@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://blqvvu0ytchcd"]
+
+[ext_resource type="Script" uid="uid://clmla13bawblu" path="res://zombie.gd" id="1_roy8y"]
+[ext_resource type="Texture2D" uid="uid://cwl2i7drlcefg" path="res://zombie.png" id="2_roy8y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eseir"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_roy8y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7nqyo"]
+size = Vector2(128, 126)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_roy8y"]
+radius = 433.029
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jmu02"]
+radius = 176.026
+
+[node name="Zombie" type="CharacterBody2D"]
+script = ExtResource("1_roy8y")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(15, 15)
+sprite_frames = SubResource("SpriteFrames_eseir")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_7nqyo")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Vision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
+shape = SubResource("CircleShape2D_roy8y")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_jmu02")

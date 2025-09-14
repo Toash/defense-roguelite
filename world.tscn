@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4fe8rix7vpn5"]
+
+[ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://player.tscn" id="1_fj7yv"]
+[ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://blqvvu0ytchcd" path="res://zombie.tscn" id="3_tlwt5"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_tlwt5"]
+vertices = PackedVector2Array(1060.08, 994.328, -602.367, 1046.68, -650.648, -280.719, 933.922, -395.32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-661, -290, -612, 1057, 1071, 1004, 943, -406)])
+
+[sub_resource type="TileSet" id="TileSet_tlwt5"]
+tile_size = Vector2i(64, 16)
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_fj7yv")]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(225, 108)
+texture = ExtResource("2_tlwt5")
+
+[node name="Zombie" parent="." instance=ExtResource("3_tlwt5")]
+position = Vector2(157, 477)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_tlwt5")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_tlwt5")
