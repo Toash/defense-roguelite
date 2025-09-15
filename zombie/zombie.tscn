@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://blqvvu0ytchcd"]
 
-[ext_resource type="Script" uid="uid://clmla13bawblu" path="res://zombie.gd" id="1_roy8y"]
-[ext_resource type="Texture2D" uid="uid://cwl2i7drlcefg" path="res://zombie.png" id="2_roy8y"]
+[ext_resource type="Script" uid="uid://clmla13bawblu" path="res://zombie/zombie.gd" id="1_roy8y"]
+[ext_resource type="Texture2D" uid="uid://cwl2i7drlcefg" path="res://zombie/zombie.png" id="2_roy8y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eseir"]
 animations = [{
