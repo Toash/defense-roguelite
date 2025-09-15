@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://2onao7jc1o5o"]
+
+[ext_resource type="Script" uid="uid://ccmithhxmiee3" path="res://item_drop.gd" id="1_nhhfg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5p4q"]
+
+[node name="ItemDrop" type="Area2D"]
+script = ExtResource("1_nhhfg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_j5p4q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

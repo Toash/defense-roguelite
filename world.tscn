@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=7 format=4 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://player/player.tscn" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_tlwt5"]
 [ext_resource type="TileSet" uid="uid://jv2ydqss3wc6" path="res://player/tileset.tres" id="3_tlwt5"]
+[ext_resource type="Script" uid="uid://dks5g7nwcde5b" path="res://spawner.gd" id="4_aqk2v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlwt5"]
 size = Vector2(128, 136)
@@ -40,3 +41,6 @@ collision_enabled = false
 z_index = -1
 tile_map_data = PackedByteArray("AAD9//3/AAACAAAAAAD+//3/AAACAAAAAAD///3/AAACAAAAAAAAAP3/AAACAAAAAAABAP3/AAACAAAAAAACAP3/AAACAAAAAAADAP3/AAACAAAAAAAEAP3/AAACAAAAAAAFAP3/AAACAAAAAAAGAP3/AAACAAAAAAD8//3/AAACAAAAAAD7//3/AAACAAAAAAD7//7/AAACAAAAAAD7////AAACAAAAAAD7/wAAAAACAAAAAAD7/wEAAAACAAAAAAD7/wIAAAACAAAAAAD7/wMAAAACAAAAAAD7/wQAAAACAAAAAAD8/wQAAAACAAAAAAD9/wQAAAACAAAAAAD+/wQAAAACAAAAAAD//wQAAAACAAAAAAAGAP7/AAACAAAAAAAGAP//AAACAAAAAAAGAAAAAAACAAAAAAAGAAEAAAACAAAAAAAGAAIAAAACAAAAAAAGAAMAAAACAAAAAAAGAAQAAAACAAAAAAAFAAQAAAACAAAAAAAEAAQAAAACAAAAAAACAAQAAAACAAAAAAADAAQAAAACAAAAAAA=")
 tile_set = ExtResource("3_tlwt5")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("4_aqk2v")

@@ -7,7 +7,7 @@ var state = "idle"
 
 @onready var sprite = $AnimatedSprite2D
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	var input_vector = Vector2.ZERO
 
 	if Input.is_action_pressed("up"):

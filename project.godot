@@ -15,11 +15,21 @@ run/main_scene="uid://c4fe8rix7vpn5"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+uuid="*res://addons/uuid/uuid.gd"
+Inventory="*res://item/inventory.gd"
+ItemFactory="*res://item/item_factory.gd"
+
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/uuid/plugin.cfg")
 
 [input]
 
