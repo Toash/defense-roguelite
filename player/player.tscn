@@ -56,7 +56,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(41, 62)
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D"]
 collision_mask = 3
 script = ExtResource("1_onrkg")
 speed = 500
@@ -76,7 +76,7 @@ position_smoothing_enabled = true
 position = Vector2(0.5, 3)
 shape = SubResource("RectangleShape2D_rkbax")
 
-[node name="Equipment" type="Node" parent="."]
+[node name="Equipment" type="Node" parent="." groups=["player"]]
 script = ExtResource("3_g1dw6")
 metadata/_custom_type_script = "uid://cltd7bjbnx6wl"
 

@@ -1,5 +1,6 @@
 extends Resource
 
+#repreents an instasnce of item data
 class_name ItemInstance
 
 @export var uid: String

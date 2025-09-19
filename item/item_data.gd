@@ -1,5 +1,6 @@
 extends Resource
 
+# "abstract" class for itemdata
 class_name ItemData
 
 @export var id: String

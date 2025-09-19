@@ -1,4 +1,6 @@
 extends Node
+# singleton for spawning items into the game
+
 
 @export var pickup_scene: PackedScene = preload("res://item/item_drop.tscn")
 

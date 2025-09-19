@@ -1,5 +1,6 @@
 extends Node
-# items that the player can equip.
+
+# represents items that the player has equipped.
 class_name Equipment
 
 signal equipped(slot: StringName, uid: String)
