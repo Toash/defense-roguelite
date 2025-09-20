@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx228vpoo4alc"]
+
+[ext_resource type="Script" uid="uid://dplekqd6pbuop" path="res://ui/tooltip.gd" id="1_np3dp"]
+
+[node name="Tooltip" type="Panel" node_paths=PackedStringArray("label")]
+z_index = 10
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_np3dp")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

@@ -21,6 +21,7 @@ uuid="*res://addons/uuid/uuid.gd"
 Inventory="*res://item/inventory.gd"
 ItemFactory="*res://item/item_factory.gd"
 Hotbar="*res://item/hotbar.gd"
+TooltipManager="*res://ui/tooltip_manager.tscn"
 
 [display]
 
