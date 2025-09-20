@@ -2,14 +2,15 @@
 
 [ext_resource type="Script" uid="uid://byth8gi71tp5v" path="res://ui/item_slot.gd" id="1_n6cxc"]
 
-[node name="ItemSlot" type="Control"]
-layout_mode = 3
+[node name="ItemSlot" type="TextureButton" node_paths=PackedStringArray("icon", "count")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n6cxc")
+icon = NodePath("Icon")
+count = NodePath("Count")
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 0

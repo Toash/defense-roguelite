@@ -22,6 +22,7 @@ func _ready() -> void:
 	_full_refresh()
 
 func toggle() -> void:
+	print("toggling inventory")
 	visible = not visible
 	if visible:
 		_full_refresh()
@@ -38,7 +39,7 @@ func _build_grid() -> void:
 		var slot := slot_scene.instantiate() as ItemSlot
 		slot.slot_index = i
 		slot.clear_slot()
-		grid.add_child(slot)
+		grid.add_child.call_deferred(slot)
 		_slots.append(slot)
 
 # clears ui inventory and restores item instances.
@@ -76,14 +77,14 @@ func _place_instance(inst: ItemInstance) -> void:
 # returns -1 if cannot find one.
 func _find_stackable_slot(inst: ItemInstance) -> int:
 	# stackazble if share same ItemData and room remains (from maxstack)
-	var max_stack := inst.data.max_stack if inst.data.has("max_stack") else 1
+	var max_stack := inst.data.max_stack if "max_stack" in inst.data else 1
 	if max_stack <= 1:
 		return 1
 	for i in _slots.size():
 		var slot: ItemSlot = _slots[i]
 		if slot.inst == null: continue
 		if slot.inst.data == inst.data:
-			max_stack = slot.inst.data.max_stack if slot.inst.data and slot.inst.data.has("max_stack") else 1
+			max_stack = slot.inst.data.max_stack if slot.inst.data and "max_stack" in slot.inst.data else 1
 			if max_stack > 1 and slot.inst.quantity < max_stack:
 				return i
 	return -1

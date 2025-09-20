@@ -6,7 +6,7 @@ func _ready() -> void:
 	ItemFactory.spawn_pickup(
 	"res://item/items/apple/apple.tres",
 	1,
-	Vector2(0, 0)
+	Vector2(50, 50)
 	)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

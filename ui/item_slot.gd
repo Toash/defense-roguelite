@@ -6,8 +6,11 @@ class_name ItemSlot
 # corresponds to a slot in the inventory
 @export var slot_index: int = -1
 
-@onready var icon: TextureRect = $Icon
-@onready var count: Label = $Count
+# @onready var icon: TextureRect = $Icon
+# @onready var count: Label = $Count
+
+@export var icon: TextureRect
+@export var count: Label
 
 var inst: ItemInstance = null
 

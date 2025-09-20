@@ -1,24 +1,25 @@
 extends Node
 
-signal item_instance_added(uid: String)
-signal item_instance_removed(uid: String)
-signal item_instance_changed(uid: String)
+signal item_instance_added(instance: ItemInstance)
+signal item_instance_removed(instance: ItemInstance)
+signal item_instance_changed(instance: ItemInstance)
 
 var _uid_to_instance: Dictionary = {}
 
+
 func add(inst: ItemInstance) -> void:
 	_uid_to_instance[inst.uid] = inst
-	item_instance_added.emit(inst.uid)
+	item_instance_added.emit(inst)
 
 func remove(uid: String, qty := -1) -> void:
 	var inst = _uid_to_instance.get(uid)
 	if inst == null: return
 	if qty < 0 or inst.qty <= qty:
 		_uid_to_instance.erase(uid)
-		item_instance_removed.emit(uid)
+		item_instance_removed.emit(inst)
 	else:
 		inst.qty -= qty
-		item_instance_changed.emit(uid)
+		item_instance_changed.emit(inst)
 
 # saving
 # convert items into an array format that we can save
