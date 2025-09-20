@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cx228vpoo4alc" path="res://ui/tooltip.tscn" id="2_ilk7u"]
 
 [node name="TooltipManager" type="CanvasLayer" node_paths=PackedStringArray("tooltip")]
+layer = 2
 script = ExtResource("1_ilk7u")
 tooltip = NodePath("Tooltip")
 

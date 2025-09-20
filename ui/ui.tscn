@@ -8,9 +8,17 @@
 [node name="UI" type="CanvasLayer"]
 
 [node name="InventoryUI" parent="." instance=ExtResource("1_ks8t7")]
+offset_left = 438.0
+offset_top = 217.0
+offset_right = 438.0
+offset_bottom = 217.0
 slot_scene = ExtResource("2_vkava")
 
 [node name="HotbarUI" parent="." instance=ExtResource("2_wl5ax")]
+offset_left = 404.0
+offset_top = 784.0
+offset_right = 404.0
+offset_bottom = 784.0
 
 [node name="InventoryInput" type="Node" parent="." node_paths=PackedStringArray("inventory_ui")]
 script = ExtResource("3_wl5ax")
