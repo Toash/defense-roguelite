@@ -1,73 +1,79 @@
 extends Control
 
 # ui that connects to Inventory autoload through its signals.
+# adds a bunch of slots
+# 	adds itemslots as child of a slot if it is considered populated.
 
 class_name InventoryUI
 
-@export var slot_count := 32
+@export var slot_count := 60
+@export var item_scene: PackedScene
 @export var slot_scene: PackedScene
-@onready var grid: GridContainer = %Slots
+@onready var slots: GridContainer = %Slots
 
-var _slots: Array[ItemSlot] = []
+var _slots: Array[Slot] = []
+# var _items: Array[ItemUI] = []
 
-# maps uid to slot index for quick lookups
+# maps uid to slot index for quick lookups (when removing)
 var _uid_to_slot_idx: Dictionary[String, int] = {}
 
 func _ready() -> void:
 	visible = false
-	_build_grid()
+	_add_slots()
 	Inventory.item_instance_added.connect(_on_item_added)
 	Inventory.item_instance_removed.connect(_on_item_removed)
 	Inventory.item_instance_changed.connect(_on_item_changed)
-	_full_refresh()
+	_refresh()
 
 func toggle() -> void:
 	print("toggling inventory")
 	visible = not visible
 	if visible:
-		_full_refresh()
+		_refresh()
 
-func _build_grid() -> void:
+func _add_slots() -> void:
 	# clear slots 
-	for child in grid.get_children():
+	for child in slots.get_children():
 		child.queue_free()
+	
 	_slots.clear()
 	_uid_to_slot_idx.clear()
 
 	# build the slots
 	for i in slot_count:
-		var slot := slot_scene.instantiate() as ItemSlot
+		# var item:= item_scene.instantiate() as ItemUI
+		var slot: Slot = slot_scene.instantiate() as Slot
 		slot.slot_index = i
 		slot.clear_slot()
-		grid.add_child.call_deferred(slot)
+		slots.add_child.call_deferred(slot)
 		_slots.append(slot)
 
+	_refresh()
+
 # clears ui inventory and restores item instances.
-func _full_refresh() -> void:
+func _refresh() -> void:
 	_uid_to_slot_idx.clear()
 	for s in _slots:
 		s.clear_slot()
 	for inst: ItemInstance in Inventory.all_instances():
 		_place_instance(inst)
 
+
 func _place_instance(inst: ItemInstance) -> void:
-	# if already placed, refresh the quantity.
-	# is this needed?
-	# if _uid_to_slot_idx.has(inst.uid):
-	# 	var idx: int = _uid_to_slot_idx[inst.uid]
-	# 	_slots[idx].set_item(inst)
-	# 	return
 	# stack with same item definition and respect max stack.
 	var stack_idx := _find_stackable_slot(inst)
 	if stack_idx != -1:
+		print("asdfasdfadfa FOUND")
 		_uid_to_slot_idx[inst.uid] = stack_idx
-		_slots[stack_idx].set_iteminstance(inst)
+		# _slots[stack_idx].set_item_instance(inst)
+		_slots[stack_idx].add_item_instance(inst)
 		return
 
 	var empty_idx := _first_empty_slot()
 	if empty_idx != -1:
+		print(empty_idx)
 		_uid_to_slot_idx[inst.uid] = empty_idx
-		_slots[empty_idx].set_iteminstance(inst)
+		_slots[empty_idx].add_item_instance(inst)
 		return
 
 	# no space 
@@ -79,21 +85,21 @@ func _find_stackable_slot(inst: ItemInstance) -> int:
 	# stackazble if share same ItemData and room remains (from maxstack)
 	var max_stack := inst.data.max_stack if "max_stack" in inst.data else 1
 	if max_stack <= 1:
-		return 1
+		max_stack = 1
 	for i in _slots.size():
-		var slot: ItemSlot = _slots[i]
+		var slot: Slot = _slots[i]
 		if slot.inst == null: continue
 		if slot.inst.data == inst.data:
 			max_stack = slot.inst.data.max_stack if slot.inst.data and "max_stack" in slot.inst.data else 1
 			if max_stack > 1 and slot.inst.quantity < max_stack:
-				return i
+				return slot.slot_index
 	return -1
 
 
 func _first_empty_slot() -> int:
 	for i in _slots.size():
 		if _slots[i].inst == null:
-			return i
+			return _slots[i].slot_index
 	return -1
 
 
@@ -104,7 +110,7 @@ func _on_item_added(inst: ItemInstance) -> void:
 func _on_item_removed(uid: String) -> void:
 	if not _uid_to_slot_idx.has(uid):
 		# fallback
-		_full_refresh()
+		_refresh()
 		return
 
 	var idx: int = _uid_to_slot_idx[uid]
@@ -115,6 +121,6 @@ func _on_item_changed(inst: ItemInstance) -> void:
 	# refresh
 	if _uid_to_slot_idx.has(inst.uid):
 		var index := _uid_to_slot_idx[inst.uid]
-		_slots[index].set_iteminstance(inst)
+		_slots[index].set_item_instance(inst)
 	else:
 		_place_instance(inst)

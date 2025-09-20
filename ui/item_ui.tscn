@@ -1,18 +1,19 @@
 [gd_scene load_steps=2 format=3 uid="uid://vlp6hac3givw"]
 
-[ext_resource type="Script" uid="uid://byth8gi71tp5v" path="res://ui/item_slot.gd" id="1_n6cxc"]
+[ext_resource type="Script" uid="uid://byth8gi71tp5v" path="res://ui/item_ui.gd" id="1_5mrwm"]
 
-[node name="ItemSlot" type="TextureButton" node_paths=PackedStringArray("count")]
+[node name="ItemUI" type="TextureButton" node_paths=PackedStringArray("count")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
-script = ExtResource("1_n6cxc")
+script = ExtResource("1_5mrwm")
 count = NodePath("Count")
 
 [node name="Icon" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
