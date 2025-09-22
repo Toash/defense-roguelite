@@ -17,7 +17,13 @@ func _ready() -> void:
 
 # returns data that can be dragged from current control.
 func _get_drag_data(at_position: Vector2) -> Variant:
-	var data := {"inst": inst}
+	if inst == null:
+		return null
+
+	var data := {
+		"inst": inst,
+		"from_slot": get_parent()
+		}
 
 	var preview = TextureRect.new()
 	preview.texture = inst.data.icon

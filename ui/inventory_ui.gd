@@ -51,29 +51,37 @@ func _add_slots() -> void:
 	_refresh()
 
 # clears ui inventory and restores item instances.
+# this should never be called?
 func _refresh() -> void:
 	_uid_to_slot_idx.clear()
 	for s in _slots:
 		s.clear_slot()
 	for inst: ItemInstance in Inventory.all_instances():
-		_place_instance(inst)
+		var saved := Inventory.slot_of(inst.uid)
+		print("saved: " + str(saved))
+		if saved != -1:
+			_uid_to_slot_idx[inst.uid] = saved
+			_slots[saved].set_slot(inst)
+		else:
+			print("woah there!!")
+			_place_instance(inst)
 
 
 func _place_instance(inst: ItemInstance) -> void:
 	# stack with same item definition and respect max stack.
 	var stack_idx := _find_stackable_slot(inst)
 	if stack_idx != -1:
-		print("asdfasdfadfa FOUND")
 		_uid_to_slot_idx[inst.uid] = stack_idx
 		# _slots[stack_idx].set_item_instance(inst)
-		_slots[stack_idx].add_item_instance(inst)
+		_slots[stack_idx].set_slot(inst)
+		Inventory.set_slot(inst.uid, stack_idx)
 		return
 
 	var empty_idx := _first_empty_slot()
 	if empty_idx != -1:
-		print(empty_idx)
 		_uid_to_slot_idx[inst.uid] = empty_idx
-		_slots[empty_idx].add_item_instance(inst)
+		_slots[empty_idx].set_slot(inst)
+		Inventory.set_slot(inst.uid, empty_idx)
 		return
 
 	# no space 
