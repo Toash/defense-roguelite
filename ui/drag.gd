@@ -1,5 +1,8 @@
 extends Panel
 
+# makes a panel draggable.
+
+
 var dragging := false
 var drag_offset := Vector2.ZERO
 
