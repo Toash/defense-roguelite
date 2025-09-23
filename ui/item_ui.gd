@@ -10,6 +10,8 @@ class_name ItemUI
 
 var inst: ItemInstance = null
 
+var draggable = true
+
 func _ready() -> void:
 	# mouse_entered.connect(_on_mouse_entered)
 	# mouse_exited.connect(_on_mouse_exited)
@@ -17,6 +19,7 @@ func _ready() -> void:
 
 # returns data that can be dragged from current control.
 func _get_drag_data(at_position: Vector2) -> Variant:
+	if not draggable: return null
 	if inst == null:
 		return null
 
@@ -52,7 +55,7 @@ func set_item_instance(new_inst: ItemInstance) -> void:
 	disabled = false
 
 func _on_mouse_entered():
-	if inst:
+	if inst and draggable:
 		TooltipManager.show_tooltip(inst.data.display_name + ": " + inst.data.description)
 
 func _on_mouse_exited():

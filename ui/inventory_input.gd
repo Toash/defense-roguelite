@@ -8,4 +8,3 @@ class_name InventoryInput
 func _process(delta: float) -> void:
     if Input.is_action_just_pressed("inventory"):
         inventory_ui.toggle()
-        print("asdfs")

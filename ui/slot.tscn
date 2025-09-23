@@ -1,14 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://bpnkgf1rpg18r"]
 
 [ext_resource type="Script" uid="uid://b1r6hddyhxh1r" path="res://ui/slot.gd" id="1_mityc"]
+[ext_resource type="StyleBox" uid="uid://b0lpf8b6hvrkt" path="res://ui/themes/inventory_slot.tres" id="1_q3y4y"]
 [ext_resource type="PackedScene" uid="uid://vlp6hac3givw" path="res://ui/item_ui.tscn" id="2_laex7"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0nma"]
-
-[node name="Slot" type="Panel"]
+[node name="Slot" type="Panel" node_paths=PackedStringArray("number_label")]
 custom_minimum_size = Vector2(64, 64)
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_y0nma")
+theme_override_styles/panel = ExtResource("1_q3y4y")
 script = ExtResource("1_mityc")
-item_scene = ExtResource("2_laex7")
+item_ui = ExtResource("2_laex7")
+number_label = NodePath("Number")
+
+[node name="Number" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

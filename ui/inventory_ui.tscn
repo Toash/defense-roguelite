@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c44tg88n7uy51"]
+[gd_scene load_steps=7 format=3 uid="uid://c44tg88n7uy51"]
 
 [ext_resource type="Script" uid="uid://1h4kytcm7jhx" path="res://ui/inventory_ui.gd" id="1_7v2e4"]
 [ext_resource type="PackedScene" uid="uid://vlp6hac3givw" path="res://ui/item_ui.tscn" id="2_wij5n"]
 [ext_resource type="PackedScene" uid="uid://bpnkgf1rpg18r" path="res://ui/slot.tscn" id="3_j1vmf"]
+[ext_resource type="StyleBox" uid="uid://b0lpf8b6hvrkt" path="res://ui/themes/inventory_slot.tres" id="4_80bpo"]
+[ext_resource type="StyleBox" uid="uid://dahy7xe0mlt3w" path="res://ui/themes/hotbar_slot.tres" id="5_ihvlr"]
+[ext_resource type="Script" uid="uid://d2w3k2noyqw80" path="res://ui/drag.gd" id="6_ihvlr"]
 
 [node name="InventoryUI" type="Control"]
 layout_mode = 3
@@ -15,6 +18,8 @@ mouse_filter = 1
 script = ExtResource("1_7v2e4")
 item_scene = ExtResource("2_wij5n")
 slot_scene = ExtResource("3_j1vmf")
+inventory_theme = ExtResource("4_80bpo")
+hotbar_theme = ExtResource("5_ihvlr")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
@@ -24,6 +29,7 @@ offset_right = 1400.0
 offset_bottom = 600.0
 pivot_offset = Vector2(450, 200)
 mouse_filter = 1
+script = ExtResource("6_ihvlr")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 0

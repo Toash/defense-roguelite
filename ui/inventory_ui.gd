@@ -6,9 +6,13 @@ extends Control
 
 class_name InventoryUI
 
-@export var slot_count := 60
+@export var slot_num := 60
 @export var item_scene: PackedScene
 @export var slot_scene: PackedScene
+
+@export var inventory_theme: StyleBoxFlat
+@export var hotbar_theme: StyleBoxFlat
+
 @onready var slots: GridContainer = %Slots
 
 var _slots: Array[Slot] = []
@@ -26,7 +30,6 @@ func _ready() -> void:
 	_refresh()
 
 func toggle() -> void:
-	print("toggling inventory")
 	visible = not visible
 	if visible:
 		_refresh()
@@ -40,9 +43,18 @@ func _add_slots() -> void:
 	_uid_to_slot_idx.clear()
 
 	# build the slots
-	for i in slot_count:
+	for i in slot_num:
 		# var item:= item_scene.instantiate() as ItemUI
 		var slot: Slot = slot_scene.instantiate() as Slot
+
+		#highlight hotbar slots
+		if i < Hotbar.num_slots:
+			slot.add_theme_stylebox_override("panel", hotbar_theme)
+			slot.set_number(i + 1)
+		else:
+			slot.add_theme_stylebox_override("panel", inventory_theme)
+
+
 		slot.slot_index = i
 		slot.clear_slot()
 		slots.add_child.call_deferred(slot)
@@ -51,19 +63,17 @@ func _add_slots() -> void:
 	_refresh()
 
 # clears ui inventory and restores item instances.
-# this should never be called?
 func _refresh() -> void:
 	_uid_to_slot_idx.clear()
 	for s in _slots:
 		s.clear_slot()
 	for inst: ItemInstance in Inventory.all_instances():
-		var saved := Inventory.slot_of(inst.uid)
-		print("saved: " + str(saved))
+		var saved := Inventory.get_slot_index_from_uid(inst.uid)
 		if saved != -1:
 			_uid_to_slot_idx[inst.uid] = saved
-			_slots[saved].set_slot(inst)
+			_slots[saved].set_slot_item(inst)
 		else:
-			print("woah there!!")
+			print("woah there!! did not store slot of item.")
 			_place_instance(inst)
 
 
@@ -73,15 +83,15 @@ func _place_instance(inst: ItemInstance) -> void:
 	if stack_idx != -1:
 		_uid_to_slot_idx[inst.uid] = stack_idx
 		# _slots[stack_idx].set_item_instance(inst)
-		_slots[stack_idx].set_slot(inst)
-		Inventory.set_slot(inst.uid, stack_idx)
+		_slots[stack_idx].set_slot_item(inst)
+		Inventory.move_item(inst.uid, stack_idx)
 		return
 
 	var empty_idx := _first_empty_slot()
 	if empty_idx != -1:
 		_uid_to_slot_idx[inst.uid] = empty_idx
-		_slots[empty_idx].set_slot(inst)
-		Inventory.set_slot(inst.uid, empty_idx)
+		_slots[empty_idx].set_slot_item(inst)
+		Inventory.move_item(inst.uid, empty_idx)
 		return
 
 	# no space 

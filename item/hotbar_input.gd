@@ -15,7 +15,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("hotbar_8"): _equip_from_hotbar(7, &"MainHand")
 
 func _equip_from_hotbar(hotbar_index: int, equip_slot: StringName):
-	var uid := Hotbar.slots[hotbar_index]
-	if uid == "":
-		return
-	equipment.equip(equip_slot, uid)
+	# var uid := Hotbar.slots[hotbar_index]
+	# if uid == "":
+	# 	return
+	# equipment.equip(equip_slot, uid)
+	Hotbar.select_slot(hotbar_index)
+	pass

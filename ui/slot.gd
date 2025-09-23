@@ -7,21 +7,32 @@ class_name Slot
 
 var inst: ItemInstance = null
 @export var slot_index: int = -1
-@export var item_scene: PackedScene
+@export var item_ui: PackedScene
 
-func set_slot(instance: ItemInstance):
-	var item: ItemUI = item_scene.instantiate()
+var droppable = true
+
+@export var number_label: Label
+
+func set_slot_item(instance: ItemInstance, draggable = true):
+	var item: ItemUI = item_ui.instantiate()
 	item.set_item_instance(instance)
+	item.draggable = draggable
 	add_child(item)
 	inst = instance
 
 func clear_slot() -> void:
 	for child in get_children():
-		child.queue_free()
+		if child is ItemUI:
+			child.queue_free()
 	inst = null
+
+func set_number(number: int):
+	number_label.text = str(number)
+
 
 # can check for item size here
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+	if not droppable: return false
 	return typeof(data) == TYPE_DICTIONARY and data.has("inst") and data.has("from_slot")
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:
@@ -37,10 +48,10 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 
 	# no item in slot
 	if inst == null:
-		set_slot(dropped_inst)
+		set_slot_item(dropped_inst)
 		from_slot.clear_slot()
 		Inventory.clear_slot(dropped_inst.uid)
-		Inventory.set_slot(dropped_inst.uid, slot_index)
+		Inventory.move_item(dropped_inst.uid, slot_index)
 		return
 
 	# same item and is stackable
@@ -66,10 +77,10 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 	# different item or no stack space.
 	var temp := inst
 	clear_slot()
-	set_slot(dropped_inst)
+	set_slot_item(dropped_inst)
 
 	from_slot.clear_slot()
-	from_slot.set_slot(temp)
+	from_slot.set_slot_item(temp)
 
-	Inventory.set_slot(dropped_inst.uid, slot_index)
-	Inventory.set_slot(temp.uid, from_slot.slot_index)
+	Inventory.move_item(dropped_inst.uid, slot_index)
+	Inventory.move_item(temp.uid, from_slot.slot_index)
