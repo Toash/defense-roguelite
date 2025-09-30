@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=9 format=4 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://player/player.tscn" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_tlwt5"]
 [ext_resource type="TileSet" uid="uid://jv2ydqss3wc6" path="res://player/tileset.tres" id="3_tlwt5"]
 [ext_resource type="Script" uid="uid://dks5g7nwcde5b" path="res://spawner.gd" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://b3kkj3vijsw7s" path="res://ui/ui.tscn" id="5_036b0"]
+[ext_resource type="Resource" uid="uid://cgmqglknu0sab" path="res://item/items/apple/apple.tres" id="5_dwbse"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlwt5"]
 size = Vector2(128, 136)
@@ -46,5 +47,6 @@ tile_set = ExtResource("3_tlwt5")
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("4_aqk2v")
+apple = ExtResource("5_dwbse")
 
 [node name="UI" parent="." instance=ExtResource("5_036b0")]

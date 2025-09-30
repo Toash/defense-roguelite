@@ -1,7 +1,7 @@
 extends Control
 
 var player
-var pickups: Array[ItemDrop]
+var pickups: Array[GroundItem]
 var detector: PickupDetector
 
 func _ready() -> void:
@@ -15,5 +15,5 @@ func _ready() -> void:
 		push_error("Player needs pickup detector.")
 
 
-func _process(delta):
-	print(detector.nearby_items)
+# func _process(delta):
+# 	print(detector.nearby_items)

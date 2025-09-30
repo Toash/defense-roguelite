@@ -1,20 +1,17 @@
 extends Node
 
 
+@export var apple: ItemData
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	ItemFactory.spawn_pickup(
-	"res://item/items/apple/apple.tres",
+	GroundItems.spawn(
+	apple,
 	1,
 	Vector2(50, 50)
 	)
 	
-	ItemFactory.spawn_pickup(
-	"res://item/items/apple/apple.tres",
+	GroundItems.spawn(
+	apple,
 	1,
 	Vector2(150, 60)
 	)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

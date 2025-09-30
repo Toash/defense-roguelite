@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=8 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_yw30f"]
-[ext_resource type="Script" uid="uid://cltd7bjbnx6wl" path="res://item/equipment.gd" id="3_g1dw6"]
-[ext_resource type="Script" uid="uid://cu2mhoqnrgeam" path="res://item/hotbar_input.gd" id="4_yw30f"]
+[ext_resource type="Script" uid="uid://cu2mhoqnrgeam" path="res://input/hotbar_input.gd" id="4_yw30f"]
 [ext_resource type="Script" uid="uid://dsrxhicfffw3e" path="res://player/pickup_detector.gd" id="5_qjkh3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g1dw6"]
@@ -51,13 +50,8 @@ position_smoothing_enabled = true
 position = Vector2(0.5, 3)
 shape = SubResource("RectangleShape2D_rkbax")
 
-[node name="Equipment" type="Node" parent="." groups=["player"]]
-script = ExtResource("3_g1dw6")
-metadata/_custom_type_script = "uid://cltd7bjbnx6wl"
-
-[node name="HotbarInput" type="Node" parent="." node_paths=PackedStringArray("equipment")]
+[node name="HotbarInput" type="Node" parent="."]
 script = ExtResource("4_yw30f")
-equipment = NodePath("../Equipment")
 metadata/_custom_type_script = "uid://cu2mhoqnrgeam"
 
 [node name="PickupRadius" type="Area2D" parent="."]

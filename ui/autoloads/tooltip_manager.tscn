@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dcvtw3uodavnk"]
 
-[ext_resource type="Script" uid="uid://vd1dkhmeg0om" path="res://ui/tooltip_manager.gd" id="1_ilk7u"]
+[ext_resource type="Script" uid="uid://vd1dkhmeg0om" path="res://ui/autoloads/tooltip_manager.gd" id="1_ilk7u"]
 [ext_resource type="PackedScene" uid="uid://cx228vpoo4alc" path="res://ui/tooltip.tscn" id="2_ilk7u"]
 
 [node name="TooltipManager" type="CanvasLayer" node_paths=PackedStringArray("tooltip")]

@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://vlne1xae4etb"]
+[gd_scene load_steps=3 format=3 uid="uid://vlne1xae4etb"]
 
-[ext_resource type="Script" uid="uid://cawk133pfbf8b" path="res://ui/hotbar_ui.gd" id="1_8xk2y"]
+[ext_resource type="Script" uid="uid://but4405u5nhke" path="res://ui/hotbar_ui.gd" id="1_8xk2y"]
 [ext_resource type="PackedScene" uid="uid://bpnkgf1rpg18r" path="res://ui/slot.tscn" id="2_p5cey"]
-[ext_resource type="StyleBox" uid="uid://dahy7xe0mlt3w" path="res://ui/themes/hotbar_slot.tres" id="3_o4l7h"]
-[ext_resource type="StyleBox" uid="uid://p6t188bwn4ta" path="res://ui/themes/select_slot.tres" id="4_rle4w"]
 
 [node name="HotbarUI" type="Control"]
 layout_mode = 3
@@ -13,20 +11,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_8xk2y")
-slot_scene = ExtResource("2_p5cey")
-hotbar_theme = ExtResource("3_o4l7h")
-select_theme = ExtResource("4_rle4w")
 
-[node name="Slots" type="HBoxContainer" parent="."]
+[node name="Slots" type="HBoxContainer" parent="." node_paths=PackedStringArray("slots_root")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -30.0
-offset_bottom = -30.0
+offset_left = -960.0
+offset_top = -1080.0
+offset_right = -960.0
+offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
+script = ExtResource("1_8xk2y")
+container = 1
+slot_scene = ExtResource("2_p5cey")
+slots_root = NodePath(".")
+format = 2
