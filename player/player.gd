@@ -31,3 +31,17 @@ func _process(delta: float) -> void:
 	input_vector = input_vector.normalized()
 	velocity = input_vector * speed
 	move_and_slide()
+
+
+func save() -> Dictionary:
+	return {
+		"save_type": SaveManager.SaveType.NO_RELOAD,
+		"path": get_path(),
+
+		"position_x": position.x,
+		"position_y": position.y,
+	}
+
+func load(d: Dictionary):
+	position.x = d.position_x
+	position.y = d.position_y

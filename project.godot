@@ -23,6 +23,7 @@ TooltipManager="*res://ui/autoloads/tooltip_manager.tscn"
 ItemService="*res://item/autoloads/item_service.gd"
 Game="*res://game/autoloads/game.gd"
 GroundItems="*res://item/autoloads/ground_items.tscn"
+SaveManager="*res://game/autoloads/save_manager.gd"
 
 [display]
 
@@ -38,6 +39,7 @@ enabled=PackedStringArray("res://addons/uuid/plugin.cfg")
 
 player=""
 items=""
+persist="Nodes that should be saved."
 
 [input]
 

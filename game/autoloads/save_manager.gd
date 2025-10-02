@@ -13,16 +13,17 @@ const PERSIST_GROUP := "persist"
 
 enum SaveType {
     RELOAD, # delete node and reinstantiate it
-    AUTOLOAD # laod data onto autoload - dont delete
+    NO_RELOAD # laod data onto autoload - dont delete
 }
 
 # Each savable object is saved as a single line in a file.
 func save_game(path := DEFAULT_PATH) -> void:
+    print("Saving game...")
     var f := FileAccess.open(path, FileAccess.WRITE)
     for node in get_tree().get_nodes_in_group(PERSIST_GROUP):
         if not node.has_method("save"):
             push_error("Save Manager: persist node should define a save function!")
-        if not node.has_method("load"):
+        if not node.has_method("load_node"):
             push_error("Save Manager: persist node should define a load function!")
 
         var payload: Dictionary = node.save()
@@ -32,9 +33,12 @@ func save_game(path := DEFAULT_PATH) -> void:
             push_error("Save Manager: persist node should define a save_type!")
 
         f.store_line(JSON.stringify(payload))
+        print("Saved " + str(node.name))
+    print("Save finished!")
 
 
 func load_game(path := DEFAULT_PATH) -> void:
+    print("Loading game...")
     if not FileAccess.file_exists(path):
         return
 
@@ -48,7 +52,8 @@ func load_game(path := DEFAULT_PATH) -> void:
 
     var f = FileAccess.open(path, FileAccess.READ)
     while f.get_position() < f.get_length():
-        var data = JSON.parse_string(f.get_line())
+        var data: Dictionary = JSON.parse_string(f.get_line())
+        print(data)
 
         if typeof(data) != TYPE_DICTIONARY:
             push_error("Save Manager: each line in the save file should represent a dictionary.")
@@ -57,8 +62,7 @@ func load_game(path := DEFAULT_PATH) -> void:
             print("Save Manager: data not found on line " + str(f.get_position()) + " when loading")
             continue
 
-
-        match data.get("save_type"):
+        match data.get("save_type") as SaveType:
             SaveType.RELOAD:
                 var filename: String = data["filename"] # path in editor
                 var parent_path: String = data["parent"]
@@ -75,11 +79,15 @@ func load_game(path := DEFAULT_PATH) -> void:
                     
                 inst.load(data)
 
-            SaveType.AUTOLOAD:
+            SaveType.NO_RELOAD:
                 var autoload_path: String = data["path"]
                 if not autoload_path:
                     push_error("Save Manager: need to define a path for the autoload")
 
                 var node = get_node(autoload_path)
 
+                print(node)
+
                 node.load(data)
+
+    print("Load finished!")
