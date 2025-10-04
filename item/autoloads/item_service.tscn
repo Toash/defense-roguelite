@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvd4apd3xr3uo"]
+
+[ext_resource type="Script" uid="uid://bs8uclww5abva" path="res://item/autoloads/item_service.gd" id="1_vmcx2"]
+
+[node name="ItemService" type="Node" groups=["persist"]]
+script = ExtResource("1_vmcx2")

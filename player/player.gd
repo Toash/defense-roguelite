@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 func save() -> Dictionary:
 	return {
 		"save_type": SaveManager.SaveType.NO_RELOAD,
-		"path": get_path(),
+		SaveManager.SaveKeys_NO_RELOAD.PATH: get_path(),
 
 		"position_x": position.x,
 		"position_y": position.y,

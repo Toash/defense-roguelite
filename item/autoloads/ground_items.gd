@@ -2,6 +2,8 @@ extends Node
 
 # Ground Items - Manager for items on the ground.
 
+# uses itemdata to spawn corresponding instances.
+
 @export var item_drop_scene: PackedScene = preload("res://item/ground_item.tscn")
 var _uid_to_ground_item: Dictionary[String, GroundItem]
 
@@ -12,7 +14,8 @@ func spawn(data: ItemData, qty := 1, pos := Vector2.ZERO) -> Node2D:
 		push_error("Could not find item data when spawning ground item.")
 		return null
 	
-	var inst := ItemInstance.new(data, qty)
+	# var inst := ItemInstance.new(data, qty)
+	var inst: ItemInstance = ItemService.create_instance(data, qty)
 	var pickup: GroundItem = item_drop_scene.instantiate()
 	pickup.inst = inst
 	pickup.global_position = pos

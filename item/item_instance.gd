@@ -16,3 +16,27 @@ func _init(d: ItemData = null, q := 1):
 	uid = uuid.v4()
 	data = d
 	quantity = q
+
+
+# serialize
+func to_dict() -> Dictionary:
+	return {
+		"uid": uid,
+		"data_path": data.resource_path,
+		"quantity": uid,
+	}
+
+
+# deserialize
+# create an item instance from a dictionary
+static func from_dict(dict: Dictionary) -> ItemInstance:
+	var uid: String = str(dict.uid)
+
+	var data_path: String = dict.data_path
+	var data: ItemData = load(data_path)
+	var quantity: int = int(dict.quantity)
+	
+
+	var inst: ItemInstance = ItemService.create_instance(data, quantity)
+	inst.uid = uid
+	return inst

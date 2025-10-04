@@ -11,3 +11,11 @@ class_name ItemData
 
 
 @export var icon: Texture2D
+
+
+# func to_dict() -> Dictionary:
+#     return {
+#         "id": id,
+#         "display_name": id,
+#         "id": id,
+#     }

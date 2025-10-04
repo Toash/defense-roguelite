@@ -3,10 +3,6 @@ extends ItemContainer
 class_name PickupsContainer
 
 
-# used to persist item positions in an inventory.
-var _slot_to_inst: Dictionary[int, ItemInstance] = {}
-	
-
 # Set the items in this container from the pickup detector.
 func sync(items: Array):
 	_slot_to_inst.clear()
