@@ -3,7 +3,7 @@ extends Resource
 # "abstract" class for itemdata
 class_name ItemData
 
-@export var id: String
+@export var id: int
 
 @export var display_name: String
 @export var description: String

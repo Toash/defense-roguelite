@@ -81,7 +81,7 @@ func move(from_container: ContainerName, from_index: int, to_container: Containe
 
 	# check if we are dropping an item (whatever container -> pickup container)
 	if from_container != ContainerName.PICKUPS and to_container == ContainerName.PICKUPS:
-		GroundItems.spawn(from_item.data, from_item.quantity, player.position)
+		GroundItems.spawn_by_data(from_item.data, from_item.quantity, player.position)
 
 	# merge
 	if to_item and to_item.data.id == from_item.data.id and to_item.data.max_stack > 1:

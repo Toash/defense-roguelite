@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://7reo7q35ry2m"]
+
+[ext_resource type="Script" uid="uid://dlp6fbw2s60hc" path="res://game/autoloads/console.gd" id="1_2oh3a"]
+[ext_resource type="Script" uid="uid://d2w3k2noyqw80" path="res://ui/drag.gd" id="2_04rbq"]
+
+[node name="Console" type="CanvasLayer" node_paths=PackedStringArray("logs", "input")]
+layer = 10
+script = ExtResource("1_2oh3a")
+logs = NodePath("Panel/VBoxContainer2/Logs")
+input = NodePath("Panel/VBoxContainer2/Input")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 800.0
+offset_bottom = 600.0
+script = ExtResource("2_04rbq")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="Logs" type="RichTextLabel" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+fit_content = true
+
+[node name="Input" type="LineEdit" parent="Panel/VBoxContainer2"]
+layout_mode = 2
