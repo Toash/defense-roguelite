@@ -1,12 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3kkj3vijsw7s"]
+[gd_scene load_steps=7 format=3 uid="uid://b3kkj3vijsw7s"]
 
+[ext_resource type="Script" uid="uid://dy00162n1j4me" path="res://ui/ui.gd" id="1_bo1jx"]
 [ext_resource type="PackedScene" uid="uid://c44tg88n7uy51" path="res://ui/inventory_ui.tscn" id="1_ks8t7"]
 [ext_resource type="PackedScene" uid="uid://vlne1xae4etb" path="res://ui/hotbar_ui.tscn" id="2_wl5ax"]
 [ext_resource type="Script" uid="uid://dtth8kvwyyrfn" path="res://input/inventory_input.gd" id="3_wl5ax"]
 [ext_resource type="PackedScene" uid="uid://bjqewamciy61i" path="res://ui/expandable_window.tscn" id="4_tf0e0"]
 [ext_resource type="PackedScene" uid="uid://cxthe01r5l7g7" path="res://ui/pickup_ui.tscn" id="4_vkava"]
 
-[node name="UI" type="CanvasLayer"]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("health_bar")]
+script = ExtResource("1_bo1jx")
+health_bar = NodePath("Stats/VBoxContainer/ProgressBar")
 
 [node name="HotbarUI" parent="." instance=ExtResource("2_wl5ax")]
 offset_left = 960.0
@@ -27,3 +30,17 @@ offset_left = 489.0
 offset_right = 573.0
 window_title = "Inventory"
 content_scene = ExtResource("1_ks8t7")
+
+[node name="Stats" type="PanelContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 260.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Stats"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Stats/VBoxContainer"]
+layout_mode = 2
