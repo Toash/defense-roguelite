@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://blqvvu0ytchcd"]
+[gd_scene load_steps=12 format=3 uid="uid://blqvvu0ytchcd"]
 
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="1_fsm1j"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="2_ixsl6"]
 [ext_resource type="Script" uid="uid://cskdd0xcjjmfc" path="res://zombie/zombie_wander.gd" id="4_8jy1d"]
 [ext_resource type="Script" uid="uid://b1vk2g6nxw2g" path="res://zombie/zombie_chase.gd" id="4_s7rjo"]
 [ext_resource type="Script" uid="uid://dt4kadfyw2ywh" path="res://zombie/zombie_target.gd" id="4_ymihc"]
+[ext_resource type="Script" uid="uid://y6xyi4gu5uqa" path="res://zombie/zombie_last_seen.gd" id="5_8jy1d"]
+[ext_resource type="Script" uid="uid://bbflvir0kv6hb" path="res://ai/state_machine_debug.gd" id="7_3fose"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eseir"]
 animations = [{
@@ -17,14 +19,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7nqyo"]
-size = Vector2(128, 126)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_roy8y"]
 radius = 433.029
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmu02"]
 radius = 176.026
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3fose"]
+size = Vector2(50, 81)
 
 [node name="Zombie" type="CharacterBody2D"]
 
@@ -34,11 +36,8 @@ position = Vector2(0, -7)
 scale = Vector2(0.4, 0.66)
 sprite_frames = SubResource("SpriteFrames_eseir")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_7nqyo")
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
 
 [node name="Vision" type="Area2D" parent="."]
 
@@ -55,30 +54,54 @@ script = ExtResource("2_ixsl6")
 initial_state = NodePath("Wander")
 metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 
-[node name="Wander" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("wander_timer", "character", "vision", "nav", "sprite", "zombie_target")]
+[node name="Wander" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("wander_timer", "character", "vision", "nav", "sprite", "target", "raycast")]
 script = ExtResource("4_8jy1d")
 wander_timer = NodePath("../../WanderTimer")
 character = NodePath("../..")
 vision = NodePath("../../Vision")
 nav = NodePath("../../NavigationAgent2D")
 sprite = NodePath("../../AnimatedSprite2D")
-zombie_target = NodePath("../../ZombieTarget")
+target = NodePath("../../ZombieTarget")
+raycast = NodePath("../../ObstructionRaycast")
 
-[node name="Chase" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "vision", "raycast", "nav", "sprite", "zombie_target")]
+[node name="Chase" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "vision", "raycast", "nav", "sprite", "target")]
 script = ExtResource("4_s7rjo")
 chase_speed = 130
 character = NodePath("../..")
 vision = NodePath("../../Vision")
-raycast = NodePath("../../RayCast2D")
+raycast = NodePath("../../ObstructionRaycast")
 nav = NodePath("../../NavigationAgent2D")
 sprite = NodePath("../../AnimatedSprite2D")
-zombie_target = NodePath("../../ZombieTarget")
+target = NodePath("../../ZombieTarget")
+
+[node name="Last_Seen" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "vision", "raycast", "nav", "sprite", "target")]
+script = ExtResource("5_8jy1d")
+speed = 100
+character = NodePath("../..")
+vision = NodePath("../../Vision")
+raycast = NodePath("../../ObstructionRaycast")
+nav = NodePath("../../NavigationAgent2D")
+sprite = NodePath("../../AnimatedSprite2D")
+target = NodePath("../../ZombieTarget")
 
 [node name="ZombieTarget" type="Node" parent="."]
 script = ExtResource("4_ymihc")
 
 [node name="WanderTimer" type="Timer" parent="."]
+wait_time = 2.7
 autostart = true
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="ObstructionRaycast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
+collision_mask = 2
+
+[node name="StateMachineDebug" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("7_3fose")
+state_machine = NodePath("../ZombieStateMachine")
+metadata/_custom_type_script = "uid://bbflvir0kv6hb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_3fose")

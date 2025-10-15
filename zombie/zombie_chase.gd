@@ -11,7 +11,8 @@ extends State
 @export var sprite: AnimatedSprite2D
 
 
-@export var zombie_target: Node
+@export var target: ZombieTarget
+
 
 var active = false
 
@@ -22,25 +23,29 @@ func state_enter():
 func state_physics_update(delta: float):
 	if active == false: return
 
-	var target: Node2D = zombie_target.target
-
-	if target and is_instance_valid(target):
-		raycast.target_position = character.to_local(target.global_position)
-		print(raycast.get_collider())
-
-		nav.target_position = target.global_position
-
-		var next_point: Vector2 = nav.get_next_path_position()
-		var normal_dir = (next_point - character.global_position).normalized()
-
-		if normal_dir.x > 0:
-			sprite.flip_h = false
-		else:
-			sprite.flip_h = true
-
-		character.velocity = normal_dir * chase_speed
-		character.move_and_slide()
 	
+	raycast.target_position = character.to_local(target.reference.global_position)
+
+	if raycast.get_collider():
+		print("Obstruction detected.")
+		target.last_position = raycast.get_collision_point()
+		transitioned.emit(self, "last_seen")
+
+
+	nav.target_position = target.reference.global_position
+
+	var next_point: Vector2 = nav.get_next_path_position()
+	var normal_dir = (next_point - character.global_position).normalized()
+
+	if normal_dir.x > 0:
+		sprite.flip_h = false
+	else:
+		sprite.flip_h = true
+
+	# character.velocity = normal_dir * chase_speed
+	character.move_and_collide(normal_dir * chase_speed * delta)
+	# character.move_and_slide()
+
 
 func state_exit():
 	active = false

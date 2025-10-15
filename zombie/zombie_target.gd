@@ -1,3 +1,7 @@
 extends Node
 
-var target: Node2D
+class_name ZombieTarget
+
+var reference: Node2D
+
+var last_position: Vector2

@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=4 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=8 format=4 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://player/player.tscn" id="1_fj7yv"]
-[ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_tlwt5"]
 [ext_resource type="TileSet" uid="uid://jv2ydqss3wc6" path="res://player/tileset.tres" id="3_tlwt5"]
 [ext_resource type="Script" uid="uid://dks5g7nwcde5b" path="res://spawner.gd" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://b3kkj3vijsw7s" path="res://ui/ui.tscn" id="5_036b0"]
@@ -9,31 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://c08inc3nvav0f" path="res://ui/pause_menu.tscn" id="7_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://blqvvu0ytchcd" path="res://zombie/zombie.tscn" id="8_gbfbk"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlwt5"]
-size = Vector2(128, 136)
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_tlwt5"]
-vertices = PackedVector2Array(1060.08, 994.328, -602.367, 1046.68, -650.648, -280.719, 933.922, -395.32)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-661, -290, -612, 1057, 1071, 1004, 943, -406)])
-
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_fj7yv")]
-
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(225, 108)
-texture = ExtResource("2_tlwt5")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Icon"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/StaticBody2D"]
-position = Vector2(2, 0)
-shape = SubResource("RectangleShape2D_tlwt5")
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
-navigation_polygon = SubResource("NavigationPolygon_tlwt5")
 
 [node name="Background" type="TileMapLayer" parent="."]
 z_index = -1

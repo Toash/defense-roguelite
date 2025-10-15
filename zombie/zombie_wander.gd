@@ -3,17 +3,20 @@ extends State
 
 @export var wander_speed = 50
 @export var wander_timer: Timer
-@export var wander_radius = 100
+@export var wander_radius = 400
 
 @export var character: CharacterBody2D
 @export var vision: Area2D
 @export var nav: NavigationAgent2D
 @export var sprite: AnimatedSprite2D
 
-@export var zombie_target: Node
+@export var target: ZombieTarget
+@export var raycast: RayCast2D
 
 var wander_point: Vector2
 var rng = RandomNumberGenerator.new()
+
+var humans_within_vision: Dictionary[int, Node2D] = {}
 
 var active = false
 
@@ -28,9 +31,18 @@ func _ready() -> void:
 func state_enter():
 	active = true
 
-
 func state_physics_update(delta: float):
 	if active == false: return
+
+	for human in humans_within_vision.values():
+		# raycast to all humans in the area
+		raycast.target_position = character.to_local(human.global_position)
+		if raycast.get_collider():
+			print("Obstruction detected.")
+			continue
+
+		target.reference = human
+		transitioned.emit(self, "chase")
 
 	if !nav.is_target_reached():
 		var next_point: Vector2 = nav.get_next_path_position()
@@ -51,9 +63,12 @@ func state_exit():
 func _on_body_entered(body: Node2D):
 	if active == false: return
 	if body.is_in_group("player"):
-		print(body)
-		zombie_target.target = body
-		transitioned.emit(self, "chase")
+		humans_within_vision[body.get_instance_id()] = body
+
+func _on_body_exited(body: Node2D):
+	if active == false: return
+	if body.is_in_group("player"):
+		humans_within_vision.erase(body.get_instance_id())
 
 
 func _on_timeout():
