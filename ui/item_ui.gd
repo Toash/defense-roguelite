@@ -58,5 +58,13 @@ func _on_mouse_entered():
 	if inst:
 		TooltipManager.show_tooltip(inst.data.display_name + ": " + inst.data.description)
 
+
 func _on_mouse_exited():
 	TooltipManager.hide_tooltip()
+
+
+func _on_pressed():
+	if Input.is_action_pressed("shift"):
+		print("Shift click!")
+		var slot: Slot = get_parent() as Slot
+		ItemService.quick_swap(slot.container, slot.slot_index)

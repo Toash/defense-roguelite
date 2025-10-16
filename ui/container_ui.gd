@@ -29,7 +29,7 @@ func _build_slots():
 	_slots.clear()
 
 	# build the slots_root
-	for i in ItemService.size(container):
+	for i in ItemService.capacity(container):
 		# var item:= item_scene.instantiate() as ItemUI
 		var slot: Slot = slot_scene.instantiate() as Slot
 
@@ -54,11 +54,11 @@ func _connect_signals():
 
 
 func _refresh():
-	for i in ItemService.size(container):
+	for i in ItemService.capacity(container):
 		_draw_slot(i)
 
 func _draw_slot(i: int):
-	if i < 0 or i >= ItemService.size(container):
+	if i < 0 or i >= ItemService.capacity(container):
 		return
 	var inst := ItemService.containers[container].get_item(i)
 	_slots[i].set_slot_item(inst)

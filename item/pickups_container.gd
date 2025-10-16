@@ -11,7 +11,7 @@ func sync(items: Array):
 		_slot_to_inst[index] = inst
 
 	# emit signal - this is probably slow
-	for index in ItemService.containers[ItemService.ContainerName.PICKUPS].size():
+	for index in ItemService.containers[ItemService.ContainerName.PICKUPS].get_capacity():
 		ItemService.slot_changed.emit(ItemService.ContainerName.PICKUPS, index)
 
 

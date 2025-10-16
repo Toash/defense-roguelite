@@ -17,7 +17,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		use()
 
 func _on_equip_slot(index: int):
-	if ItemService.containers[ItemService.ContainerName.HOTBAR].size() <= index:
+	if ItemService.containers[ItemService.ContainerName.HOTBAR].get_capacity() <= index:
 		push_error("Hotbar does not have the right capacity to equip index " + str(index))
 		return
 

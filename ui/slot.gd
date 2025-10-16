@@ -46,7 +46,7 @@ func set_number(number: int):
 
 # can check for item size here
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
-	print("checking...")
+	# print("checking...")
 	# if not droppable: return false
 	return typeof(data) == TYPE_DICTIONARY and data.has("inst") and data.has("from_slot")
 
@@ -67,7 +67,7 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 
 	ItemService.move(
 		from_container, from_slot_index,
-		container, slot_index,
+		self.container, self.slot_index,
 		get_tree().get_first_node_in_group("player") # only the player will drop items on a slot
 
 	)

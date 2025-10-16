@@ -19,5 +19,5 @@ func _select_index(index: int) -> void:
 
 
 func on_equip_slot(index: int) -> void:
-	if index < ItemService.size(container):
+	if index < ItemService.capacity(container):
 		_select_index(index)

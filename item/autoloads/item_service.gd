@@ -4,8 +4,11 @@ extends Node
 # handles items for all types of containers.
 # single source of truth that handles moving, stacking, swap for containers.
 #      emits signals for UIs to redraw.
+# also other item stuff
 
 signal slot_changed(container: ContainerName, index: int)
+
+# resizing
 # signal container_range_changed(container_id: String, start: int, end: int)
 
 enum ContainerName {INVENTORY, HOTBAR, PICKUPS}
@@ -45,19 +48,39 @@ func load(dict: Dictionary):
 	hotbar.load_dict(dict.hotbar)
 	pickups.load_dict(dict.pickups)
 
-	for idx in inventory.size():
+	for idx in inventory.get_capacity():
 		slot_changed.emit(ContainerName.INVENTORY, idx)
-	for idx in hotbar.size():
+	for idx in hotbar.get_capacity():
 		slot_changed.emit(ContainerName.HOTBAR, idx)
-	for idx in pickups.size():
+	for idx in pickups.get_capacity():
 		slot_changed.emit(ContainerName.PICKUPS, idx)
 
 
 # ---------- INVENTORIES ----------------
 
 
-func size(container: ContainerName) -> int:
-	return containers[container].size()
+# shift click
+
+## Swaps an item to the next best container.
+func quick_swap(from_container: ContainerName, from_index: int):
+	print("quick swap")
+	var to_container: ContainerName = _get_best_swap_container(from_container)
+	if from_container == to_container:
+		print("ItemService: Best container is the same as the current container")
+		return
+
+	var to_index = containers[to_container].get_first_empty_slot()
+
+	if to_index == -1:
+		print("ItemService: No more space whe quick swapping.")
+		return
+
+	var player = get_tree().get_first_node_in_group("player") as Node2D
+	move(from_container, from_index, to_container, to_index, player)
+	
+	
+func capacity(container: ContainerName) -> int:
+	return containers[container].get_capacity()
 	
 
 func move(from_container: ContainerName, from_index: int, to_container: ContainerName, to_index: int, player: Node2D):
@@ -113,7 +136,7 @@ func add_inst(container: ContainerName, added_inst: ItemInstance) -> bool:
 	var cont := containers[container]
 
 	# try stacking with exisiting item
-	for i in cont.size():
+	for i in cont.get_capacity():
 		var curr_inst = cont.get_item(i)
 		if curr_inst and curr_inst.data.id == added_inst.data.id and curr_inst.data.max_stack > curr_inst.quantity:
 			var space = curr_inst.data.max_stack - curr_inst.quantity
@@ -126,7 +149,7 @@ func add_inst(container: ContainerName, added_inst: ItemInstance) -> bool:
 
 
 	# try empty slot
-	for i in cont.size():
+	for i in cont.get_capacity():
 		if cont.get_item(i) == null:
 			cont.set_item(i, added_inst)
 			slot_changed.emit(container, i)
@@ -135,3 +158,22 @@ func add_inst(container: ContainerName, added_inst: ItemInstance) -> bool:
 
 	# no space in the container
 	return false
+
+func _get_best_swap_container(container: ContainerName) -> ContainerName:
+	if container == ContainerName.PICKUPS:
+		if not containers[ContainerName.HOTBAR].is_full():
+			return ContainerName.HOTBAR
+		elif not containers[ContainerName.INVENTORY].is_full():
+			return ContainerName.INVENTORY
+		else:
+			return container
+
+	if container == ContainerName.HOTBAR:
+		if not containers[ContainerName.INVENTORY].is_full():
+			return ContainerName.INVENTORY
+
+	if container == ContainerName.INVENTORY:
+		if not containers[ContainerName.HOTBAR].is_full():
+			return ContainerName.HOTBAR
+
+	return container
