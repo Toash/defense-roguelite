@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bjqewamciy61i" path="res://ui/expandable_window.tscn" id="4_tf0e0"]
 [ext_resource type="PackedScene" uid="uid://cxthe01r5l7g7" path="res://ui/pickup_ui.tscn" id="4_vkava"]
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("health_bar")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("hotbar_ui", "health_bar")]
 script = ExtResource("1_bo1jx")
+hotbar_ui = NodePath("HotbarUI")
 health_bar = NodePath("Stats/VBoxContainer/ProgressBar")
 
 [node name="HotbarUI" parent="." instance=ExtResource("2_wl5ax")]

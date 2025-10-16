@@ -1,13 +1,17 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cgmqglknu0sab"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://cgmqglknu0sab"]
 
 [ext_resource type="Texture2D" uid="uid://dsctldir7hnac" path="res://item/items/apple/apple.png" id="1_ry7xa"]
+[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/item_effect.gd" id="2_7638r"]
 [ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="2_bb4jg"]
+[ext_resource type="Resource" uid="uid://b2bu2eyn744ax" path="res://item/effects/small_heal.tres" id="3_f45cx"]
 
 [resource]
 script = ExtResource("2_bb4jg")
-id = "1"
+id = 0
 display_name = "Apple"
 description = "A singular apple."
 max_stack = 1
+consume_on_use = true
 icon = ExtResource("1_ry7xa")
+item_effects = Array[ExtResource("2_7638r")]([ExtResource("3_f45cx")])
 metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

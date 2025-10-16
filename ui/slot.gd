@@ -29,7 +29,7 @@ func set_slot_item(instance: ItemInstance, draggable = true):
 	inst = instance
 
 func set_selected(b: bool):
-	print(str(b))
+	# print(str(b))
 	_selected = b
 	if highlight:
 		highlight.visible = b

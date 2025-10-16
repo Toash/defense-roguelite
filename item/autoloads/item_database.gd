@@ -1,5 +1,6 @@
 extends Node
 
+# autoload that contains the games itemdata.
 
 var _id_to_data: Dictionary[int, ItemData] = {}
 var _name_to_data: Dictionary[String, ItemData] = {}
@@ -11,8 +12,8 @@ func _ready() -> void:
 	_load_item_data("res://item/items")
 	# build the index
 	for data in items:
-		if data == null or !data.id or !data.display_name:
-			push_error("ItemDatabase: Item with missing id.")
+		if !data.display_name:
+			push_error("ItemDatabase: Item with missing name.")
 			continue
 		if _id_to_data.has(data.id) or _name_to_data.has(data.display_name):
 			push_error("ItemDatabase: Database already has this item")

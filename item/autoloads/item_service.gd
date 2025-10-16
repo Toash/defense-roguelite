@@ -12,9 +12,9 @@ enum ContainerName {INVENTORY, HOTBAR, PICKUPS}
 
 # all of these containers have the same operations.
 var containers: Dictionary[ContainerName, ItemContainer] = {
-	ContainerName.INVENTORY: InventoryContainer.new(40),
-	ContainerName.HOTBAR: HotbarContainer.new(8),
-	ContainerName.PICKUPS: PickupsContainer.new(16)
+	ContainerName.INVENTORY: InventoryContainer.new(40, ContainerName.INVENTORY),
+	ContainerName.HOTBAR: HotbarContainer.new(8, ContainerName.HOTBAR),
+	ContainerName.PICKUPS: PickupsContainer.new(16, ContainerName.PICKUPS)
 }
 
 
@@ -105,8 +105,8 @@ func move(from_container: ContainerName, from_index: int, to_container: Containe
 	#swap
 	src.set_item(from_index, to_item)
 	dst.set_item(to_index, from_item)
-	slot_changed.emit(from_container, from_index)
-	slot_changed.emit(to_container, to_index)
+	# slot_changed.emit(from_container, from_index)
+	# slot_changed.emit(to_container, to_index)
 
 
 func add_inst(container: ContainerName, added_inst: ItemInstance) -> bool:

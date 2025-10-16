@@ -39,6 +39,7 @@ player = NodePath("../Player")
 [node name="PauseMenu" parent="." instance=ExtResource("7_pkg7o")]
 
 [node name="Zombie" parent="." instance=ExtResource("8_gbfbk")]
+visible = false
 position = Vector2(314, -393)
 
 [node name="Icon" type="Sprite2D" parent="."]

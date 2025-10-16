@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=10 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_yw30f"]
 [ext_resource type="Script" uid="uid://cu2mhoqnrgeam" path="res://input/hotbar_input.gd" id="4_yw30f"]
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://generic/health.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://dsrxhicfffw3e" path="res://player/pickup_detector.gd" id="5_qjkh3"]
+[ext_resource type="Script" uid="uid://cvmwf84dan6g7" path="res://item/autoloads/equipment.gd" id="6_g6k8r"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g1dw6"]
 animations = [{
@@ -64,6 +65,11 @@ shape = SubResource("CircleShape2D_yw30f")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_g6k8r")
 metadata/_custom_type_script = "uid://gyp8bshfrfoj"
+
+[node name="Equipment" type="Node" parent="." node_paths=PackedStringArray("hotbar_input")]
+script = ExtResource("6_g6k8r")
+hotbar_input = NodePath("../HotbarInput")
+metadata/_custom_type_script = "uid://cvmwf84dan6g7"
 
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]
