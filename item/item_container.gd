@@ -25,8 +25,12 @@ func get_dict() -> Dictionary:
 	var dict: Dictionary[int, Dictionary] = {}
 	for slot: int in _slot_to_inst:
 		var inst: ItemInstance = _slot_to_inst[slot]
+		
+		if inst == null:
+			continue
+
 		var inst_dict: Dictionary = inst.to_dict()
-		dict[slot] = inst_dict
+		dict[int(slot)] = inst_dict
 	return dict
 
 # unserialize
@@ -34,7 +38,11 @@ func load_dict(dict: Dictionary):
 	for slot in dict:
 		var inst_dict = dict[slot]
 		var inst: ItemInstance = ItemInstance.from_dict(inst_dict)
-		_slot_to_inst[slot] = inst
+
+		if inst == null:
+			continue
+
+		_slot_to_inst[int(slot)] = inst
 
 func get_item(i: int) -> ItemInstance:
 	return _slot_to_inst.get(i, null)

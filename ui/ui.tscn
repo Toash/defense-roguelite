@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3kkj3vijsw7s"]
+[gd_scene load_steps=10 format=3 uid="uid://b3kkj3vijsw7s"]
 
 [ext_resource type="Script" uid="uid://dy00162n1j4me" path="res://ui/ui.gd" id="1_bo1jx"]
 [ext_resource type="PackedScene" uid="uid://c44tg88n7uy51" path="res://ui/inventory_ui.tscn" id="1_ks8t7"]
@@ -7,10 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://bjqewamciy61i" path="res://ui/expandable_window.tscn" id="4_tf0e0"]
 [ext_resource type="PackedScene" uid="uid://cxthe01r5l7g7" path="res://ui/pickup_ui.tscn" id="4_vkava"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obcwv"]
+bg_color = Color(0.811578, 1.85303e-06, 3.85046e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo1jx"]
+bg_color = Color(0.740564, 0.381836, 2.11775e-06, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gycre"]
+bg_color = Color(0, 0.37443, 0.964439, 1)
+
 [node name="UI" type="CanvasLayer" node_paths=PackedStringArray("hotbar_ui", "health_bar")]
 script = ExtResource("1_bo1jx")
 hotbar_ui = NodePath("HotbarUI")
-health_bar = NodePath("Stats/VBoxContainer/ProgressBar")
+health_bar = NodePath("Stats/VBoxContainer/Health")
 
 [node name="HotbarUI" parent="." instance=ExtResource("2_wl5ax")]
 offset_left = 960.0
@@ -43,5 +52,32 @@ grow_vertical = 0
 [node name="VBoxContainer" type="VBoxContainer" parent="Stats"]
 layout_mode = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="Stats/VBoxContainer"]
+[node name="Health" type="ProgressBar" parent="Stats/VBoxContainer"]
 layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_obcwv")
+
+[node name="Label" type="Label" parent="Stats/VBoxContainer/Health"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Health"
+
+[node name="Hunger" type="ProgressBar" parent="Stats/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_bo1jx")
+
+[node name="Label" type="Label" parent="Stats/VBoxContainer/Hunger"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Hunger"
+
+[node name="Thirst" type="ProgressBar" parent="Stats/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_gycre")
+
+[node name="Label" type="Label" parent="Stats/VBoxContainer/Thirst"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Thirst"

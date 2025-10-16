@@ -38,14 +38,24 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = false
 
 func save() -> Dictionary:
+	var health: Health = get_node_or_null("Health") as Health
+
+
 	return {
 		"save_type": SaveManager.SaveType.NO_RELOAD,
 		SaveManager.SaveKeys_NO_RELOAD.PATH: get_path(),
 
 		"position_x": position.x,
 		"position_y": position.y,
+
+		"health_data": health.to_dict()
 	}
 
 func load(d: Dictionary):
+	var health: Health = get_node_or_null("Health") as Health
+
 	position.x = d.position_x
 	position.y = d.position_y
+
+	health.from_dict(d.health_data)
+	health.health_changed.emit(health.health)

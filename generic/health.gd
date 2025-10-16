@@ -11,6 +11,17 @@ signal health_changed(new_value)
 var health: int = max_health
 
 
+func to_dict() -> Dictionary:
+	return {
+		"health": self.health,
+		"max_health": self.max_health
+	}
+
+func from_dict(dict: Dictionary) -> void:
+	self.health = dict.health
+	self.max_health = dict.max_health
+
+
 func damage(amount: int):
 	if health <= 0: return
 

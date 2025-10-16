@@ -34,7 +34,6 @@ func to_dict() -> Dictionary:
 		"uid": uid,
 		"data_path": data.resource_path,
 		"quantity": quantity,
-
 	}
 
 
