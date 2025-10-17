@@ -12,7 +12,7 @@ class_name ItemData
 @export var consume_on_use := false
 
 @export var icon: Texture2D
-
+@export var ingame_sprite: Texture2D
 
 # functionality
 @export var item_effects: Array[ItemEffect]

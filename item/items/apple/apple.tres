@@ -13,5 +13,6 @@ description = "A singular apple."
 max_stack = 1
 consume_on_use = true
 icon = ExtResource("1_ry7xa")
+ingame_sprite = ExtResource("1_ry7xa")
 item_effects = Array[ExtResource("2_7638r")]([ExtResource("3_f45cx")])
 metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

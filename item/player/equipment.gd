@@ -1,7 +1,8 @@
 extends Node
 
-
 class_name Equipment
+signal equipment_changed(inst: ItemInstance)
+## indexes into hotbar to use the iteminstance.
 
 @export var hotbar_input: HotbarInput
 # var equipped_instance: ItemInstance
@@ -24,11 +25,16 @@ func _on_equip_slot(index: int):
 	# var inst: ItemInstance = ItemService.containers[ItemService.ContainerName.HOTBAR].get_item(index)
 	set_equipped_index(index)
 
+func get_equipped_item() -> ItemInstance:
+	var inst = ItemService.containers[ItemService.ContainerName.HOTBAR].get_item(equipped_index)
+	return inst
 
 # func set_equipped_instance(inst: ItemInstance):
 # 	equipped_instance = inst
 func set_equipped_index(index: int):
 	equipped_index = index
+	equipment_changed.emit(get_equipped_item())
+
 
 func use():
 	var context = {}

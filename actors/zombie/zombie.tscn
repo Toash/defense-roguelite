@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="1_fsm1j"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="2_ixsl6"]
-[ext_resource type="Script" uid="uid://cskdd0xcjjmfc" path="res://zombie/zombie_wander.gd" id="4_8jy1d"]
-[ext_resource type="Script" uid="uid://b1vk2g6nxw2g" path="res://zombie/zombie_chase.gd" id="4_s7rjo"]
-[ext_resource type="Script" uid="uid://dt4kadfyw2ywh" path="res://zombie/zombie_target.gd" id="4_ymihc"]
-[ext_resource type="Script" uid="uid://y6xyi4gu5uqa" path="res://zombie/zombie_last_seen.gd" id="5_8jy1d"]
+[ext_resource type="Script" uid="uid://cskdd0xcjjmfc" path="res://actors/zombie/zombie_wander.gd" id="4_8jy1d"]
+[ext_resource type="Script" uid="uid://b1vk2g6nxw2g" path="res://actors/zombie/zombie_chase.gd" id="4_s7rjo"]
+[ext_resource type="Script" uid="uid://dt4kadfyw2ywh" path="res://actors/zombie/zombie_target.gd" id="4_ymihc"]
+[ext_resource type="Script" uid="uid://y6xyi4gu5uqa" path="res://actors/zombie/zombie_last_seen.gd" id="5_8jy1d"]
 [ext_resource type="Script" uid="uid://bbflvir0kv6hb" path="res://ai/state_machine_debug.gd" id="7_3fose"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eseir"]

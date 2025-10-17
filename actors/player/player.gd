@@ -6,6 +6,10 @@ extends CharacterBody2D
 var state = "idle"
 var input_vector = Vector2.ZERO
 
+@onready var health: Health = get_node_or_null("Health") as Health
+@onready var thirst: DrainingStat = get_node_or_null("Thirst") as DrainingStat
+@onready var hunger: DrainingStat = get_node_or_null("Hunger") as DrainingStat
+
 @onready var sprite = $AnimatedSprite2D
 
 func _process(delta: float) -> void:
@@ -38,9 +42,6 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = false
 
 func save() -> Dictionary:
-	var health: Health = get_node_or_null("Health") as Health
-
-
 	return {
 		"save_type": SaveManager.SaveType.NO_RELOAD,
 		SaveManager.SaveKeys_NO_RELOAD.PATH: get_path(),
@@ -48,14 +49,21 @@ func save() -> Dictionary:
 		"position_x": position.x,
 		"position_y": position.y,
 
-		"health_data": health.to_dict()
+		"health_data": health.to_dict(),
+		"hunger_data": hunger.to_dict(),
+		"thirst_data": thirst.to_dict(),
+
 	}
 
 func load(d: Dictionary):
-	var health: Health = get_node_or_null("Health") as Health
-
 	position.x = d.position_x
 	position.y = d.position_y
 
 	health.from_dict(d.health_data)
 	health.health_changed.emit(health.health)
+
+	hunger.from_dict(d.hunger_data)
+	hunger.poll.emit(hunger.stat)
+
+	thirst.from_dict(d.thirst_data)
+	thirst.poll.emit(thirst.stat)

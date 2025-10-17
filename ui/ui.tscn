@@ -16,10 +16,12 @@ bg_color = Color(0.740564, 0.381836, 2.11775e-06, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gycre"]
 bg_color = Color(0, 0.37443, 0.964439, 1)
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("hotbar_ui", "health_bar")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("hotbar_ui", "health_bar", "hunger_bar", "thirst_bar")]
 script = ExtResource("1_bo1jx")
 hotbar_ui = NodePath("HotbarUI")
 health_bar = NodePath("Stats/VBoxContainer/Health")
+hunger_bar = NodePath("Stats/VBoxContainer/Hunger")
+thirst_bar = NodePath("Stats/VBoxContainer/Thirst")
 
 [node name="HotbarUI" parent="." instance=ExtResource("2_wl5ax")]
 offset_left = 960.0
