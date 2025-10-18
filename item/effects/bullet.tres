@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ProjectileEffect" load_steps=3 format=3 uid="uid://drxqpryf5nwpb"]
+
+[ext_resource type="Script" uid="uid://d2jtsxokuvpi0" path="res://item/effects/projectile_effect.gd" id="1_mei51"]
+[ext_resource type="PackedScene" uid="uid://dfya2bgykrj43" path="res://projectiles/bullet.tscn" id="1_oqrri"]
+
+[resource]
+script = ExtResource("1_mei51")
+bullet = ExtResource("1_oqrri")
+damage = 25
+speed = 1200
+metadata/_custom_type_script = "uid://d2jtsxokuvpi0"

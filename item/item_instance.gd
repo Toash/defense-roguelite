@@ -18,8 +18,8 @@ func _init(d: ItemData = null, q := 1):
 	data = d
 	quantity = q
 
-func use(user, ctx):
-	data.apply_effects(user, ctx)
+func use(ctx: ItemContext):
+	data.apply_effects(ctx)
 
 	if data.consume_on_use:
 		# assuming it is in hotbar

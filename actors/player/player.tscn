@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=13 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_yw30f"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cvmwf84dan6g7" path="res://item/player/equipment.gd" id="6_g6k8r"]
 [ext_resource type="Script" uid="uid://dgkass0sic6wa" path="res://actors/generic/draining_stat.gd" id="7_boad6"]
 [ext_resource type="Script" uid="uid://cy65fv0u3uiga" path="res://item/generic/item_equip_display.gd" id="8_a744p"]
+[ext_resource type="Script" uid="uid://c5rhs0y5iry7d" path="res://input/mouse_input.gd" id="9_388e2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g1dw6"]
 animations = [{
@@ -68,9 +69,10 @@ shape = SubResource("CircleShape2D_yw30f")
 script = ExtResource("5_g6k8r")
 metadata/_custom_type_script = "uid://gyp8bshfrfoj"
 
-[node name="Equipment" type="Node" parent="." node_paths=PackedStringArray("hotbar_input")]
+[node name="Equipment" type="Node" parent="." node_paths=PackedStringArray("hotbar_input", "spawn_point")]
 script = ExtResource("6_g6k8r")
 hotbar_input = NodePath("../HotbarInput")
+spawn_point = NodePath("../ItemEquipDisplay")
 metadata/_custom_type_script = "uid://cvmwf84dan6g7"
 
 [node name="Hunger" type="Node" parent="."]
@@ -84,9 +86,16 @@ metadata/_custom_type_script = "uid://dgkass0sic6wa"
 
 [node name="ItemEquipDisplay" type="Node2D" parent="."]
 position = Vector2(-17.5758, 0)
+scale = Vector2(0.66, 0.66)
 script = ExtResource("8_a744p")
 metadata/_custom_type_script = "uid://cy65fv0u3uiga"
 
+[node name="MouseInput" type="Node2D" parent="."]
+script = ExtResource("9_388e2")
+metadata/_custom_type_script = "uid://c5rhs0y5iry7d"
+
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]
-[connection signal="equipment_changed" from="Equipment" to="ItemEquipDisplay" method="_on_equipment_changed"]
+[connection signal="equipment_changed" from="Equipment" to="ItemEquipDisplay" method="set_instance"]
+[connection signal="mouse_position" from="MouseInput" to="Equipment" method="_set_target"]
+[connection signal="mouse_position" from="MouseInput" to="ItemEquipDisplay" method="_update_target"]

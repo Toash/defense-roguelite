@@ -15,3 +15,9 @@ func _ready() -> void:
 	1,
 	Vector2(150, 60)
 	)
+
+	GroundItems.spawn_by_data(
+	ItemDatabase.get_from_id(1),
+	1,
+	Vector2(250, 0)
+	)

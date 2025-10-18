@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://cn5uuj32nxc7r"]
+
+[ext_resource type="Texture2D" uid="uid://dr3mcgkrm4uyd" path="res://item/items/pistol/pistol.png" id="1_2yt1l"]
+[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/item_effect.gd" id="1_8e78t"]
+[ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="2_2yt1l"]
+[ext_resource type="Resource" uid="uid://drxqpryf5nwpb" path="res://item/effects/bullet.tres" id="3_alyvx"]
+
+[resource]
+script = ExtResource("2_2yt1l")
+id = 1
+display_name = "Pistol"
+description = "pew pew."
+max_stack = 1
+consume_on_use = false
+icon = ExtResource("1_2yt1l")
+ingame_sprite = ExtResource("1_2yt1l")
+sprite_flipped = false
+follow_target = true
+item_effects = Array[ExtResource("1_8e78t")]([ExtResource("3_alyvx")])
+metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

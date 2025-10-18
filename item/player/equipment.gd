@@ -5,6 +5,13 @@ signal equipment_changed(inst: ItemInstance)
 ## indexes into hotbar to use the iteminstance.
 
 @export var hotbar_input: HotbarInput
+
+## used when the item spawns stuff.
+@export var spawn_point: Node2D
+
+var target: Vector2
+
+
 # var equipped_instance: ItemInstance
 var equipped_index: int
 
@@ -35,10 +42,16 @@ func set_equipped_index(index: int):
 	equipped_index = index
 	equipment_changed.emit(get_equipped_item())
 
+func _set_target(pos: Vector2):
+	self.target = pos
 
 func use():
-	var context = {}
-	var user = get_tree().get_first_node_in_group("player")
+	var item_context: ItemContext = ItemContext.new()
+	item_context.root_node = get_tree().current_scene
+	item_context.user_node = get_parent()
+	item_context.spawn_point = spawn_point.global_position
+	item_context.target_point = target
+
 
 	var inst = ItemService.containers[ItemService.ContainerName.HOTBAR].get_item(equipped_index)
 	if not inst:
@@ -46,4 +59,4 @@ func use():
 		return
 
 	print("Using equipment: " + inst.data.display_name)
-	inst.use(user, context)
+	inst.use(item_context)
