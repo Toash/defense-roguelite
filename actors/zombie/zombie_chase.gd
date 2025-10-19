@@ -27,7 +27,7 @@ func state_physics_update(delta: float):
 	raycast.target_position = character.to_local(target.reference.global_position)
 
 	if raycast.get_collider():
-		print("Obstruction detected.")
+		# print("Obstruction detected.")
 		target.last_position = raycast.get_collision_point()
 		transitioned.emit(self, "last_seen")
 

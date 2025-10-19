@@ -8,7 +8,7 @@ signal health_changed(new_value)
 
 
 @export var max_health: int = 100
-var health: int = max_health
+@onready var health: int = max_health
 
 
 func to_dict() -> Dictionary:

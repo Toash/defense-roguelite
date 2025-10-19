@@ -36,6 +36,7 @@ size = Vector2(41, 62)
 radius = 200.01
 
 [node name="Player" type="CharacterBody2D" groups=["persist"]]
+collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_onrkg")
 speed = 500
@@ -69,9 +70,8 @@ shape = SubResource("CircleShape2D_yw30f")
 script = ExtResource("5_g6k8r")
 metadata/_custom_type_script = "uid://gyp8bshfrfoj"
 
-[node name="Equipment" type="Node" parent="." node_paths=PackedStringArray("hotbar_input", "spawn_point")]
+[node name="Equipment" type="Node" parent="." node_paths=PackedStringArray("spawn_point")]
 script = ExtResource("6_g6k8r")
-hotbar_input = NodePath("../HotbarInput")
 spawn_point = NodePath("../ItemEquipDisplay")
 metadata/_custom_type_script = "uid://cvmwf84dan6g7"
 
@@ -94,6 +94,7 @@ metadata/_custom_type_script = "uid://cy65fv0u3uiga"
 script = ExtResource("9_388e2")
 metadata/_custom_type_script = "uid://c5rhs0y5iry7d"
 
+[connection signal="equip_slot" from="HotbarInput" to="Equipment" method="_on_equip_slot"]
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]
 [connection signal="equipment_changed" from="Equipment" to="ItemEquipDisplay" method="set_instance"]

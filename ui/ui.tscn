@@ -19,27 +19,33 @@ bg_color = Color(0, 0.37443, 0.964439, 1)
 [node name="UI" type="CanvasLayer" node_paths=PackedStringArray("hotbar_ui", "health_bar", "hunger_bar", "thirst_bar")]
 script = ExtResource("1_bo1jx")
 hotbar_ui = NodePath("HotbarUI")
-health_bar = NodePath("Stats/VBoxContainer/Health")
-hunger_bar = NodePath("Stats/VBoxContainer/Hunger")
-thirst_bar = NodePath("Stats/VBoxContainer/Thirst")
+health_bar = NodePath("Stats/MarginContainer/VBoxContainer/Health")
+hunger_bar = NodePath("Stats/MarginContainer/VBoxContainer/Hunger")
+thirst_bar = NodePath("Stats/MarginContainer/VBoxContainer/Thirst")
 
 [node name="HotbarUI" parent="." instance=ExtResource("2_wl5ax")]
-offset_left = 960.0
-offset_top = 917.0
-offset_right = 960.0
-offset_bottom = 917.0
+offset_left = 637.0
+offset_top = 937.0
+offset_right = 637.0
+offset_bottom = 937.0
 
 [node name="InventoryInput" type="Node" parent="."]
 script = ExtResource("3_wl5ax")
 metadata/_custom_type_script = "uid://dtth8kvwyyrfn"
 
 [node name="PickupWindow" parent="." instance=ExtResource("4_tf0e0")]
+offset_left = 66.0
+offset_top = 49.0
+offset_right = 150.0
+offset_bottom = 84.0
 window_title = "Ground Items"
 content_scene = ExtResource("4_vkava")
 
 [node name="InventoryWindow" parent="." instance=ExtResource("4_tf0e0")]
-offset_left = 489.0
-offset_right = 573.0
+offset_left = 1269.0
+offset_top = 776.0
+offset_right = 1353.0
+offset_bottom = 811.0
 window_title = "Inventory"
 content_scene = ExtResource("1_ks8t7")
 
@@ -47,38 +53,47 @@ content_scene = ExtResource("1_ks8t7")
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 260.0
+offset_left = 41.0
+offset_top = -132.0
+offset_right = 301.0
+offset_bottom = -43.0
 grow_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Stats"]
+[node name="MarginContainer" type="MarginContainer" parent="Stats"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Stats/MarginContainer"]
 layout_mode = 2
 
-[node name="Health" type="ProgressBar" parent="Stats/VBoxContainer"]
+[node name="Health" type="ProgressBar" parent="Stats/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_obcwv")
 
-[node name="Label" type="Label" parent="Stats/VBoxContainer/Health"]
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/Health"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Health"
 
-[node name="Hunger" type="ProgressBar" parent="Stats/VBoxContainer"]
+[node name="Hunger" type="ProgressBar" parent="Stats/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_bo1jx")
 
-[node name="Label" type="Label" parent="Stats/VBoxContainer/Hunger"]
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/Hunger"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Hunger"
 
-[node name="Thirst" type="ProgressBar" parent="Stats/VBoxContainer"]
+[node name="Thirst" type="ProgressBar" parent="Stats/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_gycre")
 
-[node name="Label" type="Label" parent="Stats/VBoxContainer/Thirst"]
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/Thirst"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0

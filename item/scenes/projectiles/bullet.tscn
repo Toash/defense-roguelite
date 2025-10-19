@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dfya2bgykrj43"]
 
-[ext_resource type="Script" uid="uid://c0e5vy4qopanc" path="res://projectiles/bullet.gd" id="1_4ambd"]
-[ext_resource type="Texture2D" uid="uid://ch1ctbupkfx2h" path="res://projectiles/bullet.png" id="2_cqswp"]
+[ext_resource type="Script" uid="uid://c0e5vy4qopanc" path="res://item/scenes/projectiles/bullet.gd" id="1_4ambd"]
+[ext_resource type="Texture2D" uid="uid://ch1ctbupkfx2h" path="res://item/scenes/projectiles/bullet.png" id="2_cqswp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2b2rl"]
 size = Vector2(15, 12)
@@ -10,6 +10,9 @@ size = Vector2(15, 12)
 collision_mask = 3
 input_pickable = true
 gravity_scale = 0.0
+continuous_cd = 2
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_4ambd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

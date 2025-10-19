@@ -4,6 +4,12 @@ class_name HotbarInput
 
 signal equip_slot(index: int)
 
+var current_hotbar_index: int
+
+func _ready() -> void:
+	ItemService.slot_changed.connect(_on_slot_changed)
+
+
 func _process(delta: float) -> void:
 	if Console.input.has_focus(): return
 
@@ -18,4 +24,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("hotbar_9"): _equip_from_hotbar(8)
 
 func _equip_from_hotbar(index: int):
+	current_hotbar_index = index
 	equip_slot.emit(index)
+
+
+func _on_slot_changed(container: ItemService.ContainerName, index: int):
+	if container == ItemService.ContainerName.HOTBAR:
+		equip_slot.emit(index)

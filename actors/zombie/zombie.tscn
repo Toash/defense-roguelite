@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://blqvvu0ytchcd"]
+[gd_scene load_steps=14 format=3 uid="uid://blqvvu0ytchcd"]
 
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="1_fsm1j"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="2_ixsl6"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://dt4kadfyw2ywh" path="res://actors/zombie/zombie_target.gd" id="4_ymihc"]
 [ext_resource type="Script" uid="uid://y6xyi4gu5uqa" path="res://actors/zombie/zombie_last_seen.gd" id="5_8jy1d"]
 [ext_resource type="Script" uid="uid://bbflvir0kv6hb" path="res://ai/state_machine_debug.gd" id="7_3fose"]
+[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="8_23tyx"]
+[ext_resource type="Script" uid="uid://dn7fydgbbk3wg" path="res://actors/zombie/zombie_death.gd" id="9_oyhgy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eseir"]
 animations = [{
@@ -105,3 +107,14 @@ metadata/_custom_type_script = "uid://bbflvir0kv6hb"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_3fose")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("8_23tyx")
+max_health = 1
+metadata/_custom_type_script = "uid://gyp8bshfrfoj"
+
+[node name="ZombieDeath" type="Node" parent="."]
+script = ExtResource("9_oyhgy")
+metadata/_custom_type_script = "uid://dn7fydgbbk3wg"
+
+[connection signal="died" from="Health" to="ZombieDeath" method="_on_death"]

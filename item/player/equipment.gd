@@ -4,7 +4,6 @@ class_name Equipment
 signal equipment_changed(inst: ItemInstance)
 ## indexes into hotbar to use the iteminstance.
 
-@export var hotbar_input: HotbarInput
 
 ## used when the item spawns stuff.
 @export var spawn_point: Node2D
@@ -14,10 +13,6 @@ var target: Vector2
 
 # var equipped_instance: ItemInstance
 var equipped_index: int
-
-
-func _ready() -> void:
-	hotbar_input.equip_slot.connect(_on_equip_slot)
 
 
 func _unhandled_input(event: InputEvent) -> void:

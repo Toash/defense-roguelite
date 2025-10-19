@@ -38,7 +38,7 @@ func state_physics_update(delta: float):
 		# raycast to all humans in the area
 		raycast.target_position = character.to_local(human.global_position)
 		if raycast.get_collider():
-			print("Obstruction detected.")
+			# print("Obstruction detected.")
 			continue
 
 		target.reference = human
