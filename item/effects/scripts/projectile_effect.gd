@@ -14,7 +14,7 @@ func apply(context: ItemContext):
     bullet_inst.speed = speed
     bullet_inst.add_collision_exception_with(context.user_node)
 
-    bullet_inst.global_position = context.spawn_point
-    bullet_inst.look_at(context.target_point)
+    bullet_inst.global_position = context.global_spawn_point
+    bullet_inst.look_at(context.global_target_point)
 
     context.root_node.add_child(bullet_inst)

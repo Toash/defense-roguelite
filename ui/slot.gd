@@ -1,12 +1,13 @@
 extends Panel
 
 
-# dumb slot in container
+# dumb slot in container_name
 
 class_name Slot
 
 var inst: ItemInstance = null
-@export var container: ItemService.ContainerName # inventory, hotbar, pickups
+@export var container: ItemContainer
+
 @export var slot_index: int = -1
 
 @export var item_scene: PackedScene
@@ -54,7 +55,8 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 	var from_inst: ItemInstance = data["inst"]
 
 	var from_slot: Slot = data["from_slot"]
-	var from_container: ItemService.ContainerName = from_slot.container
+	# var from_container: ItemService.ContainerName = from_slot.container_name
+	var from_container: ItemContainer = from_slot.container
 	var from_slot_index: int = from_slot.slot_index
 
 	if !_can_drop_data(at_position, data):

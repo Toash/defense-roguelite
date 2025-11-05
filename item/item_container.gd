@@ -2,22 +2,17 @@ extends Node
 
 # base class for containers.
 
-
+## represents a general container in the game that holds items.
 class_name ItemContainer
 
-var capacity: int
-var size: int
+@export var capacity: int = 0
+@export var container_name: ItemService.ContainerName
 
 # used to persist item positions in an inventory.
 var _slot_to_inst: Dictionary[int, ItemInstance] = {}
 var _inst_uid_to_slot: Dictionary[String, int] = {}
 
-var container_name: ItemService.ContainerName
-
-func _init(c: int, cname: ItemService.ContainerName):
-	print("initializing container with name " + str(cname))
-	self.capacity = c
-	self.container_name = cname
+var size: int
 
 # serialize
 func get_dict() -> Dictionary:
@@ -48,26 +43,24 @@ func get_item(i: int) -> ItemInstance:
 	return _slot_to_inst.get(i, null)
 
 func set_item(i: int, inst: ItemInstance) -> void:
-	if self.container_name == null: push_error("Container name not defined!")
 	_slot_to_inst[i] = inst
 	if inst:
 		_inst_uid_to_slot[inst.uid] = i
 	else:
 		self.size += 1
-	ItemService.slot_changed.emit(container_name, i)
+	ItemService.slot_changed.emit(self, i)
 
 func remove(i: int) -> void:
-	if self.container_name == null: push_error("Container name not defined!")
 	if _slot_to_inst[i]:
 		self.size -= 1
 		set_item(i, null)
-		ItemService.slot_changed.emit(container_name, i)
+		ItemService.slot_changed.emit(self, i)
 
 func get_index_by_uid(uid: String) -> int:
 	return _inst_uid_to_slot[uid]
 
 func get_first_empty_slot() -> int:
-	for index in ItemService.capacity(container_name):
+	for index in capacity:
 		if _slot_to_inst.get(index, null) == null:
 			return index
 	return -1
@@ -87,3 +80,17 @@ func is_empty() -> bool:
 
 func is_full() -> bool:
 	return self.size == self.capacity
+
+
+func get_item_instances() -> Array[ItemInstance]:
+	return _slot_to_inst.values()
+
+func sync_items(items: Array):
+	_slot_to_inst.clear()
+	for index in items.size():
+		var inst: ItemInstance = items[index]
+		_slot_to_inst[index] = inst
+
+
+	for index in capacity:
+		ItemService.slot_changed.emit(self, index)

@@ -6,7 +6,8 @@ signal equipment_changed(inst: ItemInstance)
 
 
 ## used when the item spawns stuff.
-@export var spawn_point: Node2D
+@export var hotbar_container: ItemContainer
+@export var equip_display: ItemEquipDisplay
 
 var target: Vector2
 
@@ -20,7 +21,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		use()
 
 func _on_equip_slot(index: int):
-	if ItemService.containers[ItemService.ContainerName.HOTBAR].get_capacity() <= index:
+	# if ItemService.player_containers[ItemService.ContainerName.HOTBAR].get_capacity() <= index:
+	if hotbar_container.get_capacity() <= index:
 		push_error("Hotbar does not have the right capacity to equip index " + str(index))
 		return
 
@@ -28,7 +30,7 @@ func _on_equip_slot(index: int):
 	set_equipped_index(index)
 
 func get_equipped_item() -> ItemInstance:
-	var inst = ItemService.containers[ItemService.ContainerName.HOTBAR].get_item(equipped_index)
+	var inst = hotbar_container.get_item(equipped_index)
 	return inst
 
 # func set_equipped_instance(inst: ItemInstance):
@@ -40,15 +42,22 @@ func set_equipped_index(index: int):
 func _set_target(pos: Vector2):
 	self.target = pos
 
+
 func use():
 	var item_context: ItemContext = ItemContext.new()
 	item_context.root_node = get_tree().current_scene
 	item_context.user_node = get_parent()
-	item_context.spawn_point = spawn_point.global_position
-	item_context.target_point = target
+	item_context.global_spawn_point = equip_display.get_origin_node().global_position
+	item_context.spawn_node = equip_display.get_origin_node()
+	item_context.global_target_point = target
+
+	item_context.equip_display = equip_display
+	item_context.flipped = equip_display.flipped
 
 
-	var inst = ItemService.containers[ItemService.ContainerName.HOTBAR].get_item(equipped_index)
+	# var inst = ItemService.player_containers[ItemService.ContainerName.HOTBAR].get_item(equipped_index)
+	var inst = hotbar_container.get_item(equipped_index)
+
 	if not inst:
 		print("No equipment")
 		return

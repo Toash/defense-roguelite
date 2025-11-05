@@ -6,5 +6,11 @@ var root_node: Node
 
 var user_node: Node
 
-var spawn_point: Vector2
-var target_point: Vector2
+var global_spawn_point: Vector2
+var spawn_node: Node2D
+
+
+var global_target_point: Vector2
+
+var equip_display: ItemEquipDisplay
+var flipped: bool

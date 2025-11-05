@@ -8,7 +8,7 @@ resource_name = "swing"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("RotatePoint:rotation")
+tracks/0/path = NodePath("Root/RotatePoint:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -23,7 +23,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("RotatePoint:rotation")
+tracks/0/path = NodePath("Root/RotatePoint:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -40,31 +40,35 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78t7m"]
-size = Vector2(20, 72)
+size = Vector2(22, 64)
 
-[node name="Melee" type="Node2D" node_paths=PackedStringArray("animation_player", "static_body")]
+[node name="Melee" type="Node2D" node_paths=PackedStringArray("animation_player", "static_body", "root")]
 script = ExtResource("1_reklo")
 animation_player = NodePath("AnimationPlayer")
-static_body = NodePath("RotatePoint/StaticBody2D")
+static_body = NodePath("Root/RotatePoint/StaticBody2D")
+root = NodePath("Root")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_rlv3f")
 }
 
-[node name="RotatePoint" type="Node2D" parent="."]
+[node name="Root" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="RotatePoint"]
+[node name="RotatePoint" type="Node2D" parent="Root"]
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Root/RotatePoint"]
 texture_filter = 1
-position = Vector2(6, -34)
+position = Vector2(7, -31)
 texture = ExtResource("1_78t7m")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="RotatePoint"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Root/RotatePoint"]
 position = Vector2(7, -34)
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RotatePoint/StaticBody2D"]
-position = Vector2(0, -4)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Root/RotatePoint/StaticBody2D"]
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_78t7m")
 debug_color = Color(0.97, 0, 0, 0.41960785)

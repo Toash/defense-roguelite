@@ -1,11 +1,17 @@
 extends Control
+
+
+## Displays the items in the container
 class_name ContainerUI
 
-# Mirrors containers in ItemService
 
-@export var container: ItemService.ContainerName
+@export var container: ItemContainer
+
 @export var slot_scene: PackedScene
+
+## the root node for the slots, typically a grid container.
 @export var slots_root: Node
+
 @export var format: SlotsFormat = SlotsFormat.BLANK
 enum SlotsFormat {
 	BLANK,
@@ -15,11 +21,10 @@ enum SlotsFormat {
 var _slots: Array[Slot] = []
 
 
-func _ready():
+func setup():
 	_build_slots()
 	_connect_signals()
 	_refresh()
-
 
 func _build_slots():
 	# clear slots_root 
@@ -29,8 +34,7 @@ func _build_slots():
 	_slots.clear()
 
 	# build the slots_root
-	for i in ItemService.capacity(container):
-		# var item:= item_scene.instantiate() as ItemUI
+	for i in container.get_capacity():
 		var slot: Slot = slot_scene.instantiate() as Slot
 
 		slot.container = container
@@ -47,18 +51,18 @@ func _build_slots():
 	_refresh()
 
 func _connect_signals():
-	ItemService.slot_changed.connect(func(c: ItemService.ContainerName, idx: int):
-		if c != container: return
+	ItemService.slot_changed.connect(func(other: ItemContainer, idx: int):
+		if other.container_name != container.container_name: return
 		_draw_slot(idx)
 		)
 
 
 func _refresh():
-	for i in ItemService.capacity(container):
+	for i in container.get_capacity():
 		_draw_slot(i)
 
 func _draw_slot(i: int):
-	if i < 0 or i >= ItemService.capacity(container):
+	if i < 0 or i >= container.get_capacity():
 		return
-	var inst := ItemService.containers[container].get_item(i)
+	var inst: ItemInstance = container.get_item(i)
 	_slots[i].set_slot_item(inst)

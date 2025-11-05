@@ -3,14 +3,12 @@ extends Resource
 #repreents an instasnce of item data
 class_name ItemInstance
 
-@export var uid: String
-@export var data: ItemData
+var uid: String
+var data: ItemData
+var quantity: int
 
+var last_used_time: float = -1
 
-@export var quantity: int
-
-# @export var max_durability: int
-# @export var durability: int
 
 # constructor
 func _init(d: ItemData = null, q := 1):
@@ -19,13 +17,23 @@ func _init(d: ItemData = null, q := 1):
 	quantity = q
 
 func use(ctx: ItemContext):
-	data.apply_effects(ctx)
+	if can_use() == false: return
 
+	data.apply_effects(ctx)
 	if data.consume_on_use:
 		# assuming it is in hotbar
-		var hotbar: ItemContainer = ItemService.containers[ItemService.ContainerName.HOTBAR]
+		# TODO: just emit a signal
+		var hotbar: ItemContainer = ItemService.player_containers[ItemService.ContainerName.HOTBAR]
 		var inst_index = hotbar._inst_uid_to_slot[uid]
 		hotbar.remove(inst_index)
+
+	last_used_time = 0
+
+func can_use() -> bool:
+	return last_used_time >= data.cooldown_time
+
+func update_state(delta: float):
+	last_used_time += delta
 
 		
 # serialize

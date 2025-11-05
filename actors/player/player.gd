@@ -1,6 +1,12 @@
 extends CharacterBody2D
 
+class_name Player
+
 @export var speed = 250
+
+@export var inventory: ItemContainer
+@export var hotbar: ItemContainer
+@export var pickups: ItemContainer
 
 
 var state = "idle"
@@ -11,6 +17,10 @@ var input_vector = Vector2.ZERO
 @onready var hunger: DrainingStat = get_node_or_null("Hunger") as DrainingStat
 
 @onready var sprite = $AnimatedSprite2D
+
+func _ready() -> void:
+	Game.player_load()
+
 
 func _process(delta: float) -> void:
 	if input_vector != Vector2.ZERO:
@@ -41,6 +51,15 @@ func _physics_process(delta: float) -> void:
 		input_vector.x += 1
 		sprite.flip_h = false
 
+
+func get_inventory() -> ItemContainer:
+	return inventory
+func get_pickups() -> ItemContainer:
+	return pickups
+func get_hotbar() -> ItemContainer:
+	return hotbar
+
+
 func save() -> Dictionary:
 	return {
 		"save_type": SaveManager.SaveType.NO_RELOAD,
@@ -67,3 +86,5 @@ func load(d: Dictionary):
 
 	thirst.from_dict(d.thirst_data)
 	thirst.poll.emit(thirst.stat)
+
+	Game.player_load()

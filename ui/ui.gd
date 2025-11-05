@@ -3,8 +3,12 @@ extends CanvasLayer
 # wires player behaviour stuff onto the UI
 
 
-@export var player: Node2D
+@export var player: Player
 # @export var hotbar_input: HotbarInput
+
+
+@export var inventory_window: ExpandableWindow
+@export var pickup_window: ExpandableWindow
 
 
 @export var hotbar_ui: HotbarUI
@@ -33,6 +37,15 @@ func _ready() -> void:
 	thirst_bar.max_value = player_thirst.max_stat
 	thirst_bar.value = player_thirst.stat
 
+
+	# attach containers to the uis 
+	hotbar_ui.container = player.get_hotbar()
+	(inventory_window.get_content() as ContainerUI).container = player.get_inventory()
+	(pickup_window.get_content() as ContainerUI).container = player.get_pickups()
+	# setup the uis
+	hotbar_ui.setup()
+	(inventory_window.get_content() as ContainerUI).setup()
+	(pickup_window.get_content() as ContainerUI).setup()
 
 	var hotbar_input: HotbarInput = player.get_node_or_null("HotbarInput") as HotbarInput
 	if not hotbar_input: push_error("UI: Could not find hotbar input in player")

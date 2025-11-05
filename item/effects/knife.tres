@@ -1,7 +1,10 @@
-[gd_resource type="Resource" script_class="MeleeEffect" load_steps=2 format=3 uid="uid://dwlv5mgkd6qnp"]
+[gd_resource type="Resource" script_class="MeleeEffect" load_steps=3 format=3 uid="uid://dwlv5mgkd6qnp"]
 
 [ext_resource type="Script" uid="uid://dn16c2l3h1soe" path="res://item/effects/scripts/melee_effect.gd" id="1_k7pwf"]
+[ext_resource type="PackedScene" uid="uid://dqj4spopcu6pq" path="res://item/scenes/melee/melee.tscn" id="1_v03j5"]
 
 [resource]
 script = ExtResource("1_k7pwf")
+melee = ExtResource("1_v03j5")
+swing_speed = 3
 metadata/_custom_type_script = "uid://dn16c2l3h1soe"

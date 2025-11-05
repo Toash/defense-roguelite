@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cos4kv2vrjqdc" path="res://ui/container_ui.gd" id="2_ee5kk"]
 [ext_resource type="PackedScene" uid="uid://bpnkgf1rpg18r" path="res://ui/slot.tscn" id="3_kvwuf"]
 
-[node name="PickupUI" type="Control"]
+[node name="PickupUI" type="Control" node_paths=PackedStringArray("slots_root")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,17 +13,16 @@ offset_bottom = -680.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("2_ee5kk")
+slot_scene = ExtResource("3_kvwuf")
+slots_root = NodePath("PanelContainer/GridContainer")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer" node_paths=PackedStringArray("slots_root")]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer"]
 layout_mode = 2
 mouse_filter = 2
 columns = 4
-script = ExtResource("2_ee5kk")
-container = 2
-slot_scene = ExtResource("3_kvwuf")
-slots_root = NodePath(".")

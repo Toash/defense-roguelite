@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cos4kv2vrjqdc" path="res://ui/container_ui.gd" id="2_wij5n"]
 [ext_resource type="PackedScene" uid="uid://bpnkgf1rpg18r" path="res://ui/slot.tscn" id="3_j1vmf"]
 
-[node name="InventoryUI" type="Control"]
+[node name="InventoryUI" type="Control" node_paths=PackedStringArray("slots_root")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("2_wij5n")
+slot_scene = ExtResource("3_j1vmf")
+slots_root = NodePath("PanelContainer/MarginContainer/Slots")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -24,9 +27,6 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Slots" type="GridContainer" parent="PanelContainer/MarginContainer" node_paths=PackedStringArray("slots_root")]
+[node name="Slots" type="GridContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 columns = 10
-script = ExtResource("2_wij5n")
-slot_scene = ExtResource("3_j1vmf")
-slots_root = NodePath(".")

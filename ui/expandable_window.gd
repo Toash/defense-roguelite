@@ -6,7 +6,10 @@ class_name ExpandableWindow
 
 
 @export var window_title: String = "Window"
+
+## the scene that the expandable window contains.
 @export var content_scene: PackedScene
+
 @export var width = 300
 
 
@@ -15,6 +18,8 @@ class_name ExpandableWindow
 @export var minimize_button: Button
 @export var title_label: Label
 
+
+var content: Node
 
 var is_minimized := false
 var _dragging := false
@@ -30,14 +35,16 @@ func _ready() -> void:
 	# size.x = content_container.get_child(0).size.x
 	# $TitleBar.gui_input.connect(_on_titlebar_gui_input)
 
+func get_content() -> Node:
+	return self.content
 	
 func _instantiate_content():
 	for child in content_container.get_children():
 		# child.queue_free()
 		child.call_deferred("queue_free")
 	if content_scene:
-		var inst = content_scene.instantiate()
-		content_container.add_child(inst)
+		content = content_scene.instantiate()
+		content_container.add_child(content)
 
 func _on_minimize_pressed():
 	is_minimized = !is_minimized

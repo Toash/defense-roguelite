@@ -23,8 +23,8 @@ SaveManager="*res://game/autoloads/save_manager.gd"
 TooltipManager="*res://ui/autoloads/tooltip_manager.tscn"
 GroundItems="*res://item/autoloads/ground_items.tscn"
 ItemDatabase="*res://item/autoloads/item_database.gd"
-ItemService="*res://item/autoloads/item_service.tscn"
 Console="*res://game/autoloads/console.tscn"
+ItemService="*res://item/autoloads/item_service.tscn"
 
 [display]
 

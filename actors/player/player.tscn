@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=14 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_yw30f"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dgkass0sic6wa" path="res://actors/generic/draining_stat.gd" id="7_boad6"]
 [ext_resource type="Script" uid="uid://cy65fv0u3uiga" path="res://item/generic/item_equip_display.gd" id="8_a744p"]
 [ext_resource type="Script" uid="uid://c5rhs0y5iry7d" path="res://input/mouse_input.gd" id="9_388e2"]
+[ext_resource type="Script" uid="uid://co0hu31xc486a" path="res://item/item_container.gd" id="10_lsln6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g1dw6"]
 animations = [{
@@ -35,11 +36,14 @@ size = Vector2(41, 62)
 [sub_resource type="CircleShape2D" id="CircleShape2D_yw30f"]
 radius = 200.01
 
-[node name="Player" type="CharacterBody2D" groups=["persist"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "pickups") groups=["persist", "player"]]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_onrkg")
 speed = 500
+inventory = NodePath("Containers/Inventory")
+hotbar = NodePath("Containers/Hotbar")
+pickups = NodePath("Containers/Pickups")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -60,8 +64,9 @@ shape = SubResource("RectangleShape2D_rkbax")
 script = ExtResource("4_yw30f")
 metadata/_custom_type_script = "uid://cu2mhoqnrgeam"
 
-[node name="PickupRadius" type="Area2D" parent="."]
+[node name="PickupRadius" type="Area2D" parent="." node_paths=PackedStringArray("pickup_container")]
 script = ExtResource("5_qjkh3")
+pickup_container = NodePath("../Containers/Pickups")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRadius"]
 shape = SubResource("CircleShape2D_yw30f")
@@ -70,9 +75,10 @@ shape = SubResource("CircleShape2D_yw30f")
 script = ExtResource("5_g6k8r")
 metadata/_custom_type_script = "uid://gyp8bshfrfoj"
 
-[node name="Equipment" type="Node" parent="." node_paths=PackedStringArray("spawn_point")]
+[node name="Equipment" type="Node" parent="." node_paths=PackedStringArray("hotbar_container", "equip_display")]
 script = ExtResource("6_g6k8r")
-spawn_point = NodePath("../ItemEquipDisplay")
+hotbar_container = NodePath("../Containers/Hotbar")
+equip_display = NodePath("../ItemEquipDisplay")
 metadata/_custom_type_script = "uid://cvmwf84dan6g7"
 
 [node name="Hunger" type="Node" parent="."]
@@ -85,18 +91,38 @@ drain_rate = 0.02
 metadata/_custom_type_script = "uid://dgkass0sic6wa"
 
 [node name="ItemEquipDisplay" type="Node2D" parent="."]
-position = Vector2(-17.5758, 0)
 scale = Vector2(0.66, 0.66)
 script = ExtResource("8_a744p")
+distance_from_user = 70
 metadata/_custom_type_script = "uid://cy65fv0u3uiga"
 
 [node name="MouseInput" type="Node2D" parent="."]
 script = ExtResource("9_388e2")
 metadata/_custom_type_script = "uid://c5rhs0y5iry7d"
 
+[node name="Containers" type="Node" parent="."]
+
+[node name="Inventory" type="Node" parent="Containers"]
+script = ExtResource("10_lsln6")
+capacity = 64
+metadata/_custom_type_script = "uid://co0hu31xc486a"
+
+[node name="Hotbar" type="Node" parent="Containers"]
+script = ExtResource("10_lsln6")
+capacity = 9
+container_name = 1
+metadata/_custom_type_script = "uid://co0hu31xc486a"
+
+[node name="Pickups" type="Node" parent="Containers"]
+script = ExtResource("10_lsln6")
+capacity = 16
+container_name = 2
+metadata/_custom_type_script = "uid://co0hu31xc486a"
+
 [connection signal="equip_slot" from="HotbarInput" to="Equipment" method="_on_equip_slot"]
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]
 [connection signal="equipment_changed" from="Equipment" to="ItemEquipDisplay" method="set_instance"]
+[connection signal="origin_created" from="ItemEquipDisplay" to="Equipment" method="_set_origin_node"]
 [connection signal="mouse_position" from="MouseInput" to="Equipment" method="_set_target"]
 [connection signal="mouse_position" from="MouseInput" to="ItemEquipDisplay" method="_update_target"]

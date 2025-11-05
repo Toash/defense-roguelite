@@ -7,7 +7,7 @@ func _ready() -> void:
 	GroundItems.spawn_by_data(
 	apple,
 	1,
-	Vector2(50, 50)
+	Vector2(50, 40)
 	)
 	
 	# GroundItems.spawn_by_data(
@@ -19,11 +19,11 @@ func _ready() -> void:
 	GroundItems.spawn_by_data(
 	ItemDatabase.get_from_id(1),
 	1,
-	Vector2(250, 0)
+	Vector2(50, 50)
 	)
 
 	GroundItems.spawn_by_data(
 	ItemDatabase.get_from_id(2),
 	1,
-	Vector2(50, 0)
+	Vector2(50, 60)
 	)

@@ -9,12 +9,14 @@ class_name ItemData
 @export var description: String
 @export var max_stack: int
 
+@export var cooldown_time: float = 1
 @export var consume_on_use := false
 
 @export var icon: Texture2D
 
 # ingame display 
 @export var ingame_sprite: Texture2D
+@export var scale = 1
 @export var sprite_flipped = false
 @export var follow_target = false # guns etc...
 

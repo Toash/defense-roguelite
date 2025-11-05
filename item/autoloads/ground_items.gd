@@ -32,6 +32,7 @@ func spawn_by_id(id: int, qty := 1, pos := Vector2.ZERO) -> Node2D:
 func _spawn(data: ItemData, qty := 1, pos := Vector2.ZERO) -> Node2D:
 	print("ItemFactory: Spawning " + data.display_name)
 	var inst: ItemInstance = ItemService.create_instance(data, qty)
+
 	var pickup: GroundItem = item_drop_scene.instantiate()
 	pickup.inst = inst
 	pickup.global_position = pos

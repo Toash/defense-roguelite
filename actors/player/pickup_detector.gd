@@ -5,12 +5,12 @@ class_name PickupDetector
 signal nearby_items_updated(nearby_items)
 var nearby_items: Array[ItemInstance] = []
 
+
+@export var pickup_container: ItemContainer
+
 func _ready():
 	nearby_items_updated.connect(func(dict):
-		ItemService.containers[ItemService.ContainerName.PICKUPS].sync (dict)
-	)
-# func _process(delta):
-# 	print(nearby_items)
+		pickup_container.sync_items(dict))
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("items"):

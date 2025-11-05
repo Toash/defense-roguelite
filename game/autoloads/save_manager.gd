@@ -22,7 +22,7 @@ enum SaveType {
 
 enum SaveKeys_RELOAD {
 	FILENAME,
-	PARENT,
+	PARENT, # should be an absolute path, and not a node that gets serialized / deserialized
 }
 enum SaveKeys_NO_RELOAD {
 	PATH,

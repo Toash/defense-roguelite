@@ -28,6 +28,6 @@ func _equip_from_hotbar(index: int):
 	equip_slot.emit(index)
 
 
-func _on_slot_changed(container: ItemService.ContainerName, index: int):
-	if container == ItemService.ContainerName.HOTBAR:
+func _on_slot_changed(container: ItemContainer, index: int):
+	if container.container_name == ItemService.ContainerName.HOTBAR:
 		equip_slot.emit(index)
