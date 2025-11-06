@@ -1,15 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=17 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_yw30f"]
 [ext_resource type="Script" uid="uid://cu2mhoqnrgeam" path="res://input/hotbar_input.gd" id="4_yw30f"]
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="5_g6k8r"]
+[ext_resource type="Script" uid="uid://cg3y6l7u7bglb" path="res://actors/player/interact_detector.gd" id="5_hiosj"]
 [ext_resource type="Script" uid="uid://dsrxhicfffw3e" path="res://actors/player/pickup_detector.gd" id="5_qjkh3"]
 [ext_resource type="Script" uid="uid://cvmwf84dan6g7" path="res://item/player/equipment.gd" id="6_g6k8r"]
 [ext_resource type="Script" uid="uid://dgkass0sic6wa" path="res://actors/generic/draining_stat.gd" id="7_boad6"]
 [ext_resource type="Script" uid="uid://cy65fv0u3uiga" path="res://item/generic/item_equip_display.gd" id="8_a744p"]
 [ext_resource type="Script" uid="uid://c5rhs0y5iry7d" path="res://input/mouse_input.gd" id="9_388e2"]
 [ext_resource type="Script" uid="uid://co0hu31xc486a" path="res://item/item_container.gd" id="10_lsln6"]
+[ext_resource type="Script" uid="uid://dplrhtm2y2ben" path="res://actors/player/interaction.gd" id="12_ssdk0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g1dw6"]
 animations = [{
@@ -35,6 +37,9 @@ size = Vector2(41, 62)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yw30f"]
 radius = 200.01
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lsln6"]
+radius = 170.49634
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "pickups") groups=["persist", "player"]]
 collision_layer = 4
@@ -65,11 +70,26 @@ script = ExtResource("4_yw30f")
 metadata/_custom_type_script = "uid://cu2mhoqnrgeam"
 
 [node name="PickupRadius" type="Area2D" parent="." node_paths=PackedStringArray("pickup_container")]
+collision_layer = 0
+collision_mask = 8
 script = ExtResource("5_qjkh3")
 pickup_container = NodePath("../Containers/Pickups")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRadius"]
 shape = SubResource("CircleShape2D_yw30f")
+
+[node name="InteractableRadius" type="Area2D" parent="." node_paths=PackedStringArray("player", "raycast")]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("5_hiosj")
+player = NodePath("..")
+raycast = NodePath("RayCast2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableRadius"]
+shape = SubResource("CircleShape2D_lsln6")
+
+[node name="RayCast2D" type="RayCast2D" parent="InteractableRadius"]
+collision_mask = 17
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_g6k8r")
@@ -119,9 +139,16 @@ capacity = 16
 container_name = 2
 metadata/_custom_type_script = "uid://co0hu31xc486a"
 
+[node name="Interaction" type="Node" parent="."]
+script = ExtResource("12_ssdk0")
+metadata/_custom_type_script = "uid://dplrhtm2y2ben"
+
 [connection signal="equip_slot" from="HotbarInput" to="Equipment" method="_on_equip_slot"]
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]
+[connection signal="area_entered" from="InteractableRadius" to="InteractableRadius" method="_on_area_entered"]
+[connection signal="area_exited" from="InteractableRadius" to="InteractableRadius" method="_on_area_exited"]
+[connection signal="nearest_interactable_changed" from="InteractableRadius" to="Interaction" method="_on_nearest_interactable_changed"]
 [connection signal="equipment_changed" from="Equipment" to="ItemEquipDisplay" method="set_instance"]
 [connection signal="origin_created" from="ItemEquipDisplay" to="Equipment" method="_set_origin_node"]
 [connection signal="mouse_position" from="MouseInput" to="Equipment" method="_set_target"]

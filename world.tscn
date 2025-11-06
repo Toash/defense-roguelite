@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=15 format=4 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/player/player.tscn" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_tlwt5"]
@@ -9,9 +9,20 @@
 [ext_resource type="PackedScene" uid="uid://c08inc3nvav0f" path="res://ui/pause_menu.tscn" id="7_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://blqvvu0ytchcd" path="res://actors/zombie/zombie.tscn" id="8_gbfbk"]
 [ext_resource type="Script" uid="uid://b4k6stbvribon" path="res://damager.gd" id="9_ioo17"]
+[ext_resource type="Shader" uid="uid://cypb182ofc63b" path="res://shaders/outline.gdshader" id="10_ic0uy"]
+[ext_resource type="Script" uid="uid://j8smuyc0fgry" path="res://interactable/interactable.gd" id="10_wse8f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbfbk"]
 size = Vector2(125, 127)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2o6r5"]
+shader = ExtResource("10_ic0uy")
+shader_parameter/allow_out_of_bounds = true
+shader_parameter/outline_thickness = 1.0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ic0uy"]
+radius = 68.359344
 
 [node name="World" type="Node2D"]
 
@@ -51,3 +62,19 @@ script = ExtResource("9_ioo17")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/Area2D"]
 position = Vector2(-0.5, -1.5)
 shape = SubResource("RectangleShape2D_gbfbk")
+
+[node name="Icon2" type="Sprite2D" parent="."]
+position = Vector2(161, -328)
+scale = Vector2(0.35999757, 0.35999757)
+texture = ExtResource("2_tlwt5")
+
+[node name="Interactable" type="Area2D" parent="Icon2" node_paths=PackedStringArray("sprite")]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("10_wse8f")
+sprite = NodePath("..")
+outline = SubResource("ShaderMaterial_2o6r5")
+metadata/_custom_type_script = "uid://j8smuyc0fgry"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon2/Interactable"]
+shape = SubResource("CircleShape2D_ic0uy")
