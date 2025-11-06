@@ -3,14 +3,14 @@ extends Area2D
 
 class_name Interactable
 
-signal interacted
+signal interacted(player: Node2D)
 
 @export var sprite: Sprite2D
 @export var outline: ShaderMaterial
 
 
-func interact():
-	interacted.emit()
+func interact(player: Node2D):
+	interacted.emit(player)
 
 
 func show_outline():

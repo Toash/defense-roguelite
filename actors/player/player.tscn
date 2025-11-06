@@ -139,8 +139,9 @@ capacity = 16
 container_name = 2
 metadata/_custom_type_script = "uid://co0hu31xc486a"
 
-[node name="Interaction" type="Node" parent="."]
+[node name="Interaction" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("12_ssdk0")
+player = NodePath("..")
 metadata/_custom_type_script = "uid://dplrhtm2y2ben"
 
 [connection signal="equip_slot" from="HotbarInput" to="Equipment" method="_on_equip_slot"]

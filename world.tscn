@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=16 format=4 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/player/player.tscn" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_tlwt5"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://blqvvu0ytchcd" path="res://actors/zombie/zombie.tscn" id="8_gbfbk"]
 [ext_resource type="Script" uid="uid://b4k6stbvribon" path="res://damager.gd" id="9_ioo17"]
 [ext_resource type="Shader" uid="uid://cypb182ofc63b" path="res://shaders/outline.gdshader" id="10_ic0uy"]
+[ext_resource type="Script" uid="uid://xc7glbh1rnk2" path="res://deletus.gd" id="10_k3n1d"]
 [ext_resource type="Script" uid="uid://j8smuyc0fgry" path="res://interactable/interactable.gd" id="10_wse8f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbfbk"]
@@ -67,6 +68,7 @@ shape = SubResource("RectangleShape2D_gbfbk")
 position = Vector2(161, -328)
 scale = Vector2(0.35999757, 0.35999757)
 texture = ExtResource("2_tlwt5")
+script = ExtResource("10_k3n1d")
 
 [node name="Interactable" type="Area2D" parent="Icon2" node_paths=PackedStringArray("sprite")]
 collision_layer = 16
@@ -78,3 +80,5 @@ metadata/_custom_type_script = "uid://j8smuyc0fgry"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon2/Interactable"]
 shape = SubResource("CircleShape2D_ic0uy")
+
+[connection signal="interacted" from="Icon2/Interactable" to="Icon2" method="delete"]
