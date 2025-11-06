@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=17 format=4 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/player/player.tscn" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_tlwt5"]
@@ -12,6 +12,7 @@
 [ext_resource type="Shader" uid="uid://cypb182ofc63b" path="res://shaders/outline.gdshader" id="10_ic0uy"]
 [ext_resource type="Script" uid="uid://xc7glbh1rnk2" path="res://deletus.gd" id="10_k3n1d"]
 [ext_resource type="Script" uid="uid://j8smuyc0fgry" path="res://interactable/interactable.gd" id="10_wse8f"]
+[ext_resource type="PackedScene" uid="uid://bpx26d2445h3y" path="res://item/scenes/containers/cabinet.tscn" id="13_2o6r5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbfbk"]
 size = Vector2(125, 127)
@@ -80,5 +81,8 @@ metadata/_custom_type_script = "uid://j8smuyc0fgry"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon2/Interactable"]
 shape = SubResource("CircleShape2D_ic0uy")
+
+[node name="Cabinet" parent="." instance=ExtResource("13_2o6r5")]
+position = Vector2(-34, -355)
 
 [connection signal="interacted" from="Icon2/Interactable" to="Icon2" method="delete"]

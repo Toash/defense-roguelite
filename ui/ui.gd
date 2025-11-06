@@ -9,6 +9,7 @@ extends CanvasLayer
 
 @export var inventory_window: ExpandableWindow
 @export var pickup_window: ExpandableWindow
+@export var world_container_window: ExpandableWindow
 
 
 @export var hotbar_ui: HotbarUI
@@ -51,6 +52,15 @@ func _ready() -> void:
 	if not hotbar_input: push_error("UI: Could not find hotbar input in player")
 	hotbar_input.equip_slot.connect(hotbar_ui.on_equip_slot)
 
+
+	# Show container ui when opening container.
+	var world_container_input: WorldContainerInput = player.get_node_or_null("WorldContainerInput")
+	if world_container_input == null:
+		push_error("Could not find World Container Input on the player!")
+
+	world_container_input.container_interacted.connect(_on_container_interact)
+
+
 func _on_health_changed(health: int):
 	health_bar.value = health
 
@@ -59,3 +69,13 @@ func _on_hunger_poll(hunger: int):
 
 func _on_thirst_poll(thirst: int):
 	thirst_bar.value = thirst
+
+func _on_container_interact(item_container: ItemContainer):
+	var container_ui: ContainerUI = world_container_window.get_content() as ContainerUI
+	if container_ui == null:
+		push_error("UI: Could not find Container UI in the world container window")
+
+	container_ui.container = item_container
+	container_ui.setup()
+
+	world_container_window.expand()

@@ -60,7 +60,7 @@ func create_instance(data: ItemData, qty: int) -> ItemInstance:
 func save() -> Dictionary:
 	return {
 		"save_type": SaveManager.SaveType.NO_RELOAD,
-		SaveManager.SaveKeys_NO_RELOAD.PATH: get_path(),
+		SaveManager.SaveKeys_NO_RELOAD.SCENETREE_PATH: get_path(),
 
 
 		"inventory": get_player_container(ContainerName.INVENTORY).get_dict(),

@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://dy00162n1j4me" path="res://ui/ui.gd" id="1_bo1jx"]
 [ext_resource type="PackedScene" uid="uid://c44tg88n7uy51" path="res://ui/inventory_ui.tscn" id="1_ks8t7"]
 [ext_resource type="PackedScene" uid="uid://vlne1xae4etb" path="res://ui/hotbar_ui.tscn" id="2_wl5ax"]
-[ext_resource type="Script" uid="uid://dtth8kvwyyrfn" path="res://input/inventory_input.gd" id="3_wl5ax"]
 [ext_resource type="PackedScene" uid="uid://bjqewamciy61i" path="res://ui/expandable_window.tscn" id="4_tf0e0"]
 [ext_resource type="PackedScene" uid="uid://cxthe01r5l7g7" path="res://ui/pickup_ui.tscn" id="4_vkava"]
+[ext_resource type="PackedScene" uid="uid://tm8hyetmjm5g" path="res://ui/world_container_ui.tscn" id="6_obcwv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obcwv"]
 bg_color = Color(0.811578, 1.85303e-06, 3.85046e-07, 1)
@@ -16,10 +16,11 @@ bg_color = Color(0.740564, 0.381836, 2.11775e-06, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gycre"]
 bg_color = Color(0, 0.37443, 0.964439, 1)
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("inventory_window", "pickup_window", "hotbar_ui", "health_bar", "hunger_bar", "thirst_bar")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("inventory_window", "pickup_window", "world_container_window", "hotbar_ui", "health_bar", "hunger_bar", "thirst_bar")]
 script = ExtResource("1_bo1jx")
 inventory_window = NodePath("InventoryWindow")
 pickup_window = NodePath("PickupWindow")
+world_container_window = NodePath("WorldContainerWindow")
 hotbar_ui = NodePath("HotbarUI")
 health_bar = NodePath("Stats/MarginContainer/VBoxContainer/Health")
 hunger_bar = NodePath("Stats/MarginContainer/VBoxContainer/Hunger")
@@ -30,10 +31,6 @@ offset_left = 637.0
 offset_top = 937.0
 offset_right = 637.0
 offset_bottom = 937.0
-
-[node name="InventoryInput" type="Node" parent="."]
-script = ExtResource("3_wl5ax")
-metadata/_custom_type_script = "uid://dtth8kvwyyrfn"
 
 [node name="PickupWindow" parent="." instance=ExtResource("4_tf0e0")]
 offset_left = 66.0
@@ -100,3 +97,12 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Thirst"
+
+[node name="WorldContainerWindow" parent="." instance=ExtResource("4_tf0e0")]
+offset_left = 752.0
+offset_top = 431.0
+offset_right = 836.0
+offset_bottom = 466.0
+window_title = "Container"
+content_scene = ExtResource("6_obcwv")
+start_minimized = true

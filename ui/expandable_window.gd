@@ -10,6 +10,7 @@ class_name ExpandableWindow
 ## the scene that the expandable window contains.
 @export var content_scene: PackedScene
 
+@export var start_minimized = false
 @export var width = 300
 
 
@@ -35,8 +36,20 @@ func _ready() -> void:
 	# size.x = content_container.get_child(0).size.x
 	# $TitleBar.gui_input.connect(_on_titlebar_gui_input)
 
+	if start_minimized:
+		minimize()
+
 func get_content() -> Node:
 	return self.content
+
+func expand():
+	is_minimized = false
+	content_container.visible = true
+
+func minimize():
+	is_minimized = true
+	content_container.visible = false
+
 	
 func _instantiate_content():
 	for child in content_container.get_children():

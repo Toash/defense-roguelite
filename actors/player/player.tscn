@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=18 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_yw30f"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://c5rhs0y5iry7d" path="res://input/mouse_input.gd" id="9_388e2"]
 [ext_resource type="Script" uid="uid://co0hu31xc486a" path="res://item/item_container.gd" id="10_lsln6"]
 [ext_resource type="Script" uid="uid://dplrhtm2y2ben" path="res://actors/player/interaction.gd" id="12_ssdk0"]
+[ext_resource type="Script" uid="uid://chxhldiu0nvle" path="res://input/world_container_input.gd" id="13_7aotg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g1dw6"]
 animations = [{
@@ -144,12 +145,16 @@ script = ExtResource("12_ssdk0")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dplrhtm2y2ben"
 
+[node name="WorldContainerInput" type="Node2D" parent="."]
+script = ExtResource("13_7aotg")
+
 [connection signal="equip_slot" from="HotbarInput" to="Equipment" method="_on_equip_slot"]
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]
 [connection signal="area_entered" from="InteractableRadius" to="InteractableRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="InteractableRadius" to="InteractableRadius" method="_on_area_exited"]
 [connection signal="nearest_interactable_changed" from="InteractableRadius" to="Interaction" method="_on_nearest_interactable_changed"]
+[connection signal="nearest_interactable_changed" from="InteractableRadius" to="WorldContainerInput" method="clear_container"]
 [connection signal="equipment_changed" from="Equipment" to="ItemEquipDisplay" method="set_instance"]
 [connection signal="origin_created" from="ItemEquipDisplay" to="Equipment" method="_set_origin_node"]
 [connection signal="mouse_position" from="MouseInput" to="Equipment" method="_set_target"]

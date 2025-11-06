@@ -22,11 +22,9 @@ func _process(delta: float) -> void:
         nearby_interactables[interactable] = distance
 
     if nearest_interactable != get_nearest_interactable():
-        print("nearest interactable changed")
-
-        print(nearest_interactable)
-        print(get_nearest_interactable())
-
+        # print("nearest interactable changed")
+        # print(nearest_interactable)
+        # print(get_nearest_interactable())
         nearest_interactable_changed.emit(get_nearest_interactable())
         nearest_interactable = get_nearest_interactable()
 

@@ -19,8 +19,6 @@ slots_root = NodePath("PanelContainer/GridContainer")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="GridContainer" type="GridContainer" parent="PanelContainer"]
 layout_mode = 2

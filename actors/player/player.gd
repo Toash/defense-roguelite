@@ -63,7 +63,7 @@ func get_hotbar() -> ItemContainer:
 func save() -> Dictionary:
 	return {
 		"save_type": SaveManager.SaveType.NO_RELOAD,
-		SaveManager.SaveKeys_NO_RELOAD.PATH: get_path(),
+		SaveManager.SaveKeys_NO_RELOAD.SCENETREE_PATH: get_path(),
 
 		"position_x": position.x,
 		"position_y": position.y,

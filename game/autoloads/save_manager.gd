@@ -21,11 +21,11 @@ enum SaveType {
 }
 
 enum SaveKeys_RELOAD {
-	FILENAME,
-	PARENT, # should be an absolute path, and not a node that gets serialized / deserialized
+	RESOURCE_PATH,
+	PARENT_SCENETREE_PATH, # should be an absolute path, and not a node that gets serialized / deserialized
 }
 enum SaveKeys_NO_RELOAD {
-	PATH,
+	SCENETREE_PATH,
 }
 
 # Each savable object is saved as a single line in a file.
@@ -76,8 +76,8 @@ func load_game(path := DEFAULT_PATH) -> void:
 
 		match data.get("save_type") as SaveType:
 			SaveType.RELOAD:
-				var filename: String = data[str(SaveKeys_RELOAD.FILENAME)] # path in editor
-				var parent_path: String = data[str(SaveKeys_RELOAD.PARENT)]
+				var filename: String = data[str(SaveKeys_RELOAD.RESOURCE_PATH)] # path in editor
+				var parent_path: String = data[str(SaveKeys_RELOAD.PARENT_SCENETREE_PATH)]
 				if not filename:
 					push_error("Save Manager: filename not defined for RELOAD node")
 				if not parent_path:
@@ -92,7 +92,7 @@ func load_game(path := DEFAULT_PATH) -> void:
 				inst.load(data)
 
 			SaveType.NO_RELOAD:
-				var autoload_path = data[str(SaveKeys_NO_RELOAD.PATH)]
+				var autoload_path = data[str(SaveKeys_NO_RELOAD.SCENETREE_PATH)]
 
 				if not autoload_path:
 					push_error("Save Manager: need to define a path for the autoload")

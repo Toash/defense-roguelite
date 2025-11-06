@@ -1,17 +1,18 @@
 extends Node
 
-
+## handles interaction for current interactable of a player.
 class_name Interaction
 
 @export var player: Node2D
 @export var interact_distance = 10000 # TODO change
 
-var current_interactable: Interactable
+var nearest_interactable: Interactable
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
-		_interact(current_interactable, player)
+		if nearest_interactable:
+			_interact(nearest_interactable, player)
 		
 
 func _interact(interactable: Interactable, player: Node2D):
@@ -27,11 +28,11 @@ func _interact(interactable: Interactable, player: Node2D):
 
 
 func _on_nearest_interactable_changed(new_interactable: Interactable):
-	if current_interactable != null:
-		current_interactable.hide_outline()
+	if nearest_interactable != null:
+		nearest_interactable.hide_outline()
 
 	if new_interactable != null:
 		new_interactable.show_outline()
 
-	current_interactable = new_interactable
-	print("Interaction: Current interactable: " + str(current_interactable))
+	nearest_interactable = new_interactable
+	print("Interaction: Current interactable: " + str(nearest_interactable))

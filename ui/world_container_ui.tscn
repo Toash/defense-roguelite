@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://tm8hyetmjm5g"]
+
+[ext_resource type="Script" uid="uid://cos4kv2vrjqdc" path="res://ui/container_ui.gd" id="1_usdek"]
+[ext_resource type="PackedScene" uid="uid://bpnkgf1rpg18r" path="res://ui/slot.tscn" id="2_sldyg"]
+
+[node name="WorldContainerUI" type="Control" node_paths=PackedStringArray("slots_root")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_usdek")
+slot_scene = ExtResource("2_sldyg")
+slots_root = NodePath("PanelContainer/GridContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer"]
+layout_mode = 2
+columns = 12
