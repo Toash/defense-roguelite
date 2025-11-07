@@ -17,7 +17,6 @@ radius = 22.022715
 
 [node name="Cabinet" type="Node2D" node_paths=PackedStringArray("container") groups=["persist"]]
 script = ExtResource("1_ssam1")
-scene = null
 container = NodePath("ItemContainer")
 
 [node name="ItemContainer" type="Node" parent="."]

@@ -5,6 +5,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5p4q"]
 
 [node name="ItemDrop" type="Area2D" groups=["items"]]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("1_nhhfg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

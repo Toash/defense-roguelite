@@ -154,7 +154,7 @@ script = ExtResource("13_7aotg")
 [connection signal="area_entered" from="InteractableRadius" to="InteractableRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="InteractableRadius" to="InteractableRadius" method="_on_area_exited"]
 [connection signal="nearest_interactable_changed" from="InteractableRadius" to="Interaction" method="_on_nearest_interactable_changed"]
-[connection signal="nearest_interactable_changed" from="InteractableRadius" to="WorldContainerInput" method="clear_container"]
+[connection signal="nearest_interactable_changed" from="InteractableRadius" to="WorldContainerInput" method="interactable_changed"]
 [connection signal="equipment_changed" from="Equipment" to="ItemEquipDisplay" method="set_instance"]
 [connection signal="origin_created" from="ItemEquipDisplay" to="Equipment" method="_set_origin_node"]
 [connection signal="mouse_position" from="MouseInput" to="Equipment" method="_set_target"]

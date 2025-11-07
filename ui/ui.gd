@@ -59,6 +59,7 @@ func _ready() -> void:
 		push_error("Could not find World Container Input on the player!")
 
 	world_container_input.container_interacted.connect(_on_container_interact)
+	world_container_input.container_changed.connect(_on_container_changed)
 
 
 func _on_health_changed(health: int):
@@ -71,11 +72,17 @@ func _on_thirst_poll(thirst: int):
 	thirst_bar.value = thirst
 
 func _on_container_interact(item_container: ItemContainer):
+	_set_world_container_ui(item_container)
+	world_container_window.toggle()
+
+func _on_container_changed(item_container: ItemContainer):
+	_set_world_container_ui(item_container)
+
+
+func _set_world_container_ui(item_container: ItemContainer):
 	var container_ui: ContainerUI = world_container_window.get_content() as ContainerUI
 	if container_ui == null:
 		push_error("UI: Could not find Container UI in the world container window")
 
 	container_ui.container = item_container
 	container_ui.setup()
-
-	world_container_window.expand()

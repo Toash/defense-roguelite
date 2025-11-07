@@ -84,5 +84,10 @@ shape = SubResource("CircleShape2D_ic0uy")
 
 [node name="Cabinet" parent="." instance=ExtResource("13_2o6r5")]
 position = Vector2(-34, -355)
+packed_scene = ExtResource("13_2o6r5")
+
+[node name="Cabinet2" parent="." instance=ExtResource("13_2o6r5")]
+position = Vector2(99, -378)
+packed_scene = ExtResource("13_2o6r5")
 
 [connection signal="interacted" from="Icon2/Interactable" to="Icon2" method="delete"]

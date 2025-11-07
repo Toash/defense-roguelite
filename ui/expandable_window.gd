@@ -50,6 +50,9 @@ func minimize():
 	is_minimized = true
 	content_container.visible = false
 
+func toggle():
+	_on_minimize_pressed()
+
 	
 func _instantiate_content():
 	for child in content_container.get_children():

@@ -3,6 +3,7 @@ extends Node
 # base class for containers.
 
 ## represents a general container in the game that holds items.
+## Note: This should be a sibling to an interactable if in the world.
 class_name ItemContainer
 
 @export var capacity: int = 0

@@ -20,7 +20,6 @@ enum SlotsFormat {
 }
 var _slots: Array[Slot] = []
 
-
 func setup():
 	# if container == null:
 	# 	push_error("ContainerUI: Container should be defined.")
@@ -54,12 +53,17 @@ func _build_slots():
 	_refresh()
 
 func _connect_signals():
-	if container == null: return
-	
-	ItemService.slot_changed.connect(func(other: ItemContainer, idx: int):
-		if other.container_name != container.container_name: return
-		_draw_slot(idx)
-		)
+	ItemService.slot_changed.connect(
+		func(other: ItemContainer, idx: int):
+			if container == null: return
+			if other.container_name != container.container_name: return
+			_draw_slot(idx)
+	)
+
+	# ItemService.slot_changed.connect(func(other: ItemContainer, idx: int):
+	# 	if other.container_name != container.container_name: return
+	# 	_draw_slot(idx)
+	# 	)
 
 
 func _refresh():
