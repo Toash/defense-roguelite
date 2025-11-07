@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=21 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/player/player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_yw30f"]
 [ext_resource type="Script" uid="uid://cu2mhoqnrgeam" path="res://input/hotbar_input.gd" id="4_yw30f"]
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://cg3y6l7u7bglb" path="res://actors/player/interact_detector.gd" id="5_hiosj"]
@@ -13,25 +12,11 @@
 [ext_resource type="Script" uid="uid://co0hu31xc486a" path="res://item/item_container.gd" id="10_lsln6"]
 [ext_resource type="Script" uid="uid://dplrhtm2y2ben" path="res://actors/player/interaction.gd" id="12_ssdk0"]
 [ext_resource type="Script" uid="uid://chxhldiu0nvle" path="res://input/world_container_input.gd" id="13_7aotg"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_g1dw6"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_yw30f")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_yw30f")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 12.0
-}]
+[ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/character_sprite.tscn" id="13_k67x5"]
+[ext_resource type="Texture2D" uid="uid://csxjjom3dyxfa" path="res://actors/sprites/head/white_head_1.png" id="14_0wchr"]
+[ext_resource type="Texture2D" uid="uid://oyto6h4h2ewn" path="res://actors/sprites/torso/torso_blue_jacket.png" id="15_qrxv1"]
+[ext_resource type="Texture2D" uid="uid://ddl3g6wo4371s" path="res://actors/sprites/hand/hands_white_1.png" id="16_dqf5y"]
+[ext_resource type="Texture2D" uid="uid://wcmxajlvsg1i" path="res://actors/sprites/leg/legs_black_1.png" id="17_otn2r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(41, 62)
@@ -51,13 +36,6 @@ inventory = NodePath("Containers/Inventory")
 hotbar = NodePath("Containers/Hotbar")
 pickups = NodePath("Containers/Pickups")
 metadata/_edit_group_ = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-scale = Vector2(0.33, 0.49)
-sprite_frames = SubResource("SpriteFrames_g1dw6")
-animation = &"idle"
-autoplay = "walk"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -147,6 +125,15 @@ metadata/_custom_type_script = "uid://dplrhtm2y2ben"
 
 [node name="WorldContainerInput" type="Node2D" parent="."]
 script = ExtResource("13_7aotg")
+
+[node name="CharacterSprite" parent="." node_paths=PackedStringArray("character_body") instance=ExtResource("13_k67x5")]
+character_body = NodePath("..")
+head_texture = ExtResource("14_0wchr")
+torso_texture = ExtResource("15_qrxv1")
+left_arm_texture = ExtResource("16_dqf5y")
+right_arm_texture = ExtResource("16_dqf5y")
+left_leg_texture = ExtResource("17_otn2r")
+right_leg_texture = ExtResource("17_otn2r")
 
 [connection signal="equip_slot" from="HotbarInput" to="Equipment" method="_on_equip_slot"]
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]

@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
+
 @export var speed = 250
 
 @export var inventory: ItemContainer
@@ -16,7 +17,6 @@ var input_vector = Vector2.ZERO
 @onready var thirst: DrainingStat = get_node_or_null("Thirst") as DrainingStat
 @onready var hunger: DrainingStat = get_node_or_null("Hunger") as DrainingStat
 
-@onready var sprite = $AnimatedSprite2D
 
 func _ready() -> void:
 	Game.player_load()
@@ -25,11 +25,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if input_vector != Vector2.ZERO:
 		state = "walk"
-		sprite.animation = "walk"
 	else:
 		state = "idle"
-		sprite.animation = "idle"
-
 	input_vector = input_vector.normalized()
 	velocity = input_vector * speed
 	move_and_slide()
@@ -46,10 +43,8 @@ func _physics_process(delta: float) -> void:
 		input_vector.y += 1
 	if Input.is_action_pressed("left"):
 		input_vector.x -= 1
-		sprite.flip_h = true
 	if Input.is_action_pressed("right"):
 		input_vector.x += 1
-		sprite.flip_h = false
 
 
 func get_inventory() -> ItemContainer:

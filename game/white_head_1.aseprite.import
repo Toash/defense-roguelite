@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dswrmui0eif34"
+path="res://.godot/imported/white_head_1.aseprite-b232954f370f2fe569fadcb53375bb39.res"
+
+[deps]
+
+source_file="res://game/white_head_1.aseprite"
+dest_files=["res://.godot/imported/white_head_1.aseprite-b232954f370f2fe569fadcb53375bb39.res"]
+
+[params]
+
