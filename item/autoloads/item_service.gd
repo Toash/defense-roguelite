@@ -14,10 +14,6 @@ signal slot_changed(container: ItemContainer, index: int)
 
 enum ContainerName {INVENTORY, HOTBAR, PICKUPS, WORLD}
 
-# @export var player_inventory: Node
-# @export var player_hotbar: Node
-# @export var player_pickups: Node
-
 
 # containers should be configured in-editor
 # ensure the player is loaded before calling this function  - use Game.player_loaded signal
@@ -99,24 +95,20 @@ func _process(delta):
 
 ## Swaps an item to the next best container.
 func quick_swap(from_container: ItemContainer, from_index: int):
-	print("quick swap")
-	var to_container_name: ContainerName = _get_best_swap_container_name(from_container.container_name)
-	if from_container.container_name == to_container_name:
+	var player = get_tree().get_first_node_in_group("player") as Node2D
+	var to_container: ItemContainer = _get_best_swap_container(from_container, player)
+
+	if from_container.container_name == to_container.container_name:
 		print("ItemService: Best container is the same as the current container")
 		return
 
-	var to_index = get_player_container(to_container_name).get_first_empty_slot()
+	var to_index = to_container.get_first_empty_slot()
 
 	if to_index == -1:
 		print("ItemService: No more space whe quick swapping.")
 		return
 
-	var player = get_tree().get_first_node_in_group("player") as Node2D
-	# move(from_container, from_index, to_container, to_index, player)
-
-	var container_name: ItemContainer = get_player_container(to_container_name)
-	# container will not be in the world
-	move(from_container, from_index, container_name, to_index, player)
+	move(from_container, from_index, to_container, to_index, player)
 	
 	
 func move(from_container: ItemContainer, from_index: int, to_container: ItemContainer, to_index: int, player: Node2D):
@@ -187,21 +179,48 @@ func add_inst(container: ItemContainer, added_inst: ItemInstance) -> bool:
 	# no space in the container
 	return false
 
-func _get_best_swap_container_name(container: ContainerName) -> ContainerName:
-	if container == ContainerName.PICKUPS:
-		if not get_player_container(ContainerName.HOTBAR).is_full():
-			return ContainerName.HOTBAR
-		elif not get_player_container(ContainerName.INVENTORY).is_full():
-			return ContainerName.INVENTORY
-		else:
-			return container
+func _get_best_swap_container(from_container: ItemContainer, player: Node2D) -> ItemContainer:
+	var interaction: Interaction = _get_interaction_from_player(player)
+	var interaction_container: ItemContainer = interaction.get_nearest_container_if_it_exists()
 
-	if container == ContainerName.HOTBAR:
-		if not get_player_container(ContainerName.INVENTORY).is_full():
-			return ContainerName.INVENTORY
+	if interaction_container != null:
+		if not interaction_container.is_full() and from_container.container_name != ContainerName.WORLD:
+			return interaction_container
 
-	if container == ContainerName.INVENTORY:
-		if not get_player_container(ContainerName.HOTBAR).is_full():
-			return ContainerName.HOTBAR
 
-	return container
+	# var pickups = get_player_container(ContainerName.PICKUPS)
+	var hotbar = get_player_container(ContainerName.HOTBAR)
+	var inventory = get_player_container(ContainerName.INVENTORY)
+
+	var from_name
+	if from_container.container_name != ContainerName.INVENTORY:
+		from_name = from_container.container_name
+
+	if from_name == ContainerName.WORLD:
+		if not hotbar.is_full():
+			return hotbar
+		elif not inventory.is_full():
+			return inventory
+	elif from_name == ContainerName.PICKUPS:
+		if not hotbar.is_full():
+			return hotbar
+		elif not inventory.is_full():
+			return inventory
+	elif from_name == ContainerName.HOTBAR:
+		if not inventory.is_full():
+			return inventory
+
+	# inventory cause its acting weird (its null)
+	else:
+		if not hotbar.is_full():
+			return hotbar
+
+	return from_container
+
+
+func _get_interaction_from_player(player: Node2D) -> Interaction:
+	for child in player.get_children():
+		if child is Interaction:
+			return child as Interaction
+
+	return null

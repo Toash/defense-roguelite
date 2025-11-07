@@ -99,10 +99,10 @@ offset_bottom = 23.0
 text = "Thirst"
 
 [node name="WorldContainerWindow" parent="." instance=ExtResource("4_tf0e0")]
-offset_left = 752.0
-offset_top = 431.0
-offset_right = 836.0
-offset_bottom = 466.0
+offset_left = 649.0
+offset_top = 27.0
+offset_right = 733.0
+offset_bottom = 62.0
 window_title = "Container"
 content_scene = ExtResource("6_obcwv")
 start_minimized = true

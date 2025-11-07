@@ -8,6 +8,14 @@ class_name Interaction
 
 var nearest_interactable: Interactable
 
+## Gets the container of the nearest interactable, if it has a container
+func get_nearest_container_if_it_exists() -> ItemContainer:
+	if nearest_interactable != null:
+		for child in nearest_interactable.get_parent().get_children():
+			if child is ItemContainer:
+				return child as ItemContainer
+	return null
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):

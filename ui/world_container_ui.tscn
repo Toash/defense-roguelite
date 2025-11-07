@@ -19,4 +19,4 @@ layout_mode = 0
 
 [node name="GridContainer" type="GridContainer" parent="PanelContainer"]
 layout_mode = 2
-columns = 12
+columns = 16

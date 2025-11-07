@@ -67,4 +67,5 @@ func _on_pressed():
 	if Input.is_action_pressed("shift"):
 		print("Shift click!")
 		var slot: Slot = get_parent() as Slot
+
 		ItemService.quick_swap(slot.container, slot.slot_index)
