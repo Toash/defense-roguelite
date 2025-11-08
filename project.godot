@@ -159,3 +159,7 @@ zoom_out={
 2d_physics/layer_4="ground_items"
 2d_physics/layer_5="interactable"
 2d_physics/layer_6="fog"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

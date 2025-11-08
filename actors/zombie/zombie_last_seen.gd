@@ -8,7 +8,6 @@ extends State
 @export var raycast: RayCast2D
 
 @export var nav: NavigationAgent2D
-@export var sprite: AnimatedSprite2D
 
 
 @export var target: ZombieTarget
@@ -40,10 +39,6 @@ func _move_to_target():
 	var next_point: Vector2 = nav.get_next_path_position()
 	var normal_dir = (next_point - character.global_position).normalized()
 
-	if normal_dir.x > 0:
-		sprite.flip_h = false
-	else:
-		sprite.flip_h = true
 
 	character.velocity = normal_dir * speed
 	character.move_and_slide()

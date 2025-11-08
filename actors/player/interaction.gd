@@ -3,10 +3,15 @@ extends Node
 ## handles interaction for current interactable of a player.
 class_name Interaction
 
+
+@export var interact_detector: InteractDetector
 @export var player: Node2D
 @export var interact_distance = 10000 # TODO change
 
 var nearest_interactable: Interactable
+
+func _ready():
+	interact_detector.nearest_interactable_changed.connect(_on_nearest_interactable_changed)
 
 ## Gets the container of the nearest interactable, if it has a container
 func get_nearest_container_if_it_exists() -> ItemContainer:

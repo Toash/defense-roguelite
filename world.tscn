@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=18 format=4 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/player/player.tscn" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_tlwt5"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://b3kkj3vijsw7s" path="res://ui/ui.tscn" id="5_036b0"]
 [ext_resource type="Resource" uid="uid://cgmqglknu0sab" path="res://item/items/apple/apple.tres" id="5_dwbse"]
 [ext_resource type="PackedScene" uid="uid://c08inc3nvav0f" path="res://ui/pause_menu.tscn" id="7_pkg7o"]
-[ext_resource type="PackedScene" uid="uid://blqvvu0ytchcd" path="res://actors/zombie/zombie.tscn" id="8_gbfbk"]
 [ext_resource type="Script" uid="uid://b4k6stbvribon" path="res://damager.gd" id="9_ioo17"]
 [ext_resource type="Shader" uid="uid://cypb182ofc63b" path="res://shaders/outline.gdshader" id="10_ic0uy"]
 [ext_resource type="Script" uid="uid://j8smuyc0fgry" path="res://interactable/interactable.gd" id="10_wse8f"]
@@ -58,15 +57,13 @@ player = NodePath("../Player")
 
 [node name="PauseMenu" parent="." instance=ExtResource("7_pkg7o")]
 
-[node name="Zombie" parent="." instance=ExtResource("8_gbfbk")]
-position = Vector2(700, 29)
-
 [node name="Icon" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
 position = Vector2(197, 532)
 texture = ExtResource("2_tlwt5")
 
 [node name="Area2D" type="Area2D" parent="Icon"]
+collision_mask = 5
 script = ExtResource("9_ioo17")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/Area2D"]
@@ -98,19 +95,19 @@ packed_scene = ExtResource("13_2o6r5")
 position = Vector2(99, -378)
 packed_scene = ExtResource("13_2o6r5")
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
-color = Color(0, 0, 0, 1)
-blend_mode = 2
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+position = Vector2(-1, 0)
 color = Color(0.5, 0.5, 0.5, 1)
 
 [node name="FogManager" type="Node" parent="." node_paths=PackedStringArray("world_root", "ground_layer")]
 script = ExtResource("14_70uel")
+disabled = true
 fog_scene = ExtResource("13_70uel")
 world_root = NodePath("..")
 ground_layer = NodePath("../GroundTiles")
 metadata/_custom_type_script = "uid://c5t800787mhdc"
+
+[node name="Zombies" type="Node2D" parent="."]
 
 [connection signal="interacted" from="Icon2/Interactable" to="Icon2" method="delete"]

@@ -3,9 +3,14 @@ extends Node
 ## emits signal when interacting with world containers
 class_name WorldContainerInput
 
+@export var interact_detector: InteractDetector
+
 signal container_interacted(container: ItemContainer)
 signal container_changed(container: ItemContainer)
 
+
+func _ready():
+	interact_detector.nearest_interactable_changed.connect(interactable_changed)
 
 func interact_with(container: ItemContainer):
 	container_interacted.emit(container)

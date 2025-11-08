@@ -13,9 +13,9 @@ class_name Player
 var state = "idle"
 var input_vector = Vector2.ZERO
 
-@onready var health: Health = get_node_or_null("Health") as Health
-@onready var thirst: DrainingStat = get_node_or_null("Thirst") as DrainingStat
-@onready var hunger: DrainingStat = get_node_or_null("Hunger") as DrainingStat
+@export var health: Health
+@export var thirst: DrainingStat
+@export var hunger: DrainingStat
 
 
 func _ready() -> void:

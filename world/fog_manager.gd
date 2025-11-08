@@ -5,6 +5,7 @@ extends Node
 class_name FogManager
 
 
+@export var disabled = false
 @export var fog_scene: PackedScene
 @export var world_root: Node
 @export var spacing: float = 200
@@ -12,6 +13,7 @@ class_name FogManager
 
 
 func _ready():
+	if disabled: return
 	var tile_map_origin: Vector2 = ground_layer.get_used_rect().position * ground_layer.tile_set.tile_size.x
 	var tile_map_rect: Vector2 = ground_layer.get_used_rect().size * ground_layer.tile_set.tile_size.x
 	# _spawn_fog(tile_map_rect.position)

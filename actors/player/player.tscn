@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=31 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/player/player_camera.gd" id="2_qrxv1"]
@@ -20,6 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://wcmxajlvsg1i" path="res://actors/sprites/leg/legs_black_1.png" id="17_otn2r"]
 [ext_resource type="Script" uid="uid://0umt1fxhkw5l" path="res://actors/player/fog_dissipator.gd" id="20_ctwkf"]
 [ext_resource type="Texture2D" uid="uid://c8u4rr4xtq3tj" path="res://actors/player/spot_light.png" id="20_otn2r"]
+[ext_resource type="Script" uid="uid://c8dnwtjdg5wbq" path="res://audio/footsteps.gd" id="21_ctwkf"]
+[ext_resource type="AudioStream" uid="uid://cytdvns5e1i4a" path="res://audio/grass_1.mp3" id="22_nsxbo"]
+[ext_resource type="AudioStream" uid="uid://dy7u36uymvova" path="res://audio/grass_2.mp3" id="23_yeioo"]
+[ext_resource type="AudioStream" uid="uid://d4cb26dn2ofoj" path="res://audio/grass_3.mp3" id="24_qct7d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(41, 62)
@@ -40,9 +44,9 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_icg72"]
-radius = 551.66113
+radius = 422.01895
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "pickups") groups=["persist", "player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "pickups", "health", "thirst", "hunger") groups=["persist", "player"]]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_onrkg")
@@ -50,6 +54,9 @@ speed = 500
 inventory = NodePath("Containers/Inventory")
 hotbar = NodePath("Containers/Hotbar")
 pickups = NodePath("Containers/Pickups")
+health = NodePath("Stats/Health")
+thirst = NodePath("Stats/Thirst")
+hunger = NodePath("Stats/Hunger")
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -87,24 +94,11 @@ shape = SubResource("CircleShape2D_lsln6")
 [node name="RayCast2D" type="RayCast2D" parent="InteractableRadius"]
 collision_mask = 17
 
-[node name="Health" type="Node" parent="."]
-script = ExtResource("5_g6k8r")
-metadata/_custom_type_script = "uid://gyp8bshfrfoj"
-
 [node name="Equipment" type="Node" parent="." node_paths=PackedStringArray("hotbar_container", "equip_display")]
 script = ExtResource("6_g6k8r")
 hotbar_container = NodePath("../Containers/Hotbar")
 equip_display = NodePath("../ItemEquipDisplay")
 metadata/_custom_type_script = "uid://cvmwf84dan6g7"
-
-[node name="Hunger" type="Node" parent="."]
-script = ExtResource("7_boad6")
-metadata/_custom_type_script = "uid://dgkass0sic6wa"
-
-[node name="Thirst" type="Node" parent="."]
-script = ExtResource("7_boad6")
-drain_rate = 0.02
-metadata/_custom_type_script = "uid://dgkass0sic6wa"
 
 [node name="ItemEquipDisplay" type="Node2D" parent="."]
 scale = Vector2(0.66, 0.66)
@@ -135,16 +129,17 @@ capacity = 16
 container_name = 2
 metadata/_custom_type_script = "uid://co0hu31xc486a"
 
-[node name="Interaction" type="Node" parent="." node_paths=PackedStringArray("player")]
+[node name="Interaction" type="Node" parent="." node_paths=PackedStringArray("interact_detector", "player")]
 script = ExtResource("12_ssdk0")
+interact_detector = NodePath("../InteractableRadius")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dplrhtm2y2ben"
 
-[node name="WorldContainerInput" type="Node2D" parent="."]
+[node name="WorldContainerInput" type="Node2D" parent="." node_paths=PackedStringArray("interact_detector")]
 script = ExtResource("13_7aotg")
+interact_detector = NodePath("../InteractableRadius")
 
-[node name="CharacterSprite" parent="." node_paths=PackedStringArray("character_body") instance=ExtResource("13_k67x5")]
-character_body = NodePath("..")
+[node name="CharacterSprite" parent="." instance=ExtResource("13_k67x5")]
 head_texture = ExtResource("14_0wchr")
 torso_texture = ExtResource("15_qrxv1")
 left_arm_texture = ExtResource("16_dqf5y")
@@ -153,6 +148,7 @@ left_leg_texture = ExtResource("17_otn2r")
 right_leg_texture = ExtResource("17_otn2r")
 
 [node name="Lights" type="Node2D" parent="."]
+visible = false
 
 [node name="AmbientLight" type="PointLight2D" parent="Lights"]
 texture_filter = 1
@@ -187,14 +183,35 @@ shape = SubResource("CircleShape2D_icg72")
 [node name="RayCast2D" type="RayCast2D" parent="FogDissipator"]
 collision_mask = 2
 
+[node name="Stats" type="Node2D" parent="."]
+
+[node name="Health" type="Node" parent="Stats"]
+script = ExtResource("5_g6k8r")
+metadata/_custom_type_script = "uid://gyp8bshfrfoj"
+
+[node name="Hunger" type="Node" parent="Stats"]
+script = ExtResource("7_boad6")
+metadata/_custom_type_script = "uid://dgkass0sic6wa"
+
+[node name="Thirst" type="Node" parent="Stats"]
+script = ExtResource("7_boad6")
+drain_rate = 0.02
+metadata/_custom_type_script = "uid://dgkass0sic6wa"
+
+[node name="Footsteps" type="AudioStreamPlayer2D" parent="." node_paths=PackedStringArray("character_sprite")]
+bus = &"player"
+script = ExtResource("21_ctwkf")
+character_sprite = NodePath("../CharacterSprite")
+clips = Array[AudioStream]([ExtResource("22_nsxbo"), ExtResource("23_yeioo"), ExtResource("24_qct7d")])
+metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
+
 [connection signal="equip_slot" from="HotbarInput" to="Equipment" method="_on_equip_slot"]
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]
 [connection signal="area_entered" from="InteractableRadius" to="InteractableRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="InteractableRadius" to="InteractableRadius" method="_on_area_exited"]
-[connection signal="nearest_interactable_changed" from="InteractableRadius" to="Interaction" method="_on_nearest_interactable_changed"]
-[connection signal="nearest_interactable_changed" from="InteractableRadius" to="WorldContainerInput" method="interactable_changed"]
 [connection signal="equipment_changed" from="Equipment" to="ItemEquipDisplay" method="set_instance"]
 [connection signal="origin_created" from="ItemEquipDisplay" to="Equipment" method="_set_origin_node"]
 [connection signal="mouse_position" from="MouseInput" to="Equipment" method="_set_target"]
 [connection signal="mouse_position" from="MouseInput" to="ItemEquipDisplay" method="_update_target"]
+[connection signal="mouse_position" from="MouseInput" to="CharacterSprite" method="_set_target"]

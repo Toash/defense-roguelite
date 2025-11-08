@@ -19,20 +19,20 @@ extends CanvasLayer
 
 
 func _ready() -> void:
-	var player_health: Health = player.get_node_or_null("Health") as Health
+	var player_health: Health = player.health
 	if not player_health: push_error("UI: player health not found")
 	player_health.health_changed.connect(_on_health_changed)
 	health_bar.max_value = player_health.max_health
 	health_bar.value = player_health.health
 
-	var player_hunger: DrainingStat = player.get_node_or_null("Hunger") as DrainingStat
+	var player_hunger: DrainingStat = player.hunger
 	if not player_hunger: push_error("UI: player hunger not found")
 	player_hunger.poll.connect(_on_hunger_poll)
 	hunger_bar.max_value = player_hunger.max_stat
 	hunger_bar.value = player_hunger.stat
 
 
-	var player_thirst: DrainingStat = player.get_node_or_null("Thirst") as DrainingStat
+	var player_thirst: DrainingStat = player.thirst
 	if not player_thirst: push_error("UI: player thirst not found")
 	player_thirst.poll.connect(_on_thirst_poll)
 	thirst_bar.max_value = player_thirst.max_stat
