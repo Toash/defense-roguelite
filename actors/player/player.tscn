@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=27 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/player/player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/player/player_camera.gd" id="2_qrxv1"]
 [ext_resource type="Script" uid="uid://cu2mhoqnrgeam" path="res://input/hotbar_input.gd" id="4_yw30f"]
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://cg3y6l7u7bglb" path="res://actors/player/interact_detector.gd" id="5_hiosj"]
@@ -17,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://oyto6h4h2ewn" path="res://actors/sprites/torso/torso_blue_jacket.png" id="15_qrxv1"]
 [ext_resource type="Texture2D" uid="uid://ddl3g6wo4371s" path="res://actors/sprites/hand/hands_white_1.png" id="16_dqf5y"]
 [ext_resource type="Texture2D" uid="uid://wcmxajlvsg1i" path="res://actors/sprites/leg/legs_black_1.png" id="17_otn2r"]
+[ext_resource type="Script" uid="uid://0umt1fxhkw5l" path="res://actors/player/fog_dissipator.gd" id="20_ctwkf"]
+[ext_resource type="Texture2D" uid="uid://c8u4rr4xtq3tj" path="res://actors/player/spot_light.png" id="20_otn2r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(41, 62)
@@ -26,6 +29,18 @@ radius = 200.01
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsln6"]
 radius = 170.49634
+
+[sub_resource type="Gradient" id="Gradient_dqf5y"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_otn2r"]
+gradient = SubResource("Gradient_dqf5y")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_icg72"]
+radius = 551.66113
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "pickups") groups=["persist", "player"]]
 collision_layer = 4
@@ -39,6 +54,8 @@ metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+script = ExtResource("2_qrxv1")
+zoom_speed = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 3)
@@ -134,6 +151,41 @@ left_arm_texture = ExtResource("16_dqf5y")
 right_arm_texture = ExtResource("16_dqf5y")
 left_leg_texture = ExtResource("17_otn2r")
 right_leg_texture = ExtResource("17_otn2r")
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="AmbientLight" type="PointLight2D" parent="Lights"]
+texture_filter = 1
+color = Color(0.5, 0.5, 0.5, 1)
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_otn2r")
+texture_scale = 50.0
+
+[node name="Node2D" type="Node2D" parent="Lights"]
+visible = false
+scale = Vector2(0.64000016, 4.000001)
+
+[node name="Flashlight" type="PointLight2D" parent="Lights/Node2D"]
+texture_filter = 1
+position = Vector2(360, 0)
+energy = 0.38
+texture = ExtResource("20_otn2r")
+texture_scale = 2.82
+
+[node name="FogDissipator" type="Area2D" parent="." node_paths=PackedStringArray("player", "obstruction_raycast")]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("20_ctwkf")
+player = NodePath("..")
+obstruction_raycast = NodePath("RayCast2D")
+metadata/_custom_type_script = "uid://0umt1fxhkw5l"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FogDissipator"]
+shape = SubResource("CircleShape2D_icg72")
+
+[node name="RayCast2D" type="RayCast2D" parent="FogDissipator"]
+collision_mask = 2
 
 [connection signal="equip_slot" from="HotbarInput" to="Equipment" method="_on_equip_slot"]
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
