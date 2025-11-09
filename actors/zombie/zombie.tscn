@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://blqvvu0ytchcd"]
+[gd_scene load_steps=22 format=3 uid="uid://blqvvu0ytchcd"]
 
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="2_ixsl6"]
 [ext_resource type="Script" uid="uid://cskdd0xcjjmfc" path="res://actors/zombie/zombie_wander.gd" id="4_8jy1d"]
@@ -16,6 +16,8 @@
 [ext_resource type="AudioStream" uid="uid://cytdvns5e1i4a" path="res://audio/grass_1.mp3" id="14_xsj0l"]
 [ext_resource type="AudioStream" uid="uid://dy7u36uymvova" path="res://audio/grass_2.mp3" id="15_mr8wc"]
 [ext_resource type="AudioStream" uid="uid://d4cb26dn2ofoj" path="res://audio/grass_3.mp3" id="16_ubgnx"]
+[ext_resource type="Script" uid="uid://cy65fv0u3uiga" path="res://item/generic/item_equip_display.gd" id="16_xsj0l"]
+[ext_resource type="Script" uid="uid://b7nergdxei2p6" path="res://actors/zombie/zombie_arms.gd" id="18_ubgnx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_roy8y"]
 radius = 433.029
@@ -29,6 +31,12 @@ size = Vector2(50, 81)
 [node name="Zombie" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 0
+
+[node name="CharacterSprite" parent="." instance=ExtResource("9_culwy")]
+head_texture = ExtResource("10_mmehc")
+torso_texture = ExtResource("11_eew4g")
+left_arm_texture = ExtResource("12_b6tq7")
+right_arm_texture = ExtResource("12_b6tq7")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
@@ -110,12 +118,6 @@ metadata/_custom_type_script = "uid://gyp8bshfrfoj"
 script = ExtResource("9_oyhgy")
 metadata/_custom_type_script = "uid://dn7fydgbbk3wg"
 
-[node name="CharacterSprite" parent="." instance=ExtResource("9_culwy")]
-head_texture = ExtResource("10_mmehc")
-torso_texture = ExtResource("11_eew4g")
-left_arm_texture = ExtResource("12_b6tq7")
-right_arm_texture = ExtResource("12_b6tq7")
-
 [node name="Footsteps" type="AudioStreamPlayer2D" parent="." node_paths=PackedStringArray("character_sprite")]
 bus = &"zombie"
 script = ExtResource("13_mmehc")
@@ -123,4 +125,23 @@ character_sprite = NodePath("../CharacterSprite")
 clips = Array[AudioStream]([ExtResource("14_xsj0l"), ExtResource("15_mr8wc"), ExtResource("16_ubgnx")])
 metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
 
+[node name="Items" type="Node2D" parent="."]
+
+[node name="ItemEquipDisplay" type="Node2D" parent="Items" node_paths=PackedStringArray("user")]
+script = ExtResource("16_xsj0l")
+user = NodePath("../..")
+distance_from_user = 40
+metadata/_custom_type_script = "uid://cy65fv0u3uiga"
+
+[node name="ZombieArms" type="Node2D" parent="."]
+script = ExtResource("18_ubgnx")
+
+[connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
+[connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]
+[connection signal="target_emitted" from="ZombieStateMachine/Chase" to="Items/ItemEquipDisplay" method="_update_target"]
+[connection signal="target_emitted" from="ZombieStateMachine/Chase" to="ZombieArms" method="_set_target"]
+[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_right_hand_pos"]
+[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_left_hand_pos"]
 [connection signal="died" from="Health" to="ZombieDeath" method="_on_death"]
+[connection signal="left_hand_pos_emitted" from="ZombieArms" to="CharacterSprite" method="_set_left_hand_pos"]
+[connection signal="right_hand_pos_emitted" from="ZombieArms" to="CharacterSprite" method="_set_right_hand_pos"]

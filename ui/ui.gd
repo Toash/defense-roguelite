@@ -48,13 +48,13 @@ func _ready() -> void:
 	(inventory_window.get_content() as ContainerUI).setup()
 	(pickup_window.get_content() as ContainerUI).setup()
 
-	var hotbar_input: HotbarInput = player.get_node_or_null("HotbarInput") as HotbarInput
+	var hotbar_input: HotbarInput = player.get_hotbar_input()
 	if not hotbar_input: push_error("UI: Could not find hotbar input in player")
 	hotbar_input.equip_slot.connect(hotbar_ui.on_equip_slot)
 
 
 	# Show container ui when opening container.
-	var world_container_input: WorldContainerInput = player.get_node_or_null("WorldContainerInput")
+	var world_container_input: WorldContainerInput = player.get_world_container_input()
 	if world_container_input == null:
 		push_error("Could not find World Container Input on the player!")
 

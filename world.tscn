@@ -1,37 +1,15 @@
-[gd_scene load_steps=18 format=4 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=11 format=4 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/player/player.tscn" id="1_fj7yv"]
-[ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_tlwt5"]
 [ext_resource type="TileSet" uid="uid://jv2ydqss3wc6" path="res://actors/player/tileset.tres" id="3_tlwt5"]
 [ext_resource type="Script" uid="uid://dks5g7nwcde5b" path="res://spawner.gd" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://b3kkj3vijsw7s" path="res://ui/ui.tscn" id="5_036b0"]
 [ext_resource type="Resource" uid="uid://cgmqglknu0sab" path="res://item/items/apple/apple.tres" id="5_dwbse"]
 [ext_resource type="PackedScene" uid="uid://c08inc3nvav0f" path="res://ui/pause_menu.tscn" id="7_pkg7o"]
-[ext_resource type="Script" uid="uid://b4k6stbvribon" path="res://damager.gd" id="9_ioo17"]
-[ext_resource type="Shader" uid="uid://cypb182ofc63b" path="res://shaders/outline.gdshader" id="10_ic0uy"]
-[ext_resource type="Script" uid="uid://j8smuyc0fgry" path="res://interactable/interactable.gd" id="10_wse8f"]
+[ext_resource type="PackedScene" uid="uid://blqvvu0ytchcd" path="res://actors/zombie/zombie.tscn" id="8_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://bpx26d2445h3y" path="res://item/scenes/containers/cabinet.tscn" id="13_2o6r5"]
 [ext_resource type="PackedScene" uid="uid://cf7w5yb2lhl4y" path="res://world/fog.tscn" id="13_70uel"]
 [ext_resource type="Script" uid="uid://c5t800787mhdc" path="res://world/fog_manager.gd" id="14_70uel"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbfbk"]
-size = Vector2(125, 127)
-
-[sub_resource type="GDScript" id="GDScript_k3n1d"]
-script/source = "extends Sprite2D
-
-
-func delete(_player: Node2D):
-    queue_free()"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2o6r5"]
-shader = ExtResource("10_ic0uy")
-shader_parameter/allow_out_of_bounds = true
-shader_parameter/outline_thickness = 1.0
-shader_parameter/outline_color = Color(1, 1, 1, 1)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ic0uy"]
-radius = 68.359344
 
 [node name="World" type="Node2D"]
 
@@ -48,7 +26,7 @@ z_index = -1
 tile_map_data = PackedByteArray("AAAGAP3/AAACAAAAAAD8/wQAAAACAAAAAAD9/wQAAAACAAAAAAD+/wQAAAACAAAAAAD//wQAAAACAAAAAAAGAP7/AAACAAAAAAAGAP//AAACAAAAAAAGAAAAAAACAAAAAAAGAAEAAAACAAAAAAAGAAIAAAACAAAAAAAGAAMAAAACAAAAAAAGAAQAAAACAAAAAAAFAAQAAAACAAAAAAAEAAQAAAACAAAAAAADAAQAAAACAAAAAAAHAP3/AAACAAAAAAAIAP3/AAACAAAAAAAJAP3/AAACAAAAAAAKAP3/AAACAAAAAAALAP3/AAACAAAAAAAMAP3/AAACAAAAAAANAP3/AAACAAAAAAAOAPf/AAACAAAAAAAOAPj/AAACAAAAAAAOAPn/AAACAAAAAAAOAPr/AAACAAAAAAAOAPv/AAACAAAAAAAOAPz/AAACAAAAAAAOAP3/AAACAAAAAAD8//b/AAACAAAAAAD9//b/AAACAAAAAAD+//b/AAACAAAAAAD///b/AAACAAAAAAAAAPb/AAACAAAAAAABAPb/AAACAAAAAAACAPb/AAACAAAAAAADAPb/AAACAAAAAAAEAPb/AAACAAAAAAAFAPb/AAACAAAAAAAGAPb/AAACAAAAAAAHAPb/AAACAAAAAAAIAPb/AAACAAAAAAAJAPb/AAACAAAAAAAKAPb/AAACAAAAAAANAPb/AAACAAAAAAAOAPb/AAACAAAAAAD8/wMAAAACAAAAAAD8/wIAAAACAAAAAAD8//f/AAACAAAAAAD8//r/AAACAAAAAAD8//v/AAACAAAAAAD8//z/AAACAAAAAAD8//3/AAACAAAAAAD8//7/AAACAAAAAAD8////AAACAAAAAAD8/wAAAAACAAAAAAD8/wEAAAACAAAAAAAAAAQAAAACAAAAAAA=")
 tile_set = ExtResource("3_tlwt5")
 
-[node name="spawnwer" type="Node" parent="."]
+[node name="spawner" type="Node" parent="."]
 script = ExtResource("4_aqk2v")
 apple = ExtResource("5_dwbse")
 
@@ -56,36 +34,6 @@ apple = ExtResource("5_dwbse")
 player = NodePath("../Player")
 
 [node name="PauseMenu" parent="." instance=ExtResource("7_pkg7o")]
-
-[node name="Icon" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-position = Vector2(197, 532)
-texture = ExtResource("2_tlwt5")
-
-[node name="Area2D" type="Area2D" parent="Icon"]
-collision_mask = 5
-script = ExtResource("9_ioo17")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/Area2D"]
-position = Vector2(-0.5, -1.5)
-shape = SubResource("RectangleShape2D_gbfbk")
-
-[node name="Icon2" type="Sprite2D" parent="."]
-position = Vector2(161, -328)
-scale = Vector2(0.35999757, 0.35999757)
-texture = ExtResource("2_tlwt5")
-script = SubResource("GDScript_k3n1d")
-
-[node name="Interactable" type="Area2D" parent="Icon2" node_paths=PackedStringArray("sprite")]
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("10_wse8f")
-sprite = NodePath("..")
-outline = SubResource("ShaderMaterial_2o6r5")
-metadata/_custom_type_script = "uid://j8smuyc0fgry"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon2/Interactable"]
-shape = SubResource("CircleShape2D_ic0uy")
 
 [node name="Cabinet" parent="." instance=ExtResource("13_2o6r5")]
 position = Vector2(-34, -355)
@@ -110,4 +58,5 @@ metadata/_custom_type_script = "uid://c5t800787mhdc"
 
 [node name="Zombies" type="Node2D" parent="."]
 
-[connection signal="interacted" from="Icon2/Interactable" to="Icon2" method="delete"]
+[node name="Zombie" parent="Zombies" instance=ExtResource("8_gbfbk")]
+position = Vector2(647, 0)

@@ -1,5 +1,9 @@
 extends State
 
+signal target_acquired
+signal target_emitted(pos: Vector2)
+signal target_lost
+
 
 @export var chase_speed = 200
 @export var character: CharacterBody2D
@@ -12,12 +16,15 @@ extends State
 
 @export var target: ZombieTarget
 
+var out_of_sight_retries = 10
+var retries = 0
 
 var active = false
 
 
 func state_enter():
 	active = true
+	target_acquired.emit()
 
 func state_physics_update(delta: float):
 	if active == false: return
@@ -26,12 +33,17 @@ func state_physics_update(delta: float):
 	raycast.target_position = character.to_local(target.reference.global_position)
 
 	if raycast.get_collider():
-		# print("Obstruction detected.")
-		target.last_position = raycast.get_collision_point()
-		transitioned.emit(self, "last_seen")
+		retries += 1
+		if retries > out_of_sight_retries:
+			retries = 0
+			target.last_position = raycast.get_collision_point()
+			transitioned.emit(self, "last_seen")
+		else:
+			return
 
 
 	nav.target_position = target.reference.global_position
+	target_emitted.emit(target.reference.global_position)
 
 	var next_point: Vector2 = nav.get_next_path_position()
 	var normal_dir = (next_point - character.global_position).normalized()
@@ -44,3 +56,4 @@ func state_physics_update(delta: float):
 
 func state_exit():
 	active = false
+	target_lost.emit()

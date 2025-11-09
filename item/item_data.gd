@@ -18,7 +18,10 @@ class_name ItemData
 @export var ingame_sprite: Texture2D
 @export var scale = 1
 @export var sprite_flipped = false
-@export var follow_target = false # guns etc...
+
+
+## item should point towards the target.
+@export var follow_target = false
 
 # functionality
 @export var item_effects: Array[ItemEffect]

@@ -17,6 +17,8 @@ var input_vector = Vector2.ZERO
 @export var thirst: DrainingStat
 @export var hunger: DrainingStat
 
+@export var hotbar_input: HotbarInput
+@export var world_container_input: WorldContainerInput
 
 func _ready() -> void:
 	Game.player_load()
@@ -53,6 +55,10 @@ func get_pickups() -> ItemContainer:
 	return pickups
 func get_hotbar() -> ItemContainer:
 	return hotbar
+func get_hotbar_input() -> HotbarInput:
+	return hotbar_input
+func get_world_container_input() -> WorldContainerInput:
+	return world_container_input
 
 
 func save() -> Dictionary:

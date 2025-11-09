@@ -12,29 +12,32 @@ script = ExtResource("1_702fr")
 
 [node name="LeftLeg" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-3, 8)
+position = Vector2(-3, 9.333334)
 texture = ExtResource("1_g2x4w")
 
 [node name="RightLeg" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(3, 8)
+position = Vector2(3, 9.333334)
 texture = ExtResource("1_g2x4w")
 
 [node name="Torso" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(0, 1.333333)
 texture = ExtResource("2_702fr")
 
 [node name="Head" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -10)
+position = Vector2(0, -8.666667)
 texture = ExtResource("3_o7wq7")
 
 [node name="LeftArm" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-6, 1)
+position = Vector2(-6, 2.333333)
+scale = Vector2(1.25, 1.25)
 texture = ExtResource("4_kfdqb")
 
 [node name="RightArm" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(6, 1)
+position = Vector2(6, 2.333333)
+scale = Vector2(1.25, 1.25)
 texture = ExtResource("4_kfdqb")

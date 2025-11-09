@@ -1,74 +1,79 @@
 extends Node2D
 
-# displays an item instance
+## displays an item instance, must be supplied a target.
 class_name ItemEquipDisplay
 
 
 signal origin_created(node: Node2D)
+signal origin_position_emitted(pos: Vector2)
 
 ## how far the item instnace will be from the player
+@export var user: Node2D
 @export var distance_from_user = 50
 
-@onready var sprite: Sprite2D = Sprite2D.new()
-var inst: ItemInstance
-
-var user: Node2D
+@onready var inst_sprite: Sprite2D = Sprite2D.new()
 @onready var origin_node: Node2D = Node2D.new()
+var displayed_inst: ItemInstance
+
+## origin will point towards this.
 var target: Vector2
+
 var flipped: bool
 
 ## sets instance to display
 ## null to hide.
 func set_instance(inst: ItemInstance):
 	if inst:
-		sprite.texture = inst.data.ingame_sprite as Texture2D
-		sprite.flip_h = inst.data.sprite_flipped
-		sprite.visible = true
-		sprite.scale = Vector2(inst.data.scale, inst.data.scale)
+		self.displayed_inst = inst
+		inst_sprite.texture = inst.data.ingame_sprite as Texture2D
+		inst_sprite.flip_h = inst.data.sprite_flipped
+		inst_sprite.visible = true
+		inst_sprite.scale = Vector2(inst.data.scale, inst.data.scale)
 	else:
-		sprite.texture = null
-		sprite.visible = false
+		inst_sprite.texture = null
+		inst_sprite.visible = false
 
 func get_origin_node() -> Node2D:
 	return origin_node
 
 func hide_sprite():
-	sprite.visible = false
+	inst_sprite.visible = false
 
 func show_sprite():
-	sprite.visible = true
+	inst_sprite.visible = true
 
 
 func _ready():
 	add_child(origin_node)
 	origin_created.emit(origin_node)
 
-	user = get_parent()
-	add_child(sprite)
-	# sprite.position = position
+	add_child(inst_sprite)
+	# inst_sprite.position = position
 
 
 func _process(delta):
 	_set_origin_position()
-	if inst:
-		if inst.data.follow_target == false: return
+	if displayed_inst:
+		if displayed_inst.data.follow_target == false: return
 	if target.x < self.global_position.x:
-		sprite.flip_v = true
+		inst_sprite.flip_v = true
 		flipped = true
 	else:
-		sprite.flip_v = false
+		inst_sprite.flip_v = false
 		flipped = false
 
-	sprite.look_at(target)
+	inst_sprite.look_at(target)
 
+
+	origin_position_emitted.emit(origin_node.global_position)
+
+func _update_target(pos: Vector2):
+	target = pos
 
 func _set_origin_position():
 	var offset: Vector2 = target - user.global_position
 	offset = offset.normalized()
 	offset *= distance_from_user
 
-	sprite.position = self.position + offset
+	inst_sprite.position = self.position + offset
 	origin_node.position = self.position + offset
-
-func _update_target(pos: Vector2):
-	target = pos

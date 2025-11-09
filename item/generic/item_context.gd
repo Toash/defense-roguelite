@@ -2,9 +2,12 @@
 class_name ItemContext
 extends RefCounted
 
+
 var root_node: Node
 
+## who is using this item
 var user_node: Node
+
 
 var global_spawn_point: Vector2
 var spawn_node: Node2D

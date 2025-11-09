@@ -19,15 +19,15 @@ var character_body: CharacterBody2D
 
 var head: Sprite2D
 var torso: Sprite2D
-var left_arm: Sprite2D
-var right_arm: Sprite2D
+var left_hand: Sprite2D
+var right_hand: Sprite2D
 var left_leg: Sprite2D
 var right_leg: Sprite2D
 
 var head_initial_pos: Vector2
 var torso_initial_pos: Vector2
-var left_arm_initial_pos: Vector2
-var right_arm_initial_pos: Vector2
+var left_hand_initial_pos: Vector2
+var right_hand_initial_pos: Vector2
 var left_leg_initial_pos: Vector2
 var right_leg_initial_pos: Vector2
 
@@ -40,6 +40,9 @@ var t := 0.0
 var animation_speed: float = 0.0
 var moving: bool = false
 
+var left_hand_moving = false
+var right_hand_moving = false
+
 func _ready() -> void:
 	original_scale = scale
 	flipped_scale = Vector2(-original_scale.x, original_scale.y)
@@ -48,8 +51,8 @@ func _ready() -> void:
 
 	head = get_node("Head")
 	torso = get_node("Torso")
-	left_arm = get_node("LeftArm")
-	right_arm = get_node("RightArm")
+	left_hand = get_node("LeftArm")
+	right_hand = get_node("RightArm")
 	left_leg = get_node("LeftLeg")
 	right_leg = get_node("RightLeg")
 
@@ -60,9 +63,9 @@ func _ready() -> void:
 		torso.texture = torso_texture
 
 	if left_arm_texture:
-		left_arm.texture = left_arm_texture
+		left_hand.texture = left_arm_texture
 	if right_arm_texture:
-		right_arm.texture = right_arm_texture
+		right_hand.texture = right_arm_texture
 
 	if left_leg_texture:
 		left_leg.texture = left_leg_texture
@@ -71,8 +74,8 @@ func _ready() -> void:
 
 	head_initial_pos = head.position
 	torso_initial_pos = torso.position
-	left_arm_initial_pos = left_arm.position
-	right_arm_initial_pos = right_arm.position
+	left_hand_initial_pos = left_hand.position
+	right_hand_initial_pos = right_hand.position
 	left_leg_initial_pos = left_leg.position
 	right_leg_initial_pos = right_leg.position
 
@@ -88,6 +91,8 @@ func _process(delta: float) -> void:
 		scale = flipped_scale
 	else:
 		scale = original_scale
+
+
 	_legs(delta)
 
 func _set_animation_speed():
@@ -131,8 +136,24 @@ func _legs(delta: float):
 		right_leg.position.x = right_leg_initial_pos.x
 
 
-func _set_hand_pos(pos: Vector2):
-	pass
+func _move_left_hand():
+	left_hand_moving = true
+func _move_right_hand():
+	right_hand_moving = true
+
+func _set_left_hand_pos(pos: Vector2):
+	if left_hand_moving:
+		left_hand.global_position = pos
+func _set_right_hand_pos(pos: Vector2):
+	if right_hand_moving:
+		right_hand.global_position = pos
+
+func _reset_left_hand_pos():
+	left_hand_moving = false
+	left_hand.position = left_hand_initial_pos
+func _reset_right_hand_pos():
+	right_hand_moving = false
+	right_hand.position = right_hand_initial_pos
 
 func _set_target(target: Vector2):
 	self.target = target

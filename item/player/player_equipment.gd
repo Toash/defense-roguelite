@@ -1,11 +1,14 @@
 extends Node
 
-class_name Equipment
+class_name PlayerEquipment
 signal equipment_changed(inst: ItemInstance)
+signal holding_something
+signal holding_nothing
 ## indexes into hotbar to use the iteminstance.
 
 
 ## used when the item spawns stuff.
+@export var user: Node2D
 @export var hotbar_container: ItemContainer
 @export var equip_display: ItemEquipDisplay
 
@@ -39,6 +42,11 @@ func set_equipped_index(index: int):
 	equipped_index = index
 	equipment_changed.emit(get_equipped_item())
 
+	if get_equipped_item() != null:
+		holding_something.emit()
+	else:
+		holding_nothing.emit()
+
 func _set_target(pos: Vector2):
 	self.target = pos
 
@@ -46,7 +54,7 @@ func _set_target(pos: Vector2):
 func use():
 	var item_context: ItemContext = ItemContext.new()
 	item_context.root_node = get_tree().current_scene
-	item_context.user_node = get_parent()
+	item_context.user_node = user
 	item_context.global_spawn_point = equip_display.get_origin_node().global_position
 	item_context.spawn_node = equip_display.get_origin_node()
 	item_context.global_target_point = target
