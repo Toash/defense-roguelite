@@ -19,7 +19,7 @@ extends CanvasLayer
 
 
 func _ready() -> void:
-	var player_health: Health = player.health
+	var player_health: Health = player.get_health()
 	if not player_health: push_error("UI: player health not found")
 	player_health.health_changed.connect(_on_health_changed)
 	health_bar.max_value = player_health.max_health

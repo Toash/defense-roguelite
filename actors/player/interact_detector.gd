@@ -14,6 +14,11 @@ signal nearest_interactable_changed(interactable: Interactable)
 var nearby_interactables: Dictionary[Interactable, float]
 var nearest_interactable: Interactable = null
 
+func _ready():
+    area_entered.connect(_on_area_entered)
+    area_exited.connect(_on_area_exited)
+
+
 func _process(delta: float) -> void:
     # print(nearby_interactables)
     # update distances between interactables.

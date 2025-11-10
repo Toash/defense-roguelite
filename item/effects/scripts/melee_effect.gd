@@ -18,7 +18,7 @@ func apply(context: ItemContext):
 	melee_inst.swing_speed = swing_speed
 
 	
-	context.spawn_node.add_child(melee_inst)
+	context.spawn_node.add_child.call_deferred(melee_inst)
 	melee_inst.position = Vector2.ZERO
 	melee_inst.look_at(context.global_target_point)
 

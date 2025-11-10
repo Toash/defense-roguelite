@@ -36,7 +36,7 @@ func _process(delta):
         empty.emit()
 
 func _on_timeout():
-    print("asdbfiosabf")
+    # print("asdbfiosabf")
     poll.emit(int(stat))
 
 

@@ -1,6 +1,7 @@
-extends Node2D
+extends TargetProvider
 
 class_name MouseInput
+
 
 signal mouse_position(pos: Vector2)
 signal mouse_local_direction(dir: Vector2)
@@ -12,3 +13,9 @@ func _process(delta):
 
 	mouse_position.emit(mouse_pos)
 	mouse_local_direction.emit(dir)
+	target_emitted.emit(mouse_pos)
+
+func get_target_pos() -> Vector2:
+	var mouse_pos: Vector2 = get_global_mouse_position()
+	print(mouse_pos)
+	return mouse_pos

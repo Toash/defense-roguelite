@@ -49,6 +49,8 @@ func _physics_process(delta: float) -> void:
 		input_vector.x += 1
 
 
+func get_health() -> Health:
+	return health
 func get_inventory() -> ItemContainer:
 	return inventory
 func get_pickups() -> ItemContainer:

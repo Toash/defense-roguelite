@@ -1,7 +1,7 @@
 extends Node2D
 
-## displays an item instance, must be supplied a target.
-class_name ItemEquipDisplay
+## displays an item instance that a user has, must be supplied a target.
+class_name ItemDisplay
 
 
 signal origin_created(node: Node2D)
@@ -10,6 +10,8 @@ signal origin_position_emitted(pos: Vector2)
 ## how far the item instnace will be from the player
 @export var user: Node2D
 @export var distance_from_user = 50
+@export var instance_supplier: ItemInstanceProvider
+@export var target_supplier: TargetProvider
 
 @onready var inst_sprite: Sprite2D = Sprite2D.new()
 @onready var origin_node: Node2D = Node2D.new()
@@ -20,9 +22,19 @@ var target: Vector2
 
 var flipped: bool
 
+func _ready():
+	instance_supplier.instance_changed.connect(_set_instance)
+	target_supplier.target_emitted.connect(_update_target)
+
+	add_child(origin_node)
+	origin_created.emit(origin_node)
+
+	add_child(inst_sprite)
+	# inst_sprite.position = position
+
 ## sets instance to display
 ## null to hide.
-func set_instance(inst: ItemInstance):
+func _set_instance(inst: ItemInstance):
 	if inst:
 		self.displayed_inst = inst
 		inst_sprite.texture = inst.data.ingame_sprite as Texture2D
@@ -43,19 +55,12 @@ func show_sprite():
 	inst_sprite.visible = true
 
 
-func _ready():
-	add_child(origin_node)
-	origin_created.emit(origin_node)
-
-	add_child(inst_sprite)
-	# inst_sprite.position = position
-
-
 func _process(delta):
 	_set_origin_position()
 	if displayed_inst:
 		if displayed_inst.data.follow_target == false: return
-	if target.x < self.global_position.x:
+	
+	if target.x < user.global_position.x:
 		inst_sprite.flip_v = true
 		flipped = true
 	else:
@@ -63,7 +68,6 @@ func _process(delta):
 		flipped = false
 
 	inst_sprite.look_at(target)
-
 
 	origin_position_emitted.emit(origin_node.global_position)
 

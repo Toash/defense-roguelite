@@ -14,7 +14,6 @@ max_stack = 1
 cooldown_time = 0.45
 icon = ExtResource("1_1reje")
 ingame_sprite = ExtResource("1_1reje")
-scale = 2
 follow_target = true
 item_effects = Array[ExtResource("2_yx7jj")]([ExtResource("3_yx7jj")])
 metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

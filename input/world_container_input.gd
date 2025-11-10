@@ -1,6 +1,6 @@
 extends Node
 
-## emits signal when interacting with world containers
+## emits signal when interacting with world containers (for the ui to respond to)
 class_name WorldContainerInput
 
 @export var interact_detector: InteractDetector

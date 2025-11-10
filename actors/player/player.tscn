@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=32 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/player/player_camera.gd" id="2_qrxv1"]
@@ -6,9 +6,7 @@
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://cg3y6l7u7bglb" path="res://actors/player/interact_detector.gd" id="5_hiosj"]
 [ext_resource type="Script" uid="uid://dsrxhicfffw3e" path="res://actors/player/pickup_detector.gd" id="5_qjkh3"]
-[ext_resource type="Script" uid="uid://cvmwf84dan6g7" path="res://item/player/player_equipment.gd" id="6_g6k8r"]
 [ext_resource type="Script" uid="uid://dgkass0sic6wa" path="res://actors/generic/draining_stat.gd" id="7_boad6"]
-[ext_resource type="Script" uid="uid://cy65fv0u3uiga" path="res://item/generic/item_equip_display.gd" id="8_a744p"]
 [ext_resource type="Script" uid="uid://c5rhs0y5iry7d" path="res://input/mouse_input.gd" id="9_388e2"]
 [ext_resource type="Script" uid="uid://co0hu31xc486a" path="res://item/item_container.gd" id="10_lsln6"]
 [ext_resource type="Script" uid="uid://dplrhtm2y2ben" path="res://actors/player/interaction.gd" id="12_ssdk0"]
@@ -18,11 +16,15 @@
 [ext_resource type="Texture2D" uid="uid://oyto6h4h2ewn" path="res://actors/sprites/torso/torso_blue_jacket.png" id="15_qrxv1"]
 [ext_resource type="Texture2D" uid="uid://wcmxajlvsg1i" path="res://actors/sprites/leg/legs_black_1.png" id="17_otn2r"]
 [ext_resource type="Script" uid="uid://0umt1fxhkw5l" path="res://actors/player/fog_dissipator.gd" id="20_ctwkf"]
+[ext_resource type="Script" uid="uid://kesirm75pc1q" path="res://item/generic/equipment.gd" id="20_lj3dd"]
+[ext_resource type="Script" uid="uid://dflsf7ovo0jqw" path="res://item/generic/item_display.gd" id="20_nsxbo"]
 [ext_resource type="Texture2D" uid="uid://c8u4rr4xtq3tj" path="res://actors/player/spot_light.png" id="20_otn2r"]
 [ext_resource type="Script" uid="uid://c8dnwtjdg5wbq" path="res://audio/footsteps.gd" id="21_ctwkf"]
 [ext_resource type="AudioStream" uid="uid://cytdvns5e1i4a" path="res://audio/grass_1.mp3" id="22_nsxbo"]
 [ext_resource type="AudioStream" uid="uid://dy7u36uymvova" path="res://audio/grass_2.mp3" id="23_yeioo"]
+[ext_resource type="Script" uid="uid://bbp3ruk8jvfsw" path="res://actors/player/equipped_hotbar_inst.gd" id="24_nsxbo"]
 [ext_resource type="AudioStream" uid="uid://d4cb26dn2ofoj" path="res://audio/grass_3.mp3" id="24_qct7d"]
+[ext_resource type="Script" uid="uid://dfsam3b8d27hq" path="res://input/equipment_input.gd" id="24_yeioo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(41, 62)
@@ -47,13 +49,13 @@ radius = 422.01895
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "pickups", "health", "thirst", "hunger", "hotbar_input", "world_container_input") groups=["persist", "player"]]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("1_onrkg")
 speed = 500
 inventory = NodePath("Containers/Inventory")
 hotbar = NodePath("Containers/Hotbar")
 pickups = NodePath("Containers/Pickups")
-health = NodePath("Stats/Health")
+health = NodePath("Health")
 thirst = NodePath("Stats/Thirst")
 hunger = NodePath("Stats/Hunger")
 hotbar_input = NodePath("Inputs/HotbarInput")
@@ -78,17 +80,17 @@ pickup_container = NodePath("../Containers/Pickups")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRadius"]
 shape = SubResource("CircleShape2D_yw30f")
 
-[node name="InteractableRadius" type="Area2D" parent="." node_paths=PackedStringArray("player", "raycast")]
+[node name="InteractableDetector" type="Area2D" parent="." node_paths=PackedStringArray("player", "raycast")]
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("5_hiosj")
 player = NodePath("..")
 raycast = NodePath("RayCast2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableRadius"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableDetector"]
 shape = SubResource("CircleShape2D_lsln6")
 
-[node name="RayCast2D" type="RayCast2D" parent="InteractableRadius"]
+[node name="RayCast2D" type="RayCast2D" parent="InteractableDetector"]
 collision_mask = 17
 
 [node name="Containers" type="Node" parent="."]
@@ -112,11 +114,12 @@ metadata/_custom_type_script = "uid://co0hu31xc486a"
 
 [node name="Interaction" type="Node" parent="." node_paths=PackedStringArray("interact_detector", "player")]
 script = ExtResource("12_ssdk0")
-interact_detector = NodePath("../InteractableRadius")
+interact_detector = NodePath("../InteractableDetector")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dplrhtm2y2ben"
 
-[node name="CharacterSprite" parent="." instance=ExtResource("13_k67x5")]
+[node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier") instance=ExtResource("13_k67x5")]
+target_supplier = NodePath("../Inputs/MouseInput")
 head_texture = ExtResource("14_0wchr")
 torso_texture = ExtResource("15_qrxv1")
 left_leg_texture = ExtResource("17_otn2r")
@@ -182,18 +185,20 @@ metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
 
 [node name="Items" type="Node2D" parent="."]
 
-[node name="Equipment" type="Node" parent="Items" node_paths=PackedStringArray("user", "hotbar_container", "equip_display")]
-script = ExtResource("6_g6k8r")
+[node name="Equipment" type="Node" parent="Items" node_paths=PackedStringArray("user", "instance_supplier", "target_supplier", "equip_display")]
+script = ExtResource("20_lj3dd")
 user = NodePath("../..")
-hotbar_container = NodePath("../../Containers/Hotbar")
-equip_display = NodePath("../ItemEquipDisplay")
-metadata/_custom_type_script = "uid://cvmwf84dan6g7"
+instance_supplier = NodePath("../../HotbarEquippedInst")
+target_supplier = NodePath("../../Inputs/MouseInput")
+equip_display = NodePath("../ItemDisplay")
+metadata/_custom_type_script = "uid://kesirm75pc1q"
 
-[node name="ItemEquipDisplay" type="Node2D" parent="Items" node_paths=PackedStringArray("user")]
-scale = Vector2(0.66, 0.66)
-script = ExtResource("8_a744p")
+[node name="ItemDisplay" type="Node2D" parent="Items" node_paths=PackedStringArray("user", "instance_supplier", "target_supplier")]
+script = ExtResource("20_nsxbo")
 user = NodePath("../..")
-metadata/_custom_type_script = "uid://cy65fv0u3uiga"
+instance_supplier = NodePath("../../HotbarEquippedInst")
+target_supplier = NodePath("../../Inputs/MouseInput")
+metadata/_custom_type_script = "uid://dflsf7ovo0jqw"
 
 [node name="Inputs" type="Node2D" parent="."]
 
@@ -205,23 +210,33 @@ metadata/_custom_type_script = "uid://cu2mhoqnrgeam"
 script = ExtResource("9_388e2")
 metadata/_custom_type_script = "uid://c5rhs0y5iry7d"
 
-[node name="WorldContainerInput" type="Node2D" parent="Inputs" node_paths=PackedStringArray("interact_detector")]
+[node name="WorldContainerInput" type="Node" parent="Inputs" node_paths=PackedStringArray("interact_detector")]
 script = ExtResource("13_7aotg")
-interact_detector = NodePath("../../InteractableRadius")
+interact_detector = NodePath("../../InteractableDetector")
+metadata/_custom_type_script = "uid://chxhldiu0nvle"
+
+[node name="EquipmentInput" type="Node2D" parent="Inputs"]
+script = ExtResource("24_yeioo")
+metadata/_custom_type_script = "uid://dfsam3b8d27hq"
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("5_g6k8r")
+metadata/_custom_type_script = "uid://gyp8bshfrfoj"
+
+[node name="HotbarEquippedInst" type="Node2D" parent="." node_paths=PackedStringArray("hotbar_container", "hotbar_input")]
+script = ExtResource("24_nsxbo")
+hotbar_container = NodePath("../Containers/Hotbar")
+hotbar_input = NodePath("../Inputs/HotbarInput")
+metadata/_custom_type_script = "uid://bbp3ruk8jvfsw"
 
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]
-[connection signal="area_entered" from="InteractableRadius" to="InteractableRadius" method="_on_area_entered"]
-[connection signal="area_exited" from="InteractableRadius" to="InteractableRadius" method="_on_area_exited"]
-[connection signal="equipment_changed" from="Items/Equipment" to="Items/ItemEquipDisplay" method="set_instance"]
-[connection signal="holding_nothing" from="Items/Equipment" to="CharacterSprite" method="_reset_right_hand_pos"]
-[connection signal="holding_nothing" from="Items/Equipment" to="CharacterSprite" method="_reset_left_hand_pos"]
-[connection signal="holding_something" from="Items/Equipment" to="CharacterSprite" method="_move_left_hand"]
-[connection signal="holding_something" from="Items/Equipment" to="CharacterSprite" method="_move_right_hand"]
-[connection signal="origin_created" from="Items/ItemEquipDisplay" to="Items/Equipment" method="_set_origin_node"]
-[connection signal="origin_position_emitted" from="Items/ItemEquipDisplay" to="CharacterSprite" method="_set_right_hand_pos"]
-[connection signal="origin_position_emitted" from="Items/ItemEquipDisplay" to="CharacterSprite" method="_set_left_hand_pos"]
-[connection signal="equip_slot" from="Inputs/HotbarInput" to="Items/Equipment" method="_on_equip_slot"]
-[connection signal="mouse_position" from="Inputs/MouseInput" to="Items/Equipment" method="_set_target"]
-[connection signal="mouse_position" from="Inputs/MouseInput" to="Items/ItemEquipDisplay" method="_update_target"]
+[connection signal="origin_position_emitted" from="Items/ItemDisplay" to="CharacterSprite" method="_set_left_hand_pos"]
+[connection signal="origin_position_emitted" from="Items/ItemDisplay" to="CharacterSprite" method="_set_right_hand_pos"]
 [connection signal="mouse_position" from="Inputs/MouseInput" to="CharacterSprite" method="_set_target"]
+[connection signal="mouse_position" from="Inputs/MouseInput" to="Items/ItemDisplay" method="_update_target"]
+[connection signal="use_equipment" from="Inputs/EquipmentInput" to="Items/Equipment" method="use"]
+[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_left_hand"]
+[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
+[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_left_hand"]
+[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_right_hand"]

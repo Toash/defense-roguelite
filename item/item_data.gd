@@ -16,7 +16,7 @@ class_name ItemData
 
 # ingame display 
 @export var ingame_sprite: Texture2D
-@export var scale = 1
+@export var scale: float = 1
 @export var sprite_flipped = false
 
 

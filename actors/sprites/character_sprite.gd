@@ -9,6 +9,9 @@ signal foot_touchdown
 
 var character_body: CharacterBody2D
 
+## sprite rotates according to target
+@export var target_supplier: TargetProvider
+
 @export var head_texture: Texture2D
 @export var torso_texture: Texture2D
 @export var left_arm_texture: Texture2D
@@ -43,7 +46,10 @@ var moving: bool = false
 var left_hand_moving = false
 var right_hand_moving = false
 
+var dead = false
+
 func _ready() -> void:
+	target_supplier.target_emitted.connect(_set_target)
 	original_scale = scale
 	flipped_scale = Vector2(-original_scale.x, original_scale.y)
 
@@ -80,12 +86,14 @@ func _ready() -> void:
 	right_leg_initial_pos = right_leg.position
 
 func _process(delta: float) -> void:
+	if dead: return
 	_set_animation_speed()
 
 	if character_body.velocity.length() > 0:
 		moving = true
 	else:
 		moving = false
+
 
 	if target.x < torso.global_position.x:
 		scale = flipped_scale
@@ -136,9 +144,9 @@ func _legs(delta: float):
 		right_leg.position.x = right_leg_initial_pos.x
 
 
-func _move_left_hand():
+func _enable_left_hand():
 	left_hand_moving = true
-func _move_right_hand():
+func _enable_right_hand():
 	right_hand_moving = true
 
 func _set_left_hand_pos(pos: Vector2):
@@ -148,12 +156,16 @@ func _set_right_hand_pos(pos: Vector2):
 	if right_hand_moving:
 		right_hand.global_position = pos
 
-func _reset_left_hand_pos():
+func _disable_left_hand():
 	left_hand_moving = false
 	left_hand.position = left_hand_initial_pos
-func _reset_right_hand_pos():
+func _disable_right_hand():
 	right_hand_moving = false
 	right_hand.position = right_hand_initial_pos
 
-func _set_target(target: Vector2):
-	self.target = target
+func _set_target(targ: Vector2):
+	self.target = targ
+
+func die():
+	rotation = deg_to_rad(90)
+	dead = true

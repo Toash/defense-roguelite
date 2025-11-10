@@ -1,6 +1,8 @@
 extends Node
 
 
+## ensure that this is a direct child of the main node and not renamed. 
+## ( lots of components are checking if this a direct child.)
 class_name Health
 
 signal died

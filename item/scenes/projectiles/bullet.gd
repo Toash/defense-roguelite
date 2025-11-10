@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _body_entered(body: Node2D):
-	print("asdfbasioafbd")
+	# print("asdfbasioafbd")
 	var health := body.get_node_or_null("Health") as Health
 	if health:
 		health.damage(self.damage)

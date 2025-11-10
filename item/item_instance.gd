@@ -3,9 +3,9 @@ extends Resource
 #repreents an instasnce of item data
 class_name ItemInstance
 
-var uid: String
-var data: ItemData
-var quantity: int
+@export var uid: String
+@export var data: ItemData
+@export var quantity: int
 
 var last_used_time: float = -1
 
