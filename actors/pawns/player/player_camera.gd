@@ -14,6 +14,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		zoom = clamp(zoom - Vector2(event.delta.y, event.delta.y) * touchpad_zoom_speed, Vector2(min_zoom, min_zoom), Vector2(max_zoom, max_zoom))
 
 func _process(delta: float) -> void:
+	if Console.is_open():
+		return
 	if Input.is_action_just_pressed("zoom_in"):
 		zooming_in = true
 	if Input.is_action_just_pressed("zoom_out"):

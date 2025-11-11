@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://dfb3edd4wnnag"]
 
-[ext_resource type="Script" uid="uid://pmnccyfhs5pm" path="res://actors/sprites/character_sprite.gd" id="1_702fr"]
-[ext_resource type="Texture2D" uid="uid://wcmxajlvsg1i" path="res://actors/sprites/leg/legs_black_1.png" id="1_g2x4w"]
-[ext_resource type="Texture2D" uid="uid://oyto6h4h2ewn" path="res://actors/sprites/torso/torso_blue_jacket.png" id="2_702fr"]
-[ext_resource type="Texture2D" uid="uid://csxjjom3dyxfa" path="res://actors/sprites/head/white_head_1.png" id="3_o7wq7"]
-[ext_resource type="Texture2D" uid="uid://ddl3g6wo4371s" path="res://actors/sprites/hand/hands_white_1.png" id="4_kfdqb"]
+[ext_resource type="Script" uid="uid://pmnccyfhs5pm" path="res://actors/pawns/sprites/character_sprite.gd" id="1_702fr"]
+[ext_resource type="Texture2D" uid="uid://wcmxajlvsg1i" path="res://actors/pawns/sprites/leg/legs_black_1.png" id="1_g2x4w"]
+[ext_resource type="Texture2D" uid="uid://oyto6h4h2ewn" path="res://actors/pawns/sprites/torso/torso_blue_jacket.png" id="2_702fr"]
+[ext_resource type="Texture2D" uid="uid://csxjjom3dyxfa" path="res://actors/pawns/sprites/head/white_head_1.png" id="3_o7wq7"]
+[ext_resource type="Texture2D" uid="uid://ddl3g6wo4371s" path="res://actors/pawns/sprites/hand/hands_white_1.png" id="4_kfdqb"]
 
 [node name="CharacterSprite" type="Node2D"]
 scale = Vector2(3, 3)

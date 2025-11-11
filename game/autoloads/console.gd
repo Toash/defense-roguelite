@@ -23,6 +23,14 @@ func _ready() -> void:
 		GroundItems.spawn_by_name(item_name, 1, Vector2(int(x), int(y)))
 		)
 
+	_register_command("spawn_item_here", func(item_name):
+		GroundItems.spawn_by_name_on_player(item_name, 1)
+		)
+
+	_register_command("spawn_actor_here", func(actor_name: String):
+		ActorSpawner.spawn_actor_on_player(ActorRegistry.get_key(actor_name))
+		)
+
 	_register_command("items", func():
 		var items = ItemDatabase.get_all()
 		
@@ -72,6 +80,9 @@ func set_open(b: bool):
 	else:
 		open = false
 		visible = false
+
+func is_open() -> bool:
+	return open
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("console"):

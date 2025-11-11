@@ -26,6 +26,8 @@ ItemDatabase="*res://item/autoloads/item_database.gd"
 Console="*res://game/autoloads/console.tscn"
 ItemService="*res://item/autoloads/item_service.tscn"
 AudioManager="*res://audio/audio_manager.tscn"
+ActorRegistry="*res://actors/autoloads/actor_registry.tscn"
+ActorSpawner="*res://actors/autoloads/actor_spawner.gd"
 
 [display]
 

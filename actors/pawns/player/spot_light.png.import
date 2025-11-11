@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcrncjn0sri3i"
-path="res://.godot/imported/hands_zombie_1.png-99d0a7afd4e7311f0ef24e9f7231d008.ctex"
+uid="uid://c8u4rr4xtq3tj"
+path="res://.godot/imported/spot_light.png-b4a88ef0059a75183ad827e04b60c26e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/sprites/hand/hands_zombie_1.png"
-dest_files=["res://.godot/imported/hands_zombie_1.png-99d0a7afd4e7311f0ef24e9f7231d008.ctex"]
+source_file="res://actors/pawns/player/spot_light.png"
+dest_files=["res://.godot/imported/spot_light.png-b4a88ef0059a75183ad827e04b60c26e.ctex"]
 
 [params]
 

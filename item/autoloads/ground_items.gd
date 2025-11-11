@@ -21,6 +21,16 @@ func spawn_by_name(item_name: String, qty := 1, pos := Vector2.ZERO) -> Node2D:
 		return null
 	return _spawn(data, qty, pos)
 
+func spawn_by_name_on_player(item_name: String, qty := 1) -> Node2D:
+	var data = ItemDatabase.get_from_display_name(item_name)
+	if data == null:
+		push_error("Could not find item data when spawning ground item.")
+		return null
+
+	# hacky
+	var pos: Vector2 = get_tree().get_first_node_in_group("player").global_position
+	return _spawn(data, qty, pos)
+
 func spawn_by_id(id: int, qty := 1, pos := Vector2.ZERO) -> Node2D:
 	var data = ItemDatabase.get_from_id(id)
 	if data == null:

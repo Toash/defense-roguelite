@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wcmxajlvsg1i"
-path="res://.godot/imported/legs_black_1.png-126a397d2000540bbcc778b79341719c.ctex"
+uid="uid://ddl3g6wo4371s"
+path="res://.godot/imported/hands_white_1.png-fd0f38b227e2576e16d3af6e19ae8eeb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/sprites/leg/legs_black_1.png"
-dest_files=["res://.godot/imported/legs_black_1.png-126a397d2000540bbcc778b79341719c.ctex"]
+source_file="res://actors/pawns/sprites/hand/hands_white_1.png"
+dest_files=["res://.godot/imported/hands_white_1.png-fd0f38b227e2576e16d3af6e19ae8eeb.ctex"]
 
 [params]
 

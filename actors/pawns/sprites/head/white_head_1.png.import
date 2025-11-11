@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8u4rr4xtq3tj"
-path="res://.godot/imported/spot_light.png-d1004c3fed7a64e4553fb9c281a6de63.ctex"
+uid="uid://csxjjom3dyxfa"
+path="res://.godot/imported/white_head_1.png-45cd1a7eccd20f31026a9333b2dbd52d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/player/spot_light.png"
-dest_files=["res://.godot/imported/spot_light.png-d1004c3fed7a64e4553fb9c281a6de63.ctex"]
+source_file="res://actors/pawns/sprites/head/white_head_1.png"
+dest_files=["res://.godot/imported/white_head_1.png-45cd1a7eccd20f31026a9333b2dbd52d.ctex"]
 
 [params]
 

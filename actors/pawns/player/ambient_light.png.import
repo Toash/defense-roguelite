@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bymqf3o7aw37"
-path="res://.godot/imported/ambient_light.png-9382ec35ce211c9cf5740877cfaa5706.ctex"
+path="res://.godot/imported/ambient_light.png-039d25ad91c032027d75457ff411d5ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/player/ambient_light.png"
-dest_files=["res://.godot/imported/ambient_light.png-9382ec35ce211c9cf5740877cfaa5706.ctex"]
+source_file="res://actors/pawns/player/ambient_light.png"
+dest_files=["res://.godot/imported/ambient_light.png-039d25ad91c032027d75457ff411d5ce.ctex"]
 
 [params]
 

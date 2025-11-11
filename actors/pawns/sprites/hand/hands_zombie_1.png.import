@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oyto6h4h2ewn"
-path="res://.godot/imported/torso_blue_jacket.png-a74f7f73521ead21f57d2a0627c9be3b.ctex"
+uid="uid://bcrncjn0sri3i"
+path="res://.godot/imported/hands_zombie_1.png-6d47d6d4cdbbfdb0f04af3b94abdeec4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/sprites/torso/torso_blue_jacket.png"
-dest_files=["res://.godot/imported/torso_blue_jacket.png-a74f7f73521ead21f57d2a0627c9be3b.ctex"]
+source_file="res://actors/pawns/sprites/hand/hands_zombie_1.png"
+dest_files=["res://.godot/imported/hands_zombie_1.png-6d47d6d4cdbbfdb0f04af3b94abdeec4.ctex"]
 
 [params]
 

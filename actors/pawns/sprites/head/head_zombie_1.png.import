@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csxjjom3dyxfa"
-path="res://.godot/imported/white_head_1.png-553dafcf7ad2bdbf7eba9b2d1eebe810.ctex"
+uid="uid://doueacum5bmne"
+path="res://.godot/imported/head_zombie_1.png-8599723fabab99006515176678edf4bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/sprites/head/white_head_1.png"
-dest_files=["res://.godot/imported/white_head_1.png-553dafcf7ad2bdbf7eba9b2d1eebe810.ctex"]
+source_file="res://actors/pawns/sprites/head/head_zombie_1.png"
+dest_files=["res://.godot/imported/head_zombie_1.png-8599723fabab99006515176678edf4bb.ctex"]
 
 [params]
 

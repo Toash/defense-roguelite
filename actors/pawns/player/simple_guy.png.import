@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddl3g6wo4371s"
-path="res://.godot/imported/hands_white_1.png-d7f4c77973f1601a6bfb9f57c2831aa7.ctex"
+uid="uid://dvxkqmytvojw4"
+path="res://.godot/imported/simple_guy.png-83a0121898bd2e55fede87f4d4fcb0b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/sprites/hand/hands_white_1.png"
-dest_files=["res://.godot/imported/hands_white_1.png-d7f4c77973f1601a6bfb9f57c2831aa7.ctex"]
+source_file="res://actors/pawns/player/simple_guy.png"
+dest_files=["res://.godot/imported/simple_guy.png-83a0121898bd2e55fede87f4d4fcb0b9.ctex"]
 
 [params]
 
