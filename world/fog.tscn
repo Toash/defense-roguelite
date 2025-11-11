@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cf7w5yb2lhl4y"]
 
 [ext_resource type="Script" uid="uid://m7t6xveppwv7" path="res://world/fog.gd" id="1_11jws"]
-[ext_resource type="Texture2D" uid="uid://cooiy0bvurjeg" path="res://fog.png" id="1_kbfj0"]
+[ext_resource type="Texture2D" uid="uid://cooiy0bvurjeg" path="res://world/fog.png" id="1_kbfj0"]
 [ext_resource type="Shader" uid="uid://b1py67be17k80" path="res://world/fog.gdshader" id="2_rj5s7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rj5s7"]
