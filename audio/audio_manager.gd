@@ -9,6 +9,7 @@ extends Node
 @export var knife_slice: Array[AudioStream]
 
 @export_group("Zombies")
+@export var zombie_attack: Array[AudioStream]
 @export var zombie_groan: Array[AudioStream]
 @export var zombie_death: Array[AudioStream]
 
@@ -20,6 +21,7 @@ enum KEY {
 	WEAPON_PISTOL_SHOOT,
 	WEAPON_KNIFE_SLICE,
 
+	ZOMBIE_ATTACK,
 	ZOMBIE_GROAN,
 	ZOMBIE_DEATH,
 	}
@@ -44,6 +46,9 @@ func play_key(key: KEY, position: Vector2, bus := "Master") -> void:
 			streams = pistol_shoot
 		KEY.WEAPON_KNIFE_SLICE:
 			streams = knife_slice
+
+		KEY.ZOMBIE_ATTACK:
+			streams = zombie_attack
 		KEY.ZOMBIE_GROAN:
 			streams = zombie_groan
 		KEY.ZOMBIE_DEATH:

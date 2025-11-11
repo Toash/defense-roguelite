@@ -27,7 +27,8 @@ class_name ItemData
 @export var follow_target = false
 
 @export_group("Sound")
-@export var audio_key: AudioManager.KEY = AudioManager.KEY.NO_SOUND
+@export var use_sound_key: AudioManager.KEY = AudioManager.KEY.NO_SOUND
+@export var use_sound_bus: String = "master"
 
 
 @export_group("Functionality")

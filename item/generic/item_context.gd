@@ -8,7 +8,7 @@ extends RefCounted
 var root_node: Node
 
 ## who is using this item
-var user_node: Node
+var user_node: Node2D
 
 
 var global_spawn_point: Vector2

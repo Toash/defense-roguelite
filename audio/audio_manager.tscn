@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1rm4vy4whff2"]
+[gd_scene load_steps=7 format=3 uid="uid://d1rm4vy4whff2"]
 
 [ext_resource type="Script" uid="uid://bkwhxe6xctrn0" path="res://audio/audio_manager.gd" id="1_5jhky"]
 [ext_resource type="AudioStream" uid="uid://cytdvns5e1i4a" path="res://audio/audioaudio/footsteps/grass_1.mp3" id="2_vxw8f"]
 [ext_resource type="AudioStream" uid="uid://dy7u36uymvova" path="res://audio/audioaudio/footsteps/grass_2.mp3" id="3_mhfhn"]
 [ext_resource type="AudioStream" uid="uid://d4cb26dn2ofoj" path="res://audio/audioaudio/footsteps/grass_3.mp3" id="4_i1k7u"]
 [ext_resource type="AudioStream" uid="uid://quv5igoeyjdh" path="res://audio/audioaudio/weapons/pistol_shot.wav" id="5_mhfhn"]
+[ext_resource type="AudioStream" uid="uid://ixr8e05cptj7" path="res://audio/audioaudio/zombies/zombie_bite_1.wav" id="6_i1k7u"]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_5jhky")
 grass_step = Array[AudioStream]([ExtResource("2_vxw8f"), ExtResource("3_mhfhn"), ExtResource("4_i1k7u")])
 pistol_shoot = Array[AudioStream]([ExtResource("5_mhfhn")])
+zombie_attack = Array[AudioStream]([ExtResource("6_i1k7u")])
 metadata/_custom_type_script = "uid://bkwhxe6xctrn0"

@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_6sxxn")
+audio_key = 4
 zombie_attack_scene = ExtResource("2_kqfrm")
 attack_duration = 1
 metadata/_custom_type_script = "uid://cfffdk0hv8wl5"

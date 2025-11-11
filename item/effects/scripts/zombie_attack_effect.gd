@@ -9,7 +9,7 @@ class_name ZombieAttackEffect
 func apply(context: ItemContext):
 	var attack_inst: ZombieAttackScene = zombie_attack_scene.instantiate() as ZombieAttackScene
 
-	
+
 	attack_inst.context = context
 	attack_inst.damage = damage
 	attack_inst.duration = attack_duration

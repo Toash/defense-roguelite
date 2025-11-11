@@ -19,6 +19,8 @@ func _init(d: ItemData = null, q := 1):
 func use(ctx: ItemContext):
 	if can_use() == false: return
 
+	AudioManager.play_key(data.use_sound_key, ctx.user_node.global_position, data.use_sound_bus)
+
 	data.apply_effects(ctx)
 	if data.consume_on_use:
 		# assuming it is in hotbar
