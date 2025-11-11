@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://b888f1irbry2f"]
+
+[ext_resource type="Script" uid="uid://d5bs56c5o7uy" path="res://item/world_container.gd" id="1_2vv8q"]
+[ext_resource type="Script" uid="uid://co0hu31xc486a" path="res://item/item_container.gd" id="2_7aw7u"]
+[ext_resource type="Script" uid="uid://j8smuyc0fgry" path="res://interactable/interactable.gd" id="3_gons1"]
+[ext_resource type="Shader" uid="uid://cypb182ofc63b" path="res://shaders/outline.gdshader" id="4_qm0y2"]
+[ext_resource type="Texture2D" uid="uid://dui8hbxwg6ihn" path="res://actors/containers/crate/crate.png" id="5_ouxop"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7wq1f"]
+shader = ExtResource("4_qm0y2")
+shader_parameter/allow_out_of_bounds = true
+shader_parameter/outline_thickness = 1.0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7da31"]
+radius = 33.0
+
+[node name="Crate" type="Node2D" node_paths=PackedStringArray("container") groups=["persist"]]
+script = ExtResource("1_2vv8q")
+self_resource_path = "res://actors/containers/crate/crate.tscn"
+container = NodePath("ItemContainer")
+
+[node name="ItemContainer" type="Node" parent="."]
+script = ExtResource("2_7aw7u")
+capacity = 8
+container_name = 3
+metadata/_custom_type_script = "uid://co0hu31xc486a"
+
+[node name="Interactable" type="Area2D" parent="." node_paths=PackedStringArray("sprite")]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("3_gons1")
+sprite = NodePath("../Sprite2D")
+outline = SubResource("ShaderMaterial_7wq1f")
+metadata/_custom_type_script = "uid://j8smuyc0fgry"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("CircleShape2D_7da31")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("5_ouxop")
+
+[connection signal="interacted" from="Interactable" to="." method="_interact"]

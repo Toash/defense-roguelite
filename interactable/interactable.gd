@@ -14,7 +14,7 @@ func interact(player: Node2D):
 
 
 func show_outline():
-	outline.set_shader_parameter("outline_thickness", 6)
+	outline.set_shader_parameter("outline_thickness", 1)
 	sprite.material = outline
 
 func hide_outline():

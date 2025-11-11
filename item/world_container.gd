@@ -5,13 +5,12 @@ extends Node2D
 class_name WorldContainer
 
 ## uses the path of this when loading. 
-@export var packed_scene: PackedScene
+@export var self_resource_path: String
 @export var container: ItemContainer
 
 func _ready() -> void:
-	print(packed_scene)
-	if packed_scene == null:
-		push_error("World Container: packed_scene should be set for " + str(get_path()))
+	if not self_resource_path:
+		push_error("World Container: self resource path should be defined")
 	if container == null:
 		push_error("World Container: container should be set for " + str(get_path()))
 
@@ -27,7 +26,7 @@ func save() -> Dictionary:
 	return {
 		"save_type": SaveManager.SaveType.RELOAD,
 
-		SaveManager.SaveKeys_RELOAD.RESOURCE_PATH: packed_scene.resource_path,
+		SaveManager.SaveKeys_RELOAD.RESOURCE_PATH: self_resource_path,
 		SaveManager.SaveKeys_RELOAD.PARENT_SCENETREE_PATH: get_parent().get_path(),
 
 		"container": container.get_dict()

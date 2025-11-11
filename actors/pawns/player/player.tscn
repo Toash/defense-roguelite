@@ -72,6 +72,7 @@ position = Vector2(0.5, 3)
 shape = SubResource("RectangleShape2D_rkbax")
 
 [node name="PickupRadius" type="Area2D" parent="." node_paths=PackedStringArray("pickup_container")]
+visible = false
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("5_qjkh3")
@@ -81,6 +82,7 @@ pickup_container = NodePath("../Containers/Pickups")
 shape = SubResource("CircleShape2D_yw30f")
 
 [node name="InteractableDetector" type="Area2D" parent="." node_paths=PackedStringArray("player", "raycast")]
+visible = false
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("5_hiosj")
@@ -97,7 +99,7 @@ collision_mask = 17
 
 [node name="Inventory" type="Node" parent="Containers"]
 script = ExtResource("10_lsln6")
-capacity = 64
+capacity = 16
 metadata/_custom_type_script = "uid://co0hu31xc486a"
 
 [node name="Hotbar" type="Node" parent="Containers"]
@@ -108,7 +110,7 @@ metadata/_custom_type_script = "uid://co0hu31xc486a"
 
 [node name="Pickups" type="Node" parent="Containers"]
 script = ExtResource("10_lsln6")
-capacity = 16
+capacity = 8
 container_name = 2
 metadata/_custom_type_script = "uid://co0hu31xc486a"
 
@@ -148,6 +150,7 @@ texture = ExtResource("20_otn2r")
 texture_scale = 2.82
 
 [node name="FogDissipator" type="Area2D" parent="." node_paths=PackedStringArray("player", "obstruction_raycast")]
+visible = false
 collision_layer = 0
 collision_mask = 32
 script = ExtResource("20_ctwkf")
@@ -237,7 +240,7 @@ metadata/_custom_type_script = "uid://bbp3ruk8jvfsw"
 [connection signal="mouse_position" from="Inputs/MouseInput" to="CharacterSprite" method="_set_target"]
 [connection signal="mouse_position" from="Inputs/MouseInput" to="Items/ItemDisplay" method="_update_target"]
 [connection signal="use_equipment" from="Inputs/EquipmentInput" to="Items/Equipment" method="use"]
-[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
 [connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_left_hand"]
+[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
 [connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_right_hand"]
 [connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_left_hand"]
