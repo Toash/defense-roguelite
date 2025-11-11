@@ -3,7 +3,6 @@ extends CanvasLayer
 # wires player behaviour stuff onto the UI
 
 
-@export var player: Player
 # @export var hotbar_input: HotbarInput
 
 
@@ -17,6 +16,8 @@ extends CanvasLayer
 @export var hunger_bar: ProgressBar
 @export var thirst_bar: ProgressBar
 
+@export_group("in code")
+@export var player: Player
 
 func _ready() -> void:
 	var player_health: Health = player.get_health()

@@ -7,14 +7,11 @@
 
 [resource]
 script = ExtResource("2_bb4jg")
-id = 0
 display_name = "Apple"
 description = "A singular apple."
 max_stack = 64
-consume_on_use = true
 icon = ExtResource("1_ry7xa")
+consume_on_use = true
 ingame_sprite = ExtResource("1_ry7xa")
-sprite_flipped = false
-follow_target = false
 item_effects = Array[ExtResource("2_7638r")]([ExtResource("3_f45cx")])
 metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

@@ -41,10 +41,10 @@ func play(flipped: bool):
 	animator.speed_scale = 2.5
 	animator.play()
 
-	# if flipped:
-	# 	root.scale = Vector2(-1, 1)
-	# else:
-	# 	root.scale = Vector2(1, 1)
+	if flipped:
+		root.scale = Vector2(1, -1)
+	else:
+		root.scale = Vector2(1, 1)
 
 
 	# static_body.add_collision_exception_with(ctx.user_node)

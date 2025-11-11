@@ -20,10 +20,10 @@
 [ext_resource type="Script" uid="uid://dflsf7ovo0jqw" path="res://item/generic/item_display.gd" id="20_nsxbo"]
 [ext_resource type="Texture2D" uid="uid://c8u4rr4xtq3tj" path="res://actors/player/spot_light.png" id="20_otn2r"]
 [ext_resource type="Script" uid="uid://c8dnwtjdg5wbq" path="res://audio/footsteps.gd" id="21_ctwkf"]
-[ext_resource type="AudioStream" uid="uid://cytdvns5e1i4a" path="res://audio/grass_1.mp3" id="22_nsxbo"]
-[ext_resource type="AudioStream" uid="uid://dy7u36uymvova" path="res://audio/grass_2.mp3" id="23_yeioo"]
+[ext_resource type="AudioStream" uid="uid://cytdvns5e1i4a" path="res://audio/audioaudio/footsteps/grass_1.mp3" id="22_nsxbo"]
+[ext_resource type="AudioStream" uid="uid://dy7u36uymvova" path="res://audio/audioaudio/footsteps/grass_2.mp3" id="23_yeioo"]
 [ext_resource type="Script" uid="uid://bbp3ruk8jvfsw" path="res://actors/player/equipped_hotbar_inst.gd" id="24_nsxbo"]
-[ext_resource type="AudioStream" uid="uid://d4cb26dn2ofoj" path="res://audio/grass_3.mp3" id="24_qct7d"]
+[ext_resource type="AudioStream" uid="uid://d4cb26dn2ofoj" path="res://audio/audioaudio/footsteps/grass_3.mp3" id="24_qct7d"]
 [ext_resource type="Script" uid="uid://dfsam3b8d27hq" path="res://input/equipment_input.gd" id="24_yeioo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
