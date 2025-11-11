@@ -21,7 +21,7 @@
 [ext_resource type="Script" uid="uid://kesirm75pc1q" path="res://item/generic/equipment.gd" id="18_xnimh"]
 [ext_resource type="Script" uid="uid://dflsf7ovo0jqw" path="res://item/generic/item_display.gd" id="19_ld5a4"]
 [ext_resource type="Script" uid="uid://c816dagnqn6re" path="res://actors/zombie/zombie_item.gd" id="20_cthrv"]
-[ext_resource type="Resource" uid="uid://vvugqdykgub0" path="res://item/items/knife/knife.tres" id="21_qpxon"]
+[ext_resource type="Resource" uid="uid://6rsgvhonqx4b" path="res://item/items/zombie/zombie_attack.tres" id="21_cthrv"]
 [ext_resource type="Script" uid="uid://bnk868k5qp3nb" path="res://actors/nav_target_provider.gd" id="23_cthrv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_roy8y"]
@@ -144,25 +144,25 @@ metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
 
 [node name="Items" type="Node2D" parent="."]
 
-[node name="Equipment" type="Node" parent="Items" node_paths=PackedStringArray("user", "instance_supplier", "target_supplier", "equip_display")]
+[node name="Equipment" type="Node" parent="Items" node_paths=PackedStringArray("user", "inst_provider", "target_provider", "item_display", "character_sprite")]
 script = ExtResource("18_xnimh")
 user = NodePath("../..")
-instance_supplier = NodePath("../ZombieItem")
-target_supplier = NodePath("../../NavTargetProvider")
-equip_display = NodePath("../ItemDisplay")
+inst_provider = NodePath("../ZombieItem")
+target_provider = NodePath("../../ZombieTarget")
+item_display = NodePath("../ItemDisplay")
+character_sprite = NodePath("../../CharacterSprite")
 metadata/_custom_type_script = "uid://kesirm75pc1q"
 
 [node name="ItemDisplay" type="Node2D" parent="Items" node_paths=PackedStringArray("user", "instance_supplier", "target_supplier")]
 script = ExtResource("19_ld5a4")
 user = NodePath("../..")
-distance_from_user = 100
 instance_supplier = NodePath("../ZombieItem")
 target_supplier = NodePath("../../NavTargetProvider")
 metadata/_custom_type_script = "uid://dflsf7ovo0jqw"
 
 [node name="ZombieItem" type="Node2D" parent="Items"]
 script = ExtResource("20_cthrv")
-data = ExtResource("21_qpxon")
+data = ExtResource("21_cthrv")
 metadata/_custom_type_script = "uid://c816dagnqn6re"
 
 [node name="ZombieArms" type="Node2D" parent="."]

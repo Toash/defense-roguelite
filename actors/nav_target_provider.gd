@@ -8,7 +8,7 @@ class_name NavTargetProvider
 
 
 func _process(delta):
-    target_emitted.emit(agent.target_position)
+    target_pos_emitted.emit(agent.target_position)
 
 
 func get_target_pos() -> Vector2:

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dr3mcgkrm4uyd" path="res://item/items/pistol/pistol.png" id="1_2yt1l"]
 [ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_8e78t"]
 [ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="2_2yt1l"]
-[ext_resource type="Resource" uid="uid://drxqpryf5nwpb" path="res://item/effects/bullet.tres" id="3_alyvx"]
+[ext_resource type="Resource" uid="uid://drxqpryf5nwpb" path="res://item/effects/effect_bullet.tres" id="3_alyvx"]
 
 [resource]
 script = ExtResource("2_2yt1l")

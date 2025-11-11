@@ -24,7 +24,7 @@ var flipped: bool
 
 func _ready():
 	instance_supplier.instance_changed.connect(_set_instance)
-	target_supplier.target_emitted.connect(_update_target)
+	target_supplier.target_pos_emitted.connect(_update_target)
 
 	add_child(origin_node)
 	origin_created.emit(origin_node)

@@ -1,6 +1,11 @@
 Item effects define the behaviour when items get used
 
-Item contexts pass in general informatino to the effects so they can be used.
+Item contexts pass in general information to the Item Effects to be used accordingly.
+For ex. 
+Root
+User
+Spawn position
+etc..
 
 Player item usage flow:
    HotbarContainer 
@@ -41,3 +46,11 @@ Target is player ( during chase state)
 Item Display
 Equipment
 Call use on the equipment in the attack state. 
+
+
+
+
+Animating hands:
+
+Attach CharacterSprite to equipment
+Set positions accordingly from the CharacterSprite passed in ItemContexts.

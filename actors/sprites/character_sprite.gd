@@ -49,7 +49,7 @@ var right_hand_moving = false
 var dead = false
 
 func _ready() -> void:
-	target_supplier.target_emitted.connect(_set_target)
+	target_supplier.target_pos_emitted.connect(_set_target)
 	original_scale = scale
 	flipped_scale = Vector2(-original_scale.x, original_scale.y)
 
@@ -144,22 +144,22 @@ func _legs(delta: float):
 		right_leg.position.x = right_leg_initial_pos.x
 
 
-func _enable_left_hand():
+func enable_left_hand():
 	left_hand_moving = true
-func _enable_right_hand():
+func enable_right_hand():
 	right_hand_moving = true
 
-func _set_left_hand_pos(pos: Vector2):
+func set_left_hand(pos: Vector2):
 	if left_hand_moving:
 		left_hand.global_position = pos
-func _set_right_hand_pos(pos: Vector2):
+func set_right_hand(pos: Vector2):
 	if right_hand_moving:
 		right_hand.global_position = pos
 
-func _disable_left_hand():
+func disable_left_hand():
 	left_hand_moving = false
 	left_hand.position = left_hand_initial_pos
-func _disable_right_hand():
+func disable_right_hand():
 	right_hand_moving = false
 	right_hand.position = right_hand_initial_pos
 

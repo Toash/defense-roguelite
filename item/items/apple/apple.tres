@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dsctldir7hnac" path="res://item/items/apple/apple.png" id="1_ry7xa"]
 [ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="2_7638r"]
 [ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="2_bb4jg"]
-[ext_resource type="Resource" uid="uid://b2bu2eyn744ax" path="res://item/effects/small_heal.tres" id="3_f45cx"]
+[ext_resource type="Resource" uid="uid://b2bu2eyn744ax" path="res://item/effects/effect_small_heal.tres" id="3_f45cx"]
 
 [resource]
 script = ExtResource("2_bb4jg")

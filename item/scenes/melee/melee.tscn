@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqj4spopcu6pq"]
+[gd_scene load_steps=7 format=3 uid="uid://dqj4spopcu6pq"]
 
 [ext_resource type="Texture2D" uid="uid://dydnxbuxco00i" path="res://item/items/knife/knife.png" id="1_78t7m"]
 [ext_resource type="Script" uid="uid://d0xfbhpgo3nyb" path="res://item/scenes/melee/melee.gd" id="1_reklo"]
@@ -39,15 +39,13 @@ _data = {
 &"swing": SubResource("Animation_78t7m")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_78t7m"]
-size = Vector2(22, 64)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_reklo"]
 size = Vector2(20, 46.5)
 
-[node name="Melee" type="Node2D" node_paths=PackedStringArray("animation_player", "root")]
+[node name="Melee" type="Node2D" node_paths=PackedStringArray("animation_player", "area", "root")]
 script = ExtResource("1_reklo")
 animation_player = NodePath("AnimationPlayer")
+area = NodePath("Root/RotatePoint/Area2D")
 root = NodePath("Root")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -64,17 +62,6 @@ texture_filter = 1
 position = Vector2(7, -31)
 texture = ExtResource("1_78t7m")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Root/RotatePoint"]
-visible = false
-position = Vector2(7, -34)
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Root/RotatePoint/StaticBody2D"]
-position = Vector2(1, 0)
-shape = SubResource("RectangleShape2D_78t7m")
-debug_color = Color(0.97, 0, 0, 0.41960785)
-
 [node name="Area2D" type="Area2D" parent="Root/RotatePoint"]
 position = Vector2(7.5, -32)
 collision_layer = 0
@@ -83,5 +70,3 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Root/RotatePoint/Area2D"]
 position = Vector2(0, -11.75)
 shape = SubResource("RectangleShape2D_reklo")
-
-[connection signal="body_entered" from="Root/RotatePoint/Area2D" to="." method="_on_area_2d_body_entered"]

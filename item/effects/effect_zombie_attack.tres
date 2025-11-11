@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ZombieAttackEffect" load_steps=3 format=3 uid="uid://x0i4c8tf5dhb"]
+
+[ext_resource type="Script" uid="uid://cfffdk0hv8wl5" path="res://item/effects/scripts/zombie_attack_effect.gd" id="1_6sxxn"]
+[ext_resource type="PackedScene" uid="uid://dcgihnrjqae7q" path="res://item/scenes/zombie/zombie_attack.tscn" id="2_kqfrm"]
+
+[resource]
+script = ExtResource("1_6sxxn")
+zombie_attack_scene = ExtResource("2_kqfrm")
+attack_duration = 1
+metadata/_custom_type_script = "uid://cfffdk0hv8wl5"

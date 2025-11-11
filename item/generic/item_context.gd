@@ -1,4 +1,6 @@
 ## Data needed to perform item effects.
+## passed when an item is used.
+## items can use the data passed into here to do more stuff.
 class_name ItemContext
 extends RefCounted
 
@@ -13,9 +15,13 @@ var global_spawn_point: Vector2
 var spawn_node: Node2D
 
 
+var target_provider: TargetProvider
 var global_target_point: Vector2
+var target_node: Node2D
 
 var equip_display: ItemDisplay
+var character_sprite: CharacterSprite
+
 var flipped: bool
 
 

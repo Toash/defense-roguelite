@@ -2,7 +2,7 @@
 class_name TargetProvider
 extends Node2D
 
-signal target_emitted(pos: Vector2)
+signal target_pos_emitted(pos: Vector2)
 
 
 @abstract

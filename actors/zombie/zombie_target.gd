@@ -9,7 +9,7 @@ var last_position: Vector2
 
 func _process(delta):
 	if reference:
-		target_emitted.emit(reference.global_position)
+		target_pos_emitted.emit(reference.global_position)
 
 func get_target_pos() -> Vector2:
 	if reference:

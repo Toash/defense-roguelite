@@ -185,12 +185,13 @@ metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
 
 [node name="Items" type="Node2D" parent="."]
 
-[node name="Equipment" type="Node" parent="Items" node_paths=PackedStringArray("user", "instance_supplier", "target_supplier", "equip_display")]
+[node name="Equipment" type="Node" parent="Items" node_paths=PackedStringArray("user", "inst_provider", "target_provider", "item_display", "character_sprite")]
 script = ExtResource("20_lj3dd")
 user = NodePath("../..")
-instance_supplier = NodePath("../../HotbarEquippedInst")
-target_supplier = NodePath("../../Inputs/MouseInput")
-equip_display = NodePath("../ItemDisplay")
+inst_provider = NodePath("../../HotbarEquippedInst")
+target_provider = NodePath("../../Inputs/MouseInput")
+item_display = NodePath("../ItemDisplay")
+character_sprite = NodePath("../../CharacterSprite")
 metadata/_custom_type_script = "uid://kesirm75pc1q"
 
 [node name="ItemDisplay" type="Node2D" parent="Items" node_paths=PackedStringArray("user", "instance_supplier", "target_supplier")]
