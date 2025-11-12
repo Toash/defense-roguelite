@@ -33,6 +33,12 @@ func _process(delta: float) -> void:
         nearest_interactable_changed.emit(get_nearest_interactable())
         nearest_interactable = get_nearest_interactable()
 
+func has_interactable(interactable: Interactable):
+    for nearby_interactable in nearby_interactables:
+        if nearby_interactable == interactable:
+            return true
+    
+    return false
 
 func get_nearest_interactable() -> Interactable:
     var _nearest_interactable = null

@@ -1,16 +1,18 @@
 [gd_scene load_steps=10 format=4 uid="uid://c4fe8rix7vpn5"]
 
+[ext_resource type="Script" uid="uid://csd4ncy3jgem8" path="res://world/world.gd" id="1_4papg"]
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/pawns/player/player.tscn" id="1_fyhu2"]
 [ext_resource type="PackedScene" uid="uid://b3kkj3vijsw7s" path="res://ui/ui.tscn" id="5_dqqhb"]
 [ext_resource type="PackedScene" uid="uid://c08inc3nvav0f" path="res://ui/pause_menu.tscn" id="6_b2suy"]
 [ext_resource type="TileSet" uid="uid://31avaoegt2bk" path="res://world/tilesets/ground.tres" id="8_fyhu2"]
 [ext_resource type="Script" uid="uid://c5t800787mhdc" path="res://world/fog_manager.gd" id="8_ysn08"]
-[ext_resource type="TileSet" uid="uid://cx5bo801w6myv" path="res://world/tilesets/doors.tres" id="9_4papg"]
 [ext_resource type="PackedScene" uid="uid://cf7w5yb2lhl4y" path="res://world/fog.tscn" id="9_m0cxt"]
 [ext_resource type="TileSet" uid="uid://dbtkbyo4n77qy" path="res://world/tilesets/walls.tres" id="9_ov2xu"]
-[ext_resource type="TileSet" uid="uid://kp24hb4w12of" path="res://world/tilesets/containers.tres" id="10_mad0u"]
+[ext_resource type="TileSet" uid="uid://kp24hb4w12of" path="res://world/tilesets/interactables.tres" id="10_mad0u"]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" node_paths=PackedStringArray("interactable_tiles") groups=["world"]]
+script = ExtResource("1_4papg")
+interactable_tiles = NodePath("Tiles/InteractableTiles")
 
 [node name="Player" parent="." instance=ExtResource("1_fyhu2")]
 
@@ -46,10 +48,6 @@ z_index = -1
 tile_map_data = PackedByteArray("AAD6//z/AAABAAAAAAD5//z/AAABAAAAAAD5//3/AAABAAAAAAD5//7/AAABAAAAAAD5////AAABAAAAAAD5/wAAAAABAAAAAAD5/wEAAAABAAAAAAD5/wIAAAABAAAAAAD5/wMAAAABAAAAAAD9//r/AAABAAAAAAD///r/AAABAAAAAAD///z/AAABAAAAAAD9//z/AAABAAAAAAA=")
 tile_set = ExtResource("9_ov2xu")
 
-[node name="ContainerTiles" type="TileMapLayer" parent="Tiles"]
-tile_map_data = PackedByteArray("AAD6//3/AQAAAAAAAQD6////AQAAAAAAAQA=")
+[node name="InteractableTiles" type="TileMapLayer" parent="Tiles"]
+tile_map_data = PackedByteArray("AAD6//3/AQAAAAAAAQD6////AQAAAAAAAQD9//7/AQAAAAAAAgA=")
 tile_set = ExtResource("10_mad0u")
-
-[node name="DoorTiles" type="TileMapLayer" parent="Tiles"]
-tile_map_data = PackedByteArray("AAD+//7/AAAAAAAAAQA=")
-tile_set = ExtResource("9_4papg")

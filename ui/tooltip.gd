@@ -1,5 +1,6 @@
 extends Panel
 
+## label with offset
 class_name Tooltip
 
 @export var label: Label

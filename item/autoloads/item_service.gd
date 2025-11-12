@@ -180,7 +180,7 @@ func add_inst(container: ItemContainer, added_inst: ItemInstance) -> bool:
 	return false
 
 func _get_best_swap_container(from_container: ItemContainer, player: Node2D) -> ItemContainer:
-	var interaction: Interaction = _get_interaction_from_player(player)
+	var interaction: PlayerInteraction = _get_interaction_from_player(player)
 	var interaction_container: ItemContainer = interaction.get_nearest_container_if_it_exists()
 
 	if interaction_container != null:
@@ -218,9 +218,9 @@ func _get_best_swap_container(from_container: ItemContainer, player: Node2D) -> 
 	return from_container
 
 
-func _get_interaction_from_player(player: Node2D) -> Interaction:
+func _get_interaction_from_player(player: Node2D) -> PlayerInteraction:
 	for child in player.get_children():
-		if child is Interaction:
-			return child as Interaction
+		if child is PlayerInteraction:
+			return child as PlayerInteraction
 
 	return null

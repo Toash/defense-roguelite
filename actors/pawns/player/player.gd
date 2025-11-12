@@ -5,6 +5,8 @@ class_name Player
 
 @export var speed = 250
 
+
+@export_group("Containers")
 @export var inventory: ItemContainer
 @export var hotbar: ItemContainer
 @export var pickups: ItemContainer
@@ -13,12 +15,16 @@ class_name Player
 var state = "idle"
 var input_vector = Vector2.ZERO
 
+@export_group("Stats")
 @export var health: Health
 @export var thirst: DrainingStat
 @export var hunger: DrainingStat
 
+@export_group("Inputs")
 @export var hotbar_input: HotbarInput
 @export var world_container_input: WorldContainerInput
+@export var context_input: ContextInput
+
 
 func _ready() -> void:
 	Game.player_load()
@@ -61,6 +67,8 @@ func get_hotbar_input() -> HotbarInput:
 	return hotbar_input
 func get_world_container_input() -> WorldContainerInput:
 	return world_container_input
+func get_context_input() -> ContextInput:
+	return context_input
 
 
 func save() -> Dictionary:

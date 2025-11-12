@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=35 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
@@ -10,7 +10,7 @@
 [ext_resource type="Shader" uid="uid://cypb182ofc63b" path="res://shaders/outline.gdshader" id="7_fptfb"]
 [ext_resource type="Script" uid="uid://c5rhs0y5iry7d" path="res://input/mouse_input.gd" id="9_388e2"]
 [ext_resource type="Script" uid="uid://co0hu31xc486a" path="res://item/item_container.gd" id="10_lsln6"]
-[ext_resource type="Script" uid="uid://dplrhtm2y2ben" path="res://actors/pawns/player/interaction.gd" id="12_ssdk0"]
+[ext_resource type="Script" uid="uid://dplrhtm2y2ben" path="res://actors/pawns/player/player_interaction.gd" id="12_ssdk0"]
 [ext_resource type="Script" uid="uid://chxhldiu0nvle" path="res://input/world_container_input.gd" id="13_7aotg"]
 [ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/pawns/character_sprite.tscn" id="13_k67x5"]
 [ext_resource type="Texture2D" uid="uid://csxjjom3dyxfa" path="res://actors/pawns/sprites/head/white_head_1.png" id="14_0wchr"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://bbp3ruk8jvfsw" path="res://actors/pawns/player/equipped_hotbar_inst.gd" id="24_nsxbo"]
 [ext_resource type="AudioStream" uid="uid://d4cb26dn2ofoj" path="res://audio/audioaudio/footsteps/grass_3.mp3" id="24_qct7d"]
 [ext_resource type="Script" uid="uid://dfsam3b8d27hq" path="res://input/equipment_input.gd" id="24_yeioo"]
+[ext_resource type="Script" uid="uid://ctutx861f7ofh" path="res://input/context_input.gd" id="26_h0lia"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(25, 27)
@@ -54,7 +55,7 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_icg72"]
 radius = 422.01895
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "pickups", "health", "thirst", "hunger", "hotbar_input", "world_container_input") groups=["persist", "player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "pickups", "health", "thirst", "hunger", "hotbar_input", "world_container_input", "context_input") groups=["persist", "player"]]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_onrkg")
@@ -67,6 +68,7 @@ thirst = NodePath("Stats/Thirst")
 hunger = NodePath("Stats/Hunger")
 hotbar_input = NodePath("Inputs/HotbarInput")
 world_container_input = NodePath("Inputs/WorldContainerInput")
+context_input = NodePath("Inputs/ContextInput")
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -121,12 +123,12 @@ capacity = 8
 container_name = 2
 metadata/_custom_type_script = "uid://co0hu31xc486a"
 
-[node name="Interaction" type="Node" parent="." node_paths=PackedStringArray("interact_detector", "player")]
+[node name="PlayerInteraction" type="Node2D" parent="." node_paths=PackedStringArray("interact_detector", "context_input", "player")]
 script = ExtResource("12_ssdk0")
 interact_detector = NodePath("../InteractableDetector")
+context_input = NodePath("../Inputs/ContextInput")
 player = NodePath("..")
 outline_material = SubResource("ShaderMaterial_h0lia")
-metadata/_custom_type_script = "uid://dplrhtm2y2ben"
 
 [node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier") instance=ExtResource("13_k67x5")]
 target_supplier = NodePath("../Inputs/MouseInput")
@@ -230,6 +232,10 @@ metadata/_custom_type_script = "uid://chxhldiu0nvle"
 [node name="EquipmentInput" type="Node2D" parent="Inputs"]
 script = ExtResource("24_yeioo")
 metadata/_custom_type_script = "uid://dfsam3b8d27hq"
+
+[node name="ContextInput" type="Node2D" parent="Inputs"]
+script = ExtResource("26_h0lia")
+metadata/_custom_type_script = "uid://ctutx861f7ofh"
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_g6k8r")

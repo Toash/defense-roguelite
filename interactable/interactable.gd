@@ -3,10 +3,22 @@ extends Area2D
 
 class_name Interactable
 
-signal interacted(player: Node2D)
+signal interacted(action_id: int, player: Node2D)
 
 @export var sprite: Sprite2D
 # @export var outline: ShaderMaterial
+
+# @export_group("Action names")
+# @export var main_action_name = "use"
+
+
+# var actions: Dictionary[String, Callable]
+@export var actions: Array[String]
+
+
+# have list of actions
+# include the action name ( string ) on the interacted event
+# thigns that listen for the interacted event will also get the actino name.
 
 
 func interact(player: Node2D):

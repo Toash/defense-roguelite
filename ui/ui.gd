@@ -21,20 +21,17 @@ extends CanvasLayer
 
 func _ready() -> void:
 	var player_health: Health = player.get_health()
-	if not player_health: push_error("UI: player health not found")
 	player_health.health_changed.connect(_on_health_changed)
 	health_bar.max_value = player_health.max_health
 	health_bar.value = player_health.health
 
 	var player_hunger: DrainingStat = player.hunger
-	if not player_hunger: push_error("UI: player hunger not found")
 	player_hunger.poll.connect(_on_hunger_poll)
 	hunger_bar.max_value = player_hunger.max_stat
 	hunger_bar.value = player_hunger.stat
 
 
 	var player_thirst: DrainingStat = player.thirst
-	if not player_thirst: push_error("UI: player thirst not found")
 	player_thirst.poll.connect(_on_thirst_poll)
 	thirst_bar.max_value = player_thirst.max_stat
 	thirst_bar.value = player_thirst.stat
@@ -50,14 +47,11 @@ func _ready() -> void:
 	(pickup_window.get_content() as ContainerUI).setup()
 
 	var hotbar_input: HotbarInput = player.get_hotbar_input()
-	if not hotbar_input: push_error("UI: Could not find hotbar input in player")
 	hotbar_input.equip_slot.connect(hotbar_ui.on_equip_slot)
 
 
 	# Show container ui when opening container.
 	var world_container_input: WorldContainerInput = player.get_world_container_input()
-	if world_container_input == null:
-		push_error("Could not find World Container Input on the player!")
 
 	world_container_input.container_interacted.connect(_on_container_interact)
 	world_container_input.container_changed.connect(_on_container_changed)
