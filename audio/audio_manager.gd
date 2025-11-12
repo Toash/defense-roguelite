@@ -13,6 +13,10 @@ extends Node
 @export var zombie_groan: Array[AudioStream]
 @export var zombie_death: Array[AudioStream]
 
+@export_group("Doors")
+@export var wood_door_open: Array[AudioStream]
+@export var wood_door_close: Array[AudioStream]
+
 
 enum KEY {
 	NO_SOUND,
@@ -24,6 +28,9 @@ enum KEY {
 	ZOMBIE_ATTACK,
 	ZOMBIE_GROAN,
 	ZOMBIE_DEATH,
+
+	DOOR_WOOD_OPEN,
+	DOOR_WOOD_CLOSE,
 	}
 
 func play(stream: AudioStream, position: Vector2, bus := "Master") -> void:
@@ -53,6 +60,11 @@ func play_key(key: KEY, position: Vector2, bus := "Master") -> void:
 			streams = zombie_groan
 		KEY.ZOMBIE_DEATH:
 			streams = zombie_death
+
+		KEY.DOOR_WOOD_OPEN:
+			streams = wood_door_open
+		KEY.DOOR_WOOD_CLOSE:
+			streams = wood_door_close
 		_:
 			push_error("Invalid key!")
 			

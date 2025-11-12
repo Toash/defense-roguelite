@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ddl3g6wo4371s" path="res://actors/pawns/sprites/hand/hands_white_1.png" id="4_kfdqb"]
 
 [node name="CharacterSprite" type="Node2D"]
+z_index = 10
 scale = Vector2(3, 3)
 script = ExtResource("1_702fr")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=34 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cg3y6l7u7bglb" path="res://actors/pawns/player/interact_detector.gd" id="5_hiosj"]
 [ext_resource type="Script" uid="uid://dsrxhicfffw3e" path="res://actors/pawns/player/pickup_detector.gd" id="5_qjkh3"]
 [ext_resource type="Script" uid="uid://dgkass0sic6wa" path="res://actors/pawns/generic/draining_stat.gd" id="7_boad6"]
+[ext_resource type="Shader" uid="uid://cypb182ofc63b" path="res://shaders/outline.gdshader" id="7_fptfb"]
 [ext_resource type="Script" uid="uid://c5rhs0y5iry7d" path="res://input/mouse_input.gd" id="9_388e2"]
 [ext_resource type="Script" uid="uid://co0hu31xc486a" path="res://item/item_container.gd" id="10_lsln6"]
 [ext_resource type="Script" uid="uid://dplrhtm2y2ben" path="res://actors/pawns/player/interaction.gd" id="12_ssdk0"]
@@ -27,13 +28,19 @@
 [ext_resource type="Script" uid="uid://dfsam3b8d27hq" path="res://input/equipment_input.gd" id="24_yeioo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
-size = Vector2(41, 62)
+size = Vector2(25, 27)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yw30f"]
 radius = 200.01
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsln6"]
-radius = 170.49634
+radius = 98.02041
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h0lia"]
+shader = ExtResource("7_fptfb")
+shader_parameter/allow_out_of_bounds = true
+shader_parameter/outline_thickness = 1.0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Gradient" id="Gradient_dqf5y"]
 offsets = PackedFloat32Array(0)
@@ -68,7 +75,7 @@ script = ExtResource("2_qrxv1")
 zoom_speed = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 3)
+position = Vector2(0.5, 18.5)
 shape = SubResource("RectangleShape2D_rkbax")
 
 [node name="PickupRadius" type="Area2D" parent="." node_paths=PackedStringArray("pickup_container")]
@@ -118,6 +125,7 @@ metadata/_custom_type_script = "uid://co0hu31xc486a"
 script = ExtResource("12_ssdk0")
 interact_detector = NodePath("../InteractableDetector")
 player = NodePath("..")
+outline_material = SubResource("ShaderMaterial_h0lia")
 metadata/_custom_type_script = "uid://dplrhtm2y2ben"
 
 [node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier") instance=ExtResource("13_k67x5")]

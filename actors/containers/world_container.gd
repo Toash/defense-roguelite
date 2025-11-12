@@ -7,12 +7,15 @@ class_name WorldContainer
 ## uses the path of this when loading. 
 @export var self_resource_path: String
 @export var container: ItemContainer
+@export var interactable: Interactable
 
 func _ready() -> void:
 	if not self_resource_path:
 		push_error("World Container: self resource path should be defined")
 	if container == null:
 		push_error("World Container: container should be set for " + str(get_path()))
+
+	interactable.interacted.connect(_interact)
 
 func _interact(player: Node2D):
 	# var world_container_input: WorldContainerInput = player.get_node_or_null("WorldContainerInput")

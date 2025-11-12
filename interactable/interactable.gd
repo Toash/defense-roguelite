@@ -6,14 +6,14 @@ class_name Interactable
 signal interacted(player: Node2D)
 
 @export var sprite: Sprite2D
-@export var outline: ShaderMaterial
+# @export var outline: ShaderMaterial
 
 
 func interact(player: Node2D):
 	interacted.emit(player)
 
 
-func show_outline():
+func show_outline(outline: ShaderMaterial):
 	outline.set_shader_parameter("outline_thickness", 1)
 	sprite.material = outline
 

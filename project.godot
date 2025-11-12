@@ -43,6 +43,17 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/uuid/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://actors/": "red",
+"res://ai/": "gray",
+"res://audio/": "orange",
+"res://interactable/": "yellow",
+"res://item/": "blue",
+"res://world/": "green"
+}
+
 [global_group]
 
 player=""

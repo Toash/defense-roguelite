@@ -7,6 +7,7 @@ class_name Interaction
 @export var interact_detector: InteractDetector
 @export var player: Node2D
 @export var interact_distance = 10000 # TODO change
+@export var outline_material: ShaderMaterial
 
 var nearest_interactable: Interactable
 
@@ -45,7 +46,7 @@ func _on_nearest_interactable_changed(new_interactable: Interactable):
 		nearest_interactable.hide_outline()
 
 	if new_interactable != null:
-		new_interactable.show_outline()
+		new_interactable.show_outline(outline_material)
 
 	nearest_interactable = new_interactable
 	print("Interaction: Current interactable: " + str(nearest_interactable))
