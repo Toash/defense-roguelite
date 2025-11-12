@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("2_fjy0u")
-id = 3
+id = 1000
 display_name = "Zombie attack"
 max_stack = 1
 use_sound_key = 4

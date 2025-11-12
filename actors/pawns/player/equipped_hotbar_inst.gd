@@ -26,7 +26,7 @@ func _on_equip_slot(index: int):
 	set_equipped_index(index)
 
 func get_inst() -> ItemInstance:
-	var inst = hotbar_container.get_item(equipped_index)
+	var inst = hotbar_container.get_item_instance(equipped_index)
 	return inst
 
 func set_equipped_index(index: int):
@@ -37,3 +37,6 @@ func set_equipped_index(index: int):
 		holding_something.emit()
 	else:
 		holding_nothing.emit()
+
+func get_equipped_index() -> int:
+	return self.equipped_index

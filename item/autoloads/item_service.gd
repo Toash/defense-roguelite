@@ -1,6 +1,7 @@
 extends Node
 
 # ItemService
+# USE FOR INTERCONTAINER SWAPPING
 # handles items for all types of player_containers.
 # single source of truth that handles moving, stacking, swap for player_containers.
 #      emits signals for UIs to redraw.
@@ -109,21 +110,21 @@ func quick_swap(from_container: ItemContainer, from_index: int):
 		return
 
 	move(from_container, from_index, to_container, to_index, player)
-	
-	
+
+
 func move(from_container: ItemContainer, from_index: int, to_container: ItemContainer, to_index: int, player: Node2D):
 	# check if we picked up an item from the ground (pickup container -> whatever container)
 	var from_item: ItemInstance = null
 	if from_container.container_name == ContainerName.PICKUPS and to_container.container_name != ContainerName.PICKUPS:
-		var inst: ItemInstance = from_container.get_item(from_index)
+		var inst: ItemInstance = from_container.get_item_instance(from_index)
 		from_item = GroundItems.take(inst.uid) # delete ground item before we put it into the other container.
 		if from_item == null:
 			push_error("Ground item doesnt exist")
 	else:
-		from_item = from_container.get_item(from_index)
+		from_item = from_container.get_item_instance(from_index)
 	if from_item == null: return
 
-	var to_item: ItemInstance = to_container.get_item(to_index)
+	var to_item: ItemInstance = to_container.get_item_instance(to_index)
 
 	# check if we are dropping an item (whatever container -> pickup container)
 	if from_container.container_name != ContainerName.PICKUPS and to_container.container_name == ContainerName.PICKUPS:
@@ -139,45 +140,19 @@ func move(from_container: ItemContainer, from_index: int, to_container: ItemCont
 			from_item.quantity -= move_amount
 
 			if from_item.quantity <= 0:
-				from_container.remove(from_index)
+				from_container.remove_entirely(from_index)
 				slot_changed.emit(from_container, from_index)
 			else:
-				from_container.set_item(from_index, from_item)
+				from_container.set_item_instance(from_index, from_item)
 				slot_changed.emit(from_container, from_index)
-			to_container.set_item(to_index, to_item)
+			to_container.set_item_instance(to_index, to_item)
 			slot_changed.emit(to_container, to_index)
 			return
 
 	#swap
-	from_container.set_item(from_index, to_item)
-	to_container.set_item(to_index, from_item)
+	from_container.set_item_instance(from_index, to_item)
+	to_container.set_item_instance(to_index, from_item)
 
-
-func add_inst(container: ItemContainer, added_inst: ItemInstance) -> bool:
-	# var cont := player_containers[container]
-	# try stacking with exisiting item
-	for i in container.get_capacity():
-		var curr_inst = container.get_item(i)
-		if curr_inst and curr_inst.data.id == added_inst.data.id and curr_inst.data.max_stack > curr_inst.quantity:
-			var space = curr_inst.data.max_stack - curr_inst.quantity
-			var moved = min(space, added_inst.quantity)
-			curr_inst.quantity += moved
-			added_inst.quantity -= moved
-			container.set_item(i, curr_inst)
-			slot_changed.emit(container, i)
-			return true
-
-
-	# try empty slot
-	for i in container.get_capacity():
-		if container.get_item(i) == null:
-			container.set_item(i, added_inst)
-			slot_changed.emit(container, i)
-			return true
-
-
-	# no space in the container
-	return false
 
 func _get_best_swap_container(from_container: ItemContainer, player: Node2D) -> ItemContainer:
 	var interaction: PlayerInteraction = _get_interaction_from_player(player)

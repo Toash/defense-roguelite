@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BuildEffect" load_steps=2 format=3 uid="uid://dcf1dp63r4r5o"]
+
+[ext_resource type="Script" uid="uid://dvveiy4hkhc6j" path="res://item/effects/scripts/build_effect.gd" id="1_50ang"]
+
+[resource]
+script = ExtResource("1_50ang")
+layer_key = 1
+metadata/_custom_type_script = "uid://dvveiy4hkhc6j"

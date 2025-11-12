@@ -11,5 +11,5 @@ func _process(delta):
     target_pos_emitted.emit(agent.target_position)
 
 
-func get_target_pos() -> Vector2:
+func get_global_mouse_pos() -> Vector2:
     return agent.target_position

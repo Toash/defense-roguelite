@@ -16,7 +16,7 @@ var spawn_node: Node2D
 
 
 var target_provider: TargetProvider
-var global_target_point: Vector2
+var global_target_position: Vector2
 var target_node: Node2D
 
 var equip_display: ItemDisplay
@@ -30,6 +30,6 @@ func _to_string() -> String:
     "\nUser node: " + str(user_node) + \
     "\nGlobal spawn point: " + str(global_spawn_point) + \
     "\nSpawn node: " + str(spawn_node) + \
-    "\nGlobal target point: " + str(global_target_point) + \
+    "\nGlobal target point: " + str(global_target_position) + \
     "\nEquip display: " + str(equip_display) + \
     "\nFlipped: " + str(flipped)

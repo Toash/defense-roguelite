@@ -20,7 +20,7 @@ func apply(context: ItemContext):
 	
 	context.spawn_node.add_child.call_deferred(melee_inst)
 	melee_inst.position = Vector2.ZERO
-	melee_inst.look_at(context.global_target_point)
+	melee_inst.look_at(context.global_target_position)
 
 
 	melee_inst.play(context, context.flipped)

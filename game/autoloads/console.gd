@@ -19,11 +19,15 @@ func _ready() -> void:
 	input.text_submitted.connect(_handle_console_input)
 	input.gui_input.connect(_on_input_gui)
 
-	_register_command("spawn_item", func(item_name, x, y):
+	_register_command("spawn_item_id", func(id, x, y):
+		GroundItems.spawn_by_id(int(id), 1, Vector2(int(x), int(y)))
+		)
+
+	_register_command("spawn_item_name", func(item_name, x, y):
 		GroundItems.spawn_by_name(item_name, 1, Vector2(int(x), int(y)))
 		)
 
-	_register_command("spawn_item_here", func(item_name):
+	_register_command("spawn_item_here_name", func(item_name):
 		GroundItems.spawn_by_name_on_player(item_name, 1)
 		)
 

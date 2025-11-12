@@ -8,14 +8,19 @@ class_name ItemUI
 # @export var icon: TextureRect
 @export var count: Label
 
+var slot: Slot
 var inst: ItemInstance = null
 
 # var draggable = true
 
 func _ready() -> void:
-	# mouse_entered.connect(_on_mouse_entered)
-	# mouse_exited.connect(_on_mouse_exited)
-	pass
+	slot = get_parent() as Slot
+	ItemService.slot_changed.connect(_on_slot_changed)
+
+
+func _on_slot_changed(container: ItemContainer, index: int):
+	if slot.container == container and slot.slot_index == index:
+		count.text = str(inst.quantity)
 
 # returns data that can be dragged from current control.
 func _get_drag_data(at_position: Vector2) -> Variant:
@@ -25,7 +30,7 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 
 	var data := {
 		"inst": inst,
-		"from_slot": get_parent() as Slot,
+		"from_slot": slot
 		}
 
 	var preview = TextureRect.new()

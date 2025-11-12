@@ -15,7 +15,7 @@ func _process(delta):
 	mouse_local_direction.emit(dir)
 	target_pos_emitted.emit(mouse_pos)
 
-func get_target_pos() -> Vector2:
+func get_global_mouse_pos() -> Vector2:
 	var mouse_pos: Vector2 = get_global_mouse_position()
-	print(mouse_pos)
+	# print(mouse_pos)
 	return mouse_pos

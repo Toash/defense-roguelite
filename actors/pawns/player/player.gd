@@ -9,6 +9,7 @@ class_name Player
 @export_group("Containers")
 @export var inventory: ItemContainer
 @export var hotbar: ItemContainer
+@export var hotbar_equipped_inst: HotbarEquippedInst
 @export var pickups: ItemContainer
 
 
@@ -63,6 +64,8 @@ func get_pickups() -> ItemContainer:
 	return pickups
 func get_hotbar() -> ItemContainer:
 	return hotbar
+func get_hotbar_equipped_inst() -> HotbarEquippedInst:
+	return hotbar_equipped_inst
 func get_hotbar_input() -> HotbarInput:
 	return hotbar_input
 func get_world_container_input() -> WorldContainerInput:

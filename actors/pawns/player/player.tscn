@@ -55,13 +55,14 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_icg72"]
 radius = 422.01895
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "pickups", "health", "thirst", "hunger", "hotbar_input", "world_container_input", "context_input") groups=["persist", "player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "hotbar_equipped_inst", "pickups", "health", "thirst", "hunger", "hotbar_input", "world_container_input", "context_input") groups=["persist", "player"]]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_onrkg")
 speed = 500
 inventory = NodePath("Containers/Inventory")
 hotbar = NodePath("Containers/Hotbar")
+hotbar_equipped_inst = NodePath("HotbarEquippedInst")
 pickups = NodePath("Containers/Pickups")
 health = NodePath("Health")
 thirst = NodePath("Stats/Thirst")
@@ -254,7 +255,7 @@ metadata/_custom_type_script = "uid://bbp3ruk8jvfsw"
 [connection signal="mouse_position" from="Inputs/MouseInput" to="CharacterSprite" method="_set_target"]
 [connection signal="mouse_position" from="Inputs/MouseInput" to="Items/ItemDisplay" method="_update_target"]
 [connection signal="use_equipment" from="Inputs/EquipmentInput" to="Items/Equipment" method="use"]
-[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_left_hand"]
 [connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
-[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_right_hand"]
+[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_left_hand"]
 [connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_left_hand"]
+[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_right_hand"]

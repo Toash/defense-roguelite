@@ -77,5 +77,5 @@ func _draw_slot(i: int):
 
 	if i < 0 or i >= container.get_capacity():
 		return
-	var inst: ItemInstance = container.get_item(i)
+	var inst: ItemInstance = container.get_item_instance(i)
 	_slots[i].set_slot_item(inst)

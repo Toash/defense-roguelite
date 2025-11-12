@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("2_1reje")
-id = 2
+id = 100
 display_name = "Knife"
 description = "stabby thing"
 max_stack = 1

@@ -13,6 +13,26 @@ Daytime: Discovery / smaller combat encounters
 Nighttime: Defense
 
 
+Resources
+    Weapons
+        ammo
+    Building items
+        wood?
+    Blueprints?
+        Defenses???
+
+Nightime
+    Just spawn zombies..
+    
+
+
+Defenses
+
+
+Night
+
+
+
 
 NPC (non-zombie):
 Raiders

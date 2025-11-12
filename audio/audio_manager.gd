@@ -18,6 +18,10 @@ extends Node
 @export var wood_door_close: Array[AudioStream]
 
 
+@export_group("Building")
+@export var placeholder_place: Array[AudioStream]
+
+
 enum KEY {
 	NO_SOUND,
 	STEP_GRASS,
@@ -31,6 +35,9 @@ enum KEY {
 
 	DOOR_WOOD_OPEN,
 	DOOR_WOOD_CLOSE,
+
+
+	BUILDING_PLACEHOLDER
 	}
 
 func play(stream: AudioStream, position: Vector2, bus := "Master") -> void:
@@ -65,6 +72,9 @@ func play_key(key: KEY, position: Vector2, bus := "Master") -> void:
 			streams = wood_door_open
 		KEY.DOOR_WOOD_CLOSE:
 			streams = wood_door_close
+
+		KEY.BUILDING_PLACEHOLDER:
+			streams = placeholder_place
 		_:
 			push_error("Invalid key!")
 			

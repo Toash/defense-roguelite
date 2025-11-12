@@ -1,6 +1,6 @@
 extends Resource
 
-#repreents an instasnce of item data
+#ingame instance of item data
 class_name ItemInstance
 
 @export var uid: String
@@ -10,7 +10,6 @@ class_name ItemInstance
 var last_used_time: float = -1
 
 
-# constructor
 func _init(d: ItemData = null, q := 1):
 	uid = uuid.v4()
 	data = d
@@ -23,11 +22,19 @@ func use(ctx: ItemContext):
 
 	data.apply_effects(ctx)
 	if data.consume_on_use:
-		# assuming it is in hotbar
-		# TODO: just emit a signal
-		var hotbar: ItemContainer = ItemService.player_containers[ItemService.ContainerName.HOTBAR]
-		var inst_index = hotbar._inst_uid_to_slot[uid]
-		hotbar.remove(inst_index)
+		print("trying to consume the item instance")
+
+		var player: Player = ctx.user_node as Player
+		if player:
+			var hotbar_equipped_inst: HotbarEquippedInst = player.get_hotbar_equipped_inst()
+			var hotbar: ItemContainer = player.get_hotbar()
+			if hotbar_equipped_inst == null:
+				push_error("Item Instance: HotbarEquippedInstance does not exist on the player!")
+			if hotbar == null:
+				push_error("Item Instance: Hotbar does not exist on the player!")
+
+			hotbar.remove_by(hotbar_equipped_inst.get_equipped_index(), 1)
+		
 
 	last_used_time = 0
 

@@ -10,8 +10,10 @@
 [ext_resource type="TileSet" uid="uid://dbtkbyo4n77qy" path="res://world/tilesets/walls.tres" id="9_ov2xu"]
 [ext_resource type="TileSet" uid="uid://kp24hb4w12of" path="res://world/tilesets/interactables.tres" id="10_mad0u"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("interactable_tiles") groups=["world"]]
+[node name="World" type="Node2D" node_paths=PackedStringArray("ground_tiles", "wall_tiles", "interactable_tiles") groups=["world"]]
 script = ExtResource("1_4papg")
+ground_tiles = NodePath("Tiles/GroundTiles")
+wall_tiles = NodePath("Tiles/WallTiles")
 interactable_tiles = NodePath("Tiles/InteractableTiles")
 
 [node name="Player" parent="." instance=ExtResource("1_fyhu2")]
