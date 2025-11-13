@@ -5,7 +5,6 @@ class_name ItemData
 
 @export var id: int
 
-
 @export_group("Inventory")
 @export var display_name: String
 @export var description: String

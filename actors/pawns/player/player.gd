@@ -44,7 +44,6 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if Console.input.has_focus(): return
 
-
 	input_vector = Vector2.ZERO
 	if Input.is_action_pressed("up"):
 		input_vector.y -= 1

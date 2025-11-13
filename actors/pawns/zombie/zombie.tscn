@@ -173,11 +173,11 @@ script = ExtResource("23_cthrv")
 agent = NodePath("../NavigationAgent2D")
 metadata/_custom_type_script = "uid://bnk868k5qp3nb"
 
-[connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
+[connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]
 [connection signal="target_emitted" from="ZombieStateMachine/Chase" to="ZombieArms" method="_set_target"]
-[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_right_hand_pos"]
 [connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_left_hand_pos"]
+[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_right_hand_pos"]
 [connection signal="died" from="Health" to="ZombieDeath" method="_on_death"]
 [connection signal="left_hand_pos_emitted" from="ZombieArms" to="CharacterSprite" method="_set_left_hand_pos"]
 [connection signal="right_hand_pos_emitted" from="ZombieArms" to="CharacterSprite" method="_set_right_hand_pos"]

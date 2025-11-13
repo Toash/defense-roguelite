@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=36 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
@@ -27,6 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://d4cb26dn2ofoj" path="res://audio/audioaudio/footsteps/grass_3.mp3" id="24_qct7d"]
 [ext_resource type="Script" uid="uid://dfsam3b8d27hq" path="res://input/equipment_input.gd" id="24_yeioo"]
 [ext_resource type="Script" uid="uid://ctutx861f7ofh" path="res://input/context_input.gd" id="26_h0lia"]
+[ext_resource type="Script" uid="uid://c8vlygcerjqvb" path="res://actors/pawns/generic/hurt_sound.gd" id="28_yr7qf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(25, 27)
@@ -247,6 +248,12 @@ script = ExtResource("24_nsxbo")
 hotbar_container = NodePath("../Containers/Hotbar")
 hotbar_input = NodePath("../Inputs/HotbarInput")
 metadata/_custom_type_script = "uid://bbp3ruk8jvfsw"
+
+[node name="HurtSound" type="Node2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("28_yr7qf")
+health = NodePath("../Health")
+audio_key = 4
+metadata/_custom_type_script = "uid://c8vlygcerjqvb"
 
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]
