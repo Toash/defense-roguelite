@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnpygi6xo1s0n"]
+
+[ext_resource type="Script" uid="uid://dsxsaqwksga3x" path="res://actors/nexus/nexus.gd" id="1_wx721"]
+[ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_w52sr"]
+
+[node name="Nexus" type="Node2D"]
+script = ExtResource("1_wx721")
+metadata/_custom_type_script = "uid://dsxsaqwksga3x"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -2)
+scale = Vector2(0.49951172, 0.53222656)
+texture = ExtResource("2_w52sr")

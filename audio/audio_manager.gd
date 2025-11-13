@@ -86,6 +86,8 @@ func play_key(key: KEY, position: Vector2, bus := "Master") -> void:
 		_:
 			push_error("Invalid key!")
 			
+
+	if streams.size() == 0: return
 	var stream: AudioStream = streams[randi() % streams.size()]
 		
 	var p := AudioStreamPlayer2D.new()

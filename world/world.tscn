@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=13 format=4 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="Script" uid="uid://csd4ncy3jgem8" path="res://world/world.gd" id="1_4papg"]
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/pawns/player/player.tscn" id="1_fyhu2"]
@@ -10,6 +10,8 @@
 [ext_resource type="TileSet" uid="uid://dbtkbyo4n77qy" path="res://world/tilesets/walls.tres" id="9_ov2xu"]
 [ext_resource type="PackedScene" uid="uid://dp5j6juluiqyu" path="res://actors/defenses/spike.tscn" id="10_fyhu2"]
 [ext_resource type="TileSet" uid="uid://kp24hb4w12of" path="res://world/tilesets/interactables.tres" id="10_mad0u"]
+[ext_resource type="PackedScene" uid="uid://dnpygi6xo1s0n" path="res://actors/nexus/nexus.tscn" id="11_ov2xu"]
+[ext_resource type="PackedScene" uid="uid://blqvvu0ytchcd" path="res://actors/pawns/zombie/zombie.tscn" id="12_mad0u"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("ground_tiles", "wall_tiles", "interactable_tiles") groups=["world"]]
 script = ExtResource("1_4papg")
@@ -48,7 +50,7 @@ collision_enabled = false
 
 [node name="WallTiles" type="TileMapLayer" parent="Tiles"]
 z_index = -1
-tile_map_data = PackedByteArray("AAD6//z/AAABAAAAAAD5//z/AAABAAAAAAD5//3/AAABAAAAAAD5//7/AAABAAAAAAD5////AAABAAAAAAD5/wAAAAABAAAAAAD5/wEAAAABAAAAAAD5/wIAAAABAAAAAAD5/wMAAAABAAAAAAD9//r/AAABAAAAAAD///r/AAABAAAAAAD///z/AAABAAAAAAD9//z/AAABAAAAAAA=")
+tile_map_data = PackedByteArray("AAD6//z/AAABAAAAAAD5//z/AAABAAAAAAD5//3/AAABAAAAAAD5//7/AAABAAAAAAD5////AAABAAAAAAD5/wAAAAABAAAAAAD5/wEAAAABAAAAAAD5/wIAAAABAAAAAAD5/wMAAAABAAAAAAD9//r/AAABAAAAAAD///r/AAABAAAAAAD///z/AAABAAAAAAD9//z/AAABAAAAAAD5/wQAAAABAAAAAAD5/wUAAAABAAAAAAD6/wUAAAABAAAAAAD7/wUAAAABAAAAAAD8/wUAAAABAAAAAAD9/wUAAAABAAAAAAD+/wUAAAABAAAAAAAAAPz/AAABAAAAAAABAPz/AAABAAAAAAACAPz/AAABAAAAAAADAPz/AAABAAAAAAAEAPz/AAABAAAAAAAEAP3/AAABAAAAAAAEAP7/AAABAAAAAAAEAP//AAABAAAAAAAEAAAAAAABAAAAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAEAAQAAAABAAAAAAAEAAUAAAABAAAAAAADAAUAAAABAAAAAAACAAUAAAABAAAAAAABAAUAAAABAAAAAAAAAAUAAAABAAAAAAD7//z/AAABAAAAAAD8//z/AAABAAAAAAD+//z/AAABAAAAAAA=")
 tile_set = ExtResource("9_ov2xu")
 
 [node name="InteractableTiles" type="TileMapLayer" parent="Tiles"]
@@ -57,3 +59,11 @@ tile_set = ExtResource("10_mad0u")
 
 [node name="Spike" parent="." instance=ExtResource("10_fyhu2")]
 position = Vector2(-203, 167)
+
+[node name="Nexus" parent="." groups=["nexus"] instance=ExtResource("11_ov2xu")]
+position = Vector2(-119, 71)
+
+[node name="Zombies" type="Node2D" parent="."]
+
+[node name="Zombie" parent="Zombies" instance=ExtResource("12_mad0u")]
+position = Vector2(471, -376)

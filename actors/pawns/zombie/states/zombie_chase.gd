@@ -8,8 +8,7 @@ signal target_lost
 @export var chase_speed = 200
 @export var character: CharacterBody2D
 
-@export var vision: Area2D
-@export var raycast: RayCast2D
+@export var obstruction_raycast: RayCast2D
 
 @export var nav: NavigationAgent2D
 
@@ -29,14 +28,13 @@ func state_enter():
 func state_physics_update(delta: float):
 	if active == false: return
 
-	
-	raycast.target_position = character.to_local(target.reference.global_position)
+	obstruction_raycast.target_position = obstruction_raycast.to_local(target.reference.global_position)
 
-	if raycast.get_collider():
+	if obstruction_raycast.get_collider():
 		retries += 1
 		if retries > out_of_sight_retries:
 			retries = 0
-			target.last_position = raycast.get_collision_point()
+			target.last_position = obstruction_raycast.get_collision_point()
 			transitioned.emit(self, "last_seen")
 		else:
 			return

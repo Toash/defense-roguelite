@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://blqvvu0ytchcd"]
+[gd_scene load_steps=30 format=3 uid="uid://blqvvu0ytchcd"]
 
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="2_ixsl6"]
 [ext_resource type="Script" uid="uid://dt4kadfyw2ywh" path="res://actors/pawns/zombie/zombie_target.gd" id="4_ymihc"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/pawns/character_sprite.tscn" id="9_culwy"]
 [ext_resource type="Script" uid="uid://dn7fydgbbk3wg" path="res://actors/pawns/zombie/zombie_death.gd" id="9_oyhgy"]
 [ext_resource type="Script" uid="uid://bdpo0eyqlq8re" path="res://actors/pawns/zombie/states/zombie_attack.gd" id="9_ubgnx"]
+[ext_resource type="Script" uid="uid://cjnn80jlwilpx" path="res://actors/pawns/zombie/states/zombie_nexus.gd" id="10_drpw1"]
 [ext_resource type="Texture2D" uid="uid://doueacum5bmne" path="res://actors/pawns/sprites/head/head_zombie_1.png" id="10_mmehc"]
 [ext_resource type="Texture2D" uid="uid://diqa5jjgkpomp" path="res://actors/pawns/sprites/torso/torso_zombie.png" id="11_eew4g"]
 [ext_resource type="Texture2D" uid="uid://bcrncjn0sri3i" path="res://actors/pawns/sprites/hand/hands_zombie_1.png" id="12_b6tq7"]
@@ -23,6 +24,8 @@
 [ext_resource type="Script" uid="uid://c816dagnqn6re" path="res://actors/pawns/zombie/zombie_item.gd" id="20_cthrv"]
 [ext_resource type="Resource" uid="uid://6rsgvhonqx4b" path="res://item/items/zombie/zombie_attack.tres" id="21_cthrv"]
 [ext_resource type="Script" uid="uid://bnk868k5qp3nb" path="res://actors/pawns/nav_target_provider.gd" id="23_cthrv"]
+[ext_resource type="Script" uid="uid://c8vlygcerjqvb" path="res://actors/pawns/generic/hurt_sound.gd" id="24_41tli"]
+[ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/player_tracker.gd" id="26_buy8w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_roy8y"]
 radius = 433.029
@@ -35,7 +38,7 @@ size = Vector2(50, 81)
 
 [node name="Zombie" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 0
+collision_mask = 2
 
 [node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier") instance=ExtResource("9_culwy")]
 target_supplier = NodePath("../NavTargetProvider")
@@ -63,33 +66,30 @@ shape = SubResource("CircleShape2D_jmu02")
 
 [node name="ZombieStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_ixsl6")
-initial_state = NodePath("Wander")
+initial_state = NodePath("Nexus")
 metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 
-[node name="Wander" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("wander_timer", "character", "vision", "nav", "target", "raycast")]
+[node name="Wander" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("wander_timer", "player_tracker", "character", "nav", "target")]
 script = ExtResource("6_cthrv")
 wander_timer = NodePath("../../WanderTimer")
+player_tracker = NodePath("../../PlayerTracker")
 character = NodePath("../..")
-vision = NodePath("../../Vision")
 nav = NodePath("../../NavigationAgent2D")
 target = NodePath("../../ZombieTarget")
-raycast = NodePath("../../ObstructionRaycast")
 
-[node name="Chase" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "vision", "raycast", "nav", "target")]
+[node name="Chase" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "obstruction_raycast", "nav", "target")]
 script = ExtResource("7_qpxon")
 chase_speed = 130
 character = NodePath("../..")
-vision = NodePath("../../Vision")
-raycast = NodePath("../../ObstructionRaycast")
+obstruction_raycast = NodePath("../../ObstructionRaycast")
 nav = NodePath("../../NavigationAgent2D")
 target = NodePath("../../ZombieTarget")
 
-[node name="Last_Seen" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "vision", "raycast", "nav", "target")]
+[node name="Last_Seen" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "player_tracker", "nav", "target")]
 script = ExtResource("8_uotjo")
 speed = 100
 character = NodePath("../..")
-vision = NodePath("../../Vision")
-raycast = NodePath("../../ObstructionRaycast")
+player_tracker = NodePath("../../PlayerTracker")
 nav = NodePath("../../NavigationAgent2D")
 target = NodePath("../../ZombieTarget")
 
@@ -101,12 +101,23 @@ attack_area = NodePath("../../AttackArea")
 nav = NodePath("../../NavigationAgent2D")
 target = NodePath("../../ZombieTarget")
 
+[node name="Nexus" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "nav", "player_tracker", "target")]
+script = ExtResource("10_drpw1")
+character = NodePath("../..")
+nav = NodePath("../../NavigationAgent2D")
+player_tracker = NodePath("../../PlayerTracker")
+target = NodePath("../../ZombieTarget")
+
 [node name="ZombieTarget" type="Node2D" parent="."]
 script = ExtResource("4_ymihc")
 
 [node name="WanderTimer" type="Timer" parent="."]
 wait_time = 2.7
 autostart = true
+
+[node name="PlayerRaycast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 6
 
 [node name="ObstructionRaycast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
@@ -172,6 +183,18 @@ script = ExtResource("18_ubgnx")
 script = ExtResource("23_cthrv")
 agent = NodePath("../NavigationAgent2D")
 metadata/_custom_type_script = "uid://bnk868k5qp3nb"
+
+[node name="HurtSound" type="Node2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("24_41tli")
+health = NodePath("../Health")
+audio_key = 4
+metadata/_custom_type_script = "uid://c8vlygcerjqvb"
+
+[node name="PlayerTracker" type="Node2D" parent="." node_paths=PackedStringArray("vision", "raycast")]
+script = ExtResource("26_buy8w")
+vision = NodePath("../Vision")
+raycast = NodePath("../PlayerRaycast")
+metadata/_custom_type_script = "uid://dg8qbly1ndg5w"
 
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]
