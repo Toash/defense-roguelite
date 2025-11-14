@@ -1,53 +1,64 @@
 extends State
 
 
-@export var wander_speed = 50
-@export var wander_timer: Timer
-@export var wander_radius = 400
+@export var wander_speed = 80
+
+@export var wander_radius: float = 250
+
+@export var wander_interval_default: float = 10
+@export var wander_interval_random: float = 4
 
 @export var player_tracker: PlayerTracker
 @export var character: CharacterBody2D
-@export var nav: NavigationAgent2D
+@export var tile_pathfind: TilePathfind
 
 @export var target: ZombieTarget
 
+var wander_interval: float
+
+
 var wander_point: Vector2
 var rng = RandomNumberGenerator.new()
+var t: float = 0
 
 
 var active = false
 
 
-func _ready() -> void:
-	wander_point = character.global_position
-	wander_timer.timeout.connect(_on_timeout)
-	
-
 func state_enter():
 	active = true
+
+	wander_point = character.global_position
+	wander_interval = wander_interval_default + rng.randf_range(-wander_interval_random, wander_interval_random)
+
 	player_tracker.found_player.connect(_on_found_player)
+	tile_pathfind.enable()
+	tile_pathfind.set_speed(wander_speed)
+
 
 func state_physics_update(delta: float):
 	if active == false: return
-
-	if !nav.is_target_reached():
-		var next_point: Vector2 = nav.get_next_path_position()
-		var normal_dir = (next_point - character.global_position).normalized()
-
-
-		character.velocity = normal_dir * wander_speed
-		character.move_and_slide()
+	t += delta
+	if t > wander_interval:
+		_on_timeout()
+		t = 0
+		wander_interval = wander_interval_default + rng.randf_range(-wander_interval_random, wander_interval_random)
 	
 
 func state_exit():
 	active = false
 	player_tracker.found_player.disconnect(_on_found_player)
+	tile_pathfind.disable()
 
 
 func _on_timeout():
-	var new_wander_point = Vector2(character.global_position.x + rng.randf_range(-wander_radius, wander_radius), character.global_position.y + rng.randf_range(-wander_radius, wander_radius))
-	nav.target_position = new_wander_point
+	var rand_x = rng.randf_range(-wander_radius, wander_radius)
+	var rand_y = rng.randf_range(-wander_radius, wander_radius)
+
+	var new_wander_point = Vector2(character.global_position.x + rand_x, character.global_position.y + rand_y)
+	print(new_wander_point)
+	tile_pathfind.set_target(new_wander_point)
 
 func _on_found_player(player: Player):
-		target.reference = player
-		transitioned.emit(self, "chase")
+	target.reference = player
+	transitioned.emit(self, "chase")

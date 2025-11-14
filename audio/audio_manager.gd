@@ -45,16 +45,41 @@ enum KEY {
 	BUILDING_PLACEHOLDER
 	}
 
+
+const POOL_SIZE := 40
+var _players: Array[AudioStreamPlayer2D]
+
+# dont play the same sound key inbetween these intervals
+const SAME_SOUND_COOLDOWN := 0.1
+var _time_since_played_sound: Dictionary[int, float]
+
+func _ready():
+	for key in KEY.values():
+		_time_since_played_sound[key] = 0
+	for i in POOL_SIZE:
+		var p := AudioStreamPlayer2D.new()
+		p.autoplay = false
+		add_child(p)
+		_players.append(p)
+
+func _process(delta):
+	for key in _time_since_played_sound:
+		_time_since_played_sound[key] += delta
+
+
 func play(stream: AudioStream, position: Vector2, bus := "Master") -> void:
-	var p := AudioStreamPlayer2D.new()
-	add_child(p)
+	# var p := AudioStreamPlayer2D.new()
+	var p := _get_free_player()
+	if p == null: return
 	p.bus = bus
 	p.stream = stream
 	p.global_position = position
-	p.finished.connect(p.queue_free)
 	p.play()
 
 func play_key(key: KEY, position: Vector2, bus := "Master") -> void:
+	if _time_since_played_sound[key] < SAME_SOUND_COOLDOWN:
+		return
+
 	var streams: Array[AudioStream]
 	match key:
 		KEY.NO_SOUND:
@@ -90,10 +115,13 @@ func play_key(key: KEY, position: Vector2, bus := "Master") -> void:
 	if streams.size() == 0: return
 	var stream: AudioStream = streams[randi() % streams.size()]
 		
-	var p := AudioStreamPlayer2D.new()
-	add_child(p)
-	p.bus = bus
-	p.stream = stream
-	p.global_position = position
-	p.finished.connect(p.queue_free)
-	p.play()
+	_time_since_played_sound[key] = 0
+	
+	play(stream, position, bus)
+
+
+func _get_free_player() -> AudioStreamPlayer2D:
+	for p in _players:
+		if not p.playing:
+			return p
+	return null

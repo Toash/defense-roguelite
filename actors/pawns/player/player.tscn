@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=33 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
@@ -21,10 +21,7 @@
 [ext_resource type="Script" uid="uid://dflsf7ovo0jqw" path="res://item/generic/item_display.gd" id="20_nsxbo"]
 [ext_resource type="Texture2D" uid="uid://c8u4rr4xtq3tj" path="res://actors/pawns/player/spot_light.png" id="20_otn2r"]
 [ext_resource type="Script" uid="uid://c8dnwtjdg5wbq" path="res://audio/footsteps.gd" id="21_ctwkf"]
-[ext_resource type="AudioStream" uid="uid://cytdvns5e1i4a" path="res://audio/audioaudio/footsteps/grass_1.mp3" id="22_nsxbo"]
-[ext_resource type="AudioStream" uid="uid://dy7u36uymvova" path="res://audio/audioaudio/footsteps/grass_2.mp3" id="23_yeioo"]
 [ext_resource type="Script" uid="uid://bbp3ruk8jvfsw" path="res://actors/pawns/player/equipped_hotbar_inst.gd" id="24_nsxbo"]
-[ext_resource type="AudioStream" uid="uid://d4cb26dn2ofoj" path="res://audio/audioaudio/footsteps/grass_3.mp3" id="24_qct7d"]
 [ext_resource type="Script" uid="uid://dfsam3b8d27hq" path="res://input/equipment_input.gd" id="24_yeioo"]
 [ext_resource type="Script" uid="uid://ctutx861f7ofh" path="res://input/context_input.gd" id="26_h0lia"]
 [ext_resource type="Script" uid="uid://c8vlygcerjqvb" path="res://actors/pawns/generic/hurt_sound.gd" id="28_yr7qf"]
@@ -71,6 +68,7 @@ hunger = NodePath("Stats/Hunger")
 hotbar_input = NodePath("Inputs/HotbarInput")
 world_container_input = NodePath("Inputs/WorldContainerInput")
 context_input = NodePath("Inputs/ContextInput")
+faction = 1
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -191,13 +189,6 @@ script = ExtResource("7_boad6")
 drain_rate = 0.02
 metadata/_custom_type_script = "uid://dgkass0sic6wa"
 
-[node name="Footsteps" type="AudioStreamPlayer2D" parent="." node_paths=PackedStringArray("character_sprite")]
-bus = &"player"
-script = ExtResource("21_ctwkf")
-character_sprite = NodePath("../CharacterSprite")
-clips = Array[AudioStream]([ExtResource("22_nsxbo"), ExtResource("23_yeioo"), ExtResource("24_qct7d")])
-metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
-
 [node name="Items" type="Node2D" parent="."]
 
 [node name="Equipment" type="Node" parent="Items" node_paths=PackedStringArray("user", "inst_provider", "target_provider", "item_display", "character_sprite")]
@@ -255,6 +246,11 @@ health = NodePath("../Health")
 audio_key = 4
 metadata/_custom_type_script = "uid://c8vlygcerjqvb"
 
+[node name="Footsteps" type="Node2D" parent="." node_paths=PackedStringArray("character_sprite")]
+script = ExtResource("21_ctwkf")
+character_sprite = NodePath("../CharacterSprite")
+metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
+
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]
 [connection signal="origin_position_emitted" from="Items/ItemDisplay" to="CharacterSprite" method="_set_right_hand_pos"]
@@ -262,7 +258,7 @@ metadata/_custom_type_script = "uid://c8vlygcerjqvb"
 [connection signal="mouse_position" from="Inputs/MouseInput" to="CharacterSprite" method="_set_target"]
 [connection signal="mouse_position" from="Inputs/MouseInput" to="Items/ItemDisplay" method="_update_target"]
 [connection signal="use_equipment" from="Inputs/EquipmentInput" to="Items/Equipment" method="use"]
-[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
 [connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_left_hand"]
-[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_left_hand"]
+[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
 [connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_right_hand"]
+[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_left_hand"]

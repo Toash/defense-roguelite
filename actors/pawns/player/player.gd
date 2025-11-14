@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Pawn
 
 class_name Player
 
@@ -17,7 +17,7 @@ var state = "idle"
 var input_vector = Vector2.ZERO
 
 @export_group("Stats")
-@export var health: Health
+# @export var health: Health
 @export var thirst: DrainingStat
 @export var hunger: DrainingStat
 

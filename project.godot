@@ -34,6 +34,10 @@ ActorRegistry="*res://actors/autoloads/actor_registry.tscn"
 ActorSpawner="*res://actors/autoloads/actor_spawner.gd"
 ContextManager="*res://ui/autoloads/context_manager.tscn"
 
+[debug]
+
+gdscript/warnings/enable=false
+
 [display]
 
 window/size/viewport_width=1920
@@ -42,7 +46,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/uuid/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/fancy_folder_colors/plugin.cfg", "res://addons/uuid/plugin.cfg")
 
 [file_customization]
 

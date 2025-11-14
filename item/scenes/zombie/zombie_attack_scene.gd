@@ -63,5 +63,13 @@ func _play():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == user:
 		return
+
+	var pawn: Pawn = body as Pawn
+	if pawn == null:
+		return
+
+	if pawn.faction == context.user_node.faction:
+		return
+		
 	var health: Health = body.get_node("Health") as Health
 	health.damage(damage)

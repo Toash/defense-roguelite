@@ -1,5 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://blqvvu0ytchcd"]
+[gd_scene load_steps=29 format=3 uid="uid://blqvvu0ytchcd"]
 
+[ext_resource type="Script" uid="uid://b0o2o27qxmxw4" path="res://actors/pawns/generic/pawn.gd" id="1_6lqgw"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="2_ixsl6"]
 [ext_resource type="Script" uid="uid://dt4kadfyw2ywh" path="res://actors/pawns/zombie/zombie_target.gd" id="4_ymihc"]
 [ext_resource type="Script" uid="uid://cskdd0xcjjmfc" path="res://actors/pawns/zombie/states/zombie_wander.gd" id="6_cthrv"]
@@ -15,9 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://diqa5jjgkpomp" path="res://actors/pawns/sprites/torso/torso_zombie.png" id="11_eew4g"]
 [ext_resource type="Texture2D" uid="uid://bcrncjn0sri3i" path="res://actors/pawns/sprites/hand/hands_zombie_1.png" id="12_b6tq7"]
 [ext_resource type="Script" uid="uid://c8dnwtjdg5wbq" path="res://audio/footsteps.gd" id="13_mmehc"]
-[ext_resource type="AudioStream" uid="uid://cytdvns5e1i4a" path="res://audio/audioaudio/footsteps/grass_1.mp3" id="14_xsj0l"]
-[ext_resource type="AudioStream" uid="uid://dy7u36uymvova" path="res://audio/audioaudio/footsteps/grass_2.mp3" id="15_mr8wc"]
-[ext_resource type="AudioStream" uid="uid://d4cb26dn2ofoj" path="res://audio/audioaudio/footsteps/grass_3.mp3" id="16_ubgnx"]
 [ext_resource type="Script" uid="uid://b7nergdxei2p6" path="res://actors/pawns/zombie/zombie_arms.gd" id="18_ubgnx"]
 [ext_resource type="Script" uid="uid://kesirm75pc1q" path="res://item/generic/equipment.gd" id="18_xnimh"]
 [ext_resource type="Script" uid="uid://dflsf7ovo0jqw" path="res://item/generic/item_display.gd" id="19_ld5a4"]
@@ -26,19 +24,22 @@
 [ext_resource type="Script" uid="uid://bnk868k5qp3nb" path="res://actors/pawns/nav_target_provider.gd" id="23_cthrv"]
 [ext_resource type="Script" uid="uid://c8vlygcerjqvb" path="res://actors/pawns/generic/hurt_sound.gd" id="24_41tli"]
 [ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/player_tracker.gd" id="26_buy8w"]
+[ext_resource type="Script" uid="uid://dbgqumwhqtmf6" path="res://actors/pawns/generic/tile_pathfind.gd" id="27_sonq4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_roy8y"]
-radius = 433.029
+radius = 376.0053
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmu02"]
-radius = 176.026
+radius = 120.203995
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fose"]
-size = Vector2(50, 81)
+size = Vector2(36, 72)
 
 [node name="Zombie" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 4
+script = ExtResource("1_6lqgw")
+faction = 2
 
 [node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier") instance=ExtResource("9_culwy")]
 target_supplier = NodePath("../NavTargetProvider")
@@ -69,12 +70,11 @@ script = ExtResource("2_ixsl6")
 initial_state = NodePath("Nexus")
 metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 
-[node name="Wander" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("wander_timer", "player_tracker", "character", "nav", "target")]
+[node name="Wander" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("player_tracker", "character", "tile_pathfind", "target")]
 script = ExtResource("6_cthrv")
-wander_timer = NodePath("../../WanderTimer")
 player_tracker = NodePath("../../PlayerTracker")
 character = NodePath("../..")
-nav = NodePath("../../NavigationAgent2D")
+tile_pathfind = NodePath("../../TilePathfind")
 target = NodePath("../../ZombieTarget")
 
 [node name="Chase" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "obstruction_raycast", "nav", "target")]
@@ -101,19 +101,14 @@ attack_area = NodePath("../../AttackArea")
 nav = NodePath("../../NavigationAgent2D")
 target = NodePath("../../ZombieTarget")
 
-[node name="Nexus" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "nav", "player_tracker", "target")]
+[node name="Nexus" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("tile_pathfind", "player_tracker", "zombie_target")]
 script = ExtResource("10_drpw1")
-character = NodePath("../..")
-nav = NodePath("../../NavigationAgent2D")
+tile_pathfind = NodePath("../../TilePathfind")
 player_tracker = NodePath("../../PlayerTracker")
-target = NodePath("../../ZombieTarget")
+zombie_target = NodePath("../../ZombieTarget")
 
 [node name="ZombieTarget" type="Node2D" parent="."]
 script = ExtResource("4_ymihc")
-
-[node name="WanderTimer" type="Timer" parent="."]
-wait_time = 2.7
-autostart = true
 
 [node name="PlayerRaycast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
@@ -131,7 +126,7 @@ state_machine = NodePath("../ZombieStateMachine")
 metadata/_custom_type_script = "uid://bbflvir0kv6hb"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -7.5)
+position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_3fose")
 
 [node name="Health" type="Node" parent="."]
@@ -139,19 +134,13 @@ script = ExtResource("8_23tyx")
 max_health = 1
 metadata/_custom_type_script = "uid://gyp8bshfrfoj"
 
-[node name="ZombieDeath" type="Node" parent="." node_paths=PackedStringArray("state_machine", "character_sprite", "state_machine_debug")]
+[node name="ZombieDeath" type="Node" parent="." node_paths=PackedStringArray("state_machine", "character_sprite", "state_machine_debug", "tile_pathfind")]
 script = ExtResource("9_oyhgy")
 state_machine = NodePath("../ZombieStateMachine")
 character_sprite = NodePath("../CharacterSprite")
 state_machine_debug = NodePath("../StateMachineDebug")
+tile_pathfind = NodePath("../TilePathfind")
 metadata/_custom_type_script = "uid://dn7fydgbbk3wg"
-
-[node name="Footsteps" type="AudioStreamPlayer2D" parent="." node_paths=PackedStringArray("character_sprite")]
-bus = &"zombie"
-script = ExtResource("13_mmehc")
-character_sprite = NodePath("../CharacterSprite")
-clips = Array[AudioStream]([ExtResource("14_xsj0l"), ExtResource("15_mr8wc"), ExtResource("16_ubgnx")])
-metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
 
 [node name="Items" type="Node2D" parent="."]
 
@@ -190,11 +179,21 @@ health = NodePath("../Health")
 audio_key = 4
 metadata/_custom_type_script = "uid://c8vlygcerjqvb"
 
-[node name="PlayerTracker" type="Node2D" parent="." node_paths=PackedStringArray("vision", "raycast")]
+[node name="PlayerTracker" type="Node2D" parent="." node_paths=PackedStringArray("vision", "player_raycast")]
 script = ExtResource("26_buy8w")
 vision = NodePath("../Vision")
-raycast = NodePath("../PlayerRaycast")
+player_raycast = NodePath("../PlayerRaycast")
 metadata/_custom_type_script = "uid://dg8qbly1ndg5w"
+
+[node name="TilePathfind" type="Node2D" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("27_sonq4")
+body = NodePath("..")
+metadata/_custom_type_script = "uid://dbgqumwhqtmf6"
+
+[node name="Footsteps" type="Node2D" parent="." node_paths=PackedStringArray("character_sprite")]
+script = ExtResource("13_mmehc")
+character_sprite = NodePath("../CharacterSprite")
+metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
 
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]

@@ -32,8 +32,13 @@ func _ready() -> void:
 		)
 
 	_register_command("spawn_actor", func(actor_name: String):
-		ActorSpawner.spawn_actor_near_player(ActorRegistry.get_key(actor_name))
+		ActorSpawner.spawn_actor_near_player(ActorRegistry.get_key(actor_name), Vector2.UP * 100)
 		)
+
+	_register_command("spawn_horde", func(amount):
+		ActorSpawner.spawn_horde(ActorRegistry.KEY.PAWNS_ZOMBIE, int(amount))
+		)
+
 
 	_register_command("items", func():
 		var items = ItemDatabase.get_all()

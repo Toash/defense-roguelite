@@ -8,6 +8,7 @@ signal target_lost
 @export var chase_speed = 200
 @export var character: CharacterBody2D
 
+
 @export var obstruction_raycast: RayCast2D
 
 @export var nav: NavigationAgent2D
@@ -15,8 +16,6 @@ signal target_lost
 
 @export var target: ZombieTarget
 
-var out_of_sight_retries = 10
-var retries = 0
 
 var active = false
 
@@ -31,13 +30,8 @@ func state_physics_update(delta: float):
 	obstruction_raycast.target_position = obstruction_raycast.to_local(target.reference.global_position)
 
 	if obstruction_raycast.get_collider():
-		retries += 1
-		if retries > out_of_sight_retries:
-			retries = 0
-			target.last_position = obstruction_raycast.get_collision_point()
-			transitioned.emit(self, "last_seen")
-		else:
-			return
+		target.last_position = obstruction_raycast.get_collision_point()
+		transitioned.emit(self, "last_seen")
 
 
 	nav.target_position = target.reference.global_position
@@ -45,11 +39,10 @@ func state_physics_update(delta: float):
 
 	var next_point: Vector2 = nav.get_next_path_position()
 	var normal_dir = (next_point - character.global_position).normalized()
+	
 
-
-	# character.velocity = normal_dir * chase_speed
+	character.velocity = normal_dir * chase_speed
 	character.move_and_collide(normal_dir * chase_speed * delta)
-	# character.move_and_slide()
 
 
 func state_exit():
