@@ -37,7 +37,7 @@ size = Vector2(36, 72)
 
 [node name="Zombie" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 0
 script = ExtResource("1_6lqgw")
 faction = 2
 
@@ -177,7 +177,7 @@ metadata/_custom_type_script = "uid://bnk868k5qp3nb"
 [node name="HurtSound" type="Node2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("24_41tli")
 health = NodePath("../Health")
-audio_key = 4
+death = 7
 metadata/_custom_type_script = "uid://c8vlygcerjqvb"
 
 [node name="PlayerTracker" type="Node2D" parent="." node_paths=PackedStringArray("vision", "player_raycast")]

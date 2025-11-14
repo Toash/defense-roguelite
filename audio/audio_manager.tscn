@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1rm4vy4whff2"]
+[gd_scene load_steps=12 format=3 uid="uid://d1rm4vy4whff2"]
 
 [ext_resource type="Script" uid="uid://bkwhxe6xctrn0" path="res://audio/audio_manager.gd" id="1_5jhky"]
 [ext_resource type="AudioStream" uid="uid://cytdvns5e1i4a" path="res://audio/audioaudio/footsteps/grass_1.mp3" id="2_vxw8f"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://ixr8e05cptj7" path="res://audio/audioaudio/zombies/zombie_bite_1.wav" id="6_i1k7u"]
 [ext_resource type="AudioStream" uid="uid://ltrjniela7pm" path="res://audio/audioaudio/door/door_open.wav" id="7_hlghp"]
 [ext_resource type="AudioStream" uid="uid://hy48jd0hs3dm" path="res://audio/audioaudio/door/door_close.wav" id="8_6wlj3"]
+[ext_resource type="AudioStream" uid="uid://6dmthwh7u5tf" path="res://audio/audioaudio/pawn/death_squish_1.mp3" id="8_oyqdx"]
 [ext_resource type="AudioStream" uid="uid://vchhhrsp46i" path="res://audio/audioaudio/building/place_thwack.wav" id="9_6wlj3"]
 
 [node name="AudioManager" type="Node"]
@@ -17,6 +18,7 @@ grass_step = Array[AudioStream]([ExtResource("2_vxw8f"), ExtResource("3_mhfhn"),
 pistol_shoot = Array[AudioStream]([ExtResource("5_mhfhn")])
 human_hurt = Array[AudioStream]([ExtResource("6_0xv67")])
 zombie_attack = Array[AudioStream]([ExtResource("6_i1k7u")])
+zombie_death = Array[AudioStream]([ExtResource("8_oyqdx")])
 wood_door_open = Array[AudioStream]([ExtResource("7_hlghp")])
 wood_door_close = Array[AudioStream]([ExtResource("8_6wlj3")])
 placeholder_place = Array[AudioStream]([ExtResource("9_6wlj3")])
