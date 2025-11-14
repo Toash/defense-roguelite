@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=13 format=4 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="Script" uid="uid://csd4ncy3jgem8" path="res://world/world.gd" id="1_4papg"]
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/pawns/player/player.tscn" id="1_fyhu2"]
@@ -10,6 +10,7 @@
 [ext_resource type="TileSet" uid="uid://dbtkbyo4n77qy" path="res://world/tilesets/walls.tres" id="9_ov2xu"]
 [ext_resource type="TileSet" uid="uid://kp24hb4w12of" path="res://world/tilesets/interactables.tres" id="10_mad0u"]
 [ext_resource type="PackedScene" uid="uid://dnpygi6xo1s0n" path="res://actors/nexus/nexus.tscn" id="11_ov2xu"]
+[ext_resource type="AudioStream" uid="uid://ce32rgxtm702s" path="res://audio/audioaudio/weather/smooth_wind.mp3" id="12_mad0u"]
 [ext_resource type="Script" uid="uid://bhr5uamvonway" path="res://actors/pawns/generic/debug_path.gd" id="13_ocfjn"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("ground_tiles", "wall_tiles", "interactable_tiles", "debug_path") groups=["world"]]
@@ -65,3 +66,12 @@ position = Vector2(-119, 71)
 [node name="DebugPath" type="Node2D" parent="."]
 script = ExtResource("13_ocfjn")
 metadata/_custom_type_script = "uid://bhr5uamvonway"
+
+[node name="Weather" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="Weather"]
+stream = ExtResource("12_mad0u")
+volume_db = -10.565
+autoplay = true
+bus = &"weather"
+parameters/looping = true

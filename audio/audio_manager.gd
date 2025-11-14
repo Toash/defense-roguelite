@@ -67,16 +67,16 @@ func _process(delta):
 		_time_since_played_sound[key] += delta
 
 
-func play(stream: AudioStream, position: Vector2, bus := "Master") -> void:
-	# var p := AudioStreamPlayer2D.new()
+func play(stream: AudioStream, volume_db: float, position: Vector2, bus := "Master") -> void:
 	var p := _get_free_player()
 	if p == null: return
 	p.bus = bus
 	p.stream = stream
+	p.volume_db = volume_db
 	p.global_position = position
 	p.play()
 
-func play_key(key: KEY, position: Vector2, bus := "Master") -> void:
+func play_key(key: KEY, volume_db: float, position: Vector2, bus := "Master") -> void:
 	if _time_since_played_sound[key] < SAME_SOUND_COOLDOWN:
 		return
 
@@ -117,7 +117,7 @@ func play_key(key: KEY, position: Vector2, bus := "Master") -> void:
 		
 	_time_since_played_sound[key] = 0
 	
-	play(stream, position, bus)
+	play(stream, volume_db, position, bus)
 
 
 func _get_free_player() -> AudioStreamPlayer2D:

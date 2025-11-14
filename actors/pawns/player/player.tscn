@@ -53,7 +53,7 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_icg72"]
 radius = 422.01895
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "hotbar_equipped_inst", "pickups", "health", "thirst", "hunger", "hotbar_input", "world_container_input", "context_input") groups=["persist", "player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "hotbar_equipped_inst", "pickups", "thirst", "hunger", "hotbar_input", "world_container_input", "context_input", "health") groups=["persist", "player"]]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_onrkg")
@@ -62,13 +62,13 @@ inventory = NodePath("Containers/Inventory")
 hotbar = NodePath("Containers/Hotbar")
 hotbar_equipped_inst = NodePath("HotbarEquippedInst")
 pickups = NodePath("Containers/Pickups")
-health = NodePath("Health")
 thirst = NodePath("Stats/Thirst")
 hunger = NodePath("Stats/Hunger")
 hotbar_input = NodePath("Inputs/HotbarInput")
 world_container_input = NodePath("Inputs/WorldContainerInput")
 context_input = NodePath("Inputs/ContextInput")
 faction = 1
+health = NodePath("Health")
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]

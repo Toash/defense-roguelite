@@ -31,13 +31,13 @@ func _set_open(open: bool, silent = false):
 		sprite.texture = door_open
 		collider.set_collision_layer_value(collision_layer, false)
 		if not silent:
-			AudioManager.play_key(open_sound_key, global_position)
+			AudioManager.play_key(open_sound_key, 1, global_position)
 
 	else:
 		sprite.texture = door_close
 		collider.set_collision_layer_value(collision_layer, true)
 		if not silent:
-			AudioManager.play_key(close_sound_key, global_position)
+			AudioManager.play_key(close_sound_key, 1, global_position)
 
 func _interact(player: Node2D):
 	_set_open(!is_open)

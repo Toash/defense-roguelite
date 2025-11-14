@@ -40,6 +40,7 @@ func state_physics_update(delta: float):
 	character.move_and_collide(normal_dir * attack_move_speed * delta)
 
 	if t > attack_cooldown:
+		print("attack!")
 		equipment.use()
 		t = 0
 

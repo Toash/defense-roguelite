@@ -13,4 +13,4 @@ func _ready():
 
 
 func _on_health_changed(new_val: int):
-	AudioManager.play_key(audio_key, global_position, bus)
+	AudioManager.play_key(audio_key, 1, global_position, bus)
