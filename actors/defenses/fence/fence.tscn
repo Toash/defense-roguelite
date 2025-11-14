@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtkkeyu4ik5tg"]
+[gd_scene load_steps=9 format=3 uid="uid://dtkkeyu4ik5tg"]
 
 [ext_resource type="Script" uid="uid://2nlsk36msui5" path="res://actors/defenses/fence/fence.gd" id="1_lcgvv"]
 [ext_resource type="Texture2D" uid="uid://oyegl1t0b74l" path="res://actors/defenses/fence/wood_fence.png" id="2_7o13v"]
 [ext_resource type="Script" uid="uid://q6n7fr42kj25" path="res://actors/defenses/defense.gd" id="3_7o13v"]
+[ext_resource type="Script" uid="uid://6x0akmb8ed61" path="res://actors/generic/health_bar.gd" id="4_vdnsm"]
+[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="5_q3pk1"]
+[ext_resource type="Script" uid="uid://b7qqww31r78yp" path="res://actors/remove_on_death.gd" id="6_q3pk1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lcgvv"]
 radius = 8.0
@@ -26,11 +29,28 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("CircleShape2D_lcgvv")
 
-[node name="Defense" type="Area2D" parent="."]
+[node name="Health" type="Node" parent="StaticBody2D"]
+script = ExtResource("5_q3pk1")
+max_health = 25
+metadata/_custom_type_script = "uid://gyp8bshfrfoj"
+
+[node name="Defense" type="Area2D" parent="." node_paths=PackedStringArray("defense")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("3_7o13v")
+defense = NodePath("..")
 metadata/_custom_type_script = "uid://q6n7fr42kj25"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Defense"]
 shape = SubResource("CircleShape2D_0agoj")
+
+[node name="HealthBar" type="Node2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("4_vdnsm")
+health = NodePath("../StaticBody2D/Health")
+metadata/_custom_type_script = "uid://6x0akmb8ed61"
+
+[node name="RemoveOnDeath" type="Node" parent="." node_paths=PackedStringArray("node_to_remove", "health")]
+script = ExtResource("6_q3pk1")
+node_to_remove = NodePath("..")
+health = NodePath("../StaticBody2D/Health")
+metadata/_custom_type_script = "uid://b7qqww31r78yp"

@@ -11,9 +11,9 @@ func _process(delta):
 	if reference:
 		target_pos_emitted.emit(reference.global_position)
 
-func get_global_mouse_pos() -> Vector2:
+func get_global_pos() -> Vector2:
 	if reference:
 		return reference.position
 
-	push_error("Getting target pos when there is no target reference")
+	# push_error("Getting target pos when there is no target reference")
 	return Vector2.ZERO

@@ -28,7 +28,7 @@ func _process(delta):
 	context.character_sprite.set_right_hand(right_hand_origin.global_position)
 	
 	# THS IS EPIC
-	root.look_at(context.target_provider.get_global_mouse_pos())
+	root.look_at(context.target_provider.get_global_pos())
 
 
 func play(flipped: bool):
@@ -65,11 +65,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		return
 
 	var pawn: Pawn = body as Pawn
-	if pawn == null:
-		return
-
-	if pawn.faction == context.user_node.faction:
-		return
+	if pawn != null:
+		if pawn.faction == context.user_node.faction:
+			return
 		
+
 	var health: Health = body.get_node("Health") as Health
-	health.damage(damage)
+	if health != null:
+		health.damage(damage)

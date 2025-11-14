@@ -6,4 +6,4 @@ signal target_pos_emitted(pos: Vector2)
 
 
 @abstract
-func get_global_mouse_pos() -> Vector2
+func get_global_pos() -> Vector2

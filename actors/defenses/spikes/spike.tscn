@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dmgdc6u4t2he8"]
 
 [ext_resource type="Script" path="res://actors/defenses/spikes/spike.gd" id="1_j0p1j"]
-[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/pawns/generic/health.gd" id="2_hbvc0"]
+[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="2_hbvc0"]
 [ext_resource type="Texture2D" uid="uid://b8jn4sq5auw1y" path="res://actors/defenses/spikes/wood_spikes.png" id="3_fbhar"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_02lfe"]

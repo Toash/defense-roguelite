@@ -25,6 +25,7 @@ func from_dict(dict: Dictionary) -> void:
 
 
 func damage(amount: int):
+	print("damage!!")
 	if health <= 0: return
 
 	health = clamp(health - amount, 0, max_health)

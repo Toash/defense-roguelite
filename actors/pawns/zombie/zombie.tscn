@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://blqvvu0ytchcd"]
+[gd_scene load_steps=33 format=3 uid="uid://blqvvu0ytchcd"]
 
 [ext_resource type="Script" uid="uid://b0o2o27qxmxw4" path="res://actors/pawns/generic/pawn.gd" id="1_6lqgw"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="2_ixsl6"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cskdd0xcjjmfc" path="res://actors/pawns/states/state_wander.gd" id="6_cthrv"]
 [ext_resource type="Script" uid="uid://bbflvir0kv6hb" path="res://ai/state_machine_debug.gd" id="7_3fose"]
 [ext_resource type="Script" uid="uid://b1vk2g6nxw2g" path="res://actors/pawns/states/state_chase.gd" id="7_qpxon"]
-[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/pawns/generic/health.gd" id="8_23tyx"]
+[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="8_23tyx"]
 [ext_resource type="Script" uid="uid://y6xyi4gu5uqa" path="res://actors/pawns/states/state_last_seen.gd" id="8_uotjo"]
 [ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/pawns/character_sprite.tscn" id="9_culwy"]
 [ext_resource type="Script" uid="uid://dn7fydgbbk3wg" path="res://actors/pawns/zombie/zombie_death.gd" id="9_oyhgy"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/player_tracker.gd" id="26_buy8w"]
 [ext_resource type="Script" uid="uid://d3o527u2hmgp7" path="res://actors/pawns/generic/defense_tracker.gd" id="26_sonq4"]
 [ext_resource type="Script" uid="uid://dbgqumwhqtmf6" path="res://actors/pawns/generic/tile_pathfind.gd" id="27_sonq4"]
+[ext_resource type="Script" uid="uid://6x0akmb8ed61" path="res://actors/generic/health_bar.gd" id="28_6lqgw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fose"]
 size = Vector2(36, 72)
@@ -35,10 +36,10 @@ size = Vector2(36, 72)
 radius = 376.0053
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmu02"]
-radius = 120.203995
+radius = 80.024994
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_buy8w"]
-radius = 207.06038
+radius = 38.013157
 
 [node name="Zombie" type="CharacterBody2D"]
 collision_layer = 4
@@ -235,6 +236,13 @@ collision_mask = 2
 
 [node name="DefenseRaycast" type="RayCast2D" parent="Raycasts"]
 collision_mask = 34
+
+[node name="HealthBar" type="Node2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("28_6lqgw")
+health = NodePath("../Health")
+bar_size = Vector2(60, 15)
+offset = Vector2(0, -40)
+metadata/_custom_type_script = "uid://6x0akmb8ed61"
 
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]

@@ -30,22 +30,25 @@ func state_enter():
 func state_physics_update(delta: float):
 	if active == false: return
 
-	obstruction_raycast.target_position = obstruction_raycast.to_local(target.reference.global_position)
+	if target.reference:
+		obstruction_raycast.target_position = obstruction_raycast.to_local(target.reference.global_position)
 
-	if obstruction_raycast.get_collider():
-		target.last_position = obstruction_raycast.get_collision_point()
-		transitioned.emit(self, "last_seen")
+		if obstruction_raycast.get_collider():
+			target.last_position = obstruction_raycast.get_collision_point()
+			transitioned.emit(self, "last_seen")
 
 
-	nav.target_position = target.reference.global_position
-	target_emitted.emit(target.reference.global_position)
+		nav.target_position = target.reference.global_position
+		target_emitted.emit(target.reference.global_position)
 
-	var next_point: Vector2 = nav.get_next_path_position()
-	var normal_dir = (next_point - character.global_position).normalized()
-	
+		var next_point: Vector2 = nav.get_next_path_position()
+		var normal_dir = (next_point - character.global_position).normalized()
+		
 
-	character.velocity = normal_dir * chase_speed
-	character.move_and_collide(normal_dir * chase_speed * delta)
+		character.velocity = normal_dir * chase_speed
+		character.move_and_collide(normal_dir * chase_speed * delta)
+	else:
+		transitioned.emit(self, "nexus")
 
 
 func state_exit():

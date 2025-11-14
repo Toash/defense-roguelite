@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
 [ext_resource type="Script" uid="uid://cu2mhoqnrgeam" path="res://input/hotbar_input.gd" id="4_yw30f"]
-[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/pawns/generic/health.gd" id="5_g6k8r"]
+[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://cg3y6l7u7bglb" path="res://actors/pawns/player/interact_detector.gd" id="5_hiosj"]
 [ext_resource type="Script" uid="uid://dsrxhicfffw3e" path="res://actors/pawns/player/pickup_detector.gd" id="5_qjkh3"]
 [ext_resource type="Script" uid="uid://dgkass0sic6wa" path="res://actors/pawns/generic/draining_stat.gd" id="7_boad6"]

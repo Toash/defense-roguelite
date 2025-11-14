@@ -10,7 +10,6 @@ extends State
 
 @export var nav: NavigationAgent2D
 
-
 @export var ai_target: AITarget
 
 var active = false
@@ -28,17 +27,20 @@ func state_physics_update(delta: float):
 
 	t += delta
 
-	nav.target_position = ai_target.reference.global_position
-	var next_point: Vector2 = nav.get_next_path_position()
-	var normal_dir = (next_point - character.global_position).normalized()
+	if ai_target.reference:
+		nav.target_position = ai_target.reference.global_position
+		var next_point: Vector2 = nav.get_next_path_position()
+		var normal_dir = (next_point - character.global_position).normalized()
 
-	character.velocity = normal_dir * speed
-	character.move_and_collide(normal_dir * speed * delta)
-	
-	if (ai_target.reference.global_position - character.global_position).length() < BREAK_DISTANCE:
-		if t > break_cooldown:
-			equipment.use()
-			t = 0
+		character.velocity = normal_dir * speed
+		character.move_and_collide(normal_dir * speed * delta)
+		
+		if (ai_target.reference.global_position - character.global_position).length() < BREAK_DISTANCE:
+			if t > break_cooldown:
+				equipment.use()
+				t = 0
+	else:
+		transitioned.emit(self, "nexus")
 
 
 func state_exit():

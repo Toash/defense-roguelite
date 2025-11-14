@@ -14,12 +14,17 @@ signal found_defense(defense: Defense)
 
 var retries = 0
 const MAX_RETRIES = 50 ## only find player if we can see this many times in a row.
+const COOLDOWN = 2 ## cooldown after having discovered a defense.
+var t: float = INF
 
 var defenses_within_vision: Dictionary[int, Defense] = {}
 
 func _ready() -> void:
 	defense_vision.area_entered.connect(_on_area_entered)
 	defense_vision.area_exited.connect(_on_area_exited)
+
+func _process(delta):
+	t += delta
 
 func _physics_process(delta):
 	# print(defenses_within_vision)
@@ -31,7 +36,9 @@ func _physics_process(delta):
 			if defense_raycast.get_collider() is Defense:
 				retries += 1
 				if MAX_RETRIES <= retries:
-					found_defense.emit(defense_raycast.get_collider() as Defense)
+					if t > COOLDOWN:
+						found_defense.emit(defense_raycast.get_collider() as Defense)
+						t = 0
 			else:
 				retries = 0
 				print("Obstruction")
