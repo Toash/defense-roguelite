@@ -12,7 +12,7 @@ extends State
 @export var character: CharacterBody2D
 @export var tile_pathfind: TilePathfind
 
-@export var target: ZombieTarget
+@export var target: AITarget
 
 var wander_interval: float
 

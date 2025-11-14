@@ -183,10 +183,10 @@ open_context={
 [layer_names]
 
 2d_physics/layer_2="walls"
-2d_physics/layer_3="actors"
+2d_physics/layer_3="pawns"
 2d_physics/layer_4="ground_items"
 2d_physics/layer_5="interactable"
-2d_physics/layer_6="fog"
+2d_physics/layer_6="defenses"
 
 [rendering]
 

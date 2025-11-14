@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8jn4sq5auw1y"
-path="res://.godot/imported/wood_spikes.png-4eea69c94a08c77d2697c28dd23249ad.ctex"
+uid="uid://oyegl1t0b74l"
+path="res://.godot/imported/wood_fence.png-fe5470e37dc85a0c5c07de2769b5baee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/defenses/wood_spikes.png"
-dest_files=["res://.godot/imported/wood_spikes.png-4eea69c94a08c77d2697c28dd23249ad.ctex"]
+source_file="res://actors/defenses/fence/wood_fence.png"
+dest_files=["res://.godot/imported/wood_fence.png-fe5470e37dc85a0c5c07de2769b5baee.ctex"]
 
 [params]
 

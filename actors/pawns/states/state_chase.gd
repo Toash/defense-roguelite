@@ -8,13 +8,14 @@ signal target_lost
 @export var chase_speed = 200
 @export var character: CharacterBody2D
 
+@export var attack_vision: Area2D
 
 @export var obstruction_raycast: RayCast2D
 
 @export var nav: NavigationAgent2D
 
 
-@export var target: ZombieTarget
+@export var target: AITarget
 
 
 var active = false
@@ -23,6 +24,8 @@ var active = false
 func state_enter():
 	active = true
 	target_acquired.emit()
+	attack_vision.body_entered.connect(_on_body_entered)
+	
 
 func state_physics_update(delta: float):
 	if active == false: return
@@ -48,3 +51,9 @@ func state_physics_update(delta: float):
 func state_exit():
 	active = false
 	target_lost.emit()
+	attack_vision.body_entered.disconnect(_on_body_entered)
+
+
+func _on_body_entered(body: Node2D):
+	if body is Player:
+		transitioned.emit(self, "attack")

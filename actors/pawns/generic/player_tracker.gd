@@ -5,8 +5,8 @@ class_name PlayerTracker
 
 signal found_player(player: Player)
 
-
-@export var vision: Area2D
+## mask should include layers to track.
+@export var player_vision: Area2D
 ## ensure this raycast gets obstructed by walls
 @export var player_raycast: RayCast2D
 
@@ -16,8 +16,8 @@ const MAX_RETRIES = 50 ## only find player if we can see this many times in a ro
 var humans_within_vision: Dictionary[int, Node2D] = {}
 
 func _ready() -> void:
-	vision.body_entered.connect(_on_body_entered)
-	vision.body_exited.connect(_on_body_exited)
+	player_vision.body_entered.connect(_on_body_entered)
+	player_vision.body_exited.connect(_on_body_exited)
 
 func _physics_process(delta):
 	# print(humans_within_vision)

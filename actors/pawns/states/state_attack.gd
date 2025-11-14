@@ -8,32 +8,29 @@ signal target_lost
 @export var character: CharacterBody2D
 @export var attack_move_speed = 300
 @export var attack_cooldown = 1
+@export var attack_vision: Area2D
 @export var equipment: Equipment
-@export var attack_area: Area2D
 
 
 @export var nav: NavigationAgent2D
-@export var target: ZombieTarget
+@export var ai_target: AITarget
 
 
 var active = false
 var t: float = 0.0
 
-func _ready():
-	attack_area.body_entered.connect(_on_body_entered)
-
-
 func state_enter():
 	active = true
 	target_acquired.emit()
+	attack_vision.body_exited.connect(_on_body_exited)
 
 func state_physics_update(delta: float):
 	if active == false: return
 
 	t += delta
 
-	nav.target_position = target.reference.global_position
-	target_emitted.emit(target.reference.global_position)
+	nav.target_position = ai_target.reference.global_position
+	target_emitted.emit(ai_target.reference.global_position)
 
 	var next_point: Vector2 = nav.get_next_path_position()
 	var normal_dir = (next_point - character.global_position).normalized()
@@ -49,7 +46,7 @@ func state_exit():
 	active = false
 	target_lost.emit()
 
-func _on_body_entered(body: Node2D):
-	if body.is_in_group("player"):
-		print("attack")
-		equipment.use()
+func _on_body_exited(body: Node2D):
+	if body is Player:
+		ai_target.reference = body
+		transitioned.emit(self, "chase")

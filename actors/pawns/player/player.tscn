@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=31 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://csxjjom3dyxfa" path="res://actors/pawns/sprites/head/white_head_1.png" id="14_0wchr"]
 [ext_resource type="Texture2D" uid="uid://oyto6h4h2ewn" path="res://actors/pawns/sprites/torso/torso_blue_jacket.png" id="15_qrxv1"]
 [ext_resource type="Texture2D" uid="uid://wcmxajlvsg1i" path="res://actors/pawns/sprites/leg/legs_black_1.png" id="17_otn2r"]
-[ext_resource type="Script" uid="uid://0umt1fxhkw5l" path="res://actors/pawns/player/fog_dissipator.gd" id="20_ctwkf"]
 [ext_resource type="Script" uid="uid://kesirm75pc1q" path="res://item/generic/equipment.gd" id="20_lj3dd"]
 [ext_resource type="Script" uid="uid://dflsf7ovo0jqw" path="res://item/generic/item_display.gd" id="20_nsxbo"]
 [ext_resource type="Texture2D" uid="uid://c8u4rr4xtq3tj" path="res://actors/pawns/player/spot_light.png" id="20_otn2r"]
@@ -50,12 +49,9 @@ gradient = SubResource("Gradient_dqf5y")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_icg72"]
-radius = 422.01895
-
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "hotbar_equipped_inst", "pickups", "thirst", "hunger", "hotbar_input", "world_container_input", "context_input", "health") groups=["persist", "player"]]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 38
 script = ExtResource("1_onrkg")
 speed = 500
 inventory = NodePath("Containers/Inventory")
@@ -159,21 +155,6 @@ energy = 0.38
 texture = ExtResource("20_otn2r")
 texture_scale = 2.82
 
-[node name="FogDissipator" type="Area2D" parent="." node_paths=PackedStringArray("player", "obstruction_raycast")]
-visible = false
-collision_layer = 0
-collision_mask = 32
-script = ExtResource("20_ctwkf")
-player = NodePath("..")
-obstruction_raycast = NodePath("RayCast2D")
-metadata/_custom_type_script = "uid://0umt1fxhkw5l"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FogDissipator"]
-shape = SubResource("CircleShape2D_icg72")
-
-[node name="RayCast2D" type="RayCast2D" parent="FogDissipator"]
-collision_mask = 2
-
 [node name="Stats" type="Node2D" parent="."]
 
 [node name="Health" type="Node" parent="Stats"]
@@ -243,7 +224,6 @@ metadata/_custom_type_script = "uid://bbp3ruk8jvfsw"
 [node name="HurtSound" type="Node2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("28_yr7qf")
 health = NodePath("../Health")
-audio_key = 4
 metadata/_custom_type_script = "uid://c8vlygcerjqvb"
 
 [node name="Footsteps" type="Node2D" parent="." node_paths=PackedStringArray("character_sprite")]

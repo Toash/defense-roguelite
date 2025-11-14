@@ -5,7 +5,8 @@ extends State
 
 @export var tile_pathfind: TilePathfind
 @export var player_tracker: PlayerTracker
-@export var zombie_target: ZombieTarget
+@export var defense_tracker: DefenseTracker
+@export var ai_target: AITarget
 
 var active = false
 @onready var nexus_pos: Vector2 = (get_tree().get_first_node_in_group("nexus") as Nexus).global_position
@@ -17,6 +18,7 @@ func state_enter():
 	
 
 	player_tracker.found_player.connect(_on_player_found)
+	defense_tracker.found_defense.connect(_on_defense_found)
 	tile_pathfind.enable()
 
 	if not world.setup:
@@ -32,14 +34,20 @@ func state_physics_update(delta: float):
 func state_exit():
 	active = false
 	player_tracker.found_player.disconnect(_on_player_found)
+	defense_tracker.found_defense.disconnect(_on_defense_found)
 	tile_pathfind.disable()
 
 
 func _on_player_found(player: Player):
 	# pass
 	print("found player!")
-	zombie_target.reference = player
+	ai_target.reference = player
 	transitioned.emit(self, "chase")
+
+func _on_defense_found(defense: Defense):
+	print("found defense!")
+	ai_target.reference = defense
+	transitioned.emit(self, "break")
 
 func _set_target():
 	tile_pathfind.set_speed(speed)

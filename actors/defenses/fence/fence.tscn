@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtkkeyu4ik5tg"]
+
+[ext_resource type="Script" uid="uid://2nlsk36msui5" path="res://actors/defenses/fence/fence.gd" id="1_lcgvv"]
+[ext_resource type="Texture2D" uid="uid://oyegl1t0b74l" path="res://actors/defenses/fence/wood_fence.png" id="2_7o13v"]
+[ext_resource type="Script" uid="uid://q6n7fr42kj25" path="res://actors/defenses/defense.gd" id="3_7o13v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lcgvv"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0agoj"]
+radius = 9.0
+
+[node name="Fence" type="Node2D"]
+script = ExtResource("1_lcgvv")
+metadata/_custom_type_script = "uid://2nlsk36msui5"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -3)
+scale = Vector2(0.5, 0.625)
+texture = ExtResource("2_7o13v")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_lcgvv")
+
+[node name="Defense" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("3_7o13v")
+metadata/_custom_type_script = "uid://q6n7fr42kj25"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Defense"]
+shape = SubResource("CircleShape2D_0agoj")

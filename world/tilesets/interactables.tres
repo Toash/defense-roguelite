@@ -1,13 +1,15 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://kp24hb4w12of"]
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://kp24hb4w12of"]
 
 [ext_resource type="PackedScene" uid="uid://b888f1irbry2f" path="res://actors/containers/crate/crate.tscn" id="1_331fi"]
 [ext_resource type="PackedScene" uid="uid://sg8a2pgomwuw" path="res://actors/doors/door.tscn" id="2_oeqgq"]
-[ext_resource type="PackedScene" uid="uid://dp5j6juluiqyu" path="res://actors/defenses/spike.tscn" id="3_oeqgq"]
+[ext_resource type="PackedScene" uid="uid://dmgdc6u4t2he8" path="res://actors/defenses/spikes/spike.tscn" id="3_oeqgq"]
+[ext_resource type="PackedScene" uid="uid://dtkkeyu4ik5tg" path="res://actors/defenses/fence/fence.tscn" id="4_2obb6"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_3pkja"]
 scenes/1/scene = ExtResource("1_331fi")
 scenes/2/scene = ExtResource("2_oeqgq")
 scenes/3/scene = ExtResource("3_oeqgq")
+scenes/4/scene = ExtResource("4_2obb6")
 
 [resource]
 sources/1 = SubResource("TileSetScenesCollectionSource_3pkja")

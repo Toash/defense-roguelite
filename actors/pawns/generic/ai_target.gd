@@ -1,6 +1,6 @@
 extends TargetProvider
 
-class_name ZombieTarget
+class_name AITarget
 
 var reference: Node2D
 

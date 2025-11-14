@@ -7,7 +7,7 @@ extends State
 
 @export var nav: NavigationAgent2D
 
-@export var target: ZombieTarget
+@export var target: AITarget
 
 var active = false
 
