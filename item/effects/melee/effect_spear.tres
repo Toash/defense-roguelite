@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MeleeEffect" load_steps=3 format=3 uid="uid://dpshn6vo1w8ck"]
+
+[ext_resource type="PackedScene" uid="uid://bkxcb3afuvs15" path="res://item/scenes/melee/spear.tscn" id="1_tpvee"]
+[ext_resource type="Script" uid="uid://dn16c2l3h1soe" path="res://item/effects/scripts/melee_effect.gd" id="2_35i4t"]
+
+[resource]
+script = ExtResource("2_35i4t")
+scene = ExtResource("1_tpvee")
+metadata/_custom_type_script = "uid://dn16c2l3h1soe"

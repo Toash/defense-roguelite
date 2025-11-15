@@ -47,7 +47,7 @@ func use():
 	item_context.spawn_node = item_display.get_origin_node()
 	item_context.equip_display = item_display
 	item_context.character_sprite = character_sprite
-	item_context.flipped = item_display.flipped
+	item_context.flip_when_looking_left = item_display.flipped
 
 	item_context.target_provider = target_provider
 

@@ -7,7 +7,7 @@ class_name ItemInstance
 @export var data: ItemData
 @export var quantity: int
 
-var last_used_time: float = -1
+var last_used_time: float = INF
 
 
 func _init(d: ItemData = null, q := 1):

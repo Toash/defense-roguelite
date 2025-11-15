@@ -22,4 +22,4 @@ func apply(context: ItemContext):
 	# attack_inst.look_at(context.global_target_point)
 
 	
-	attack_inst.play.call_deferred(context.flipped)
+	attack_inst.play.call_deferred(context.flip_when_looking_left)

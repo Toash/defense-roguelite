@@ -22,7 +22,8 @@ var target_node: Node2D
 var equip_display: ItemDisplay
 var character_sprite: CharacterSprite
 
-var flipped: bool
+## flip sprite when looking left
+var flip_when_looking_left: bool
 
 
 func _to_string() -> String:
@@ -32,4 +33,4 @@ func _to_string() -> String:
     "\nSpawn node: " + str(spawn_node) + \
     "\nGlobal target point: " + str(global_target_position) + \
     "\nEquip display: " + str(equip_display) + \
-    "\nFlipped: " + str(flipped)
+    "\nFlipped: " + str(flip_when_looking_left)

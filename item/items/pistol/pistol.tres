@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("2_2yt1l")
-id = 101
+id = 150
 display_name = "Pistol"
 description = "pew pew."
 max_stack = 1

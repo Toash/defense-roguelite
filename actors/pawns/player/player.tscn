@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=33 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
@@ -22,7 +22,9 @@
 [ext_resource type="Script" uid="uid://c8dnwtjdg5wbq" path="res://audio/footsteps.gd" id="21_ctwkf"]
 [ext_resource type="Script" uid="uid://bbp3ruk8jvfsw" path="res://actors/pawns/player/equipped_hotbar_inst.gd" id="24_nsxbo"]
 [ext_resource type="Script" uid="uid://dfsam3b8d27hq" path="res://input/equipment_input.gd" id="24_yeioo"]
+[ext_resource type="Script" uid="uid://dscssqnu3m0h1" path="res://misc/item_inserter.gd" id="25_fptfb"]
 [ext_resource type="Script" uid="uid://ctutx861f7ofh" path="res://input/context_input.gd" id="26_h0lia"]
+[ext_resource type="Resource" uid="uid://dl4jalxjxqdxk" path="res://item/items/wooden_spear/wooden_spear.tres" id="26_yr7qf"]
 [ext_resource type="Script" uid="uid://c8vlygcerjqvb" path="res://actors/pawns/generic/hurt_sound.gd" id="28_yr7qf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
@@ -230,6 +232,11 @@ metadata/_custom_type_script = "uid://c8vlygcerjqvb"
 script = ExtResource("21_ctwkf")
 character_sprite = NodePath("../CharacterSprite")
 metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
+
+[node name="ItemInserter" type="Node2D" parent="." node_paths=PackedStringArray("hotbar")]
+script = ExtResource("25_fptfb")
+hotbar = NodePath("../Containers/Hotbar")
+itemdata = ExtResource("26_yr7qf")
 
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]

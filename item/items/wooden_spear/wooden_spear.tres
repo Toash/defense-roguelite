@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://dl4jalxjxqdxk"]
+
+[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_qokqg"]
+[ext_resource type="Texture2D" uid="uid://corwpdej058q" path="res://item/items/wooden_spear/spear_wood.png" id="1_swtsm"]
+[ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="2_uicoe"]
+[ext_resource type="Resource" uid="uid://dpshn6vo1w8ck" path="res://item/effects/melee/effect_spear.tres" id="3_vrqey"]
+
+[resource]
+script = ExtResource("2_uicoe")
+id = 101
+display_name = "Wooden spear"
+description = "Stab"
+max_stack = 1
+icon = ExtResource("1_swtsm")
+cooldown_time = 0.5
+ingame_sprite = ExtResource("1_swtsm")
+scale = 3.0
+follow_target = true
+item_effects = Array[ExtResource("1_qokqg")]([ExtResource("3_vrqey")])
+metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

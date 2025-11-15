@@ -124,7 +124,6 @@ shape = SubResource("RectangleShape2D_3fose")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("8_23tyx")
-max_health = 1
 metadata/_custom_type_script = "uid://gyp8bshfrfoj"
 
 [node name="ZombieDeath" type="Node" parent="." node_paths=PackedStringArray("pawn", "state_machine", "character_sprite", "state_machine_debug", "tile_pathfind")]
