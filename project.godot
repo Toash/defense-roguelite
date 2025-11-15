@@ -56,6 +56,7 @@ folder_colors={
 "res://audio/": "orange",
 "res://interactable/": "yellow",
 "res://item/": "blue",
+"res://shaders/": "purple",
 "res://world/": "green"
 }
 

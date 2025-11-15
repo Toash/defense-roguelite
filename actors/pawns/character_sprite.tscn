@@ -1,44 +1,88 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfb3edd4wnnag"]
+[gd_scene load_steps=11 format=3 uid="uid://dfb3edd4wnnag"]
 
 [ext_resource type="Script" uid="uid://pmnccyfhs5pm" path="res://actors/pawns/sprites/character_sprite.gd" id="1_702fr"]
 [ext_resource type="Texture2D" uid="uid://wcmxajlvsg1i" path="res://actors/pawns/sprites/leg/legs_black_1.png" id="1_g2x4w"]
+[ext_resource type="Shader" uid="uid://48ta4ahe0rkq" path="res://shaders/character_sprite.gdshader" id="1_va1py"]
 [ext_resource type="Texture2D" uid="uid://oyto6h4h2ewn" path="res://actors/pawns/sprites/torso/torso_blue_jacket.png" id="2_702fr"]
 [ext_resource type="Texture2D" uid="uid://csxjjom3dyxfa" path="res://actors/pawns/sprites/head/white_head_1.png" id="3_o7wq7"]
 [ext_resource type="Texture2D" uid="uid://ddl3g6wo4371s" path="res://actors/pawns/sprites/hand/hands_white_1.png" id="4_kfdqb"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ngeuq"]
+resource_local_to_scene = true
+shader = ExtResource("1_va1py")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_percentage = 0.0
+
+[sub_resource type="Animation" id="Animation_va1py"]
+resource_name = "flash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_percentage")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.50000002375, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ngeuq"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ngeuq"]
+_data = {
+&"RESET": SubResource("Animation_ngeuq"),
+&"flash": SubResource("Animation_va1py")
+}
+
 [node name="CharacterSprite" type="Node2D"]
 z_index = 10
+material = SubResource("ShaderMaterial_ngeuq")
 scale = Vector2(3, 3)
 script = ExtResource("1_702fr")
 
 [node name="LeftLeg" type="Sprite2D" parent="."]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(-3, 9.333334)
 texture = ExtResource("1_g2x4w")
 
 [node name="RightLeg" type="Sprite2D" parent="."]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(3, 9.333334)
 texture = ExtResource("1_g2x4w")
 
 [node name="Torso" type="Sprite2D" parent="."]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(0, 1.333333)
 texture = ExtResource("2_702fr")
 
 [node name="Head" type="Sprite2D" parent="."]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(0, -8.666667)
 texture = ExtResource("3_o7wq7")
 
 [node name="LeftArm" type="Sprite2D" parent="."]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(-6, 2.333333)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("4_kfdqb")
 
 [node name="RightArm" type="Sprite2D" parent="."]
 texture_filter = 1
+use_parent_material = true
 position = Vector2(6, 2.333333)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("4_kfdqb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ngeuq")
+}

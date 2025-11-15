@@ -11,6 +11,8 @@ var character_body: CharacterBody2D
 
 ## sprite rotates according to target
 @export var target_supplier: TargetProvider
+@export var health: Health
+
 
 @export var head_texture: Texture2D
 @export var torso_texture: Texture2D
@@ -19,6 +21,7 @@ var character_body: CharacterBody2D
 @export var left_leg_texture: Texture2D
 @export var right_leg_texture: Texture2D
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var head: Sprite2D
 var torso: Sprite2D
@@ -49,6 +52,9 @@ var right_hand_moving = false
 var dead = false
 
 func _ready() -> void:
+	health.health_changed.connect(_on_health_changed)
+	health.died.connect(_on_die)
+
 	target_supplier.target_pos_emitted.connect(_set_target)
 	original_scale = scale
 	flipped_scale = Vector2(-original_scale.x, original_scale.y)
@@ -166,6 +172,10 @@ func disable_right_hand():
 func _set_target(targ: Vector2):
 	self.target = targ
 
-func die():
+func _on_health_changed(new_val: int):
+	animation_player.current_animation = "flash"
+	animation_player.play()
+
+func _on_die():
 	rotation = deg_to_rad(90)
 	dead = true

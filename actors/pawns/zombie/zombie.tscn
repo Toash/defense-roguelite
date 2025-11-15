@@ -47,8 +47,9 @@ collision_mask = 32
 script = ExtResource("1_6lqgw")
 faction = 2
 
-[node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier") instance=ExtResource("9_culwy")]
+[node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier", "health") instance=ExtResource("9_culwy")]
 target_supplier = NodePath("../NavTargetProvider")
+health = NodePath("../Health")
 head_texture = ExtResource("10_mmehc")
 torso_texture = ExtResource("11_eew4g")
 left_arm_texture = ExtResource("12_b6tq7")
@@ -126,11 +127,10 @@ shape = SubResource("RectangleShape2D_3fose")
 script = ExtResource("8_23tyx")
 metadata/_custom_type_script = "uid://gyp8bshfrfoj"
 
-[node name="ZombieDeath" type="Node" parent="." node_paths=PackedStringArray("pawn", "state_machine", "character_sprite", "state_machine_debug", "tile_pathfind")]
+[node name="ZombieDeath" type="Node" parent="." node_paths=PackedStringArray("pawn", "state_machine", "state_machine_debug", "tile_pathfind")]
 script = ExtResource("9_oyhgy")
 pawn = NodePath("..")
 state_machine = NodePath("../ZombieStateMachine")
-character_sprite = NodePath("../CharacterSprite")
 state_machine_debug = NodePath("../StateMachineDebug")
 tile_pathfind = NodePath("../TilePathfind")
 metadata/_custom_type_script = "uid://dn7fydgbbk3wg"
@@ -243,11 +243,11 @@ bar_size = Vector2(60, 15)
 offset = Vector2(0, -40)
 metadata/_custom_type_script = "uid://6x0akmb8ed61"
 
-[connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]
+[connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
 [connection signal="target_emitted" from="ZombieStateMachine/Chase" to="ZombieArms" method="_set_target"]
-[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_left_hand_pos"]
 [connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_right_hand_pos"]
+[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_left_hand_pos"]
 [connection signal="died" from="Health" to="ZombieDeath" method="_on_death"]
 [connection signal="left_hand_pos_emitted" from="ZombieArms" to="CharacterSprite" method="_set_left_hand_pos"]
 [connection signal="right_hand_pos_emitted" from="ZombieArms" to="CharacterSprite" method="_set_right_hand_pos"]
