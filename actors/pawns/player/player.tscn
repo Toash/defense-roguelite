@@ -1,10 +1,11 @@
-[gd_scene load_steps=34 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=38 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
 [ext_resource type="Script" uid="uid://cu2mhoqnrgeam" path="res://input/hotbar_input.gd" id="4_yw30f"]
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://cg3y6l7u7bglb" path="res://actors/pawns/player/interact_detector.gd" id="5_hiosj"]
+[ext_resource type="Script" uid="uid://c0e61g0mwp78t" path="res://actors/pawns/player/player_containers.gd" id="5_nvisx"]
 [ext_resource type="Script" uid="uid://dsrxhicfffw3e" path="res://actors/pawns/player/pickup_detector.gd" id="5_qjkh3"]
 [ext_resource type="Shader" uid="uid://cypb182ofc63b" path="res://shaders/outline.gdshader" id="7_fptfb"]
 [ext_resource type="Script" uid="uid://c5rhs0y5iry7d" path="res://input/mouse_input.gd" id="9_388e2"]
@@ -25,7 +26,10 @@
 [ext_resource type="Script" uid="uid://dscssqnu3m0h1" path="res://misc/item_inserter.gd" id="25_fptfb"]
 [ext_resource type="Script" uid="uid://ctutx861f7ofh" path="res://input/context_input.gd" id="26_h0lia"]
 [ext_resource type="Resource" uid="uid://dl4jalxjxqdxk" path="res://item/items/wooden_spear/wooden_spear.tres" id="26_yr7qf"]
+[ext_resource type="Script" uid="uid://cvf4ycidd0cme" path="res://actors/pawns/player/player_crafting.gd" id="27_h0lia"]
 [ext_resource type="Script" uid="uid://c8vlygcerjqvb" path="res://actors/pawns/generic/hurt_sound.gd" id="28_yr7qf"]
+[ext_resource type="Script" uid="uid://c0igk80mo7ba7" path="res://crafting/blueprint.gd" id="29_s6245"]
+[ext_resource type="Resource" uid="uid://cm5rcgysn4fkm" path="res://crafting/blueprints/blueprint_wooden_spear.tres" id="30_qqc64"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(25, 54)
@@ -57,7 +61,7 @@ gradient = SubResource("Gradient_dqf5y")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "hotbar_equipped_inst", "pickups", "hotbar_input", "world_container_input", "context_input", "health") groups=["persist", "player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "hotbar_equipped_inst", "pickups", "player_crafting", "hotbar_input", "world_container_input", "context_input", "health") groups=["persist", "player"]]
 collision_layer = 4
 collision_mask = 38
 script = ExtResource("1_onrkg")
@@ -66,6 +70,7 @@ inventory = NodePath("Containers/Inventory")
 hotbar = NodePath("Containers/Hotbar")
 hotbar_equipped_inst = NodePath("HotbarEquippedInst")
 pickups = NodePath("Containers/Pickups")
+player_crafting = NodePath("PlayerCrafting")
 hotbar_input = NodePath("Inputs/HotbarInput")
 world_container_input = NodePath("Inputs/WorldContainerInput")
 context_input = NodePath("Inputs/ContextInput")
@@ -106,7 +111,10 @@ shape = SubResource("CircleShape2D_lsln6")
 [node name="RayCast2D" type="RayCast2D" parent="InteractableDetector"]
 collision_mask = 17
 
-[node name="Containers" type="Node" parent="."]
+[node name="Containers" type="Node2D" parent="." node_paths=PackedStringArray("hotbar_container", "inventory_container")]
+script = ExtResource("5_nvisx")
+hotbar_container = NodePath("Hotbar")
+inventory_container = NodePath("Inventory")
 
 [node name="Inventory" type="Node" parent="Containers"]
 script = ExtResource("10_lsln6")
@@ -228,6 +236,11 @@ metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
 script = ExtResource("25_fptfb")
 hotbar = NodePath("../Containers/Hotbar")
 itemdata = ExtResource("26_yr7qf")
+
+[node name="PlayerCrafting" type="Node2D" parent="."]
+script = ExtResource("27_h0lia")
+blueprints = Array[ExtResource("29_s6245")]([ExtResource("30_qqc64")])
+metadata/_custom_type_script = "uid://cvf4ycidd0cme"
 
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]

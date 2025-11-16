@@ -18,7 +18,7 @@ func craft(blueprint: Blueprint):
     for ingredient: ItemDataGroup in blueprint.get_ingredients():
         if player_containers.must_take_amount(ingredient.item_data, ingredient.amount) != null:
             # took the ingredients because the player has them.
-            for results: ItemDataGroup in blueprint.get_results():
+            for results: ItemDataGroup in blueprint.get_outputs():
                 # add the results
                 player_containers.force_add_item_group(results)
     pass

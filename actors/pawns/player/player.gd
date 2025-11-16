@@ -12,6 +12,9 @@ class_name Player
 @export var hotbar_equipped_inst: HotbarEquippedInst
 @export var pickups: ItemContainer
 
+@export_group("Crafting")
+@export var player_crafting: PlayerCrafting
+
 
 var state = "idle"
 var input_vector = Vector2.ZERO
@@ -67,6 +70,8 @@ func get_world_container_input() -> WorldContainerInput:
 	return world_container_input
 func get_context_input() -> ContextInput:
 	return context_input
+func get_player_crafting() -> PlayerCrafting:
+	return self.player_crafting
 
 
 func save() -> Dictionary:

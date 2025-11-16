@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://40ge33beu4dm"]
+
+[ext_resource type="Script" uid="uid://5bx2xryj8581" path="res://ui/crafting/blueprint_ui.gd" id="1_3plvy"]
+[ext_resource type="Texture2D" uid="uid://bpyb1qw03660d" path="res://ui/crafting/arrow.png" id="2_0khts"]
+
+[node name="BlueprintUI" type="PanelContainer" node_paths=PackedStringArray("ingredients_root", "output_root")]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_3plvy")
+ingredients_root = NodePath("MarginContainer/HBoxContainer/MarginContainer/Ingredients_root")
+output_root = NodePath("MarginContainer/HBoxContainer/MarginContainer3/Output_root")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Ingredients_root" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Arrow" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Arrow"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_0khts")
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Output_root" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer3"]
+layout_mode = 2
+mouse_filter = 2

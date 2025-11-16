@@ -9,7 +9,7 @@ extends CanvasLayer
 @export var inventory_window: ExpandableWindow
 @export var pickup_window: ExpandableWindow
 @export var world_container_window: ExpandableWindow
-
+@export var crafting_window: ExpandableWindow
 
 @export var hotbar_ui: HotbarUI
 @export var health_bar: ProgressBar
@@ -42,6 +42,9 @@ func _ready() -> void:
 
 	world_container_input.container_interacted.connect(_on_container_interact)
 	world_container_input.container_changed.connect(_on_container_changed)
+
+
+	(crafting_window.get_content() as CraftingUI).setup(player.get_player_crafting().get_blueprints())
 
 
 func _on_health_changed(health: int):
