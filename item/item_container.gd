@@ -53,7 +53,24 @@ func set_item_instance(i: int, inst: ItemInstance) -> void:
 		self.size += 1
 	ItemService.slot_changed.emit(self, i)
 
+## tries to add the group returns the amount of items added.
+func try_add_item_group(group: ItemDataGroup) -> int:
+	var items_left: int = group.amount
+	# try to add to the same items if the player already has them.
+	for index in capacity:
+		var inst: ItemInstance = _slot_to_inst[index]
+		if inst.data == group.item_data:
+			if items_left == 0: return 0
+			var to_max_stack = inst.data.max_stack - inst.quantity
+			var to_add = min(items_left, to_max_stack)
+			inst.quantity += to_add
 
+			items_left -= to_add
+			ItemService.slot_changed.emit(self, index)
+
+	return items_left
+
+		
 func remove_entirely(index: int) -> void:
 	if _slot_to_inst[index]:
 		self.size -= 1
@@ -67,6 +84,35 @@ func remove_by(index: int, by: int) -> void:
 		if inst.quantity <= 0:
 			remove_entirely(index)
 		ItemService.slot_changed.emit(self, index)
+
+## returns true if the container has enough items to accommodate the group, else false.
+func has_enough_items(group: ItemDataGroup):
+	var counter := 0
+
+	for index in capacity:
+		if _slot_to_inst[index]:
+			var inst: ItemInstance = _slot_to_inst[index]
+			if inst.data == group.item_data:
+				counter += inst.quantity
+
+	return counter >= group.amount
+
+
+## take item instance in the container by an index an amount 
+## DOES NOT throw an error if the amount we are taking exceeds the amount we have in the slot.
+func take_as_much(index: int, by: int) -> ItemDataGroup:
+	if _slot_to_inst[index]:
+		var inst: ItemInstance = _slot_to_inst[index]
+
+		var amount_taken = min(inst.quantity, by)
+		inst.quantity -= amount_taken
+		if inst.quantity <= 0:
+			remove_entirely(index)
+		
+		ItemService.slot_changed.emit(self, index)
+		var item_group: ItemDataGroup = ItemDataGroup.create(inst.data, amount_taken)
+		return item_group
+	return null
 
 
 func get_index_by_uid(uid: String) -> int:
@@ -86,16 +132,28 @@ func get_best_slot(item_data: ItemData):
 	for index in capacity:
 		var inst = _slot_to_inst.get(index, null)
 		if inst != null:
-			var max_stack: int = inst.data.max_stack
-			var current_stack: int = inst.quantity
+			if inst.data == item_data:
+				var max_stack: int = inst.data.max_stack
+				var current_stack: int = inst.quantity
 
-			if current_stack < max_stack:
-				return index
+				if current_stack < max_stack:
+					return index
 		elif first_empty_slot == -1:
 			first_empty_slot = index
 			
 
 	return first_empty_slot
+
+
+func get_slot_which_contains_item(item_data: ItemData):
+	for index in capacity:
+		var inst = _slot_to_inst.get(index, null)
+		if inst != null:
+			if inst.data == item_data:
+				return index
+			
+	return -1
+
 
 ## tries to give an index with the same instance that doesnt have max capacity.
 ## if not returns the first empty slot

@@ -1,7 +1,6 @@
 extends Node
 
 # ItemService
-# USE FOR INTERCONTAINER SWAPPING
 # handles items for all types of player_containers.
 # single source of truth that handles moving, stacking, swap for player_containers.
 #      emits signals for UIs to redraw.

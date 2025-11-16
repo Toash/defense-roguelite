@@ -54,6 +54,7 @@ folder_colors={
 "res://actors/": "red",
 "res://ai/": "gray",
 "res://audio/": "orange",
+"res://crafting/": "yellow",
 "res://interactable/": "yellow",
 "res://item/": "blue",
 "res://shaders/": "purple",
