@@ -60,3 +60,12 @@ func take(item_uid: String) -> ItemInstance:
 	_uid_to_ground_item[item_uid].queue_free()
 	_uid_to_ground_item.erase(item_uid)
 	return inst
+
+func clear():
+	for uid in _uid_to_ground_item:
+		(_uid_to_ground_item[uid] as Node2D).queue_free()
+	
+	_uid_to_ground_item.clear()
+
+	# for ground_item in _uid_to_ground_item.values():
+	# 	ground_item.queue_free()

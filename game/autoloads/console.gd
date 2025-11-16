@@ -39,6 +39,12 @@ func _ready() -> void:
 		ActorSpawner.spawn_horde(ActorRegistry.KEY.PAWNS_ZOMBIE, int(amount))
 		)
 
+	_register_command("new_world", func():
+		var world: World = get_tree().get_first_node_in_group("world") as World
+		if world:
+			world._setup()
+		)
+
 
 	_register_command("items", func():
 		var items = ItemDatabase.get_all()
@@ -99,7 +105,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			set_open(false)
 		else:
 			set_open(true)
-		
+
+
+	if OS.is_debug_build() and event is InputEventKey:
+		if (event as InputEventKey).keycode == KEY_N:
+			if event.is_pressed():
+				var world: World = get_tree().get_first_node_in_group("world") as World
+				if world:
+					world._setup()
 
 func _on_input_gui(event: InputEvent):
 	if event is InputEventKey and event.is_pressed():

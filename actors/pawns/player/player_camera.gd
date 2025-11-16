@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var min_zoom = 1
+@export var min_zoom = .1
 @export var max_zoom = 3
 @export var zoom_speed = 1.5
 @export var touchpad_zoom_speed = 0.05

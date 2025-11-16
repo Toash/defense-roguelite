@@ -1,7 +1,8 @@
-[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://31avaoegt2bk"]
+[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://31avaoegt2bk"]
 
 [ext_resource type="Texture2D" uid="uid://2ns2doti3l0w" path="res://world/textures/grass.png" id="1_pnyhn"]
 [ext_resource type="Texture2D" uid="uid://ms2mtwtl0jcl" path="res://world/textures/dirt.png" id="2_oi5pw"]
+[ext_resource type="Texture2D" uid="uid://c17q7te8w50w2" path="res://world/textures/water.png" id="3_aqkyf"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pnyhn"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -20,7 +21,12 @@ texture = ExtResource("1_pnyhn")
 texture = ExtResource("2_oi5pw")
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4pu0u"]
+texture = ExtResource("3_aqkyf")
+0:0/0 = 0
+
 [resource]
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_oi5pw")
 sources/1 = SubResource("TileSetAtlasSource_aqkyf")
+sources/2 = SubResource("TileSetAtlasSource_4pu0u")
