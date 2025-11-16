@@ -13,8 +13,6 @@ extends CanvasLayer
 
 @export var hotbar_ui: HotbarUI
 @export var health_bar: ProgressBar
-@export var hunger_bar: ProgressBar
-@export var thirst_bar: ProgressBar
 
 @export_group("in code")
 @export var player: Player
@@ -24,17 +22,6 @@ func _ready() -> void:
 	player_health.health_changed.connect(_on_health_changed)
 	health_bar.max_value = player_health.max_health
 	health_bar.value = player_health.health
-
-	var player_hunger: DrainingStat = player.hunger
-	player_hunger.poll.connect(_on_hunger_poll)
-	hunger_bar.max_value = player_hunger.max_stat
-	hunger_bar.value = player_hunger.stat
-
-
-	var player_thirst: DrainingStat = player.thirst
-	player_thirst.poll.connect(_on_thirst_poll)
-	thirst_bar.max_value = player_thirst.max_stat
-	thirst_bar.value = player_thirst.stat
 
 
 	# attach containers to the uis 
@@ -60,11 +47,6 @@ func _ready() -> void:
 func _on_health_changed(health: int):
 	health_bar.value = health
 
-func _on_hunger_poll(hunger: int):
-	hunger_bar.value = hunger
-
-func _on_thirst_poll(thirst: int):
-	thirst_bar.value = thirst
 
 func _on_container_interact(item_container: ItemContainer):
 	_set_world_container_ui(item_container)

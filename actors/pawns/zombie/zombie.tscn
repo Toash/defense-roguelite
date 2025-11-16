@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://blqvvu0ytchcd"]
+[gd_scene load_steps=35 format=3 uid="uid://blqvvu0ytchcd"]
 
 [ext_resource type="Script" uid="uid://b0o2o27qxmxw4" path="res://actors/pawns/generic/pawn.gd" id="1_6lqgw"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="2_ixsl6"]
@@ -29,6 +29,30 @@
 [ext_resource type="Script" uid="uid://dbgqumwhqtmf6" path="res://actors/pawns/generic/tile_pathfind.gd" id="27_sonq4"]
 [ext_resource type="Script" uid="uid://6x0akmb8ed61" path="res://actors/generic/health_bar.gd" id="28_6lqgw"]
 
+[sub_resource type="Shader" id="Shader_6lqgw"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 flash_color: source_color = vec4(1.);
+uniform float flash_percentage: hint_range(0.,1.) = 0;
+
+void fragment() {
+	vec4 original_color = texture(TEXTURE, UV);
+	
+	COLOR.rgb = mix(original_color.rgb,flash_color.rgb,flash_percentage);
+	COLOR.a = original_color.a;
+	
+	
+	//COLOR.a = original_color.a;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
+resource_local_to_scene = true
+shader = SubResource("Shader_6lqgw")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_percentage = 0.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fose"]
 size = Vector2(36, 72)
 
@@ -36,10 +60,10 @@ size = Vector2(36, 72)
 radius = 376.0053
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmu02"]
-radius = 80.024994
+radius = 118.004234
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_buy8w"]
-radius = 38.013157
+radius = 47.010635
 
 [node name="Zombie" type="CharacterBody2D"]
 collision_layer = 4
@@ -48,6 +72,7 @@ script = ExtResource("1_6lqgw")
 faction = 2
 
 [node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier", "health") instance=ExtResource("9_culwy")]
+material = SubResource("ShaderMaterial_7b2us")
 target_supplier = NodePath("../NavTargetProvider")
 health = NodePath("../Health")
 head_texture = ExtResource("10_mmehc")

@@ -39,6 +39,7 @@ func clear_slot() -> void:
 	for child in get_children():
 		if child is ItemUI:
 			child.queue_free()
+	number_label.text = ""
 	inst = null
 
 func set_number(number: int):

@@ -11,6 +11,9 @@ class_name HealthBar
 var max_hp: int
 var hp: int
 
+var show: bool = false
+
+
 func _ready():
 	if health == null:
 		push_error("HealthBar: no health supplied!")
@@ -23,6 +26,9 @@ func _ready():
 
 
 func _draw() -> void:
+	if not show:
+		return
+
 	self.z_index = 999
 	if hp <= 0:
 		return
@@ -41,4 +47,9 @@ func _draw() -> void:
 
 func set_hp(new_hp: int):
 	hp = clamp(new_hp, 0, max_hp)
+
+	show = true
+	queue_redraw()
+	await get_tree().create_timer(2).timeout
+	show = false
 	queue_redraw()

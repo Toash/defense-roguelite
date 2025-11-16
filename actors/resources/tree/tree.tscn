@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://mui6lymqwrto"]
+
+[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="1_khbji"]
+[ext_resource type="Texture2D" uid="uid://bn3qjdpbtaqlm" path="res://actors/resources/tree/tree.png" id="2_7w16m"]
+[ext_resource type="Shader" uid="uid://smx07gg7bpv2" path="res://actors/resources/tree/tree.gdshader" id="2_u7por"]
+[ext_resource type="Script" uid="uid://ckcpqp1b5jb7q" path="res://actors/resources/resource_dropper.gd" id="3_ae50a"]
+[ext_resource type="Resource" uid="uid://cxlw2i1uptmc5" path="res://item/items/tiles/wood_wall.tres" id="4_gahu0"]
+[ext_resource type="Script" uid="uid://6x0akmb8ed61" path="res://actors/generic/health_bar.gd" id="5_7w16m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sim66"]
+shader = ExtResource("2_u7por")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khbji"]
+size = Vector2(13, 53)
+
+[node name="Tree" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("1_khbji")
+max_health = 50
+metadata/_custom_type_script = "uid://gyp8bshfrfoj"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_sim66")
+position = Vector2(1, -49)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_7w16m")
+
+[node name="ResourceDropper" type="Node2D" parent="." node_paths=PackedStringArray("node_to_queue_free")]
+script = ExtResource("3_ae50a")
+node_to_queue_free = NodePath("..")
+item_to_drop = ExtResource("4_gahu0")
+metadata/_custom_type_script = "uid://ckcpqp1b5jb7q"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -25.5)
+shape = SubResource("RectangleShape2D_khbji")
+
+[node name="HealthBar" type="Node2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("5_7w16m")
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://6x0akmb8ed61"
+
+[connection signal="died" from="Health" to="ResourceDropper" method="drop"]

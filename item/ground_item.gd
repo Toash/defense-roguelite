@@ -5,6 +5,7 @@ class_name GroundItem
 func _ready():
 	if inst and inst.data:
 		$Sprite2D.texture = inst.data.icon
+		$Sprite2D.scale = Vector2(inst.data.ground_scale, inst.data.ground_scale)
 	# connect("body_entered", _on_body_entered)
 
 # func _on_body_entered(body):

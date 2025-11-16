@@ -1,7 +1,14 @@
 Roguelite survival game
 
+Explore -> Gather -> Defend -> Survive -> Extract -> Repeat....
+
 Core: Gather resources, make defenses, survive the night
-Meta progression: ???
+Meta progression: 
+    Explore more interesting
+    Gathering more efficient
+    Defending more expressive
+    - Simple skill tree
+    - New biomes.
 
 1) Spawn in world
 2) Gather resources to survive

@@ -18,7 +18,7 @@ var context: ItemContext
 
 
 func _ready():
-	area.body_entered.connect(_on_area_2d_body_entered)
+	area.body_entered.connect(_on_body_entered)
 
 func _process(delta):
 	root.look_at(context.target_provider.get_global_pos())
@@ -57,7 +57,7 @@ func _play():
 	animation_player.play("use")
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_body_entered(body: Node2D) -> void:
 	if body == user:
 		return
 	var health: Health = body.get_node("Health") as Health

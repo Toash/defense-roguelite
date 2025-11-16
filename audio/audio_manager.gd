@@ -6,6 +6,7 @@ extends Node
 
 @export_group("Weapons")
 @export var pistol_shoot: Array[AudioStream]
+@export var melee_swoosh: Array[AudioStream]
 @export var knife_slice: Array[AudioStream]
 
 @export_group("Humans")
@@ -29,6 +30,7 @@ enum KEY {
 	NO_SOUND,
 	STEP_GRASS,
 
+	WEAPON_MELEE_SWOOSH,
 	WEAPON_PISTOL_SHOOT,
 	WEAPON_KNIFE_SLICE,
 
@@ -86,6 +88,8 @@ func play_key(key: KEY, volume_db: float, position: Vector2, bus := "Master") ->
 			return
 		KEY.STEP_GRASS:
 			streams = grass_step
+		KEY.WEAPON_MELEE_SWOOSH:
+			streams = melee_swoosh
 		KEY.WEAPON_PISTOL_SHOOT:
 			streams = pistol_shoot
 		KEY.WEAPON_KNIFE_SLICE:

@@ -57,6 +57,9 @@ func show_sprite():
 
 func _process(delta):
 	_set_origin_position()
+	origin_position_emitted.emit(origin_node.global_position)
+
+	# print(global_position)
 	if displayed_inst:
 		if displayed_inst.data.follow_target == false: return
 	
@@ -69,7 +72,6 @@ func _process(delta):
 
 	inst_sprite.look_at(target)
 
-	origin_position_emitted.emit(origin_node.global_position)
 
 func _update_target(pos: Vector2):
 	target = pos
@@ -79,5 +81,6 @@ func _set_origin_position():
 	offset = offset.normalized()
 	offset *= distance_from_user
 
-	inst_sprite.position = self.position + offset
+	# inst_sprite.position = self.position + offset
+	# inst_sprite.position = self.position + Vector2.RIGHT * -40
 	origin_node.position = self.position + offset

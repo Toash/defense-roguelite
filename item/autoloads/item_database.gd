@@ -8,6 +8,9 @@ var _name_to_data: Dictionary[String, ItemData] = {}
 @export var items: Array[ItemData] = []
 
 
+var id_count: int = 0
+
+
 func _ready() -> void:
 	_load_item_data("res://item/items")
 	# build the index
@@ -15,9 +18,12 @@ func _ready() -> void:
 		if !data.display_name:
 			push_error("ItemDatabase: Item with missing name.")
 			continue
-		if _id_to_data.has(data.id) or _name_to_data.has(data.display_name):
-			push_error("ItemDatabase: Database already has this item")
-			continue
+		# if _id_to_data.has(data.id) or _name_to_data.has(data.display_name):
+		# 	push_error("ItemDatabase: Database already has this item")
+		# 	continue
+
+		data.id = id_count
+		id_count += 1
 
 		_id_to_data[data.id] = data
 		_name_to_data[data.display_name.to_lower()] = data

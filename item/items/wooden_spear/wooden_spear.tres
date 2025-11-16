@@ -7,14 +7,13 @@
 
 [resource]
 script = ExtResource("2_uicoe")
-id = 101
 display_name = "Wooden spear"
 description = "Stab"
 max_stack = 1
 icon = ExtResource("1_swtsm")
 cooldown_time = 0.5
 ingame_sprite = ExtResource("1_swtsm")
-scale = 3.0
-follow_target = true
+follow_target = false
+use_sound_key = 2
 item_effects = Array[ExtResource("1_qokqg")]([ExtResource("3_vrqey")])
 metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

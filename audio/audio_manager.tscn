@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1rm4vy4whff2"]
+[gd_scene load_steps=21 format=3 uid="uid://d1rm4vy4whff2"]
 
 [ext_resource type="Script" uid="uid://bkwhxe6xctrn0" path="res://audio/audio_manager.gd" id="1_5jhky"]
 [ext_resource type="AudioStream" uid="uid://cytdvns5e1i4a" path="res://audio/audioaudio/footsteps/grass_1.mp3" id="2_vxw8f"]
@@ -6,16 +6,26 @@
 [ext_resource type="AudioStream" uid="uid://d4cb26dn2ofoj" path="res://audio/audioaudio/footsteps/grass_3.mp3" id="4_i1k7u"]
 [ext_resource type="AudioStream" uid="uid://quv5igoeyjdh" path="res://audio/audioaudio/weapons/pistol_shot.wav" id="5_mhfhn"]
 [ext_resource type="AudioStream" uid="uid://dkro5e0juxeae" path="res://audio/audioaudio/humans/retro_hurt.wav" id="6_0xv67"]
+[ext_resource type="AudioStream" uid="uid://cxgp4xcpb4xk" path="res://audio/audioaudio/weapons/swoosh/swoosh 1.wav" id="6_2qk0m"]
 [ext_resource type="AudioStream" uid="uid://ixr8e05cptj7" path="res://audio/audioaudio/zombies/zombie_bite_1.wav" id="6_i1k7u"]
+[ext_resource type="AudioStream" uid="uid://bnii0xm4lg70i" path="res://audio/audioaudio/weapons/swoosh/swoosh 2.wav" id="7_gs81p"]
 [ext_resource type="AudioStream" uid="uid://ltrjniela7pm" path="res://audio/audioaudio/door/door_open.wav" id="7_hlghp"]
 [ext_resource type="AudioStream" uid="uid://hy48jd0hs3dm" path="res://audio/audioaudio/door/door_close.wav" id="8_6wlj3"]
 [ext_resource type="AudioStream" uid="uid://6dmthwh7u5tf" path="res://audio/audioaudio/pawn/death_squish_1.mp3" id="8_oyqdx"]
+[ext_resource type="AudioStream" uid="uid://de6gk2nbefqpe" path="res://audio/audioaudio/weapons/swoosh/swoosh 3.wav" id="8_w0cj7"]
 [ext_resource type="AudioStream" uid="uid://vchhhrsp46i" path="res://audio/audioaudio/building/place_thwack.wav" id="9_6wlj3"]
+[ext_resource type="AudioStream" uid="uid://c5bgx6vvh75yr" path="res://audio/audioaudio/weapons/swoosh/swoosh 4.wav" id="9_r57gi"]
+[ext_resource type="AudioStream" uid="uid://dq44i7airiafv" path="res://audio/audioaudio/weapons/swoosh/swoosh 5.wav" id="10_p04la"]
+[ext_resource type="AudioStream" uid="uid://jqgrkay2o3xu" path="res://audio/audioaudio/weapons/swoosh/swoosh 6.wav" id="11_1vsaw"]
+[ext_resource type="AudioStream" uid="uid://dkspcbwhj2qhd" path="res://audio/audioaudio/weapons/swoosh/swoosh 7.wav" id="12_f526q"]
+[ext_resource type="AudioStream" uid="uid://d3c017pqol10k" path="res://audio/audioaudio/weapons/swoosh/swoosh 8.wav" id="13_6rlbs"]
+[ext_resource type="AudioStream" uid="uid://b0jcckcms4fa0" path="res://audio/audioaudio/weapons/swoosh/swoosh 9.wav" id="14_87kw7"]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_5jhky")
 grass_step = Array[AudioStream]([ExtResource("2_vxw8f"), ExtResource("3_mhfhn"), ExtResource("4_i1k7u")])
 pistol_shoot = Array[AudioStream]([ExtResource("5_mhfhn")])
+melee_swoosh = Array[AudioStream]([ExtResource("6_2qk0m"), ExtResource("7_gs81p"), ExtResource("8_w0cj7"), ExtResource("9_r57gi"), ExtResource("10_p04la"), ExtResource("11_1vsaw"), ExtResource("12_f526q"), ExtResource("13_6rlbs"), ExtResource("14_87kw7")])
 human_hurt = Array[AudioStream]([ExtResource("6_0xv67")])
 zombie_attack = Array[AudioStream]([ExtResource("6_i1k7u")])
 zombie_death = Array[AudioStream]([ExtResource("8_oyqdx")])

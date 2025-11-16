@@ -3,7 +3,8 @@ extends Resource
 # "abstract" class for itemdata
 class_name ItemData
 
-@export var id: int
+# @export var id: int
+var id: int
 
 @export_group("Inventory")
 @export var display_name: String
@@ -16,6 +17,10 @@ class_name ItemData
 @export var consume_on_use := false
 
 
+@export_group("Ground Display")
+@export var ground_scale: float = 1
+
+
 @export_group("In-Game Display")
 # ingame display 
 @export var ingame_sprite: Texture2D
@@ -23,7 +28,7 @@ class_name ItemData
 @export var sprite_flipped = false
 
 ## item should point towards the target.
-@export var follow_target = false
+@export var follow_target = true
 
 @export_group("Sound")
 @export var use_sound_key: AudioManager.KEY = AudioManager.KEY.NO_SOUND

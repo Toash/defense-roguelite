@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxgp4xcpb4xk"
+path="res://.godot/imported/swoosh 1.wav-311e9ac3de1e1cd48fff1a0bf7e584c8.sample"
+
+[deps]
+
+source_file="res://audio/audioaudio/weapons/swoosh/swoosh 1.wav"
+dest_files=["res://.godot/imported/swoosh 1.wav-311e9ac3de1e1cd48fff1a0bf7e584c8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

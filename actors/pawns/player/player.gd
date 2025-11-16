@@ -16,10 +16,6 @@ class_name Player
 var state = "idle"
 var input_vector = Vector2.ZERO
 
-@export_group("Stats")
-# @export var health: Health
-@export var thirst: DrainingStat
-@export var hunger: DrainingStat
 
 @export_group("Inputs")
 @export var hotbar_input: HotbarInput
@@ -82,8 +78,6 @@ func save() -> Dictionary:
 		"position_y": position.y,
 
 		"health_data": health.to_dict(),
-		"hunger_data": hunger.to_dict(),
-		"thirst_data": thirst.to_dict(),
 
 	}
 
@@ -94,10 +88,5 @@ func load(d: Dictionary):
 	health.from_dict(d.health_data)
 	health.health_changed.emit(health.health)
 
-	hunger.from_dict(d.hunger_data)
-	hunger.poll.emit(hunger.stat)
-
-	thirst.from_dict(d.thirst_data)
-	thirst.poll.emit(thirst.stat)
 
 	Game.player_load()

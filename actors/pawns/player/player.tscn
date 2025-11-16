@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=34 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
@@ -6,9 +6,9 @@
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://cg3y6l7u7bglb" path="res://actors/pawns/player/interact_detector.gd" id="5_hiosj"]
 [ext_resource type="Script" uid="uid://dsrxhicfffw3e" path="res://actors/pawns/player/pickup_detector.gd" id="5_qjkh3"]
-[ext_resource type="Script" uid="uid://dgkass0sic6wa" path="res://actors/pawns/generic/draining_stat.gd" id="7_boad6"]
 [ext_resource type="Shader" uid="uid://cypb182ofc63b" path="res://shaders/outline.gdshader" id="7_fptfb"]
 [ext_resource type="Script" uid="uid://c5rhs0y5iry7d" path="res://input/mouse_input.gd" id="9_388e2"]
+[ext_resource type="Shader" uid="uid://48ta4ahe0rkq" path="res://shaders/character_sprite.gdshader" id="9_fptfb"]
 [ext_resource type="Script" uid="uid://co0hu31xc486a" path="res://item/item_container.gd" id="10_lsln6"]
 [ext_resource type="Script" uid="uid://dplrhtm2y2ben" path="res://actors/pawns/player/player_interaction.gd" id="12_ssdk0"]
 [ext_resource type="Script" uid="uid://chxhldiu0nvle" path="res://input/world_container_input.gd" id="13_7aotg"]
@@ -42,6 +42,12 @@ shader_parameter/allow_out_of_bounds = true
 shader_parameter/outline_thickness = 1.0
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yr7qf"]
+resource_local_to_scene = true
+shader = ExtResource("9_fptfb")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_percentage = 0.0
+
 [sub_resource type="Gradient" id="Gradient_dqf5y"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(1, 1, 1, 1)
@@ -51,7 +57,7 @@ gradient = SubResource("Gradient_dqf5y")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "hotbar_equipped_inst", "pickups", "thirst", "hunger", "hotbar_input", "world_container_input", "context_input", "health") groups=["persist", "player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory", "hotbar", "hotbar_equipped_inst", "pickups", "hotbar_input", "world_container_input", "context_input", "health") groups=["persist", "player"]]
 collision_layer = 4
 collision_mask = 38
 script = ExtResource("1_onrkg")
@@ -60,8 +66,6 @@ inventory = NodePath("Containers/Inventory")
 hotbar = NodePath("Containers/Hotbar")
 hotbar_equipped_inst = NodePath("HotbarEquippedInst")
 pickups = NodePath("Containers/Pickups")
-thirst = NodePath("Stats/Thirst")
-hunger = NodePath("Stats/Hunger")
 hotbar_input = NodePath("Inputs/HotbarInput")
 world_container_input = NodePath("Inputs/WorldContainerInput")
 context_input = NodePath("Inputs/ContextInput")
@@ -129,6 +133,7 @@ player = NodePath("..")
 outline_material = SubResource("ShaderMaterial_h0lia")
 
 [node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier", "health") instance=ExtResource("13_k67x5")]
+material = SubResource("ShaderMaterial_yr7qf")
 target_supplier = NodePath("../Inputs/MouseInput")
 health = NodePath("../Health")
 head_texture = ExtResource("14_0wchr")
@@ -157,17 +162,6 @@ position = Vector2(360, 0)
 energy = 0.38
 texture = ExtResource("20_otn2r")
 texture_scale = 2.82
-
-[node name="Stats" type="Node2D" parent="."]
-
-[node name="Hunger" type="Node" parent="Stats"]
-script = ExtResource("7_boad6")
-metadata/_custom_type_script = "uid://dgkass0sic6wa"
-
-[node name="Thirst" type="Node" parent="Stats"]
-script = ExtResource("7_boad6")
-drain_rate = 0.02
-metadata/_custom_type_script = "uid://dgkass0sic6wa"
 
 [node name="Items" type="Node2D" parent="."]
 
@@ -242,7 +236,7 @@ itemdata = ExtResource("26_yr7qf")
 [connection signal="mouse_position" from="Inputs/MouseInput" to="CharacterSprite" method="_set_target"]
 [connection signal="mouse_position" from="Inputs/MouseInput" to="Items/ItemDisplay" method="_update_target"]
 [connection signal="use_equipment" from="Inputs/EquipmentInput" to="Items/Equipment" method="use"]
-[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
 [connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_left_hand"]
-[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_left_hand"]
+[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
 [connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_right_hand"]
+[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_left_hand"]

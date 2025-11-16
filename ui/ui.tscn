@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3kkj3vijsw7s"]
+[gd_scene load_steps=8 format=3 uid="uid://b3kkj3vijsw7s"]
 
 [ext_resource type="Script" uid="uid://dy00162n1j4me" path="res://ui/ui.gd" id="1_bo1jx"]
 [ext_resource type="PackedScene" uid="uid://c44tg88n7uy51" path="res://ui/inventory_ui.tscn" id="1_ks8t7"]
@@ -10,21 +10,13 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obcwv"]
 bg_color = Color(0.811578, 1.85303e-06, 3.85046e-07, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo1jx"]
-bg_color = Color(0.740564, 0.381836, 2.11775e-06, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gycre"]
-bg_color = Color(0, 0.37443, 0.964439, 1)
-
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("inventory_window", "pickup_window", "world_container_window", "hotbar_ui", "health_bar", "hunger_bar", "thirst_bar")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("inventory_window", "pickup_window", "world_container_window", "hotbar_ui", "health_bar")]
 script = ExtResource("1_bo1jx")
 inventory_window = NodePath("InventoryWindow")
 pickup_window = NodePath("PickupWindow")
 world_container_window = NodePath("WorldContainerWindow")
 hotbar_ui = NodePath("HotbarUI")
 health_bar = NodePath("Stats/MarginContainer/VBoxContainer/Health")
-hunger_bar = NodePath("Stats/MarginContainer/VBoxContainer/Hunger")
-thirst_bar = NodePath("Stats/MarginContainer/VBoxContainer/Thirst")
 
 [node name="HotbarUI" parent="." instance=ExtResource("2_wl5ax")]
 offset_left = 637.0
@@ -77,26 +69,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Health"
-
-[node name="Hunger" type="ProgressBar" parent="Stats/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_bo1jx")
-
-[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/Hunger"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Hunger"
-
-[node name="Thirst" type="ProgressBar" parent="Stats/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_gycre")
-
-[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/Thirst"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Thirst"
 
 [node name="WorldContainerWindow" parent="." instance=ExtResource("4_tf0e0")]
 offset_left = 649.0

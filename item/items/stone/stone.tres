@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dvlew2xaik00e"]
+
+[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_81tyu"]
+[ext_resource type="Texture2D" uid="uid://b5pp5p1uqv0so" path="res://item/items/stone/stone.png" id="1_ua6cn"]
+[ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="2_ua6cn"]
+
+[resource]
+script = ExtResource("2_ua6cn")
+display_name = "Stone"
+description = "Just a stone. That is all."
+max_stack = 64
+icon = ExtResource("1_ua6cn")
+ground_scale = 2.0
+ingame_sprite = ExtResource("1_ua6cn")
+metadata/_custom_type_script = "uid://c0ie8dprpo3eg"
