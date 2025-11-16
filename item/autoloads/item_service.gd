@@ -103,7 +103,9 @@ func quick_swap(from_container: ItemContainer, from_index: int):
 		print("ItemService: Best container is the same as the current container")
 		return
 
-	var to_index = to_container.get_first_empty_slot()
+	# var to_index = to_container.get_first_empty_slot()
+	var item_data: ItemData = from_container.get_item_instance(from_index).data
+	var to_index = to_container.get_best_slot(item_data)
 
 	if to_index == -1:
 		print("ItemService: No more space whe quick swapping.")

@@ -78,6 +78,25 @@ func get_first_empty_slot() -> int:
 			return index
 	return -1
 
+
+func get_best_slot(item_data: ItemData):
+	# scan for stackable else just first empty slot
+	var first_empty_slot: int = -1
+
+	for index in capacity:
+		var inst = _slot_to_inst.get(index, null)
+		if inst != null:
+			var max_stack: int = inst.data.max_stack
+			var current_stack: int = inst.quantity
+
+			if current_stack < max_stack:
+				return index
+		elif first_empty_slot == -1:
+			first_empty_slot = index
+			
+
+	return first_empty_slot
+
 ## tries to give an index with the same instance that doesnt have max capacity.
 ## if not returns the first empty slot
 ## returns -1 if no slot is available.
