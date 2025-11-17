@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AltitudeBand" load_steps=2 format=3 uid="uid://uhvi6w102lyv"]
+
+[ext_resource type="Script" uid="uid://bqfyi0m1kshlg" path="res://world/resources/altitude_band.gd" id="1_lu2jw"]
+
+[resource]
+script = ExtResource("1_lu2jw")
+type = 1
+max = 0.1
+metadata/_custom_type_script = "uid://bqfyi0m1kshlg"

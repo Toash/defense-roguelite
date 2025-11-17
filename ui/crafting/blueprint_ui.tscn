@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://5bx2xryj8581" path="res://ui/crafting/blueprint_ui.gd" id="1_3plvy"]
 [ext_resource type="Texture2D" uid="uid://bpyb1qw03660d" path="res://ui/crafting/arrow.png" id="2_0khts"]
 
-[node name="BlueprintUI" type="PanelContainer" node_paths=PackedStringArray("ingredients_root", "output_root")]
+[node name="BlueprintUI" type="PanelContainer" node_paths=PackedStringArray("ingredients_root", "output_root", "button")]
 offset_right = 8.0
 offset_bottom = 8.0
 script = ExtResource("1_3plvy")
 ingredients_root = NodePath("MarginContainer/HBoxContainer/MarginContainer/Ingredients_root")
 output_root = NodePath("MarginContainer/HBoxContainer/MarginContainer3/Output_root")
+button = NodePath("Button")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2

@@ -4,6 +4,8 @@ extends Node2D
 ## worldgen and pathfinding 
 class_name World
 
+@export var world_config: WorldConfig
+
 @export var ground_tiles: TileMapLayer
 @export var wall_tiles: TileMapLayer
 @export var interactable_tiles: TileMapLayer
@@ -32,18 +34,6 @@ func _ready():
 	setup = true
 	world_setup.emit()
 
-enum ALTITUDE {
-	WATER,
-	DIRT,
-	GRASS
-}
-
-enum RESOURCE {
-	ABSOLUTELY_NOTHING,
-	TREE,
-	STONE
-}
-
 
 func _setup():
 	print("setup!")
@@ -52,15 +42,20 @@ func _setup():
 	
 
 func _setup_ground():
-	var world_width = 128
-	var world_height = 128
+	var world_width = world_config.world_width
+	var world_height = world_config.world_height
 
-	var base_width = 24
-	var base_height = 24
+	var base_width = world_config.base_width
+	var base_height = world_config.base_height
 
 
 	var altitude = FastNoiseLite.new()
 	var resource = FastNoiseLite.new()
+
+	# altitude.frequency = .1
+	# altitude.noise_type = FastNoiseLite.TYPE_VALUE_CUBIC
+	altitude.fractal_type = FastNoiseLite.FRACTAL_RIDGED
+
 
 	altitude.seed = randi()
 	resource.seed = randi()
@@ -72,16 +67,9 @@ func _setup_ground():
 
 
 	# these link back to their respective tilesets.
-	var altitude_to_source_id: Dictionary[int, int]
-	altitude_to_source_id[ALTITUDE.WATER] = 2
-	altitude_to_source_id[ALTITUDE.DIRT] = 1
-	altitude_to_source_id[ALTITUDE.GRASS] = 0
-
-	var resource_to_source_id: Dictionary[int, int]
-	resource_to_source_id[RESOURCE.TREE] = 0
-
-	var resource_to_alternative_id: Dictionary[int, int]
-	resource_to_alternative_id[RESOURCE.TREE] = 1
+	var altitude_to_source_id = world_config.altitude_to_source_id
+	var resource_to_source_id = world_config.resource_to_source_id
+	var resource_to_alternative_id = world_config.resource_to_alternative_id
 
 
 	var tree_counter: int = 0
@@ -95,14 +83,14 @@ func _setup_ground():
 			var altitude_value: float = altitude.get_noise_2d(x, y)
 			var resource_value: float = resource.get_noise_2d(x, y)
 
-			var alt_enum: ALTITUDE = _get_altitude(altitude_value)
-			var resource_enum: RESOURCE = _get_resource(resource_value)
+			var alt_enum: WorldEnums.ALTITUDE = _get_altitude(altitude_value)
+			var resource_enum: WorldEnums.RESOURCE = _get_resource(resource_value)
 
 
 			# ensure we have room to build for base.
 			if x >= -base_width / 2 and x <= base_width / 2:
 				if y >= -base_height / 2 and y <= base_height / 2:
-					ground_tiles.set_cell(Vector2i(x, y), altitude_to_source_id[ALTITUDE.GRASS], Vector2i(0, 0))
+					ground_tiles.set_cell(Vector2i(x, y), world_config.altitude_to_source_id[WorldEnums.ALTITUDE.GRASS], Vector2i(0, 0))
 					continue
 
 
@@ -111,25 +99,25 @@ func _setup_ground():
 			ground_tiles.set_cell(Vector2i(x, y), altitude_source_id, Vector2i(0, 0))
 
 			# set resource tile.
-			if resource_enum != RESOURCE.ABSOLUTELY_NOTHING:
+			if resource_enum != WorldEnums.RESOURCE.ABSOLUTELY_NOTHING:
 				match (resource_enum):
-					RESOURCE.TREE:
+					WorldEnums.RESOURCE.TREE:
 						if tree_counter <= tree_interval:
 							tree_counter += 1
 							continue
 						else:
 							tree_counter = 0
-							if alt_enum == ALTITUDE.GRASS:
+							if alt_enum == WorldEnums.ALTITUDE.GRASS:
 								var resource_source_id: int = resource_to_source_id[resource_enum]
 								var resource_alternative_id: int = resource_to_alternative_id[resource_enum]
 								resource_tiles.set_cell(Vector2i(x, y), resource_source_id, Vector2i(0, 0), resource_alternative_id)
-					RESOURCE.STONE:
+					WorldEnums.RESOURCE.STONE:
 						if stone_counter <= stone_interval:
 							stone_counter += 1
 							continue
 						else:
 							stone_counter = 0
-							if alt_enum == ALTITUDE.GRASS:
+							if alt_enum == WorldEnums.ALTITUDE.GRASS:
 								var local_pos = resource_tiles.map_to_local(Vector2i(x, y))
 								var global_pos = resource_tiles.to_global(local_pos)
 								GroundItems.spawn_by_name("Stone", 1, global_pos)
@@ -138,27 +126,19 @@ func _setup_ground():
 	# spawn stuff on certain tiles
 
 
-func _get_altitude(altitude_value: float) -> ALTITUDE:
-	var alt_enum: ALTITUDE
-	if altitude_value < -0.2:
-		alt_enum = ALTITUDE.WATER
-	elif altitude_value >= -0.2 and altitude_value < 0:
-		alt_enum = ALTITUDE.DIRT
-	else:
-		alt_enum = ALTITUDE.GRASS
-
-	return alt_enum
+func _get_altitude(val: float) -> WorldEnums.ALTITUDE:
+	for band in world_config.altitude_bands:
+		if val <= band.max:
+			return band.type
+	# fallback
+	return world_config.altitude_bands[-1]["type"]
 
 
-func _get_resource(val: float) -> RESOURCE:
-	var resource_enum: RESOURCE
-	if val >= -0.1 and val <= 0:
-		return RESOURCE.TREE
-	elif val >= -0 and val <= .1:
-		return RESOURCE.STONE
-
-	return RESOURCE.ABSOLUTELY_NOTHING
-
+func _get_resource(val: float) -> WorldEnums.RESOURCE:
+	for band in world_config.resource_bands:
+		if val >= band.min and val <= band.max:
+			return band.type
+	return WorldEnums.RESOURCE.ABSOLUTELY_NOTHING
 
 func _setup_pathfinding():
 	# pathfinding

@@ -44,7 +44,9 @@ func _ready() -> void:
 	world_container_input.container_changed.connect(_on_container_changed)
 
 
-	(crafting_window.get_content() as CraftingUI).setup(player.get_player_crafting().get_blueprints())
+	var crafting_ui: CraftingUI = crafting_window.get_content() as CraftingUI
+	crafting_ui.setup(player.get_player_crafting().get_blueprints())
+	crafting_ui.blueprint_craft.connect(_on_blueprint_craft)
 
 
 func _on_health_changed(health: int):
@@ -66,3 +68,6 @@ func _set_world_container_ui(item_container: ItemContainer):
 
 	container_ui.container = item_container
 	container_ui.setup()
+
+func _on_blueprint_craft(blueprint: Blueprint):
+	player.get_player_crafting().craft(blueprint)

@@ -1,12 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=13 format=3 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="Script" uid="uid://csd4ncy3jgem8" path="res://world/world.gd" id="1_4papg"]
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/pawns/player/player.tscn" id="1_fyhu2"]
+[ext_resource type="Resource" uid="uid://d4jf4712x0u2o" path="res://world/resources/worlds/forest.tres" id="2_dqqhb"]
 [ext_resource type="PackedScene" uid="uid://b3kkj3vijsw7s" path="res://ui/ui.tscn" id="5_dqqhb"]
 [ext_resource type="PackedScene" uid="uid://c08inc3nvav0f" path="res://ui/pause_menu.tscn" id="6_b2suy"]
 [ext_resource type="TileSet" uid="uid://31avaoegt2bk" path="res://world/tilesets/ground.tres" id="8_fyhu2"]
-[ext_resource type="Script" uid="uid://c5t800787mhdc" path="res://world/fog_manager.gd" id="8_ysn08"]
-[ext_resource type="PackedScene" uid="uid://cf7w5yb2lhl4y" path="res://world/fog.tscn" id="9_m0cxt"]
 [ext_resource type="TileSet" uid="uid://dbtkbyo4n77qy" path="res://world/tilesets/walls.tres" id="9_ov2xu"]
 [ext_resource type="TileSet" uid="uid://kp24hb4w12of" path="res://world/tilesets/interactables.tres" id="10_mad0u"]
 [ext_resource type="TileSet" uid="uid://dal5shiydc68s" path="res://world/tilesets/resources.tres" id="10_ocfjn"]
@@ -16,6 +15,7 @@
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "debug_path") groups=["world"]]
 script = ExtResource("1_4papg")
+world_config = ExtResource("2_dqqhb")
 ground_tiles = NodePath("Tiles/GroundTiles")
 wall_tiles = NodePath("Tiles/WallTiles")
 interactable_tiles = NodePath("Tiles/InteractableTiles")
@@ -33,14 +33,6 @@ player = NodePath("../Player")
 visible = false
 position = Vector2(-1, 0)
 color = Color(0.5, 0.5, 0.5, 1)
-
-[node name="FogManager" type="Node" parent="." node_paths=PackedStringArray("world_root", "ground_layer")]
-script = ExtResource("8_ysn08")
-disabled = true
-fog_scene = ExtResource("9_m0cxt")
-world_root = NodePath("..")
-ground_layer = NodePath("../Tiles/GroundTiles")
-metadata/_custom_type_script = "uid://c5t800787mhdc"
 
 [node name="Tiles" type="Node2D" parent="."]
 scale = Vector2(4, 4)

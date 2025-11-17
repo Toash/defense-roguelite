@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ResourceBand" load_steps=2 format=3 uid="uid://mnatqrc72h2y"]
+
+[ext_resource type="Script" uid="uid://cpjpk8nlocf5b" path="res://world/resources/resource_band.gd" id="1_frchq"]
+
+[resource]
+script = ExtResource("1_frchq")
+type = 1
+min = -0.1
+metadata/_custom_type_script = "uid://cpjpk8nlocf5b"
