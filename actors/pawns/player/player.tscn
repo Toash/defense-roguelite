@@ -261,7 +261,7 @@ index = 1
 [connection signal="mouse_position" from="Inputs/MouseInput" to="CharacterSprite" method="_set_target"]
 [connection signal="mouse_position" from="Inputs/MouseInput" to="Items/ItemDisplay" method="_update_target"]
 [connection signal="use_equipment" from="Inputs/EquipmentInput" to="Items/Equipment" method="use"]
-[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
 [connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_left_hand"]
+[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
 [connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_left_hand"]
 [connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_right_hand"]

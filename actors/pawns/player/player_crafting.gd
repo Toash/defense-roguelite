@@ -21,4 +21,6 @@ func craft(blueprint: Blueprint):
 			for results: ItemDataGroup in blueprint.get_outputs():
 				# add the results
 				player_containers.force_add_item_group(results)
+		else:
+			print("Player Crafting: player does not have the necessary ingredients.")
 	pass

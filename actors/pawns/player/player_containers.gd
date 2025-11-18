@@ -9,24 +9,7 @@ class_name PlayerContainers
 @export var inventory_container: ItemContainer
 
 
-## Takes amount of item_data from the player containres, if the amount of said items isnt present, returns null. 
-# func must_take_amount(item_data: ItemData, amount: int) -> ItemDataGroup:
-# 	var total_group: ItemDataGroup = null
-# 	var to_take: int = amount
-
-# 	total_group = _take_as_much(hotbar_container, item_data, to_take)
-# 	to_take -= total_group.amount
-# 	if total_group != null:
-# 		total_group = ItemDataGroup.combine(total_group, _take_as_much(inventory_container, item_data, to_take))
-# 	else:
-# 		total_group = _take_as_much(inventory_container, item_data, to_take)
-
-# 	if total_group.amount == amount:
-# 		return total_group
-# 	else:
-# 		return null
-
-
+## Take amount of items across the player containers, if they are not avaliable, return null.
 func must_take_amount(item_data: ItemData, amount: int) -> ItemDataGroup:
 	var available := 0
 
@@ -59,6 +42,9 @@ func must_take_amount(item_data: ItemData, amount: int) -> ItemDataGroup:
 			to_take -= group_inventory.amount
 
 	# at this point, to_take should be 0 if everything is correct
+	if to_take != 0:
+		push_error("PlayerContainers: WTF")
+		return null
 	return total_group
 
 
@@ -76,8 +62,7 @@ func force_add_item_group(group: ItemDataGroup):
 		GroundItems.spawn_by_data(group.item_data, items_left, global_position)
 
 
-## attempts to take an amount of an item from the container.
-## amount left is the amount_to_take - the amount in the returned group.
+## take as much as avaliable from the container.
 func _take_as_much(container: ItemContainer, item_data: ItemData, amount_to_take: int) -> ItemDataGroup:
 	var total_group: ItemDataGroup = null
 	var amount_needed_to_take = amount_to_take
