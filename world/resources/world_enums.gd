@@ -11,3 +11,9 @@ enum RESOURCE {
 	TREE,
 	STONE
 }
+
+
+enum LAYER {
+	GROUND,
+	WALL
+}

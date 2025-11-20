@@ -12,7 +12,7 @@ func _ready() -> void:
 			detector = node as PickupDetector
 
 	if detector == null:
-		push_error("Player needs pickup detector.")
+		push_error("Pawn needs pickup detector.")
 
 
 # func _process(delta):

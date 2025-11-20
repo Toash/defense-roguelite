@@ -8,7 +8,7 @@ extends State
 @export var wander_interval_default: float = 10
 @export var wander_interval_random: float = 4
 
-@export var player_tracker: PlayerTracker
+@export var player_tracker: PawnTracker
 @export var character: CharacterBody2D
 @export var tile_pathfind: TilePathfind
 
@@ -31,7 +31,7 @@ func state_enter():
 	wander_point = character.global_position
 	wander_interval = wander_interval_default + rng.randf_range(-wander_interval_random, wander_interval_random)
 
-	player_tracker.found_player.connect(_on_found_player)
+	player_tracker.found_pawn.connect(_on_found_player)
 	tile_pathfind.enable()
 	tile_pathfind.set_speed(wander_speed)
 
@@ -47,7 +47,7 @@ func state_physics_update(delta: float):
 
 func state_exit():
 	active = false
-	player_tracker.found_player.disconnect(_on_found_player)
+	player_tracker.found_pawn.disconnect(_on_found_player)
 	tile_pathfind.disable()
 
 
@@ -59,6 +59,6 @@ func _on_timeout():
 	print(new_wander_point)
 	tile_pathfind.set_target(new_wander_point)
 
-func _on_found_player(player: Player):
+func _on_found_player(player: Pawn):
 	target.reference = player
 	transitioned.emit(self, "chase")

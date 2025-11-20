@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+## Generic "Humanoid"
 class_name Pawn
 
 enum FACTION {
@@ -10,9 +11,9 @@ enum FACTION {
 
 @export var faction: FACTION
 
-@export_group("Stats")
-@export var walk_speed: float = 200
-@export var max_health: float = 20
+# @export_group("Stats")
+var pawn_name: String
+# var walk_speed: float = 200
 
 
 @export_group("References")

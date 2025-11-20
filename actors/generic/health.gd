@@ -41,3 +41,15 @@ func heal(amount: float):
 
 	health = clamp(health + amount, 0, max_health)
 	health_changed.emit(health)
+
+func set_health(health: int) -> void:
+	self.health = health
+
+func set_max_health(h: int) -> void:
+	self.max_health = h
+
+func get_health() -> int:
+	return self.health
+
+func get_max_health() -> int:
+	return self.max_health

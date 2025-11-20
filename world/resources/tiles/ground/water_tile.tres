@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TileInfo" load_steps=2 format=3 uid="uid://cnni0n64sw7am"]
+
+[ext_resource type="Script" uid="uid://xhxw30qy6vry" path="res://world/resources/tiles/tile_info.gd" id="1_43kvw"]
+
+[resource]
+script = ExtResource("1_43kvw")
+source_id = 2
+metadata/_custom_type_script = "uid://xhxw30qy6vry"

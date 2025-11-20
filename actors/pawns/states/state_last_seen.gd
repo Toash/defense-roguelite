@@ -3,7 +3,7 @@ extends State
 
 @export var speed = 200
 @export var character: CharacterBody2D
-@export var player_tracker: PlayerTracker
+@export var player_tracker: PawnTracker
 
 @export var nav: NavigationAgent2D
 
@@ -14,7 +14,7 @@ var active = false
 
 func state_enter():
 	active = true
-	player_tracker.found_player.connect(_on_player_found)
+	player_tracker.found_pawn.connect(_on_player_found)
 	print("Going to last seen position.")
 
 func state_physics_update(delta: float):
@@ -36,8 +36,8 @@ func state_physics_update(delta: float):
 func state_exit():
 	active = false
 	
-	player_tracker.found_player.disconnect(_on_player_found)
+	player_tracker.found_pawn.disconnect(_on_player_found)
 
-func _on_player_found(player: Player):
+func _on_player_found(player: Pawn):
 	target.reference = player
 	transitioned.emit(self, "chase")

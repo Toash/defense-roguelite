@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=16 format=3 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="Script" uid="uid://csd4ncy3jgem8" path="res://world/world.gd" id="1_4papg"]
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/pawns/player/player.tscn" id="1_fyhu2"]
@@ -11,9 +11,12 @@
 [ext_resource type="TileSet" uid="uid://dal5shiydc68s" path="res://world/tilesets/resources.tres" id="10_ocfjn"]
 [ext_resource type="PackedScene" uid="uid://dnpygi6xo1s0n" path="res://actors/nexus/nexus.tscn" id="11_ov2xu"]
 [ext_resource type="AudioStream" uid="uid://ce32rgxtm702s" path="res://audio/audioaudio/weather/smooth_wind.mp3" id="12_mad0u"]
+[ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="13_dqqhb"]
 [ext_resource type="Script" uid="uid://bhr5uamvonway" path="res://actors/pawns/generic/debug_path.gd" id="13_ocfjn"]
+[ext_resource type="Script" uid="uid://c100tn48lnodg" path="res://actors/pawns/enemies/wave_spawner.gd" id="14_dqqhb"]
+[ext_resource type="Resource" uid="uid://bodglwsk04b87" path="res://actors/pawns/enemies/zombie/basic_zombie.tres" id="15_b2suy"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "debug_path") groups=["world"]]
+[node name="World" type="Node2D" node_paths=PackedStringArray("ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "debug_path", "spawn_points") groups=["world"]]
 script = ExtResource("1_4papg")
 world_config = ExtResource("2_dqqhb")
 ground_tiles = NodePath("Tiles/GroundTiles")
@@ -21,6 +24,7 @@ wall_tiles = NodePath("Tiles/WallTiles")
 interactable_tiles = NodePath("Tiles/InteractableTiles")
 resource_tiles = NodePath("Tiles/ResourceTiles")
 debug_path = NodePath("DebugPath")
+spawn_points = [NodePath("Roots/SpawnPoints/Marker2D")]
 
 [node name="Player" parent="." instance=ExtResource("1_fyhu2")]
 
@@ -68,3 +72,22 @@ volume_db = -10.565
 autoplay = true
 bus = &"weather"
 parameters/looping = true
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-349, -99)
+texture = ExtResource("13_dqqhb")
+
+[node name="WaveSpawner" type="Node2D" parent="." node_paths=PackedStringArray("enemy_root")]
+script = ExtResource("14_dqqhb")
+enemy_root = NodePath("../Roots/ZombieRoot")
+enemy_data = ExtResource("15_b2suy")
+metadata/_custom_type_script = "uid://c100tn48lnodg"
+
+[node name="Roots" type="Node2D" parent="."]
+
+[node name="ZombieRoot" type="Node2D" parent="Roots"]
+
+[node name="SpawnPoints" type="Node2D" parent="Roots"]
+
+[node name="Marker2D" type="Marker2D" parent="Roots/SpawnPoints"]
+position = Vector2(25, -2775)

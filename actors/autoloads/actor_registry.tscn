@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b3tawo6n660ry"]
 
 [ext_resource type="Script" uid="uid://dq1ns48hpjm01" path="res://actors/autoloads/actor_registry.gd" id="1_4ku6g"]
-[ext_resource type="PackedScene" uid="uid://blqvvu0ytchcd" path="res://actors/pawns/zombie/zombie.tscn" id="2_bq1va"]
+[ext_resource type="PackedScene" uid="uid://blqvvu0ytchcd" path="res://actors/pawns/enemies/zombie/zombie.tscn" id="2_bq1va"]
 
 [node name="ActorRegistry" type="Node"]
 script = ExtResource("1_4ku6g")

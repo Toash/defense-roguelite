@@ -6,6 +6,7 @@ extends CanvasLayer
 # @export var hotbar_input: HotbarInput
 
 
+@export_group("UI references")
 @export var inventory_window: ExpandableWindow
 @export var pickup_window: ExpandableWindow
 @export var world_container_window: ExpandableWindow
@@ -14,8 +15,10 @@ extends CanvasLayer
 @export var hotbar_ui: HotbarUI
 @export var health_bar: ProgressBar
 
-@export_group("in code")
-@export var player: Player
+@export_group("World references")
+@export var player: Pawn
+@export var wave_spawner: WaveSpawner
+
 
 func _ready() -> void:
 	var player_health: Health = player.get_health()

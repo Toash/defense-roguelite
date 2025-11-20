@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=3 uid="uid://blqvvu0ytchcd"]
 
-[ext_resource type="Script" uid="uid://b0o2o27qxmxw4" path="res://actors/pawns/generic/pawn.gd" id="1_6lqgw"]
+[ext_resource type="Script" uid="uid://si1ikxp52cuk" path="res://actors/pawns/enemies/enemy.gd" id="1_08fpo"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="2_ixsl6"]
 [ext_resource type="Script" uid="uid://dt4kadfyw2ywh" path="res://actors/pawns/generic/ai_target.gd" id="4_ymihc"]
 [ext_resource type="Script" uid="uid://cskdd0xcjjmfc" path="res://actors/pawns/states/state_wander.gd" id="6_cthrv"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="8_23tyx"]
 [ext_resource type="Script" uid="uid://y6xyi4gu5uqa" path="res://actors/pawns/states/state_last_seen.gd" id="8_uotjo"]
 [ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/pawns/character_sprite.tscn" id="9_culwy"]
-[ext_resource type="Script" uid="uid://dn7fydgbbk3wg" path="res://actors/pawns/zombie/zombie_death.gd" id="9_oyhgy"]
+[ext_resource type="Script" uid="uid://dn7fydgbbk3wg" path="res://actors/pawns/enemies/zombie/zombie_death.gd" id="9_oyhgy"]
 [ext_resource type="Script" uid="uid://bdpo0eyqlq8re" path="res://actors/pawns/states/state_attack.gd" id="9_ubgnx"]
 [ext_resource type="Script" uid="uid://cjnn80jlwilpx" path="res://actors/pawns/states/state_nexus.gd" id="10_drpw1"]
 [ext_resource type="Texture2D" uid="uid://doueacum5bmne" path="res://actors/pawns/sprites/head/head_zombie_1.png" id="10_mmehc"]
@@ -17,19 +17,19 @@
 [ext_resource type="Texture2D" uid="uid://bcrncjn0sri3i" path="res://actors/pawns/sprites/hand/hands_zombie_1.png" id="12_b6tq7"]
 [ext_resource type="Script" uid="uid://b4wdssttxtlra" path="res://actors/pawns/states/state_break.gd" id="12_sonq4"]
 [ext_resource type="Script" uid="uid://c8dnwtjdg5wbq" path="res://audio/footsteps.gd" id="13_mmehc"]
-[ext_resource type="Script" uid="uid://b7nergdxei2p6" path="res://actors/pawns/zombie/zombie_arms.gd" id="18_ubgnx"]
+[ext_resource type="Script" uid="uid://b7nergdxei2p6" path="res://actors/pawns/enemies/zombie/zombie_arms.gd" id="18_ubgnx"]
 [ext_resource type="Script" uid="uid://kesirm75pc1q" path="res://item/generic/equipment.gd" id="18_xnimh"]
 [ext_resource type="Script" uid="uid://dflsf7ovo0jqw" path="res://item/generic/item_display.gd" id="19_ld5a4"]
-[ext_resource type="Script" uid="uid://c816dagnqn6re" path="res://actors/pawns/zombie/zombie_item.gd" id="20_cthrv"]
+[ext_resource type="Script" uid="uid://c816dagnqn6re" path="res://actors/pawns/enemies/zombie/zombie_item.gd" id="20_cthrv"]
 [ext_resource type="Resource" uid="uid://6rsgvhonqx4b" path="res://item/items/zombie/zombie_attack.tres" id="21_cthrv"]
 [ext_resource type="Script" uid="uid://bnk868k5qp3nb" path="res://actors/pawns/nav_target_provider.gd" id="23_cthrv"]
 [ext_resource type="Script" uid="uid://c8vlygcerjqvb" path="res://actors/pawns/generic/hurt_sound.gd" id="24_41tli"]
-[ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/player_tracker.gd" id="26_buy8w"]
+[ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/pawn_tracker.gd" id="26_buy8w"]
 [ext_resource type="Script" uid="uid://d3o527u2hmgp7" path="res://actors/pawns/generic/defense_tracker.gd" id="26_sonq4"]
 [ext_resource type="Script" uid="uid://dbgqumwhqtmf6" path="res://actors/pawns/generic/tile_pathfind.gd" id="27_sonq4"]
 [ext_resource type="Script" uid="uid://6x0akmb8ed61" path="res://actors/generic/health_bar.gd" id="28_6lqgw"]
 
-[sub_resource type="Shader" id="Shader_6lqgw"]
+[sub_resource type="Shader" id="Shader_08fpo"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -49,7 +49,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
 resource_local_to_scene = true
-shader = SubResource("Shader_6lqgw")
+shader = SubResource("Shader_08fpo")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
@@ -65,11 +65,11 @@ radius = 118.004234
 [sub_resource type="CircleShape2D" id="CircleShape2D_buy8w"]
 radius = 47.010635
 
-[node name="Zombie" type="CharacterBody2D"]
+[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("health")]
 collision_layer = 4
 collision_mask = 32
-script = ExtResource("1_6lqgw")
-faction = 2
+script = ExtResource("1_08fpo")
+health = NodePath("Health")
 
 [node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier", "health") instance=ExtResource("9_culwy")]
 material = SubResource("ShaderMaterial_7b2us")
@@ -120,8 +120,9 @@ equipment = NodePath("../../Items/Equipment")
 nav = NodePath("../../NavigationAgent2D")
 ai_target = NodePath("../../ZombieTarget")
 
-[node name="Nexus" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("tile_pathfind", "player_tracker", "defense_tracker", "ai_target")]
+[node name="Nexus" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "tile_pathfind", "player_tracker", "defense_tracker", "ai_target")]
 script = ExtResource("10_drpw1")
+enemy = NodePath("../..")
 tile_pathfind = NodePath("../../TilePathfind")
 player_tracker = NodePath("../../Detectors/PlayerTracker")
 defense_tracker = NodePath("../../Detectors/DefenseTracker")
@@ -209,10 +210,11 @@ metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
 
 [node name="Detectors" type="Node2D" parent="."]
 
-[node name="PlayerTracker" type="Node2D" parent="Detectors" node_paths=PackedStringArray("player_vision", "player_raycast")]
+[node name="PlayerTracker" type="Node2D" parent="Detectors" node_paths=PackedStringArray("pawn_vision", "pawn_raycast")]
 script = ExtResource("26_buy8w")
-player_vision = NodePath("../../Areas/PlayerVision")
-player_raycast = NodePath("../../Raycasts/PlayerRaycast")
+factions_to_track = Array[int]([1])
+pawn_vision = NodePath("../../Areas/PlayerVision")
+pawn_raycast = NodePath("../../Raycasts/PlayerRaycast")
 metadata/_custom_type_script = "uid://dg8qbly1ndg5w"
 
 [node name="DefenseTracker" type="Node2D" parent="Detectors" node_paths=PackedStringArray("defense_vision", "defense_raycast")]
@@ -268,11 +270,11 @@ bar_size = Vector2(60, 15)
 offset = Vector2(0, -40)
 metadata/_custom_type_script = "uid://6x0akmb8ed61"
 
-[connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
+[connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]
 [connection signal="target_emitted" from="ZombieStateMachine/Chase" to="ZombieArms" method="_set_target"]
-[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_right_hand_pos"]
 [connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_left_hand_pos"]
+[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_right_hand_pos"]
 [connection signal="died" from="Health" to="ZombieDeath" method="_on_death"]
 [connection signal="left_hand_pos_emitted" from="ZombieArms" to="CharacterSprite" method="_set_left_hand_pos"]
 [connection signal="right_hand_pos_emitted" from="ZombieArms" to="CharacterSprite" method="_set_right_hand_pos"]

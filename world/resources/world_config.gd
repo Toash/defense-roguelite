@@ -13,19 +13,10 @@ class_name WorldConfig
 @export var base_height = 24
 
 
-@export_group("Source IDs")
-@export var altitude_to_source_id: Dictionary[WorldEnums.ALTITUDE, int] = {
-	WorldEnums.ALTITUDE.WATER: 2,
-	WorldEnums.ALTITUDE.DIRT: 1,
-	WorldEnums.ALTITUDE.GRASS: 0,
+@export_group("Tiles")
+@export var altitude_enum_to_tile: Dictionary[WorldEnums.ALTITUDE, TileInfo] = {
 }
-@export var resource_to_source_id: Dictionary[WorldEnums.RESOURCE, int] = {
-	WorldEnums.RESOURCE.TREE: 0
-}
-
-@export_group("Alternative IDs")
-@export var resource_to_alternative_id: Dictionary[WorldEnums.RESOURCE, int] = {
-	WorldEnums.RESOURCE.TREE: 1
+@export var resource_enum_to_tile: Dictionary[WorldEnums.RESOURCE, TileInfo] = {
 }
 
 

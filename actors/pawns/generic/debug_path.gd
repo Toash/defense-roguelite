@@ -6,6 +6,7 @@ class_name DebugPath
 var path: PackedVector2Array = PackedVector2Array()
 
 func set_path(new_path: PackedVector2Array) -> void:
+    return
     path = new_path
     queue_redraw() # tells Godot to call _draw()
 

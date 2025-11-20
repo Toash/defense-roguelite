@@ -1,16 +1,22 @@
-[gd_resource type="Resource" script_class="WorldConfig" load_steps=9 format=3 uid="uid://d4jf4712x0u2o"]
+[gd_resource type="Resource" script_class="WorldConfig" load_steps=11 format=3 uid="uid://d4jf4712x0u2o"]
 
 [ext_resource type="Script" uid="uid://bqfyi0m1kshlg" path="res://world/resources/altitude_band.gd" id="1_4evj6"]
-[ext_resource type="Resource" uid="uid://uhvi6w102lyv" path="res://world/resources/altitude_bands/dirt.tres" id="2_l3yoy"]
-[ext_resource type="Resource" uid="uid://d3qlf05pphyj8" path="res://world/resources/altitude_bands/grass.tres" id="3_x1elx"]
-[ext_resource type="Resource" uid="uid://4ykdi8ivxods" path="res://world/resources/altitude_bands/water.tres" id="4_mohia"]
+[ext_resource type="Resource" uid="uid://uhvi6w102lyv" path="res://world/resources/altitude_bands/dirt_altitude.tres" id="2_l3yoy"]
+[ext_resource type="Resource" uid="uid://4ykdi8ivxods" path="res://world/resources/altitude_bands/water_altitude.tres" id="2_x1elx"]
+[ext_resource type="Resource" uid="uid://d3qlf05pphyj8" path="res://world/resources/altitude_bands/grass_altitude.tres" id="3_x1elx"]
 [ext_resource type="Script" uid="uid://cpjpk8nlocf5b" path="res://world/resources/resource_band.gd" id="5_i3u64"]
+[ext_resource type="Script" uid="uid://xhxw30qy6vry" path="res://world/resources/tiles/tile_info.gd" id="5_mohia"]
 [ext_resource type="Script" uid="uid://dvy3lib5ke8ip" path="res://world/resources/world_config.gd" id="6_dm1fa"]
-[ext_resource type="Resource" uid="uid://dnqpn6dx211vo" path="res://world/resources/resource_bands/stone.tres" id="6_x1elx"]
-[ext_resource type="Resource" uid="uid://mnatqrc72h2y" path="res://world/resources/resource_bands/tree.tres" id="7_mohia"]
+[ext_resource type="Resource" uid="uid://cnni0n64sw7am" path="res://world/resources/tiles/ground/water_tile.tres" id="6_i3u64"]
+[ext_resource type="Resource" uid="uid://cifpdb8wnumtv" path="res://world/resources/tiles/ground/dirt_tile.tres" id="7_dm1fa"]
+[ext_resource type="Resource" uid="uid://bynbxch8yafm2" path="res://world/resources/tiles/ground/grass_tile.tres" id="8_eo06n"]
 
 [resource]
 script = ExtResource("6_dm1fa")
-altitude_bands = Array[ExtResource("1_4evj6")]([ExtResource("4_mohia"), ExtResource("2_l3yoy"), ExtResource("3_x1elx")])
-resource_bands = Array[ExtResource("5_i3u64")]([ExtResource("6_x1elx"), ExtResource("7_mohia")])
+altitude_enum_to_tile = Dictionary[int, ExtResource("5_mohia")]({
+0: ExtResource("6_i3u64"),
+1: ExtResource("7_dm1fa"),
+2: ExtResource("8_eo06n")
+})
+altitude_bands = Array[ExtResource("1_4evj6")]([ExtResource("2_x1elx"), ExtResource("2_l3yoy"), ExtResource("3_x1elx")])
 metadata/_custom_type_script = "uid://dvy3lib5ke8ip"

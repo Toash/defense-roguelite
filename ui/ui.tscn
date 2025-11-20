@@ -82,9 +82,9 @@ content_scene = ExtResource("6_obcwv")
 start_minimized = true
 
 [node name="CraftingWindow" parent="." instance=ExtResource("4_tf0e0")]
-offset_left = 452.0
+offset_left = 80.0
 offset_top = 321.0
-offset_right = 536.0
+offset_right = 164.0
 offset_bottom = 356.0
 window_title = "Crafting"
 content_scene = ExtResource("7_bo1jx")

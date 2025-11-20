@@ -13,6 +13,9 @@ shader = ExtResource("1_va1py")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
+[sub_resource type="Animation" id="Animation_ngeuq"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_va1py"]
 resource_name = "flash"
 length = 0.2
@@ -28,9 +31,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.50000002375, 0.0]
 }
-
-[sub_resource type="Animation" id="Animation_ngeuq"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ngeuq"]
 _data = {

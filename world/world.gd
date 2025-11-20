@@ -12,6 +12,7 @@ class_name World
 @export var resource_tiles: TileMapLayer
 @export var debug_path: DebugPath
 
+@export var spawn_points: Array[Marker2D]
 
 var astar_grid: AStarGrid2D = AStarGrid2D.new()
 
@@ -36,7 +37,7 @@ func _ready():
 
 
 func _setup():
-	print("setup!")
+	# print("setup!")
 	_setup_ground()
 	_setup_pathfinding()
 	
@@ -66,12 +67,6 @@ func _setup_ground():
 	GroundItems.clear()
 
 
-	# these link back to their respective tilesets.
-	var altitude_to_source_id = world_config.altitude_to_source_id
-	var resource_to_source_id = world_config.resource_to_source_id
-	var resource_to_alternative_id = world_config.resource_to_alternative_id
-
-
 	var tree_counter: int = 0
 	var tree_interval: int = 30
 
@@ -88,18 +83,28 @@ func _setup_ground():
 
 
 			# ensure we have room to build for base.
-			if x >= -base_width / 2 and x <= base_width / 2:
-				if y >= -base_height / 2 and y <= base_height / 2:
-					ground_tiles.set_cell(Vector2i(x, y), world_config.altitude_to_source_id[WorldEnums.ALTITUDE.GRASS], Vector2i(0, 0))
-					continue
+			# if x >= -base_width / 2 and x <= base_width / 2:
+			# 	if y >= -base_height / 2 and y <= base_height / 2:
+			# 		ground_tiles.set_cell(Vector2i(x, y), world_config.altitude_to_source_id[WorldEnums.ALTITUDE.GRASS], Vector2i(0, 0))
+			# 		continue
 
 
-			# set ground tile
-			var altitude_source_id: int = altitude_to_source_id[alt_enum]
-			ground_tiles.set_cell(Vector2i(x, y), altitude_source_id, Vector2i(0, 0))
+			# altitude
+			var altitude_tile: TileInfo = world_config.altitude_enum_to_tile[alt_enum]
+			var altitude_source_id = altitude_tile.source_id
+			var altitude_atlas_coord = altitude_tile.atlas_coord
+			var altitude_map_layer: WorldEnums.LAYER = altitude_tile.layer
+			match altitude_map_layer:
+				WorldEnums.LAYER.GROUND:
+					ground_tiles.set_cell(Vector2i(x, y), altitude_source_id, altitude_atlas_coord)
+				WorldEnums.LAYER.WALL:
+					wall_tiles.set_cell(Vector2i(x, y), altitude_source_id, altitude_atlas_coord)
 
+			
 			# set resource tile.
 			if resource_enum != WorldEnums.RESOURCE.ABSOLUTELY_NOTHING:
+				var resource_source_id: int = world_config.resource_enum_to_tile[resource_enum].source_id
+				var resource_alternative_id: int = world_config.resource_enum_to_tile[resource_enum].alternative_id
 				match (resource_enum):
 					WorldEnums.RESOURCE.TREE:
 						if tree_counter <= tree_interval:
@@ -108,8 +113,6 @@ func _setup_ground():
 						else:
 							tree_counter = 0
 							if alt_enum == WorldEnums.ALTITUDE.GRASS:
-								var resource_source_id: int = resource_to_source_id[resource_enum]
-								var resource_alternative_id: int = resource_to_alternative_id[resource_enum]
 								resource_tiles.set_cell(Vector2i(x, y), resource_source_id, Vector2i(0, 0), resource_alternative_id)
 					WorldEnums.RESOURCE.STONE:
 						if stone_counter <= stone_interval:

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://bodglwsk04b87"]
+
+[ext_resource type="PackedScene" uid="uid://blqvvu0ytchcd" path="res://actors/pawns/enemies/zombie/zombie.tscn" id="1_dxjmc"]
+[ext_resource type="Script" uid="uid://batjd7vgwc587" path="res://actors/pawns/enemies/enemy_data.gd" id="1_nx4ij"]
+
+[resource]
+script = ExtResource("1_nx4ij")
+enemy_name = "Basic zombie"
+move_speed = 200.0
+attack_damage = 1
+scene = ExtResource("1_dxjmc")
+metadata/_custom_type_script = "uid://batjd7vgwc587"
