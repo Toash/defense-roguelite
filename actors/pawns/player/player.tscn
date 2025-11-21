@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://csxjjom3dyxfa" path="res://actors/pawns/sprites/head/white_head_1.png" id="14_0wchr"]
 [ext_resource type="Texture2D" uid="uid://oyto6h4h2ewn" path="res://actors/pawns/sprites/torso/torso_blue_jacket.png" id="15_qrxv1"]
 [ext_resource type="Texture2D" uid="uid://wcmxajlvsg1i" path="res://actors/pawns/sprites/leg/legs_black_1.png" id="17_otn2r"]
-[ext_resource type="Script" uid="uid://kesirm75pc1q" path="res://item/generic/equipment.gd" id="20_lj3dd"]
+[ext_resource type="Script" uid="uid://kesirm75pc1q" path="res://item/generic/pawn_equipment.gd" id="20_lj3dd"]
 [ext_resource type="Script" uid="uid://dflsf7ovo0jqw" path="res://item/generic/item_display.gd" id="20_nsxbo"]
 [ext_resource type="Texture2D" uid="uid://c8u4rr4xtq3tj" path="res://actors/pawns/player/spot_light.png" id="20_otn2r"]
 [ext_resource type="Script" uid="uid://c8dnwtjdg5wbq" path="res://audio/footsteps.gd" id="21_ctwkf"]

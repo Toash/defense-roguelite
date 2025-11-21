@@ -11,7 +11,7 @@ extends Pawn
 	# Attack Damage 
 class_name Enemy
 
-var enemy_data: EnemyData
+@export var enemy_data: EnemyData
 
 
 func setup(data: EnemyData):

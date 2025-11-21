@@ -2,19 +2,22 @@ extends ItemEffect
 
 class_name ProjectileEffect
 
-@export var bullet: PackedScene
+@export var projectile: PackedScene
+@export var factions_to_hit: Array[Pawn.FACTION]
 @export var damage = 25
 @export var speed = 200
 
 
 func apply(context: ItemContext):
-    var bullet_inst: Bullet = bullet.instantiate() as Bullet
-    # set parameters 
-    bullet_inst.damage = damage
-    bullet_inst.speed = speed
-    bullet_inst.add_collision_exception_with(context.user_node)
+    var projectile_inst: Projectile = projectile.instantiate() as Projectile
 
-    bullet_inst.global_position = context.global_spawn_point
-    bullet_inst.look_at(context.global_target_position)
+    projectile_inst.factions_to_hit = factions_to_hit
+    projectile_inst.damage = damage
+    projectile_inst.speed = speed
 
-    context.root_node.add_child(bullet_inst)
+    projectile_inst.global_position = context.global_spawn_point
+    projectile_inst.look_at(context.global_target_position)
+
+    projectile_inst.setup(context)
+
+    context.root_node.add_child.call_deferred(projectile_inst)

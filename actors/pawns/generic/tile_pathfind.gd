@@ -72,7 +72,6 @@ func _physics_process(delta: float) -> void:
 	var dist := to_target.length()
 
 	if dist < 4:
-		print("blegghh!")
 		path_index += 1
 		# end of path
 		if path_index >= path.size():

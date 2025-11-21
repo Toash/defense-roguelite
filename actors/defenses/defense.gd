@@ -2,7 +2,6 @@ extends Area2D
 
 class_name Defense
 
-
 # How do other enemies see this ? 
 enum PRIORITY {
 	INVISIBLE,
@@ -10,4 +9,5 @@ enum PRIORITY {
 
 }
 
-@export var defense: Node2D
+
+@export var defense_data: DefenseData

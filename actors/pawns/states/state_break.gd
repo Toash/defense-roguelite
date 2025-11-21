@@ -6,7 +6,7 @@ extends State
 
 @export var character: CharacterBody2D
 
-@export var equipment: Equipment
+@export var equipment: PawnEquipment
 
 @export var nav: NavigationAgent2D
 

@@ -1,6 +1,7 @@
 extends Node2D
 
 ## displays an item instance that a user has, must be supplied a target.
+## usually used for the spawnpoint for equipment.
 class_name ItemDisplay
 
 

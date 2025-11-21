@@ -2,7 +2,7 @@ extends Node
 
 
 ## Handles using some current instance for a user
-class_name Equipment
+class_name PawnEquipment
 
 ## used when the item spawns stuff.
 @export var user: Node2D
@@ -22,15 +22,15 @@ var current_inst: ItemInstance
 
 func _ready():
 	if user == null:
-		push_error("Equipment: User node must be set")
+		push_error("PawnEquipment: User node must be set")
 	if inst_provider == null:
-		push_error("Equipment: ItemInstanceProvider must be set")
+		push_error("PawnEquipment: ItemInstanceProvider must be set")
 	if target_provider == null:
-		push_error("Equipment: TargetProvider must be set")
+		push_error("PawnEquipment: TargetProvider must be set")
 	if item_display == null:
-		push_error("Equipment: ItemDisplay must be set")
+		push_error("PawnEquipment: ItemDisplay must be set")
 	if character_sprite == null:
-		push_error("Equipment: CharacterSprite must be set")
+		push_error("PawnEquipment: CharacterSprite must be set")
 		
 
 	target_provider.target_pos_emitted.connect(_set_target)
@@ -41,7 +41,8 @@ func use():
 	var item_context: ItemContext = ItemContext.new()
 	item_context.root_node = get_tree().current_scene
 	item_context.user_node = user
-	item_context.global_target_position = target
+	# item_context.global_target_position = target
+	item_context.global_target_position = target_provider.get_global_pos()
 
 	item_context.global_spawn_point = item_display.get_origin_node().global_position
 	item_context.spawn_node = item_display.get_origin_node()

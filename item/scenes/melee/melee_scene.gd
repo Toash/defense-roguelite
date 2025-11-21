@@ -21,7 +21,7 @@ func _ready():
 	area.body_entered.connect(_on_body_entered)
 
 func _process(delta):
-	root.look_at(context.target_provider.get_global_pos())
+	root.look_at(context.target_provider.get_target_pos())
 	context.character_sprite.set_left_hand(left_hand_marker.global_position)
 	context.character_sprite.set_right_hand(right_hand_marker.global_position)
 

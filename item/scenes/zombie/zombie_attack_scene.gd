@@ -28,7 +28,7 @@ func _process(delta):
 	context.character_sprite.set_right_hand(right_hand_origin.global_position)
 	
 	# THS IS EPIC
-	root.look_at(context.target_provider.get_global_pos())
+	root.look_at(context.target_provider.get_target_pos())
 
 
 func play(flipped: bool):

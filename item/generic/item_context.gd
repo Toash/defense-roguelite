@@ -1,17 +1,23 @@
-## Data needed to perform item effects.
-## passed when an item is used.
-## items can use the data passed into here to do more stuff.
+## root_node - Scene tree root, Ex. used as the parent node for projectiles
+## user_node - Who is using the item, Ex. used for collision exceptions
+## global_spawn_point - Self explanatory
+## spawn_node - Ex. used for melee instances to spawn the instance there 
 class_name ItemContext
 extends RefCounted
 
 
+## world root node 
+## ex. could use for projectiles
 var root_node: Node
 
 ## who is using this item
-var user_node: Pawn
+var user_node: Node2D
 
 
 var global_spawn_point: Vector2
+
+## when spawning things, they will be children of this node
+## ex. could use for melee instances
 var spawn_node: Node2D
 
 

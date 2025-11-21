@@ -9,7 +9,7 @@ signal target_lost
 @export var attack_move_speed = 300
 @export var attack_cooldown = 1
 @export var attack_vision: Area2D
-@export var equipment: Equipment
+@export var equipment: PawnEquipment
 
 
 @export var nav: NavigationAgent2D

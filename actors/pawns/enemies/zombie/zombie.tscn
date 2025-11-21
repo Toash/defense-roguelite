@@ -1,6 +1,7 @@
-[gd_scene load_steps=35 format=3 uid="uid://blqvvu0ytchcd"]
+[gd_scene load_steps=36 format=3 uid="uid://blqvvu0ytchcd"]
 
 [ext_resource type="Script" uid="uid://si1ikxp52cuk" path="res://actors/pawns/enemies/enemy.gd" id="1_08fpo"]
+[ext_resource type="Resource" uid="uid://bfp85p8ebqdan" path="res://actors/pawns/enemies/zombie/basic_zombie.tres" id="2_0qpkc"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="2_ixsl6"]
 [ext_resource type="Script" uid="uid://dt4kadfyw2ywh" path="res://actors/pawns/generic/ai_target.gd" id="4_ymihc"]
 [ext_resource type="Script" uid="uid://cskdd0xcjjmfc" path="res://actors/pawns/states/state_wander.gd" id="6_cthrv"]
@@ -18,7 +19,7 @@
 [ext_resource type="Script" uid="uid://b4wdssttxtlra" path="res://actors/pawns/states/state_break.gd" id="12_sonq4"]
 [ext_resource type="Script" uid="uid://c8dnwtjdg5wbq" path="res://audio/footsteps.gd" id="13_mmehc"]
 [ext_resource type="Script" uid="uid://b7nergdxei2p6" path="res://actors/pawns/enemies/zombie/zombie_arms.gd" id="18_ubgnx"]
-[ext_resource type="Script" uid="uid://kesirm75pc1q" path="res://item/generic/equipment.gd" id="18_xnimh"]
+[ext_resource type="Script" uid="uid://kesirm75pc1q" path="res://item/generic/pawn_equipment.gd" id="18_xnimh"]
 [ext_resource type="Script" uid="uid://dflsf7ovo0jqw" path="res://item/generic/item_display.gd" id="19_ld5a4"]
 [ext_resource type="Script" uid="uid://c816dagnqn6re" path="res://actors/pawns/enemies/zombie/zombie_item.gd" id="20_cthrv"]
 [ext_resource type="Resource" uid="uid://6rsgvhonqx4b" path="res://item/items/zombie/zombie_attack.tres" id="21_cthrv"]
@@ -29,7 +30,7 @@
 [ext_resource type="Script" uid="uid://dbgqumwhqtmf6" path="res://actors/pawns/generic/tile_pathfind.gd" id="27_sonq4"]
 [ext_resource type="Script" uid="uid://6x0akmb8ed61" path="res://actors/generic/health_bar.gd" id="28_6lqgw"]
 
-[sub_resource type="Shader" id="Shader_08fpo"]
+[sub_resource type="Shader" id="Shader_0qpkc"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -49,7 +50,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
 resource_local_to_scene = true
-shader = SubResource("Shader_08fpo")
+shader = SubResource("Shader_0qpkc")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
@@ -69,6 +70,8 @@ radius = 47.010635
 collision_layer = 4
 collision_mask = 32
 script = ExtResource("1_08fpo")
+enemy_data = ExtResource("2_0qpkc")
+faction = 2
 health = NodePath("Health")
 
 [node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier", "health") instance=ExtResource("9_culwy")]

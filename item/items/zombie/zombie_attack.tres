@@ -6,7 +6,6 @@
 
 [resource]
 script = ExtResource("2_fjy0u")
-id = 1000
 display_name = "Zombie attack"
 max_stack = 1
 cooldown_time = 0.0

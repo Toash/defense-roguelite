@@ -1,0 +1,3 @@
+Items are automatically loaded into this game from THIS folder.
+
+Ensure item data definitions are in this folder only. =)

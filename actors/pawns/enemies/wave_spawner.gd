@@ -9,6 +9,7 @@ extends Node2D
 class_name WaveSpawner
 
 
+@export var freeze: bool = false
 @export var enemy_root: Node2D
 @export var enemy_data: EnemyData
 
@@ -26,6 +27,7 @@ func _ready():
 
 
 func _process(delta):
+	if freeze: return
 	t += delta
 
 	if t > 2:

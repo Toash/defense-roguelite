@@ -16,9 +16,12 @@ var speed
 
 func state_enter():
 	active = true
+	print(enemy)
+	print(enemy.enemy_data)
+	
 	speed = enemy.enemy_data.move_speed
 
-	player_tracker.found_pawn.connect(_on_player_found)
+	player_tracker.pawn_line_of_sight.connect(_on_player_found)
 	defense_tracker.found_defense.connect(_on_defense_found)
 	tile_pathfind.enable()
 
@@ -34,7 +37,7 @@ func state_physics_update(delta: float):
 			
 func state_exit():
 	active = false
-	player_tracker.found_pawn.disconnect(_on_player_found)
+	player_tracker.pawn_line_of_sight.disconnect(_on_player_found)
 	defense_tracker.found_defense.disconnect(_on_defense_found)
 	tile_pathfind.disable()
 

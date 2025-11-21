@@ -31,7 +31,7 @@ func state_enter():
 	wander_point = character.global_position
 	wander_interval = wander_interval_default + rng.randf_range(-wander_interval_random, wander_interval_random)
 
-	player_tracker.found_pawn.connect(_on_found_player)
+	player_tracker.pawn_line_of_sight.connect(_on_found_player)
 	tile_pathfind.enable()
 	tile_pathfind.set_speed(wander_speed)
 
@@ -47,7 +47,7 @@ func state_physics_update(delta: float):
 
 func state_exit():
 	active = false
-	player_tracker.found_pawn.disconnect(_on_found_player)
+	player_tracker.pawn_line_of_sight.disconnect(_on_found_player)
 	tile_pathfind.disable()
 
 

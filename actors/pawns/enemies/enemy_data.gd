@@ -12,4 +12,4 @@ class_name EnemyData
 @export var attack_speed: int = 1
 
 ## the root should be an Enemy.
-@export var scene: PackedScene
+# @export var scene: PackedScene

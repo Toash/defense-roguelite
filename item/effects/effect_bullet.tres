@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_mei51")
-bullet = ExtResource("1_oqrri")
-damage = 25
+projectile = ExtResource("1_oqrri")
+factions_to_hit = Array[int]([2])
 speed = 1200
 metadata/_custom_type_script = "uid://d2jtsxokuvpi0"
