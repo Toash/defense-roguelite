@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Blueprint" load_steps=7 format=3 uid="uid://ccuug6iyhqu4u"]
+
+[ext_resource type="Script" uid="uid://b6bhu0l2m8yl0" path="res://crafting/item_data_group.gd" id="1_75nst"]
+[ext_resource type="Resource" uid="uid://bxegj0aw5s18c" path="res://item/items/scrap/scrap.tres" id="2_0r8cl"]
+[ext_resource type="Script" uid="uid://c0igk80mo7ba7" path="res://crafting/blueprint.gd" id="2_8nets"]
+[ext_resource type="Resource" uid="uid://bag3yiaad1f5p" path="res://item/items/tiles/defense/mini_turret_item.tres" id="3_mhjk2"]
+
+[sub_resource type="Resource" id="Resource_tlcwh"]
+script = ExtResource("1_75nst")
+item_data = ExtResource("2_0r8cl")
+amount = 3
+metadata/_custom_type_script = "uid://b6bhu0l2m8yl0"
+
+[sub_resource type="Resource" id="Resource_41vqj"]
+script = ExtResource("1_75nst")
+item_data = ExtResource("3_mhjk2")
+amount = 1
+metadata/_custom_type_script = "uid://b6bhu0l2m8yl0"
+
+[resource]
+script = ExtResource("2_8nets")
+ingredients = Array[ExtResource("1_75nst")]([SubResource("Resource_tlcwh")])
+outputs = Array[ExtResource("1_75nst")]([SubResource("Resource_41vqj")])
+metadata/_custom_type_script = "uid://c0igk80mo7ba7"

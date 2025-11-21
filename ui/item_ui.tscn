@@ -3,29 +3,29 @@
 [ext_resource type="Script" uid="uid://byth8gi71tp5v" path="res://ui/item_ui.gd" id="1_5mrwm"]
 
 [node name="ItemUI" type="TextureButton" node_paths=PackedStringArray("count")]
+custom_minimum_size = Vector2(48, 48)
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+stretch_mode = 0
+script = ExtResource("1_5mrwm")
+count = NodePath("Count")
+
+[node name="Count" type="Label" parent="."]
+z_index = 1
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
-mouse_default_cursor_shape = 2
-script = ExtResource("1_5mrwm")
-count = NodePath("Count")
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 24
 
 [node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="Count" type="Label" parent="."]
-z_index = 1
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
-theme_override_font_sizes/font_size = 24
-horizontal_alignment = 2
-vertical_alignment = 2
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

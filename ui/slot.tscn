@@ -6,8 +6,8 @@
 
 [node name="Slot" type="Panel" node_paths=PackedStringArray("number_label", "highlight")]
 custom_minimum_size = Vector2(48, 48)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 48.0
+offset_bottom = 48.0
 theme_override_styles/panel = ExtResource("1_q3y4y")
 script = ExtResource("1_mityc")
 item_scene = ExtResource("2_laex7")
@@ -15,9 +15,19 @@ number_label = NodePath("Number")
 highlight = NodePath("ReferenceRect")
 
 [node name="Number" type="Label" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -11.5
+offset_right = 24.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
 visible = false
@@ -27,3 +37,6 @@ offset_bottom = 48.0
 border_color = Color(1, 1, 1, 1)
 border_width = 4.1
 editor_only = false
+
+[node name="ItemUI" parent="." instance=ExtResource("2_laex7")]
+layout_mode = 0
