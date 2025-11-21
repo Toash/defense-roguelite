@@ -42,7 +42,7 @@ func use():
 	item_context.root_node = get_tree().current_scene
 	item_context.user_node = user
 	# item_context.global_target_position = target
-	item_context.global_target_position = target_provider.get_global_pos()
+	item_context.global_target_position = target_provider.get_target_pos()
 
 	item_context.global_spawn_point = item_display.get_origin_node().global_position
 	item_context.spawn_node = item_display.get_origin_node()
