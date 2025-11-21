@@ -2,6 +2,10 @@ extends Resource
 
 class_name DefenseData
 
-@export var health: int
-@export var attack_damage: int
-@export var attack_speed: float
+@export_group("General")
+@export var health: int = 100
+@export var attack_damage: int = 10
+@export var attack_speed: float = 2
+
+@export_group("Projectiles")
+@export var projectile_speed: float = 600

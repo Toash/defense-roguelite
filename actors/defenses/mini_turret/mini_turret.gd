@@ -37,7 +37,13 @@ func _fire():
 	ctx.root_node = get_tree().current_scene
 	ctx.user_node = user
 	ctx.global_spawn_point = muzzle.global_position
-	ctx.global_target_position = enemy_tracker.get_nearest_pawn().global_position
 
 
+	var target_node = enemy_tracker.get_nearest_pawn() as Pawn
+	var predicted_target = PhysicsUtils.compute_predicted_target(ctx.global_spawn_point, target_node.global_position, target_node.velocity, defense.defense_data.projectile_speed)
+	# ctx.global_target_position = enemy_tracker.get_nearest_pawn().global_position
+	ctx.global_target_position = predicted_target
+
+	projectile_effect.damage = defense.defense_data.attack_damage
+	projectile_effect.speed = defense.defense_data.projectile_speed
 	projectile_effect.apply(ctx)

@@ -5,7 +5,7 @@ signal target_emitted(pos: Vector2)
 signal target_lost
 
 
-@export var chase_speed = 200
+@export var enemy: Enemy
 @export var character: CharacterBody2D
 
 @export var attack_vision: Area2D
@@ -19,10 +19,12 @@ signal target_lost
 
 
 var active = false
+var chase_speed
 
 
 func state_enter():
 	active = true
+	chase_speed = enemy.enemy_data.move_speed
 	target_acquired.emit()
 	attack_vision.body_entered.connect(_on_body_entered)
 	

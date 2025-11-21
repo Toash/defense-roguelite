@@ -98,9 +98,9 @@ character = NodePath("../..")
 tile_pathfind = NodePath("../../TilePathfind")
 target = NodePath("../../ZombieTarget")
 
-[node name="Chase" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "attack_vision", "obstruction_raycast", "nav", "target")]
+[node name="Chase" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "character", "attack_vision", "obstruction_raycast", "nav", "target")]
 script = ExtResource("7_qpxon")
-chase_speed = 130
+enemy = NodePath("../..")
 character = NodePath("../..")
 attack_vision = NodePath("../../Areas/AttackArea")
 obstruction_raycast = NodePath("../../Raycasts/ObstructionRaycast")
