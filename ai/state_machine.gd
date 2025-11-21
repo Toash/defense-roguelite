@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 class_name StateMachine
 
@@ -6,6 +6,7 @@ class_name StateMachine
 
 var current_state: State
 var states: Dictionary[String, State] = {}
+var font: Font = preload("res://ui/fonts/Poco.ttf")
 
 
 func _ready() -> void:
@@ -16,7 +17,17 @@ func _ready() -> void:
 		if node is State:
 			states[node.name.to_lower()] = node
 			node.transitioned.connect(_on_transition)
+	queue_redraw()
 
+func _draw() -> void:
+	if not Game.debug: return
+	self.z_index = 999
+	# matrix that cancels nodes global transform
+	var inv = get_global_transform().affine_inverse()
+	draw_set_transform_matrix(inv)
+	draw_string(font, global_position, current_state.name, HORIZONTAL_ALIGNMENT_CENTER, -1, 32)
+	draw_set_transform_matrix(Transform2D()) # reset
+	# draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 		
 func _process(delta: float) -> void:
 	if current_state:
@@ -28,6 +39,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_transition(from: State, to: String):
+	queue_redraw()
 	if from != current_state:
 		push_error("State Machine: from state does not match current state")
 		return

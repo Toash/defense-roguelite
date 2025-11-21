@@ -2,6 +2,9 @@ extends Node
 
 signal player_loaded
 
+var debug = true
+
+
 func _ready():
 	# await get_tree().create_timer(4).timeout
 	# SaveManager.save_game()

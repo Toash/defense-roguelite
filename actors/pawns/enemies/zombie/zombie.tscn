@@ -28,7 +28,7 @@
 [ext_resource type="Script" uid="uid://dbgqumwhqtmf6" path="res://actors/pawns/generic/tile_pathfind.gd" id="27_sonq4"]
 [ext_resource type="Script" uid="uid://6x0akmb8ed61" path="res://actors/generic/health_bar.gd" id="28_6lqgw"]
 
-[sub_resource type="Shader" id="Shader_0qpkc"]
+[sub_resource type="Shader" id="Shader_g23qj"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -48,7 +48,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
 resource_local_to_scene = true
-shader = SubResource("Shader_0qpkc")
+shader = SubResource("Shader_g23qj")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
@@ -84,19 +84,19 @@ right_arm_texture = ExtResource("12_b6tq7")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
 
-[node name="ZombieStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="ZombieStateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_ixsl6")
 initial_state = NodePath("Nexus")
 metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 
-[node name="Wander" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("player_tracker", "character", "tile_pathfind", "target")]
+[node name="Wander" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("player_tracker", "character", "tile_pathfind", "target")]
 script = ExtResource("6_cthrv")
 player_tracker = NodePath("../../Detectors/PlayerTracker")
 character = NodePath("../..")
 tile_pathfind = NodePath("../../TilePathfind")
 target = NodePath("../../ZombieTarget")
 
-[node name="Chase" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "character", "attack_vision", "obstruction_raycast", "nav", "target")]
+[node name="Chase" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "character", "attack_vision", "obstruction_raycast", "nav", "target")]
 script = ExtResource("7_qpxon")
 enemy = NodePath("../..")
 character = NodePath("../..")
@@ -105,7 +105,7 @@ obstruction_raycast = NodePath("../../Raycasts/ObstructionRaycast")
 nav = NodePath("../../NavigationAgent2D")
 target = NodePath("../../ZombieTarget")
 
-[node name="Last_Seen" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "player_tracker", "nav", "target")]
+[node name="Last_Seen" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "player_tracker", "nav", "target")]
 script = ExtResource("8_uotjo")
 speed = 100
 character = NodePath("../..")
@@ -113,7 +113,7 @@ player_tracker = NodePath("../../Detectors/PlayerTracker")
 nav = NodePath("../../NavigationAgent2D")
 target = NodePath("../../ZombieTarget")
 
-[node name="Attack" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "attack_vision", "equipment", "nav", "ai_target")]
+[node name="Attack" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "attack_vision", "equipment", "nav", "ai_target")]
 script = ExtResource("9_ubgnx")
 character = NodePath("../..")
 attack_vision = NodePath("../../Areas/AttackArea")
@@ -121,7 +121,7 @@ equipment = NodePath("../../Items/Equipment")
 nav = NodePath("../../NavigationAgent2D")
 ai_target = NodePath("../../ZombieTarget")
 
-[node name="Nexus" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "tile_pathfind", "player_tracker", "defense_tracker", "ai_target")]
+[node name="Nexus" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "tile_pathfind", "player_tracker", "defense_tracker", "ai_target")]
 script = ExtResource("10_drpw1")
 enemy = NodePath("../..")
 tile_pathfind = NodePath("../../TilePathfind")
@@ -129,7 +129,7 @@ player_tracker = NodePath("../../Detectors/PlayerTracker")
 defense_tracker = NodePath("../../Detectors/DefenseTracker")
 ai_target = NodePath("../../ZombieTarget")
 
-[node name="Break" type="Node" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "equipment", "nav", "ai_target")]
+[node name="Break" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "equipment", "nav", "ai_target")]
 script = ExtResource("12_sonq4")
 character = NodePath("../..")
 equipment = NodePath("../../Items/Equipment")
@@ -147,11 +147,10 @@ shape = SubResource("RectangleShape2D_3fose")
 script = ExtResource("8_23tyx")
 metadata/_custom_type_script = "uid://gyp8bshfrfoj"
 
-[node name="ZombieDeath" type="Node" parent="." node_paths=PackedStringArray("pawn", "state_machine", "state_machine_debug", "tile_pathfind")]
+[node name="ZombieDeath" type="Node" parent="." node_paths=PackedStringArray("pawn", "state_machine", "tile_pathfind")]
 script = ExtResource("9_oyhgy")
 pawn = NodePath("..")
-state_machine = NodePath("../ZombieStateMachine")
-state_machine_debug = NodePath("")
+state_machine = NodePath("")
 tile_pathfind = NodePath("../TilePathfind")
 metadata/_custom_type_script = "uid://dn7fydgbbk3wg"
 
@@ -258,11 +257,11 @@ bar_size = Vector2(60, 15)
 offset = Vector2(0, -40)
 metadata/_custom_type_script = "uid://6x0akmb8ed61"
 
-[connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]
+[connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
 [connection signal="target_emitted" from="ZombieStateMachine/Chase" to="ZombieArms" method="_set_target"]
-[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_left_hand_pos"]
 [connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_right_hand_pos"]
+[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_left_hand_pos"]
 [connection signal="died" from="Health" to="ZombieDeath" method="_on_death"]
 [connection signal="left_hand_pos_emitted" from="ZombieArms" to="CharacterSprite" method="_set_left_hand_pos"]
 [connection signal="right_hand_pos_emitted" from="ZombieArms" to="CharacterSprite" method="_set_right_hand_pos"]

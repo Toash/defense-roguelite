@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c64uwphhqlc4b"]
+[gd_scene load_steps=14 format=3 uid="uid://c64uwphhqlc4b"]
 
 [ext_resource type="Script" uid="uid://d2nfjasm1uvbd" path="res://actors/defenses/mini_turret/mini_turret.gd" id="1_7q5m8"]
 [ext_resource type="Script" uid="uid://q6n7fr42kj25" path="res://actors/defenses/defense.gd" id="1_73l1h"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="9_2t2yu"]
 [ext_resource type="Script" uid="uid://bvpgbckygjfb1" path="res://actors/defenses/states/state_swivel_idle.gd" id="10_trb0s"]
 [ext_resource type="Script" uid="uid://bhkahelyvljmo" path="res://actors/defenses/states/state_turret_attack.gd" id="11_ra1yd"]
-[ext_resource type="Script" uid="uid://bbflvir0kv6hb" path="res://ai/state_machine_debug.gd" id="12_0m62q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7q5m8"]
 radius = 655.3053
@@ -90,18 +89,18 @@ muzzle = NodePath("../SpriteRoot/SwivelRoot/MiniTurretHead")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_73l1h")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("9_2t2yu")
 initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy_tracker", "swivel_root")]
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("enemy_tracker", "swivel_root")]
 script = ExtResource("10_trb0s")
 enemy_tracker = NodePath("../../PawnTracker")
 swivel_root = NodePath("../../SpriteRoot/SwivelRoot")
 metadata/_custom_type_script = "uid://bvpgbckygjfb1"
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("user", "defense", "enemy_tracker", "swivel_root", "muzzle")]
+[node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("user", "defense", "enemy_tracker", "swivel_root", "muzzle")]
 script = ExtResource("11_ra1yd")
 user = NodePath("../..")
 defense = NodePath("../..")
@@ -109,11 +108,3 @@ enemy_tracker = NodePath("../../PawnTracker")
 swivel_root = NodePath("../../SpriteRoot/SwivelRoot")
 projectile_effect = ExtResource("8_hbcse")
 muzzle = NodePath("../../SpriteRoot/SwivelRoot/MiniTurretHead")
-metadata/_custom_type_script = "uid://bhkahelyvljmo"
-
-[node name="StateMachineDebug" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
-offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource("12_0m62q")
-state_machine = NodePath("../StateMachine")
-metadata/_custom_type_script = "uid://bbflvir0kv6hb"

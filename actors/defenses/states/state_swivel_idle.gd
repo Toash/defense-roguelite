@@ -1,8 +1,5 @@
 extends State
 
-## idle state for swivelling
-class_name SwivelIdle
-
 
 @export var enemy_tracker: PawnTracker
 @export var swivel_root: Node2D

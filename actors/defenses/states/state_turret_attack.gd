@@ -1,8 +1,5 @@
 extends State
 
-## idle state for swivelling
-class_name StateTurretAttack
-
 
 @export var user: Node2D
 @export var defense: Defense
