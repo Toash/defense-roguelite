@@ -1,0 +1,10 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://tradm20dt1wg"]
+
+[ext_resource type="PackedScene" uid="uid://c64uwphhqlc4b" path="res://actors/defenses/mini_turret/mini_turret.tscn" id="1_hpvsl"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_qomsx"]
+resource_name = "ranged"
+scenes/1/scene = ExtResource("1_hpvsl")
+
+[resource]
+sources/0 = SubResource("TileSetScenesCollectionSource_qomsx")

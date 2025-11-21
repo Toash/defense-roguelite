@@ -6,25 +6,21 @@ class_name World
 
 @export var world_config: WorldConfig
 
+@export_group("TileMapLayers")
 @export var ground_tiles: TileMapLayer
 @export var wall_tiles: TileMapLayer
 @export var interactable_tiles: TileMapLayer
 @export var resource_tiles: TileMapLayer
-@export var debug_path: DebugPath
+@export var defense_tiles: TileMapLayer
 
+@export_group("Spawners")
 @export var spawn_points: Array[Marker2D]
-
+@export_group("Debug")
+@export var debug_path: DebugPath
 var astar_grid: AStarGrid2D = AStarGrid2D.new()
 
 signal world_setup
 var setup = false
-
-
-enum TILE_KEY {
-	GROUND,
-	WALL,
-	INTERACTABLE
-}
 
 
 func _ready():
@@ -158,13 +154,16 @@ func get_astar() -> AStarGrid2D:
 func get_debug_path() -> DebugPath:
 	return self.debug_path
 
-func get_layer(key: TILE_KEY) -> TileMapLayer:
+
+func get_layer(key: WorldEnums.LAYER) -> TileMapLayer:
 	match key:
-		TILE_KEY.GROUND:
+		WorldEnums.LAYER.GROUND:
 			return ground_tiles
-		TILE_KEY.WALL:
+		WorldEnums.LAYER.WALL:
 			return wall_tiles
-		TILE_KEY.INTERACTABLE:
+		WorldEnums.LAYER.INTERACTABLE:
 			return interactable_tiles
+		WorldEnums.LAYER.DEFENSE:
+			return defense_tiles
 		_:
 			return null

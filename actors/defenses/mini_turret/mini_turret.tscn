@@ -30,7 +30,6 @@ pawn_raycast = NodePath("../ZombieRaycast")
 metadata/_custom_type_script = "uid://dg8qbly1ndg5w"
 
 [node name="SpriteRoot" type="Node2D" parent="."]
-scale = Vector2(3, 3)
 
 [node name="MiniTurretBody" type="Sprite2D" parent="SpriteRoot"]
 texture = ExtResource("3_ma2d7")

@@ -15,5 +15,7 @@ enum RESOURCE {
 
 enum LAYER {
 	GROUND,
-	WALL
+	WALL,
+	INTERACTABLE,
+	DEFENSE,
 }

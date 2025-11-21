@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://bag3yiaad1f5p"]
+
+[ext_resource type="Texture2D" uid="uid://crak87c2t24tw" path="res://item/items/tile_placeholder.png" id="1_8624y"]
+[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_syduy"]
+[ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="2_oewgp"]
+[ext_resource type="Resource" uid="uid://dfky72cmt27to" path="res://item/effects/defenses/place_mini_turret.tres" id="3_pk5pb"]
+
+[resource]
+script = ExtResource("2_oewgp")
+display_name = "Mini Turret"
+description = "Basic ranged tower."
+max_stack = 2
+icon = ExtResource("1_8624y")
+ingame_sprite = ExtResource("1_8624y")
+item_effects = Array[ExtResource("1_syduy")]([ExtResource("3_pk5pb")])
+metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

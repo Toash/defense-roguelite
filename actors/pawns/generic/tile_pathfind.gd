@@ -30,7 +30,8 @@ func set_target(target_global_pos: Vector2):
 	path_index = 0
 
 
-	var ground_layer: TileMapLayer = world.get_layer(World.TILE_KEY.GROUND)
+	# var ground_layer: TileMapLayer = world.get_layer(World.TILE_KEY.GROUND)
+	var ground_layer: TileMapLayer = world.get_layer(WorldEnums.LAYER.GROUND)
 
 	var from_cell: Vector2i = ground_layer.local_to_map(ground_layer.to_local(body.global_position))
 	var to_cell: Vector2i = ground_layer.local_to_map(ground_layer.to_local(target_global_pos))

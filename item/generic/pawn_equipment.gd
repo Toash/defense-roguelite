@@ -55,7 +55,7 @@ func use():
 
 	current_inst = inst_provider.get_inst()
 	if not current_inst:
-		print("A user does not have an item equipped but they are trying to use it.")
+		# print("A user does not have an item equipped but they are trying to use it.")
 		return
 	current_inst.use(item_context)
 

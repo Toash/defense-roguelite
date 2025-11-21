@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_1qsa1"]
 [ext_resource type="Texture2D" uid="uid://crak87c2t24tw" path="res://item/items/tile_placeholder.png" id="1_yiwkp"]
 [ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="2_yiwkp"]
-[ext_resource type="Resource" uid="uid://dcf1dp63r4r5o" path="res://item/effects/place_wood_wall.tres" id="3_xep86"]
+[ext_resource type="Resource" uid="uid://dcf1dp63r4r5o" path="res://item/effects/defenses/place_wood_wall.tres" id="3_xep86"]
 
 [resource]
 script = ExtResource("2_yiwkp")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=16 format=3 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="Script" uid="uid://csd4ncy3jgem8" path="res://world/world.gd" id="1_4papg"]
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/pawns/player/player.tscn" id="1_fyhu2"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c08inc3nvav0f" path="res://ui/pause_menu.tscn" id="6_b2suy"]
 [ext_resource type="TileSet" uid="uid://31avaoegt2bk" path="res://world/tilesets/ground.tres" id="8_fyhu2"]
 [ext_resource type="TileSet" uid="uid://dbtkbyo4n77qy" path="res://world/tilesets/walls.tres" id="9_ov2xu"]
+[ext_resource type="TileSet" uid="uid://tradm20dt1wg" path="res://world/tilesets/defenses.tres" id="10_h8lre"]
 [ext_resource type="TileSet" uid="uid://kp24hb4w12of" path="res://world/tilesets/interactables.tres" id="10_mad0u"]
 [ext_resource type="TileSet" uid="uid://dal5shiydc68s" path="res://world/tilesets/resources.tres" id="10_ocfjn"]
 [ext_resource type="PackedScene" uid="uid://dnpygi6xo1s0n" path="res://actors/nexus/nexus.tscn" id="11_ov2xu"]
@@ -14,18 +15,17 @@
 [ext_resource type="Script" uid="uid://bhr5uamvonway" path="res://actors/pawns/generic/debug_path.gd" id="13_ocfjn"]
 [ext_resource type="Script" uid="uid://c100tn48lnodg" path="res://actors/pawns/enemies/wave_spawner.gd" id="14_dqqhb"]
 [ext_resource type="Resource" uid="uid://bfp85p8ebqdan" path="res://actors/pawns/enemies/zombie/basic_zombie.tres" id="14_h8lre"]
-[ext_resource type="PackedScene" uid="uid://c64uwphhqlc4b" path="res://actors/defenses/mini_turret/mini_turret.tscn" id="15_h8lre"]
-[ext_resource type="PackedScene" uid="uid://blqvvu0ytchcd" path="res://actors/pawns/enemies/zombie/zombie.tscn" id="16_h8lre"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "debug_path", "spawn_points") groups=["world"]]
+[node name="World" type="Node2D" node_paths=PackedStringArray("ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "defense_tiles", "spawn_points", "debug_path") groups=["world"]]
 script = ExtResource("1_4papg")
 world_config = ExtResource("2_dqqhb")
 ground_tiles = NodePath("Tiles/GroundTiles")
 wall_tiles = NodePath("Tiles/WallTiles")
 interactable_tiles = NodePath("Tiles/InteractableTiles")
 resource_tiles = NodePath("Tiles/ResourceTiles")
-debug_path = NodePath("DebugPath")
+defense_tiles = NodePath("Tiles/DefenseTiles")
 spawn_points = [NodePath("Roots/SpawnPoints/Marker2D")]
+debug_path = NodePath("DebugPath")
 
 [node name="Player" parent="." instance=ExtResource("1_fyhu2")]
 
@@ -56,6 +56,10 @@ tile_set = ExtResource("10_mad0u")
 
 [node name="ResourceTiles" type="TileMapLayer" parent="Tiles"]
 tile_set = ExtResource("10_ocfjn")
+
+[node name="DefenseTiles" type="TileMapLayer" parent="Tiles"]
+tile_map_data = PackedByteArray(0, 0, 251, 255, 252, 255, 0, 0, 0, 0, 0, 0, 1, 0)
+tile_set = ExtResource("10_h8lre")
 
 [node name="Nexus" parent="." groups=["nexus"] instance=ExtResource("11_ov2xu")]
 
@@ -90,9 +94,3 @@ position = Vector2(2, 0)
 
 [node name="Marker2D" type="Marker2D" parent="Roots/SpawnPoints"]
 position = Vector2(25, -2775)
-
-[node name="MiniTurret" parent="." instance=ExtResource("15_h8lre")]
-position = Vector2(-156, -148)
-
-[node name="Zombie" parent="." instance=ExtResource("16_h8lre")]
-position = Vector2(-673, -721)
