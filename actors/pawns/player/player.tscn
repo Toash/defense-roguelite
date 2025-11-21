@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=43 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
@@ -33,6 +33,8 @@
 [ext_resource type="Resource" uid="uid://cm5rcgysn4fkm" path="res://crafting/blueprints/blueprint_wooden_spear.tres" id="30_qqc64"]
 [ext_resource type="Resource" uid="uid://bag3yiaad1f5p" path="res://item/items/tiles/defense/mini_turret_item.tres" id="31_s6245"]
 [ext_resource type="Resource" uid="uid://bxegj0aw5s18c" path="res://item/items/scrap/scrap.tres" id="32_qqc64"]
+[ext_resource type="Script" uid="uid://d1jitd8ecvh0i" path="res://actors/pawns/player/player_build_highlight.gd" id="34_5hbjc"]
+[ext_resource type="Texture2D" uid="uid://c8oaaom1olacl" path="res://ui/white_outline.png" id="35_ed5vm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(25, 54)
@@ -262,6 +264,18 @@ hotbar = NodePath("../../Containers/Hotbar")
 itemdata = ExtResource("32_qqc64")
 amount = 20
 index = 2
+
+[node name="PlayerBuildHighlight" type="Node2D" parent="." node_paths=PackedStringArray("player", "mouse_input", "instance_provider", "ghost")]
+script = ExtResource("34_5hbjc")
+player = NodePath("..")
+mouse_input = NodePath("../Inputs/MouseInput")
+instance_provider = NodePath("../HotbarEquippedInst")
+ghost = NodePath("Sprite2D")
+metadata/_custom_type_script = "uid://d1jitd8ecvh0i"
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerBuildHighlight"]
+scale = Vector2(4, 4)
+texture = ExtResource("35_ed5vm")
 
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]

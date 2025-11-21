@@ -45,3 +45,10 @@ var id: int
 func apply_effects(context: ItemContext):
 	for effect in item_effects:
 		effect.apply(context)
+
+
+func has_build_effect() -> bool:
+	for effect in item_effects:
+		if effect is BuildEffect:
+			return true
+	return false

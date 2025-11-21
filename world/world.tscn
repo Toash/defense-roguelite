@@ -16,9 +16,10 @@
 [ext_resource type="Script" uid="uid://c100tn48lnodg" path="res://actors/pawns/enemies/wave_spawner.gd" id="14_dqqhb"]
 [ext_resource type="Resource" uid="uid://bfp85p8ebqdan" path="res://actors/pawns/enemies/zombie/basic_zombie.tres" id="14_h8lre"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "defense_tiles", "spawn_points", "debug_path") groups=["world"]]
+[node name="World" type="Node2D" node_paths=PackedStringArray("tiles_root", "ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "defense_tiles", "spawn_points", "debug_path") groups=["world"]]
 script = ExtResource("1_4papg")
 world_config = ExtResource("2_dqqhb")
+tiles_root = NodePath("Tiles")
 ground_tiles = NodePath("Tiles/GroundTiles")
 wall_tiles = NodePath("Tiles/WallTiles")
 interactable_tiles = NodePath("Tiles/InteractableTiles")
@@ -27,7 +28,8 @@ defense_tiles = NodePath("Tiles/DefenseTiles")
 spawn_points = [NodePath("Roots/SpawnPoints/Marker2D")]
 debug_path = NodePath("DebugPath")
 
-[node name="Player" parent="." instance=ExtResource("1_fyhu2")]
+[node name="Player" parent="." node_paths=PackedStringArray("world") instance=ExtResource("1_fyhu2")]
+world = NodePath("..")
 
 [node name="UI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_dqqhb")]
 player = NodePath("../Player")

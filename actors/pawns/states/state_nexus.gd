@@ -10,7 +10,7 @@ extends State
 
 var active = false
 @onready var nexus_pos: Vector2 = (get_tree().get_first_node_in_group("nexus") as Nexus).global_position
-@onready var world: World = get_tree().get_first_node_in_group("world") as World
+# @onready var world: World = get_tree().get_first_node_in_group("world") as World
 
 var speed
 
@@ -25,8 +25,8 @@ func state_enter():
 	defense_tracker.found_defense.connect(_on_defense_found)
 	tile_pathfind.enable()
 
-	if not world.setup:
-		world.world_setup.connect(_set_target)
+	if not enemy.world.setup:
+		enemy.world.world_setup.connect(_set_target)
 	else:
 		_set_target()
 

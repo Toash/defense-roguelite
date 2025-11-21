@@ -7,6 +7,7 @@ class_name World
 @export var world_config: WorldConfig
 
 @export_group("TileMapLayers")
+@export var tiles_root: Node2D
 @export var ground_tiles: TileMapLayer
 @export var wall_tiles: TileMapLayer
 @export var interactable_tiles: TileMapLayer
@@ -21,6 +22,10 @@ var astar_grid: AStarGrid2D = AStarGrid2D.new()
 
 signal world_setup
 var setup = false
+var scaling_factor: Vector2
+
+## offset to the center of the tile.
+var tile_offset: Vector2 = Vector2(8, 8)
 
 
 func _ready():
@@ -34,6 +39,7 @@ func _ready():
 
 func _setup():
 	# print("setup!")
+	scaling_factor = tiles_root.scale
 	_setup_ground()
 	_setup_pathfinding()
 	
@@ -144,6 +150,7 @@ func _setup_pathfinding():
 	astar_grid.region = ground_tiles.get_used_rect()
 	astar_grid.cell_size = ground_tiles.tile_set.tile_size
 	astar_grid.offset = Vector2(8, 8)
+	astar_grid.offset = tile_offset
 	astar_grid.update()
 	for cell_pos in wall_tiles.get_used_cells():
 		astar_grid.set_point_solid(cell_pos, true)
