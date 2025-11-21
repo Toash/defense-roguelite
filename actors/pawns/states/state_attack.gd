@@ -24,6 +24,9 @@ func state_enter():
 	target_acquired.emit()
 	attack_vision.body_exited.connect(_on_body_exited)
 
+func state_update(delta: float):
+	pass
+
 func state_physics_update(delta: float):
 	if active == false: return
 

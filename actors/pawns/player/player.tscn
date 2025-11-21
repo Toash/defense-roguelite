@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=42 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
@@ -27,7 +27,6 @@
 [ext_resource type="Script" uid="uid://ctutx861f7ofh" path="res://input/context_input.gd" id="26_h0lia"]
 [ext_resource type="Resource" uid="uid://dl4jalxjxqdxk" path="res://item/items/wooden_spear/wooden_spear.tres" id="26_yr7qf"]
 [ext_resource type="Script" uid="uid://cvf4ycidd0cme" path="res://actors/pawns/player/player_crafting.gd" id="27_h0lia"]
-[ext_resource type="Script" uid="uid://c8vlygcerjqvb" path="res://actors/pawns/generic/hurt_sound.gd" id="28_yr7qf"]
 [ext_resource type="Script" uid="uid://c0igk80mo7ba7" path="res://crafting/blueprint.gd" id="29_s6245"]
 [ext_resource type="Resource" uid="uid://ccuug6iyhqu4u" path="res://crafting/blueprints/blueprint_mini_turret.tres" id="29_ygih8"]
 [ext_resource type="Resource" uid="uid://cm5rcgysn4fkm" path="res://crafting/blueprints/blueprint_wooden_spear.tres" id="30_qqc64"]
@@ -226,11 +225,6 @@ script = ExtResource("24_nsxbo")
 hotbar_container = NodePath("../Containers/Hotbar")
 hotbar_input = NodePath("../Inputs/HotbarInput")
 metadata/_custom_type_script = "uid://bbp3ruk8jvfsw"
-
-[node name="HurtSound" type="Node2D" parent="." node_paths=PackedStringArray("health")]
-script = ExtResource("28_yr7qf")
-health = NodePath("../Health")
-metadata/_custom_type_script = "uid://c8vlygcerjqvb"
 
 [node name="Footsteps" type="Node2D" parent="." node_paths=PackedStringArray("character_sprite")]
 script = ExtResource("21_ctwkf")

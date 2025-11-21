@@ -31,6 +31,9 @@ func state_enter():
 		_set_target()
 
 	
+func state_update(delta: float):
+	pass
+
 func state_physics_update(delta: float):
 	if active == false: return
 

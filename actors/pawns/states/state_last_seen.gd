@@ -17,6 +17,10 @@ func state_enter():
 	player_tracker.pawn_line_of_sight.connect(_on_player_found)
 	print("Going to last seen position.")
 
+func state_update(delta: float):
+	pass
+
+
 func state_physics_update(delta: float):
 	if active == false: return
 

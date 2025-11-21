@@ -31,7 +31,7 @@ static func compute_intercept_time(origin: Vector2, target: Vector2, target_velo
 
 	return best_t if best_t < INF else -1.0
 
-# predict target place with projectile and target velocity
+## predict target place with projectile and target velocity
 static func compute_predicted_target(origin: Vector2, target: Vector2, target_velocity: Vector2, projectile_speed: float) -> Vector2:
 	var t = compute_intercept_time(origin, target, target_velocity, projectile_speed)
 	if t > 0.0:

@@ -35,6 +35,8 @@ func state_enter():
 	tile_pathfind.enable()
 	tile_pathfind.set_speed(wander_speed)
 
+func state_update(delta: float):
+	pass
 
 func state_physics_update(delta: float):
 	if active == false: return

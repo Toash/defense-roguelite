@@ -15,6 +15,10 @@ var equipped_index: int
 func _ready():
 	hotbar_input.equip_slot.connect(_on_equip_slot)
 
+	Game.player_loaded.connect(func():
+		_on_equip_slot(0)
+	)
+
 
 func _on_equip_slot(index: int):
 	# if ItemService.player_containers[ItemService.ContainerName.HOTBAR].get_capacity() <= index:

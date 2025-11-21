@@ -22,6 +22,9 @@ func state_enter():
 	active = true
 	
 
+func state_update(delta: float):
+	pass
+
 func state_physics_update(delta: float):
 	if active == false: return
 

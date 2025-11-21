@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name HurtSound
+class_name HealthSound
 
 
 @export var health: Health

@@ -43,6 +43,10 @@ func _hide():
 	ghost.visible = false
 	show = false
 func _on_instance_changed(inst: ItemInstance):
+	if inst == null:
+		_hide()
+		return
+		
 	if inst.data.has_build_effect():
 		_show()
 	else:

@@ -29,6 +29,9 @@ func state_enter():
 	attack_vision.body_entered.connect(_on_body_entered)
 	
 
+func state_update(delta: float):
+	pass
+	
 func state_physics_update(delta: float):
 	if active == false: return
 
