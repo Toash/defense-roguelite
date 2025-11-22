@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://blqvvu0ytchcd"]
+[gd_scene load_steps=36 format=3 uid="uid://blqvvu0ytchcd"]
 
 [ext_resource type="Script" uid="uid://si1ikxp52cuk" path="res://actors/pawns/enemies/enemy.gd" id="1_08fpo"]
 [ext_resource type="Resource" uid="uid://bfp85p8ebqdan" path="res://actors/pawns/enemies/zombie/basic_zombie.tres" id="2_0qpkc"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="8_23tyx"]
 [ext_resource type="Script" uid="uid://y6xyi4gu5uqa" path="res://actors/pawns/states/state_last_seen.gd" id="8_uotjo"]
 [ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/pawns/character_sprite.tscn" id="9_culwy"]
-[ext_resource type="Script" uid="uid://dn7fydgbbk3wg" path="res://actors/pawns/enemies/zombie/zombie_death.gd" id="9_oyhgy"]
+[ext_resource type="Script" uid="uid://dn7fydgbbk3wg" path="res://actors/pawns/generic/ai_death_controller.gd" id="9_oyhgy"]
 [ext_resource type="Script" uid="uid://bdpo0eyqlq8re" path="res://actors/pawns/states/state_attack.gd" id="9_ubgnx"]
 [ext_resource type="Script" uid="uid://cjnn80jlwilpx" path="res://actors/pawns/states/state_nexus.gd" id="10_drpw1"]
 [ext_resource type="Texture2D" uid="uid://doueacum5bmne" path="res://actors/pawns/sprites/head/head_zombie_1.png" id="10_mmehc"]
@@ -26,9 +26,11 @@
 [ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/pawn_tracker.gd" id="26_buy8w"]
 [ext_resource type="Script" uid="uid://d3o527u2hmgp7" path="res://actors/pawns/generic/defense_tracker.gd" id="26_sonq4"]
 [ext_resource type="Script" uid="uid://dbgqumwhqtmf6" path="res://actors/pawns/generic/tile_pathfind.gd" id="27_sonq4"]
+[ext_resource type="Resource" uid="uid://b3mx7fnms14x8" path="res://item/loot/loot_table_basic_enemy.tres" id="28_0qpkc"]
 [ext_resource type="Script" uid="uid://6x0akmb8ed61" path="res://actors/generic/health_bar.gd" id="28_6lqgw"]
+[ext_resource type="Script" uid="uid://donkr7aqvtvk7" path="res://item/loot/loot_dropper.gd" id="28_08fpo"]
 
-[sub_resource type="Shader" id="Shader_g23qj"]
+[sub_resource type="Shader" id="Shader_08fpo"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -48,7 +50,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
 resource_local_to_scene = true
-shader = SubResource("Shader_g23qj")
+shader = SubResource("Shader_08fpo")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
@@ -146,13 +148,6 @@ shape = SubResource("RectangleShape2D_3fose")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("8_23tyx")
 metadata/_custom_type_script = "uid://gyp8bshfrfoj"
-
-[node name="ZombieDeath" type="Node" parent="." node_paths=PackedStringArray("pawn", "state_machine", "tile_pathfind")]
-script = ExtResource("9_oyhgy")
-pawn = NodePath("..")
-state_machine = NodePath("")
-tile_pathfind = NodePath("../TilePathfind")
-metadata/_custom_type_script = "uid://dn7fydgbbk3wg"
 
 [node name="Items" type="Node2D" parent="."]
 
@@ -257,11 +252,24 @@ bar_size = Vector2(60, 15)
 offset = Vector2(0, -40)
 metadata/_custom_type_script = "uid://6x0akmb8ed61"
 
-[connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]
+[node name="LootDropper" type="Node2D" parent="."]
+script = ExtResource("28_08fpo")
+loot_table = ExtResource("28_0qpkc")
+metadata/_custom_type_script = "uid://donkr7aqvtvk7"
+
+[node name="AIDeathController" type="Node" parent="." node_paths=PackedStringArray("health", "pawn", "state_machine", "tile_pathfind")]
+script = ExtResource("9_oyhgy")
+health = NodePath("../Health")
+pawn = NodePath("..")
+state_machine = NodePath("../ZombieStateMachine")
+tile_pathfind = NodePath("../TilePathfind")
+metadata/_custom_type_script = "uid://dn7fydgbbk3wg"
+
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
+[connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]
 [connection signal="target_emitted" from="ZombieStateMachine/Chase" to="ZombieArms" method="_set_target"]
-[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_right_hand_pos"]
 [connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_left_hand_pos"]
-[connection signal="died" from="Health" to="ZombieDeath" method="_on_death"]
+[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_right_hand_pos"]
+[connection signal="died" from="Health" to="LootDropper" method="drop_loot"]
 [connection signal="left_hand_pos_emitted" from="ZombieArms" to="CharacterSprite" method="_set_left_hand_pos"]
 [connection signal="right_hand_pos_emitted" from="ZombieArms" to="CharacterSprite" method="_set_right_hand_pos"]

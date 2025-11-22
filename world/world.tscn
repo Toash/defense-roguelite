@@ -28,8 +28,7 @@ defense_tiles = NodePath("Tiles/DefenseTiles")
 spawn_points = [NodePath("Roots/SpawnPoints/Marker2D")]
 debug_path = NodePath("DebugPath")
 
-[node name="Player" parent="." node_paths=PackedStringArray("world") instance=ExtResource("1_fyhu2")]
-world = NodePath("..")
+[node name="Player" parent="." instance=ExtResource("1_fyhu2")]
 
 [node name="UI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_dqqhb")]
 player = NodePath("../Player")

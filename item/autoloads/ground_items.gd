@@ -37,10 +37,13 @@ func spawn_by_id(id: int, qty := 1, pos := Vector2.ZERO) -> Node2D:
 		push_error("Could not find item data when spawning ground item.")
 		return null
 	return _spawn(data, qty, pos)
-	
+
+
+func spawn_item_group(group: ItemDataGroup, global_pos: Vector2):
+	_spawn(group.item_data, group.amount, global_pos)
 
 func _spawn(data: ItemData, qty := 1, pos := Vector2.ZERO) -> Node2D:
-	print("ItemFactory: Spawning " + data.display_name)
+	print("GroundItems: Spawning " + data.display_name)
 	var inst: ItemInstance = ItemService.create_instance(data, qty)
 
 	var pickup: GroundItem = item_drop_scene.instantiate()

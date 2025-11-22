@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemDataGroup" load_steps=3 format=3 uid="uid://by3oe1tdrue60"]
+
+[ext_resource type="Resource" uid="uid://bxegj0aw5s18c" path="res://item/items/scrap/scrap.tres" id="1_6872n"]
+[ext_resource type="Script" uid="uid://b6bhu0l2m8yl0" path="res://crafting/item_data_group.gd" id="1_fytni"]
+
+[resource]
+script = ExtResource("1_fytni")
+item_data = ExtResource("1_6872n")
+amount = 1
+metadata/_custom_type_script = "uid://b6bhu0l2m8yl0"
