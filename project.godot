@@ -30,8 +30,8 @@ GroundItems="*res://item/autoloads/ground_items.tscn"
 ItemDatabase="*res://item/autoloads/item_database.gd"
 Console="*res://game/autoloads/console.tscn"
 ItemService="*res://item/autoloads/item_service.tscn"
-ActorRegistry="*res://actors/autoloads/actor_registry.tscn"
-ActorSpawner="*res://actors/autoloads/actor_spawner.gd"
+PawnRegistry="*res://actors/autoloads/pawn_registry.tscn"
+PawnSpawner="*res://actors/autoloads/pawn_spawner.gd"
 ContextManager="*res://ui/autoloads/context_manager.tscn"
 
 [debug]

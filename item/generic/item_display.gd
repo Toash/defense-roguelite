@@ -41,7 +41,7 @@ func _set_instance(inst: ItemInstance):
 		inst_sprite.texture = inst.data.ingame_sprite as Texture2D
 		inst_sprite.flip_h = inst.data.sprite_flipped
 		inst_sprite.visible = true
-		inst_sprite.scale = Vector2(inst.data.scale, inst.data.scale)
+		inst_sprite.scale = Vector2(inst.data.equipped_scale, inst.data.equipped_scale)
 	else:
 		inst_sprite.texture = null
 		inst_sprite.visible = false

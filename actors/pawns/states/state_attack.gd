@@ -48,6 +48,7 @@ func state_physics_update(delta: float):
 func state_exit():
 	active = false
 	target_lost.emit()
+	attack_vision.body_exited.disconnect(_on_body_exited)
 
 func _on_body_exited(body: Node2D):
 	if body is Player:

@@ -24,7 +24,7 @@ var id: int
 @export_group("In-Game Display")
 # ingame display 
 @export var ingame_sprite: Texture2D
-@export var scale: float = 1
+@export var equipped_scale: float = 1
 @export var sprite_flipped = false
 
 ## item should point towards the target.

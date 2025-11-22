@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://blqvvu0ytchcd"]
+[gd_scene load_steps=35 format=3 uid="uid://blqvvu0ytchcd"]
 
 [ext_resource type="Script" uid="uid://si1ikxp52cuk" path="res://actors/pawns/enemies/enemy.gd" id="1_08fpo"]
 [ext_resource type="Resource" uid="uid://bfp85p8ebqdan" path="res://actors/pawns/enemies/zombie/basic_zombie.tres" id="2_0qpkc"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="8_23tyx"]
 [ext_resource type="Script" uid="uid://y6xyi4gu5uqa" path="res://actors/pawns/states/state_last_seen.gd" id="8_uotjo"]
 [ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/pawns/character_sprite.tscn" id="9_culwy"]
-[ext_resource type="Script" uid="uid://dn7fydgbbk3wg" path="res://actors/pawns/generic/ai_death_controller.gd" id="9_oyhgy"]
 [ext_resource type="Script" uid="uid://bdpo0eyqlq8re" path="res://actors/pawns/states/state_attack.gd" id="9_ubgnx"]
 [ext_resource type="Script" uid="uid://cjnn80jlwilpx" path="res://actors/pawns/states/state_nexus.gd" id="10_drpw1"]
 [ext_resource type="Texture2D" uid="uid://doueacum5bmne" path="res://actors/pawns/sprites/head/head_zombie_1.png" id="10_mmehc"]
@@ -30,7 +29,7 @@
 [ext_resource type="Script" uid="uid://6x0akmb8ed61" path="res://actors/generic/health_bar.gd" id="28_6lqgw"]
 [ext_resource type="Script" uid="uid://donkr7aqvtvk7" path="res://item/loot/loot_dropper.gd" id="28_08fpo"]
 
-[sub_resource type="Shader" id="Shader_08fpo"]
+[sub_resource type="Shader" id="Shader_0qpkc"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -50,7 +49,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
 resource_local_to_scene = true
-shader = SubResource("Shader_08fpo")
+shader = SubResource("Shader_0qpkc")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
@@ -66,11 +65,13 @@ radius = 118.004234
 [sub_resource type="CircleShape2D" id="CircleShape2D_buy8w"]
 radius = 47.010635
 
-[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("health")]
+[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "tile_pathfind", "health")]
 collision_layer = 4
 collision_mask = 32
 script = ExtResource("1_08fpo")
 enemy_data = ExtResource("2_0qpkc")
+state_machine = NodePath("ZombieStateMachine")
+tile_pathfind = NodePath("TilePathfind")
 faction = 2
 health = NodePath("Health")
 
@@ -256,14 +257,6 @@ metadata/_custom_type_script = "uid://6x0akmb8ed61"
 script = ExtResource("28_08fpo")
 loot_table = ExtResource("28_0qpkc")
 metadata/_custom_type_script = "uid://donkr7aqvtvk7"
-
-[node name="AIDeathController" type="Node" parent="." node_paths=PackedStringArray("health", "pawn", "state_machine", "tile_pathfind")]
-script = ExtResource("9_oyhgy")
-health = NodePath("../Health")
-pawn = NodePath("..")
-state_machine = NodePath("../ZombieStateMachine")
-tile_pathfind = NodePath("../TilePathfind")
-metadata/_custom_type_script = "uid://dn7fydgbbk3wg"
 
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]

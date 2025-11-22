@@ -10,5 +10,6 @@ display_name = "Metal Scrap"
 description = "Material used for building basic defenses."
 max_stack = 64
 icon = ExtResource("1_55tet")
+ground_scale = 4.0
 ingame_sprite = ExtResource("1_55tet")
 metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

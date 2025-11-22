@@ -1,6 +1,7 @@
 extends Node
 
-class_name AIDeathController
+## orchestrator for when npc dies.
+class_name NPCDeathController
 
 
 @export var health: Health
