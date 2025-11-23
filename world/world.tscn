@@ -100,10 +100,12 @@ position = Vector2(0, -626)
 [node name="Node2D2" type="Node2D" parent="Roots/SpawnPoints"]
 position = Vector2(0, 696)
 
-[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("world", "state_machine", "spawn_points")]
+[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("world", "state_machine", "intermission_state", "wave_state", "spawn_points")]
 script = ExtResource("14_b2suy")
 world = NodePath("..")
 state_machine = NodePath("StateMachine")
+intermission_state = NodePath("StateMachine/Intermission")
+wave_state = NodePath("StateMachine/Wave")
 spawn_points = [NodePath("../Roots/SpawnPoints/Node2D"), NodePath("../Roots/SpawnPoints/Node2D2")]
 metadata/_custom_type_script = "uid://b2l0f2hsw0cbx"
 

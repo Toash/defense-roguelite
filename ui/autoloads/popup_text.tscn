@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0mur63obiywt"]
+
+[ext_resource type="Script" uid="uid://c56raldncf3y5" path="res://ui/autoloads/text_popup_manager.gd" id="1_5nj8i"]
+[ext_resource type="PackedScene" uid="uid://161421j32dif" path="res://ui/text_popup.tscn" id="2_v0635"]
+
+[node name="PopupText" type="CanvasLayer"]
+script = ExtResource("1_5nj8i")
+popup_scene = ExtResource("2_v0635")

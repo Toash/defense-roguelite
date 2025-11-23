@@ -53,6 +53,6 @@ func _draw() -> void:
 	# matrix that cancels nodes global transform
 	var inv = get_global_transform().affine_inverse()
 	draw_set_transform_matrix(inv)
-	draw_string(font, global_position, current_state.name, HORIZONTAL_ALIGNMENT_CENTER, -1, 32)
+	draw_string(font, global_position, current_state.name, HORIZONTAL_ALIGNMENT_CENTER, -1, 16)
 	draw_set_transform_matrix(Transform2D()) # reset
 	# draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)

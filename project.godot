@@ -33,6 +33,7 @@ ItemService="*res://item/autoloads/item_service.tscn"
 PawnRegistry="*res://actors/autoloads/pawn_registry.tscn"
 PawnSpawner="*res://actors/autoloads/pawn_spawner.gd"
 ContextManager="*res://ui/autoloads/context_manager.tscn"
+TextPopupManager="*res://ui/autoloads/popup_text.tscn"
 
 [debug]
 
