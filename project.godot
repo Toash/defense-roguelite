@@ -55,6 +55,7 @@ folder_colors={
 "res://ai/": "gray",
 "res://audio/": "orange",
 "res://crafting/": "yellow",
+"res://game/": "pink",
 "res://interactable/": "yellow",
 "res://item/": "blue",
 "res://shaders/": "purple",

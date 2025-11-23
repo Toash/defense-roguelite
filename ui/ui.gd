@@ -15,9 +15,13 @@ extends CanvasLayer
 @export var hotbar_ui: HotbarUI
 @export var health_bar: ProgressBar
 
+@export var game_state_ui: GameStateUI
+
+@export var offscreen_indicators: OffscreenIndicators
+
 @export_group("World references")
-@export var player: Pawn
-@export var wave_spawner: WaveSpawner
+@export var player: Player
+@export var game_state: GameState
 
 
 func _ready() -> void:
@@ -50,6 +54,12 @@ func _ready() -> void:
 	var crafting_ui: CraftingUI = crafting_window.get_content() as CraftingUI
 	crafting_ui.setup(player.get_player_crafting().get_blueprints())
 	crafting_ui.blueprint_craft.connect(_on_blueprint_craft)
+
+	game_state_ui.game_state = game_state
+
+
+	offscreen_indicators.camera = player.camera
+	offscreen_indicators.targets = game_state.spawn_points
 
 
 func _on_health_changed(health: int):

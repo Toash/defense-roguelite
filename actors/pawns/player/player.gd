@@ -4,7 +4,7 @@ class_name Player
 
 
 @export var speed = 250
-
+@export var camera: Camera2D
 
 @export_group("Containers")
 @export var inventory: ItemContainer

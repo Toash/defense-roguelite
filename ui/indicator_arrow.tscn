@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgswlrwpp8mqe"]
+
+[ext_resource type="Texture2D" uid="uid://bpyb1qw03660d" path="res://ui/crafting/arrow.png" id="1_72t07"]
+[ext_resource type="Script" uid="uid://biuyikw2icnov" path="res://ui/pulsate.gd" id="2_fhc0m"]
+
+[node name="TextureRect" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_72t07")
+script = ExtResource("2_fhc0m")

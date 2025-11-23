@@ -36,7 +36,7 @@ func _ready() -> void:
 		)
 
 	_register_command("spawn_horde", func(amount):
-		PawnSpawner.spawn_horde(PawnEnums.KEY.PAWNS_ZOMBIE, int(amount))
+		PawnSpawner.spawn_horde(PawnEnums.NAME.BASIC_ZOMBIE, int(amount))
 		)
 
 	_register_command("new_world", func():

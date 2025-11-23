@@ -14,8 +14,9 @@ class_name World
 @export var resource_tiles: TileMapLayer
 @export var defense_tiles: TileMapLayer
 
-@export_group("Spawners")
+@export_group("GameState")
 @export var spawn_points: Array[Marker2D]
+@export var game_state: GameState
 @export_group("Debug")
 @export var debug_path: DebugPath
 var astar_grid: AStarGrid2D = AStarGrid2D.new()

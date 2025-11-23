@@ -1,6 +1,6 @@
 class_name PawnEnums
 
 
-enum KEY {
-	PAWNS_ZOMBIE
+enum NAME {
+	BASIC_ZOMBIE
 }
