@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=21 format=3 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="Script" uid="uid://csd4ncy3jgem8" path="res://world/world.gd" id="1_4papg"]
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/pawns/player/player.tscn" id="1_fyhu2"]
@@ -18,6 +18,8 @@
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="15_h8lre"]
 [ext_resource type="Script" uid="uid://omtnlx3h5d70" path="res://game/states/state_intermission.gd" id="16_ysn08"]
 [ext_resource type="Script" uid="uid://djv6321i8c28e" path="res://game/states/state_wave.gd" id="17_m0cxt"]
+[ext_resource type="Script" uid="uid://d2jl0vikp6yny" path="res://game/wave_spawner.gd" id="19_j34ew"]
+[ext_resource type="Resource" uid="uid://b6msgfm6ns6rx" path="res://world/resources/pawns/forest_enemies.tres" id="20_p2iis"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("tiles_root", "ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "defense_tiles", "spawn_points", "game_state", "debug_path") groups=["world"]]
 script = ExtResource("1_4papg")
@@ -100,12 +102,13 @@ position = Vector2(0, -626)
 [node name="Node2D2" type="Node2D" parent="Roots/SpawnPoints"]
 position = Vector2(0, 696)
 
-[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("world", "state_machine", "intermission_state", "wave_state", "spawn_points")]
+[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("world", "state_machine", "intermission_state", "wave_state", "wave_spawner", "spawn_points")]
 script = ExtResource("14_b2suy")
 world = NodePath("..")
 state_machine = NodePath("StateMachine")
 intermission_state = NodePath("StateMachine/Intermission")
 wave_state = NodePath("StateMachine/Wave")
+wave_spawner = NodePath("WaveSpawner")
 spawn_points = [NodePath("../Roots/SpawnPoints/Node2D"), NodePath("../Roots/SpawnPoints/Node2D2")]
 metadata/_custom_type_script = "uid://b2l0f2hsw0cbx"
 
@@ -118,8 +121,15 @@ metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 script = ExtResource("16_ysn08")
 game_state = NodePath("../..")
 
-[node name="Wave" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state", "enemy_root")]
+[node name="Wave" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state", "enemy_root", "wave_spawner")]
 script = ExtResource("17_m0cxt")
 game_state = NodePath("../..")
 enemy_root = NodePath("../../../Zombies")
 enemy_data = ExtResource("14_h8lre")
+wave_spawner = NodePath("../../WaveSpawner")
+
+[node name="WaveSpawner" type="Node2D" parent="GameState" node_paths=PackedStringArray("enemy_root")]
+script = ExtResource("19_j34ew")
+world_enemies = ExtResource("20_p2iis")
+enemy_root = NodePath("../../Zombies")
+metadata/_custom_type_script = "uid://d2jl0vikp6yny"

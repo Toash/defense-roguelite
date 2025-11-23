@@ -16,6 +16,7 @@ enum PHASE {
 @export var state_machine: StateMachine
 @export var intermission_state: IntermissionState
 @export var wave_state: WaveState
+@export var wave_spawner: WaveSpawner
 
 
 # TODO: get spawn_points from world
@@ -42,6 +43,8 @@ func _get_random_spawn_point() -> Vector2:
 func get_debug_string() -> String:
 	# return "asdf"
 	var s: String = "State: " + state_machine.current_state.name + "\n"
+
+	s += "Spawn Budget: " + str("%.1f" % wave_spawner.spawn_budget) + "\n"
 
 	match state_machine.current_state.name.to_lower():
 		"intermission":
