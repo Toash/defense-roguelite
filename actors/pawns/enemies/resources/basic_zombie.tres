@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://bfp85p8ebqdan"]
+
+[ext_resource type="PackedScene" uid="uid://blqvvu0ytchcd" path="res://actors/pawns/enemies/zombie/zombie.tscn" id="1_75nsu"]
+[ext_resource type="Script" uid="uid://batjd7vgwc587" path="res://actors/pawns/enemies/enemy_data.gd" id="2_i8u1u"]
+
+[resource]
+script = ExtResource("2_i8u1u")
+scene = ExtResource("1_75nsu")
+move_speed = 200.0
+metadata/_custom_type_script = "uid://batjd7vgwc587"

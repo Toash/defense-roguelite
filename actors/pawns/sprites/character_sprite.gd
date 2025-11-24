@@ -21,6 +21,13 @@ var character_body: CharacterBody2D
 @export var left_leg_texture: Texture2D
 @export var right_leg_texture: Texture2D
 
+@export var head_scale: float = 1
+@export var torso_scale: float = 1
+@export var left_arm_scale: float = 1
+@export var right_arm_scale: float = 1
+@export var left_leg_scale: float = 1
+@export var right_leg_scale: float = 1
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var head: Sprite2D
@@ -83,6 +90,14 @@ func _ready() -> void:
 		left_leg.texture = left_leg_texture
 	if right_leg_texture:
 		right_leg.texture = right_leg_texture
+
+
+	head.scale = Vector2.ONE * head_scale
+	torso.scale = Vector2.ONE * torso_scale
+	left_hand.scale = Vector2.ONE * left_arm_scale
+	right_hand.scale = Vector2.ONE * right_arm_scale
+	left_leg.scale = Vector2.ONE * left_leg_scale
+	right_leg.scale = Vector2.ONE * right_leg_scale
 
 	head_initial_pos = head.position
 	torso_initial_pos = torso.position

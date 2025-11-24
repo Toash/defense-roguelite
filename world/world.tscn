@@ -14,7 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://ce32rgxtm702s" path="res://audio/audioaudio/weather/smooth_wind.mp3" id="12_mad0u"]
 [ext_resource type="Script" uid="uid://bhr5uamvonway" path="res://actors/pawns/generic/debug_path.gd" id="13_ocfjn"]
 [ext_resource type="Script" uid="uid://b2l0f2hsw0cbx" path="res://game/game_state.gd" id="14_b2suy"]
-[ext_resource type="Resource" uid="uid://bfp85p8ebqdan" path="res://actors/pawns/enemies/zombie/basic_zombie.tres" id="14_h8lre"]
+[ext_resource type="Resource" uid="uid://bfp85p8ebqdan" path="res://actors/pawns/enemies/resources/basic_zombie.tres" id="14_h8lre"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="15_h8lre"]
 [ext_resource type="Script" uid="uid://omtnlx3h5d70" path="res://game/states/state_intermission.gd" id="16_ysn08"]
 [ext_resource type="Script" uid="uid://djv6321i8c28e" path="res://game/states/state_wave.gd" id="17_m0cxt"]
@@ -66,7 +66,7 @@ tile_set = ExtResource("10_mad0u")
 tile_set = ExtResource("10_ocfjn")
 
 [node name="DefenseTiles" type="TileMapLayer" parent="Tiles"]
-tile_map_data = PackedByteArray(0, 0, 251, 255, 252, 255, 0, 0, 0, 0, 0, 0, 1, 0)
+tile_map_data = PackedByteArray(0, 0, 253, 255, 254, 255, 0, 0, 0, 0, 0, 0, 1, 0)
 tile_set = ExtResource("10_h8lre")
 
 [node name="Nexus" parent="." groups=["nexus"] instance=ExtResource("11_ov2xu")]
@@ -90,6 +90,7 @@ parameters/looping = true
 position = Vector2(2, 0)
 
 [node name="ZombieRoot" type="Node2D" parent="Roots"]
+position = Vector2(0, -2)
 
 [node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("world", "state_machine", "intermission_state", "wave_state", "wave_spawner")]
 script = ExtResource("14_b2suy")
@@ -118,6 +119,7 @@ game_state = NodePath("../..")
 enemy_root = NodePath("../../../Zombies")
 enemy_data = ExtResource("14_h8lre")
 wave_spawner = NodePath("../../WaveSpawner")
+wave_time = 30.0
 world = NodePath("../../..")
 
 [node name="WaveSpawner" type="Node2D" parent="GameState" node_paths=PackedStringArray("enemy_root")]
