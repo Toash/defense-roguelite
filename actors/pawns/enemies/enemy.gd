@@ -37,6 +37,10 @@ func get_data() -> EnemyData:
 func _on_death():
 	remove_from_group("enemy")
 
+	# add coins to player
+	(get_tree().get_first_node_in_group("player") as Player).coins.change_coins(enemy_data.coins_dropped)
+
+
 	state_machine.queue_free()
 	tile_pathfind.queue_free()
 

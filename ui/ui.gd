@@ -15,6 +15,7 @@ extends CanvasLayer
 @export var hotbar_ui: HotbarUI
 @export var health_bar: ProgressBar
 @export var nexus_bar: ProgressBar
+@export var coins_label: Label
 @export var death_ui: DeathUI
 
 @export var game_state_ui: GameStateUI
@@ -39,7 +40,13 @@ func _ready() -> void:
 	nexus_bar.max_value = nexus.health.max_health
 	nexus_bar.value = nexus.health.max_health
 
-	
+
+	coins_label.text = "Coins: " + str(player.coins.current_coins)
+	player.coins.coins_changed.connect(func(new_amount: int):
+		coins_label.text = "Coins: " + str(new_amount)
+		)
+
+
 	nexus.health.health_changed.connect(func(health: int):
 		nexus_bar.value = health
 		)

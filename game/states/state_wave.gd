@@ -27,7 +27,7 @@ func state_update(delta: float):
 	spawn_timer += delta
 	wave_timer += delta
 
-	if spawn_timer > 2:
+	if spawn_timer > 8:
 		# TODO: fallback if we cant find spawn points
 		wave_spawner.spawn(world.get_random_spawn_point())
 		spawn_timer = 0

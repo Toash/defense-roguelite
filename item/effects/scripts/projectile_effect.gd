@@ -26,4 +26,4 @@ func apply(context: ItemContext):
     projectile_inst.setup(context)
 
     context.root_node.add_child.call_deferred(projectile_inst)
-    AudioManager.play_key(shoot_audio_key, .5, context.global_target_position, bus)
+    AudioManager.play_key(shoot_audio_key, shoot_volume, context.global_target_position, bus)

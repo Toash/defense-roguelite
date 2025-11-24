@@ -15,7 +15,7 @@ var intermission_timer: float = 0
 func state_enter():
 	intermission_timer = 0
 	# world.get_spawn_nodes(Vector2.ZERO, 3)
-	world.get_spawn_nodes(nexus.global_position, 3)
+	world.get_spawn_nodes(nexus.global_position, 1)
 	
 
 func state_update(delta: float):

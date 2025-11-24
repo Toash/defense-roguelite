@@ -1,8 +1,8 @@
 extends State
 
-signal target_acquired
-signal target_emitted(pos: Vector2)
-signal target_lost
+signal chase_target_acquired
+signal chase_target_emitted(pos: Vector2)
+signal chase_target_lost
 
 
 @export var enemy: Enemy
@@ -21,7 +21,7 @@ var active = false
 
 func state_enter():
 	active = true
-	target_acquired.emit()
+	chase_target_acquired.emit()
 	attack_vision.body_entered.connect(_on_attack_vision_entered)
 	
 
@@ -33,7 +33,7 @@ func state_physics_update(delta: float):
 
 	if target.reference:
 		nav.target_position = target.reference.global_position
-		target_emitted.emit(target.reference.global_position)
+		chase_target_emitted.emit(target.reference.global_position)
 
 		var next_point: Vector2 = nav.get_next_path_position()
 		var normal_dir = (next_point - pawn.global_position).normalized()
@@ -48,7 +48,7 @@ func state_physics_update(delta: float):
 
 func state_exit():
 	active = false
-	target_lost.emit()
+	chase_target_lost.emit()
 	attack_vision.body_entered.disconnect(_on_attack_vision_entered)
 
 

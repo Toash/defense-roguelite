@@ -179,7 +179,8 @@ func _append_spawn_node(target_global: Vector2) -> Node2D:
 	var target_cell: Vector2i = _world_to_grid(target_global)
 
 	for i in 100:
-		var angle_deg: float = randf_range(0, 360)
+		# var angle_deg: float = randf_range(0, 360)
+		var angle_deg: float = -90
 
 
 		var radius: float = world_config.world_height * ground_tiles.tile_set.tile_size.x * 1
@@ -203,7 +204,7 @@ func _append_spawn_node(target_global: Vector2) -> Node2D:
 		# 	print("World: path to target is empty")
 		# 	continue
 
-		var node2d: Node2D = Node2D.new()
+		var node2d = Node2D.new()
 		# node2d.global_position = _grid_to_world(candidate_cell)
 		node2d.global_position = candidate_global
 
@@ -216,6 +217,7 @@ func _append_spawn_node(target_global: Vector2) -> Node2D:
 
 func get_random_spawn_point() -> Vector2:
 	## TODO: fallback if no spawn points
+	# return Vector2.UP * 500
 	return spawn_nodes[randi()%spawn_nodes.size()].global_position
 
 

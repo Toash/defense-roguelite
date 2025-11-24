@@ -13,6 +13,8 @@
 
 [resource]
 script = ExtResource("6_dm1fa")
+world_width = 64
+world_height = 64
 altitude_enum_to_tile = Dictionary[int, ExtResource("5_mohia")]({
 0: ExtResource("6_i3u64"),
 1: ExtResource("7_dm1fa"),
