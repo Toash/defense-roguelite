@@ -1,17 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnpygi6xo1s0n"]
+[gd_scene load_steps=8 format=3 uid="uid://dnpygi6xo1s0n"]
 
 [ext_resource type="Script" uid="uid://dsxsaqwksga3x" path="res://actors/nexus/nexus.gd" id="1_wx721"]
+[ext_resource type="Shader" uid="uid://bte14t1wav6lm" path="res://actors/nexus/nexus.gdshader" id="2_2c8jp"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_w52sr"]
+[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="3_w52sr"]
+[ext_resource type="Theme" uid="uid://dhhk734ua4d0l" path="res://ui/theme.tres" id="5_gyffu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyffu"]
+shader = ExtResource("2_2c8jp")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx721"]
 size = Vector2(63, 70)
 
-[node name="Nexus" type="Node2D" node_paths=PackedStringArray("area")]
+[node name="Nexus" type="Node2D" node_paths=PackedStringArray("area", "health")]
 script = ExtResource("1_wx721")
 area = NodePath("Area2D")
+health = NodePath("Health")
 metadata/_custom_type_script = "uid://dsxsaqwksga3x"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_gyffu")
 position = Vector2(-1, -2)
 scale = Vector2(0.49951172, 0.53222656)
 texture = ExtResource("2_w52sr")
@@ -21,5 +29,19 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 position = Vector2(-2.5, -3)
 shape = SubResource("RectangleShape2D_wx721")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_w52sr")
+max_health = 10
+metadata/_custom_type_script = "uid://gyp8bshfrfoj"
+
+[node name="Label" type="Label" parent="."]
+offset_left = -46.0
+offset_top = -57.0
+offset_right = 57.0
+offset_bottom = -34.0
+theme = ExtResource("5_gyffu")
+text = "protect me!!!!"

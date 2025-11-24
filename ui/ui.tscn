@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b3kkj3vijsw7s"]
+[gd_scene load_steps=16 format=3 uid="uid://b3kkj3vijsw7s"]
 
 [ext_resource type="Script" uid="uid://dy00162n1j4me" path="res://ui/ui.gd" id="1_bo1jx"]
 [ext_resource type="PackedScene" uid="uid://c44tg88n7uy51" path="res://ui/inventory_ui.tscn" id="1_ks8t7"]
@@ -12,11 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://bgswlrwpp8mqe" path="res://ui/indicator_arrow.tscn" id="10_ay4pc"]
 [ext_resource type="Texture2D" uid="uid://bpyb1qw03660d" path="res://ui/crafting/arrow.png" id="11_hrmpd"]
 [ext_resource type="Texture2D" uid="uid://p6vrlwd6fa4f" path="res://ui/indicator.png" id="12_x7jpl"]
+[ext_resource type="PackedScene" uid="uid://cg4eufrf2732t" path="res://ui/death_ui.tscn" id="13_x7jpl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7jpl"]
+bg_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obcwv"]
-bg_color = Color(0.811578, 1.85303e-06, 3.85046e-07, 1)
+bg_color = Color(1, 0, 1, 1)
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("inventory_window", "pickup_window", "world_container_window", "crafting_window", "hotbar_ui", "health_bar", "game_state_ui", "offscreen_indicators")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("inventory_window", "pickup_window", "world_container_window", "crafting_window", "hotbar_ui", "health_bar", "nexus_bar", "death_ui", "game_state_ui", "offscreen_indicators")]
 script = ExtResource("1_bo1jx")
 inventory_window = NodePath("InventoryWindow")
 pickup_window = NodePath("PickupWindow")
@@ -24,6 +28,8 @@ world_container_window = NodePath("WorldContainerWindow")
 crafting_window = NodePath("CraftingWindow")
 hotbar_ui = NodePath("HotbarUI")
 health_bar = NodePath("Stats/MarginContainer/VBoxContainer/Health")
+nexus_bar = NodePath("Stats/MarginContainer/VBoxContainer/Nexus")
+death_ui = NodePath("DeathUI")
 game_state_ui = NodePath("GameStateUI")
 offscreen_indicators = NodePath("OffscreenIndicators")
 
@@ -71,13 +77,23 @@ layout_mode = 2
 
 [node name="Health" type="ProgressBar" parent="Stats/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_obcwv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_x7jpl")
 
 [node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/Health"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Health"
+
+[node name="Nexus" type="ProgressBar" parent="Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_obcwv")
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/Nexus"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Nexus"
 
 [node name="WorldContainerWindow" parent="." instance=ExtResource("4_tf0e0")]
 offset_left = 649.0
@@ -121,3 +137,6 @@ script = ExtResource("9_pa1oa")
 indicator_scene = ExtResource("10_ay4pc")
 side_indicator_texture = ExtResource("11_hrmpd")
 indicator_texture = ExtResource("12_x7jpl")
+
+[node name="DeathUI" parent="." instance=ExtResource("13_x7jpl")]
+visible = false

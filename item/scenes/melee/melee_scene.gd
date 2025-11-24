@@ -5,6 +5,7 @@ class_name MeleeScene
 signal finished
 
 var damage: int = 25
+var pierce: int = 1
 var user: Node2D
 
 @export var left_hand_marker: Marker2D
@@ -17,6 +18,9 @@ var user: Node2D
 var context: ItemContext
 
 
+var pierce_counter: int = 0
+
+
 func _ready():
 	area.body_entered.connect(_on_body_entered)
 
@@ -25,7 +29,7 @@ func _process(delta):
 	context.character_sprite.set_left_hand(left_hand_marker.global_position)
 	context.character_sprite.set_right_hand(right_hand_marker.global_position)
 
-func setup(context: ItemContext, damage: int):
+func setup(context: ItemContext, damage: int, pierce: int):
 	context.character_sprite.enable_left_hand()
 	context.character_sprite.enable_right_hand()
 	self.context = context
@@ -33,6 +37,7 @@ func setup(context: ItemContext, damage: int):
 	position = Vector2.ZERO
 
 	self.damage = damage
+	self.pierce = pierce
 
 	look_at(context.global_target_position)
 
@@ -60,5 +65,9 @@ func _play():
 func _on_body_entered(body: Node2D) -> void:
 	if body == user:
 		return
+
+	pierce_counter += 1
 	var health: Health = body.get_node("Health") as Health
 	health.damage(damage)
+	if pierce_counter >= pierce:
+		area.body_entered.disconnect(_on_body_entered)

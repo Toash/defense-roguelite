@@ -9,7 +9,7 @@ class_name WaveState
 @export var enemy_data: EnemyData
 
 @export var wave_spawner: WaveSpawner
-@export var wave_time: float = 10
+@export var wave_time: float = 1
 
 @export var world: World
 var spawn_timer: float = 0
@@ -19,7 +19,7 @@ var wave_timer: float = 0
 func state_enter():
 	spawn_timer = 0
 	wave_timer = 0
-	TextPopupManager.popup("Wave incoming...", get_viewport_rect().size / 2)
+	TextPopupManager.popup("Wave incoming...", (get_viewport_rect().size / 2) + Vector2.DOWN * 200)
 	pass
 	
 

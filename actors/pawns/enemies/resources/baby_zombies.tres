@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_c278d")
 scene = ExtResource("1_pu6dw")
-amount_spawned = 5
+amount_spawned = 3
 health = 10
 move_speed = 350.0
 metadata/_custom_type_script = "uid://batjd7vgwc587"

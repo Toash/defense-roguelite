@@ -25,12 +25,14 @@ var input_vector = Vector2.ZERO
 @export var world_container_input: WorldContainerInput
 @export var context_input: ContextInput
 
+var dead = false
 
 func _ready() -> void:
 	Game.player_load()
 
 
 func _process(delta: float) -> void:
+	if dead: return
 	if input_vector != Vector2.ZERO:
 		state = "walk"
 	else:

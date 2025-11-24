@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=22 format=3 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="Script" uid="uid://csd4ncy3jgem8" path="res://world/world.gd" id="1_4papg"]
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/pawns/player/player.tscn" id="1_fyhu2"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://djv6321i8c28e" path="res://game/states/state_wave.gd" id="17_m0cxt"]
 [ext_resource type="Script" uid="uid://d2jl0vikp6yny" path="res://game/wave_spawner.gd" id="19_j34ew"]
 [ext_resource type="Resource" uid="uid://b6msgfm6ns6rx" path="res://world/resources/pawns/forest_enemies.tres" id="20_p2iis"]
+[ext_resource type="Script" uid="uid://ocod1qfphspl" path="res://actors/pawns/player/game_over.gd" id="21_aysyn"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("tiles_root", "ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "defense_tiles", "game_state", "debug_path") groups=["world"]]
 script = ExtResource("1_4papg")
@@ -35,10 +36,12 @@ debug_path = NodePath("DebugPath")
 
 [node name="Player" parent="." instance=ExtResource("1_fyhu2")]
 
-[node name="UI" parent="." node_paths=PackedStringArray("world", "player", "game_state") instance=ExtResource("5_dqqhb")]
+[node name="UI" parent="." node_paths=PackedStringArray("world", "player", "game_state", "game_over", "nexus") instance=ExtResource("5_dqqhb")]
 world = NodePath("..")
 player = NodePath("../Player")
 game_state = NodePath("../GameState")
+game_over = NodePath("../GameOver")
+nexus = NodePath("../Nexus")
 
 [node name="PauseMenu" parent="." instance=ExtResource("6_b2suy")]
 
@@ -66,7 +69,6 @@ tile_set = ExtResource("10_mad0u")
 tile_set = ExtResource("10_ocfjn")
 
 [node name="DefenseTiles" type="TileMapLayer" parent="Tiles"]
-tile_map_data = PackedByteArray(0, 0, 253, 255, 254, 255, 0, 0, 0, 0, 0, 0, 1, 0)
 tile_set = ExtResource("10_h8lre")
 
 [node name="Nexus" parent="." groups=["nexus"] instance=ExtResource("11_ov2xu")]
@@ -127,3 +129,9 @@ script = ExtResource("19_j34ew")
 world_enemies = ExtResource("20_p2iis")
 enemy_root = NodePath("../../Zombies")
 metadata/_custom_type_script = "uid://d2jl0vikp6yny"
+
+[node name="GameOver" type="Node2D" parent="." node_paths=PackedStringArray("player", "nexus")]
+script = ExtResource("21_aysyn")
+player = NodePath("../Player")
+nexus = NodePath("../Nexus")
+metadata/_custom_type_script = "uid://ocod1qfphspl"

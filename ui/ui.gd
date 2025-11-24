@@ -14,6 +14,8 @@ extends CanvasLayer
 
 @export var hotbar_ui: HotbarUI
 @export var health_bar: ProgressBar
+@export var nexus_bar: ProgressBar
+@export var death_ui: DeathUI
 
 @export var game_state_ui: GameStateUI
 
@@ -23,6 +25,8 @@ extends CanvasLayer
 @export var world: World
 @export var player: Player
 @export var game_state: GameState
+@export var game_over: GameOver
+@export var nexus: Nexus
 
 
 func _ready() -> void:
@@ -30,6 +34,20 @@ func _ready() -> void:
 	player_health.health_changed.connect(_on_health_changed)
 	health_bar.max_value = player_health.max_health
 	health_bar.value = player_health.health
+
+
+	nexus_bar.max_value = nexus.health.max_health
+	nexus_bar.value = nexus.health.max_health
+
+	
+	nexus.health.health_changed.connect(func(health: int):
+		nexus_bar.value = health
+		)
+
+
+	game_over.game_over.connect(func():
+		death_ui.show()
+		)
 
 
 	# attach containers to the uis 
