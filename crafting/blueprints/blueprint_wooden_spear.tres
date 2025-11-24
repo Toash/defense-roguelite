@@ -1,15 +1,8 @@
-[gd_resource type="Resource" script_class="Blueprint" load_steps=7 format=3 uid="uid://cm5rcgysn4fkm"]
+[gd_resource type="Resource" script_class="Blueprint" load_steps=5 format=3 uid="uid://cm5rcgysn4fkm"]
 
 [ext_resource type="Script" uid="uid://b6bhu0l2m8yl0" path="res://crafting/item_data_group.gd" id="1_4xpxq"]
-[ext_resource type="Resource" uid="uid://cxlw2i1uptmc5" path="res://item/items/tiles/wood_wall.tres" id="2_bar04"]
 [ext_resource type="Resource" uid="uid://dl4jalxjxqdxk" path="res://item/items/wooden_spear/wooden_spear.tres" id="3_kih68"]
 [ext_resource type="Script" uid="uid://c0igk80mo7ba7" path="res://crafting/blueprint.gd" id="4_ke3u8"]
-
-[sub_resource type="Resource" id="Resource_yh6go"]
-script = ExtResource("1_4xpxq")
-item_data = ExtResource("2_bar04")
-amount = 2
-metadata/_custom_type_script = "uid://b6bhu0l2m8yl0"
 
 [sub_resource type="Resource" id="Resource_j0afq"]
 script = ExtResource("1_4xpxq")
@@ -19,6 +12,6 @@ metadata/_custom_type_script = "uid://b6bhu0l2m8yl0"
 
 [resource]
 script = ExtResource("4_ke3u8")
-ingredients = Array[ExtResource("1_4xpxq")]([SubResource("Resource_yh6go")])
+coins_needed = 10
 outputs = Array[ExtResource("1_4xpxq")]([SubResource("Resource_j0afq")])
 metadata/_custom_type_script = "uid://c0igk80mo7ba7"

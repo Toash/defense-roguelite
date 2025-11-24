@@ -8,6 +8,18 @@ class_name PlayerContainers
 @export var hotbar_container: ItemContainer
 @export var inventory_container: ItemContainer
 
+func has_enough_items(item_data: ItemData, amount: int) -> bool:
+	var available := 0
+
+	for container in [hotbar_container, inventory_container]:
+		for i in container.get_capacity():
+			var inst: ItemInstance = container.get_item_instance(i)
+			if inst != null and inst.data == item_data:
+				available += inst.quantity
+				if available >= amount:
+					return true
+
+	return false
 
 ## Take amount of items across the player containers, if they are not avaliable, return null.
 func must_take_amount(item_data: ItemData, amount: int) -> ItemDataGroup:

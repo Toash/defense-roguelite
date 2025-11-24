@@ -17,6 +17,12 @@ func _ready():
 func setup(blueprint: Blueprint):
 	self.blueprint = blueprint
 
+
+	if blueprint.coins_needed > 0:
+		var label: Label = Label.new()
+		label.text = str(blueprint.coins_needed) + " Coins"
+		ingredients_root.add_child(label)
+
 	for ingredient in self.blueprint.get_ingredients():
 		var item_data = ingredient.item_data
 		var amount = ingredient.amount

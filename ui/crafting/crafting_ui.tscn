@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://emm2r078gi1f"]
+[gd_scene load_steps=4 format=3 uid="uid://emm2r078gi1f"]
 
+[ext_resource type="Theme" uid="uid://dhhk734ua4d0l" path="res://ui/theme.tres" id="1_4otws"]
 [ext_resource type="Script" uid="uid://cndkpxulmv6rm" path="res://ui/crafting/crafting_ui.gd" id="1_46k18"]
 [ext_resource type="PackedScene" uid="uid://40ge33beu4dm" path="res://ui/crafting/blueprint_ui.tscn" id="2_mka8e"]
 
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_4otws")
 script = ExtResource("1_46k18")
 blueprint_scene = ExtResource("2_mka8e")
 blueprints_root = NodePath("PanelContainer/VBoxContainer")

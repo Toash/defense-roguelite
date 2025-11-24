@@ -4,6 +4,7 @@ extends Node2D
 class_name PlayerCrafting
 
 
+@export var coins: PlayerCoins
 @export var blueprints: Array[Blueprint]
 @export var player_containers: PlayerContainers
 
@@ -12,15 +13,19 @@ func get_blueprints() -> Array[Blueprint]:
 	return blueprints
 
 
-# take ingredients from inventory, give thre player the result.
 func craft(blueprint: Blueprint):
-	# take items
+	if not coins.has_enough(blueprint.coins_needed):
+		TextPopupManager.popup("Not enough coins!", get_viewport_rect().size / 2)
+		return
+		
 	for ingredient: ItemDataGroup in blueprint.get_ingredients():
-		if player_containers.must_take_amount(ingredient.item_data, ingredient.amount) != null:
-			# took the ingredients because the player has them.
-			for results: ItemDataGroup in blueprint.get_outputs():
-				# add the results
-				player_containers.force_add_item_group(results)
-		else:
-			print("Player Crafting: player does not have the necessary ingredients.")
-	pass
+		if not player_containers.has_enough_items(ingredient.item_data, ingredient.amount):
+			TextPopupManager.popup("Not enough items!", get_viewport_rect().size / 2)
+			return
+
+	for ingredient: ItemDataGroup in blueprint.get_ingredients():
+		player_containers.must_take_amount(ingredient.item_data, ingredient.amount)
+
+	for results: ItemDataGroup in blueprint.get_outputs():
+		player_containers.force_add_item_group(results)
+	coins.change_coins(-blueprint.coins_needed)

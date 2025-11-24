@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjqewamciy61i"]
+[gd_scene load_steps=3 format=3 uid="uid://bjqewamciy61i"]
 
+[ext_resource type="Theme" uid="uid://dhhk734ua4d0l" path="res://ui/theme.tres" id="1_5ksf2"]
 [ext_resource type="Script" uid="uid://81xg6j3a8nx8" path="res://ui/expandable_window.gd" id="1_s7oyo"]
 
 [node name="ExpandableWindow" type="PanelContainer" node_paths=PackedStringArray("content_container", "hbox", "minimize_button", "title_label")]
@@ -7,6 +8,7 @@ offset_right = 84.0
 offset_bottom = 35.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_5ksf2")
 script = ExtResource("1_s7oyo")
 content_container = NodePath("VBoxContainer/Content")
 hbox = NodePath("VBoxContainer/TitleBar")

@@ -234,8 +234,9 @@ script = ExtResource("21_ctwkf")
 character_sprite = NodePath("../CharacterSprite")
 metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
 
-[node name="PlayerCrafting" type="Node2D" parent="." node_paths=PackedStringArray("player_containers")]
+[node name="PlayerCrafting" type="Node2D" parent="." node_paths=PackedStringArray("coins", "player_containers")]
 script = ExtResource("27_h0lia")
+coins = NodePath("../PlayerCoins")
 blueprints = Array[ExtResource("29_s6245")]([ExtResource("30_qqc64"), ExtResource("29_ygih8")])
 player_containers = NodePath("../Containers")
 metadata/_custom_type_script = "uid://cvf4ycidd0cme"
