@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://blqvvu0ytchcd"]
+[gd_scene load_steps=32 format=3 uid="uid://blqvvu0ytchcd"]
 
 [ext_resource type="Script" uid="uid://si1ikxp52cuk" path="res://actors/pawns/enemies/enemy.gd" id="1_08fpo"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="2_ixsl6"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://cskdd0xcjjmfc" path="res://actors/pawns/states/state_wander.gd" id="6_cthrv"]
 [ext_resource type="Script" uid="uid://b1vk2g6nxw2g" path="res://actors/pawns/states/state_chase.gd" id="7_qpxon"]
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="8_23tyx"]
-[ext_resource type="Script" uid="uid://y6xyi4gu5uqa" path="res://actors/pawns/states/state_last_seen.gd" id="8_uotjo"]
 [ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/pawns/character_sprite.tscn" id="9_culwy"]
 [ext_resource type="Script" uid="uid://bdpo0eyqlq8re" path="res://actors/pawns/states/state_attack.gd" id="9_ubgnx"]
 [ext_resource type="Script" uid="uid://cjnn80jlwilpx" path="res://actors/pawns/states/state_nexus.gd" id="10_drpw1"]
@@ -27,7 +26,7 @@
 [ext_resource type="Script" uid="uid://6x0akmb8ed61" path="res://actors/generic/health_bar.gd" id="28_6lqgw"]
 [ext_resource type="Script" uid="uid://donkr7aqvtvk7" path="res://item/loot/loot_dropper.gd" id="28_08fpo"]
 
-[sub_resource type="Shader" id="Shader_g23qj"]
+[sub_resource type="Shader" id="Shader_gt3xx"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -47,7 +46,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
 resource_local_to_scene = true
-shader = SubResource("Shader_g23qj")
+shader = SubResource("Shader_gt3xx")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
@@ -96,25 +95,17 @@ character = NodePath("../..")
 tile_pathfind = NodePath("../../TilePathfind")
 target = NodePath("../../ZombieTarget")
 
-[node name="Chase" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "character", "attack_vision", "obstruction_raycast", "nav", "target")]
+[node name="Chase" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "character", "attack_vision", "nav", "target")]
 script = ExtResource("7_qpxon")
 enemy = NodePath("../..")
 character = NodePath("../..")
 attack_vision = NodePath("../../Areas/AttackArea")
-obstruction_raycast = NodePath("../../Raycasts/ObstructionRaycast")
 nav = NodePath("../../NavigationAgent2D")
 target = NodePath("../../ZombieTarget")
 
-[node name="Last_Seen" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "player_tracker", "nav", "target")]
-script = ExtResource("8_uotjo")
-speed = 100
-character = NodePath("../..")
-player_tracker = NodePath("../../Detectors/PlayerTracker")
-nav = NodePath("../../NavigationAgent2D")
-target = NodePath("../../ZombieTarget")
-
-[node name="Attack" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "attack_vision", "equipment", "nav", "ai_target")]
+[node name="Attack" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "character", "attack_vision", "equipment", "nav", "ai_target")]
 script = ExtResource("9_ubgnx")
+enemy = NodePath("../..")
 character = NodePath("../..")
 attack_vision = NodePath("../../Areas/AttackArea")
 equipment = NodePath("../../Items/Equipment")
