@@ -9,8 +9,14 @@ class_name OffscreenIndicators
 @export var camera: Camera2D
 @export var margin: float = 64.0 # distance from edge
 
-var indicators: Dictionary[Node2D, TextureRect] = {}
-var targets: Array[Node2D]
+var indicators: Dictionary[Vector2, TextureRect] = {}
+var targets: Array[Vector2]
+
+func set_targets(nodes: Array[Node2D]):
+	self.targets.clear()
+	for node in nodes:
+		targets.append(node.global_position)
+
 
 func _process(delta: float) -> void:
 	if camera == null:
@@ -39,15 +45,21 @@ func _process(delta: float) -> void:
 	# update all indicators
 	var center_world := camera.get_screen_center_position()
 
-	for t in indicators.keys():
-		var ind: TextureRect = indicators[t]
+	for pos in indicators.keys():
+		var ind: TextureRect = indicators[pos]
 
 		# world -> screen (manual)
-		var delta_world: Vector2 = t.global_position - center_world
+		var delta_world: Vector2 = pos - center_world
+		# var screen_offset := Vector2(
+		# 	delta_world.x / zoom.x,
+		# 	delta_world.y / zoom.y
+		# )
+
 		var screen_offset := Vector2(
-			delta_world.x / zoom.x,
-			delta_world.y / zoom.y
+			delta_world.x * zoom.x,
+			delta_world.y * zoom.y
 		)
+
 		var screen_pos := center + screen_offset
 
 		# on-screen? hide arrow

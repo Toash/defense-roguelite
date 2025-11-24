@@ -21,7 +21,7 @@
 [ext_resource type="Script" uid="uid://d2jl0vikp6yny" path="res://game/wave_spawner.gd" id="19_j34ew"]
 [ext_resource type="Resource" uid="uid://b6msgfm6ns6rx" path="res://world/resources/pawns/forest_enemies.tres" id="20_p2iis"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("tiles_root", "ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "defense_tiles", "spawn_points", "game_state", "debug_path") groups=["world"]]
+[node name="World" type="Node2D" node_paths=PackedStringArray("tiles_root", "ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "defense_tiles", "game_state", "debug_path") groups=["world"]]
 script = ExtResource("1_4papg")
 world_config = ExtResource("2_dqqhb")
 tiles_root = NodePath("Tiles")
@@ -30,13 +30,13 @@ wall_tiles = NodePath("Tiles/WallTiles")
 interactable_tiles = NodePath("Tiles/InteractableTiles")
 resource_tiles = NodePath("Tiles/ResourceTiles")
 defense_tiles = NodePath("Tiles/DefenseTiles")
-spawn_points = [NodePath("Roots/SpawnPoints/Marker2D")]
 game_state = NodePath("GameState")
 debug_path = NodePath("DebugPath")
 
 [node name="Player" parent="." instance=ExtResource("1_fyhu2")]
 
-[node name="UI" parent="." node_paths=PackedStringArray("player", "game_state") instance=ExtResource("5_dqqhb")]
+[node name="UI" parent="." node_paths=PackedStringArray("world", "player", "game_state") instance=ExtResource("5_dqqhb")]
+world = NodePath("..")
 player = NodePath("../Player")
 game_state = NodePath("../GameState")
 
@@ -91,25 +91,13 @@ position = Vector2(2, 0)
 
 [node name="ZombieRoot" type="Node2D" parent="Roots"]
 
-[node name="SpawnPoints" type="Node2D" parent="Roots"]
-
-[node name="Marker2D" type="Marker2D" parent="Roots/SpawnPoints"]
-position = Vector2(25, -2775)
-
-[node name="Node2D" type="Node2D" parent="Roots/SpawnPoints"]
-position = Vector2(0, -626)
-
-[node name="Node2D2" type="Node2D" parent="Roots/SpawnPoints"]
-position = Vector2(0, 696)
-
-[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("world", "state_machine", "intermission_state", "wave_state", "wave_spawner", "spawn_points")]
+[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("world", "state_machine", "intermission_state", "wave_state", "wave_spawner")]
 script = ExtResource("14_b2suy")
 world = NodePath("..")
 state_machine = NodePath("StateMachine")
 intermission_state = NodePath("StateMachine/Intermission")
 wave_state = NodePath("StateMachine/Wave")
 wave_spawner = NodePath("WaveSpawner")
-spawn_points = [NodePath("../Roots/SpawnPoints/Node2D"), NodePath("../Roots/SpawnPoints/Node2D2")]
 metadata/_custom_type_script = "uid://b2l0f2hsw0cbx"
 
 [node name="StateMachine" type="Node2D" parent="GameState" node_paths=PackedStringArray("initial_state")]
@@ -117,16 +105,20 @@ script = ExtResource("15_h8lre")
 initial_state = NodePath("Intermission")
 metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 
-[node name="Intermission" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state")]
+[node name="Intermission" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state", "nexus", "world")]
 script = ExtResource("16_ysn08")
 game_state = NodePath("../..")
+nexus = NodePath("../../../Nexus")
+world = NodePath("../../..")
+intermission_time = 3.0
 
-[node name="Wave" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state", "enemy_root", "wave_spawner")]
+[node name="Wave" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state", "enemy_root", "wave_spawner", "world")]
 script = ExtResource("17_m0cxt")
 game_state = NodePath("../..")
 enemy_root = NodePath("../../../Zombies")
 enemy_data = ExtResource("14_h8lre")
 wave_spawner = NodePath("../../WaveSpawner")
+world = NodePath("../../..")
 
 [node name="WaveSpawner" type="Node2D" parent="GameState" node_paths=PackedStringArray("enemy_root")]
 script = ExtResource("19_j34ew")

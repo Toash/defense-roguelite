@@ -11,7 +11,7 @@ class_name WaveState
 @export var wave_spawner: WaveSpawner
 @export var wave_time: float = 10
 
-var world: World
+@export var world: World
 var spawn_timer: float = 0
 var wave_timer: float = 0
 
@@ -28,7 +28,8 @@ func state_update(delta: float):
 	wave_timer += delta
 
 	if spawn_timer > 2:
-		wave_spawner.spawn(game_state._get_random_spawn_point())
+		# TODO: fallback if we cant find spawn points
+		wave_spawner.spawn(world.get_random_spawn_point())
 		spawn_timer = 0
 
 

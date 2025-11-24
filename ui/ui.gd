@@ -20,6 +20,7 @@ extends CanvasLayer
 @export var offscreen_indicators: OffscreenIndicators
 
 @export_group("World references")
+@export var world: World
 @export var player: Player
 @export var game_state: GameState
 
@@ -59,7 +60,9 @@ func _ready() -> void:
 
 
 	offscreen_indicators.camera = player.camera
-	offscreen_indicators.targets = game_state.spawn_points
+	world.generated_spawn_nodes.connect(func(nodes: Array[Node2D]):
+		offscreen_indicators.set_targets(nodes)
+		)
 
 
 func _on_health_changed(health: int):

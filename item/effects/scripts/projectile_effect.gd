@@ -8,6 +8,11 @@ class_name ProjectileEffect
 @export var speed = 200
 
 
+@export var shoot_audio_key: AudioManager.KEY
+@export var shoot_volume: float = 1
+@export var bus: String = "master"
+
+
 func apply(context: ItemContext):
     var projectile_inst: Projectile = projectile.instantiate() as Projectile
 
@@ -21,3 +26,4 @@ func apply(context: ItemContext):
     projectile_inst.setup(context)
 
     context.root_node.add_child.call_deferred(projectile_inst)
+    AudioManager.play_key(shoot_audio_key, .5, context.global_target_position, bus)
