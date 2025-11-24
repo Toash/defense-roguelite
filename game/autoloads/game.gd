@@ -2,7 +2,7 @@ extends Node
 
 signal player_loaded
 
-var debug = true
+var debug_state_machines = false
 
 
 func _ready():

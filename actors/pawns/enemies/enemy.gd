@@ -3,7 +3,7 @@ extends Pawn
 
 class_name Enemy
 
-## used when none is supplied by a spawner.
+## SHOULJD NOT BE ACCESSED DIRECTLY! USE get_data 
 var enemy_data: EnemyData
 
 @export var state_machine: StateMachine
@@ -23,10 +23,11 @@ func get_data() -> EnemyData:
 	if enemy_data == null:
 		var default_enemy_data = EnemyData.new()
 
+		default_enemy_data.coins_dropped = 1
 		default_enemy_data.cost = 1
 		default_enemy_data.health = 100
-		default_enemy_data.move_speed = 500
-		default_enemy_data.attack_damage = 25
+		default_enemy_data.move_speed = 200
+		default_enemy_data.attack_damage = 10
 		default_enemy_data.attack_speed = 1
 
 		return default_enemy_data
@@ -38,7 +39,7 @@ func _on_death():
 	remove_from_group("enemy")
 
 	# add coins to player
-	(get_tree().get_first_node_in_group("player") as Player).coins.change_coins(enemy_data.coins_dropped)
+	(get_tree().get_first_node_in_group("player") as Player).coins.change_coins(get_data().coins_dropped)
 
 
 	state_machine.queue_free()

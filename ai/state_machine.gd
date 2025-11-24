@@ -48,7 +48,7 @@ func _on_transition(from: State, to: String):
 
 
 func _draw() -> void:
-	if not Game.debug: return
+	if not Game.debug_state_machines: return
 	self.z_index = 999
 	# matrix that cancels nodes global transform
 	var inv = get_global_transform().affine_inverse()

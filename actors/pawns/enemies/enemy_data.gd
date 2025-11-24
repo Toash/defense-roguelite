@@ -16,3 +16,6 @@ class_name EnemyData
 
 @export var attack_damage: int = 25
 @export var attack_speed: float = 1
+
+
+@export var defense_targeting: Defense.PRIORITY = Defense.PRIORITY.VISIBLE

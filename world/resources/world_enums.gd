@@ -1,9 +1,10 @@
 class_name WorldEnums
 
 enum ALTITUDE {
-	WATER,
-	DIRT,
-	GRASS
+	LIQUID,
+	LIQUID_GROUND_TRANSITION,
+	GROUND,
+	OBSTRUCTION,
 }
 
 enum RESOURCE {

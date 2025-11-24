@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://bcpu5pthfg2j1"]
+
+[ext_resource type="PackedScene" uid="uid://dm15crljo54tt" path="res://actors/pawns/enemies/scenes/tank_zombie.tscn" id="1_opkow"]
+[ext_resource type="Script" uid="uid://batjd7vgwc587" path="res://actors/pawns/enemies/enemy_data.gd" id="2_44un6"]
+
+[resource]
+script = ExtResource("2_44un6")
+scene = ExtResource("1_opkow")
+coins_dropped = 250
+health = 600
+move_speed = 70.0
+attack_damage = 50
+attack_speed = 2.0
+metadata/_custom_type_script = "uid://batjd7vgwc587"

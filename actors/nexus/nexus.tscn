@@ -33,7 +33,7 @@ visible = false
 position = Vector2(-2.5, -3)
 shape = SubResource("RectangleShape2D_wx721")
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node2D" parent="."]
 script = ExtResource("3_w52sr")
 max_health = 10
 metadata/_custom_type_script = "uid://gyp8bshfrfoj"

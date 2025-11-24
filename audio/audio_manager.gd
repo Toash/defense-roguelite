@@ -74,7 +74,7 @@ func play(stream: AudioStream, volume_db: float, position: Vector2, bus := "Mast
 	if p == null: return
 	p.bus = bus
 	p.stream = stream
-	p.volume_db = volume_db
+	p.volume_linear = volume_db
 	p.global_position = position
 	p.play()
 

@@ -5,12 +5,13 @@ class_name WorldConfig
 
 
 @export_group("World Size")
-@export var world_width = 128
-@export var world_height = 128
+@export var world_width = 64
+@export var world_height = 64
 
 @export_group("Base Size")
-@export var base_width = 24
-@export var base_height = 24
+@export var base_radius = 8
+@export var base_width = 8
+@export var base_height = 8
 
 
 @export_group("Tiles")

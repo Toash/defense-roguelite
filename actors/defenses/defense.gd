@@ -11,3 +11,7 @@ enum PRIORITY {
 
 
 @export var defense_data: DefenseData
+
+
+func get_data() -> DefenseData:
+	return self.defense_data

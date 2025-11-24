@@ -65,15 +65,16 @@ func _setup_ground():
 
 	# altitude.frequency = .1
 	# altitude.noise_type = FastNoiseLite.TYPE_VALUE_CUBIC
-	altitude.fractal_type = FastNoiseLite.FRACTAL_RIDGED
+	altitude.fractal_type = FastNoiseLite.FRACTAL_PING_PONG
 
 
 	altitude.seed = randi()
 	resource.seed = randi()
 	# altitude.noise_type = FastNoiseLite.TYPE_PERLIN
-	ground_tiles.clear()
-	
-	resource_tiles.clear()
+
+
+	for layer in get_tile_map_layers():
+		layer.clear()
 	GroundItems.clear()
 
 
@@ -89,6 +90,19 @@ func _setup_ground():
 			var resource_value: float = resource.get_noise_2d(x, y)
 
 			var alt_enum: WorldEnums.ALTITUDE = _get_altitude(altitude_value)
+
+			# if x >= -world_config.base_width and x <= world_config.base_width:
+			# 	if y >= -world_config.base_height and y <= world_config.base_height:
+			# 		alt_enum = WorldEnums.ALTITUDE.GROUND
+
+			var dx = x
+			var dy = y
+			var dist_sq = dx * dx + dy * dy
+			var radius_sq = world_config.base_radius * world_config.base_radius
+
+			if dist_sq <= radius_sq:
+				alt_enum = WorldEnums.ALTITUDE.GROUND
+
 			var resource_enum: WorldEnums.RESOURCE = _get_resource(resource_value)
 
 
@@ -122,7 +136,7 @@ func _setup_ground():
 							continue
 						else:
 							tree_counter = 0
-							if alt_enum == WorldEnums.ALTITUDE.GRASS:
+							if alt_enum == WorldEnums.ALTITUDE.GROUND:
 								resource_tiles.set_cell(Vector2i(x, y), resource_source_id, Vector2i(0, 0), resource_alternative_id)
 					WorldEnums.RESOURCE.STONE:
 						if stone_counter <= stone_interval:
@@ -130,7 +144,7 @@ func _setup_ground():
 							continue
 						else:
 							stone_counter = 0
-							if alt_enum == WorldEnums.ALTITUDE.GRASS:
+							if alt_enum == WorldEnums.ALTITUDE.GROUND:
 								var local_pos = resource_tiles.map_to_local(Vector2i(x, y))
 								var global_pos = resource_tiles.to_global(local_pos)
 								GroundItems.spawn_by_name("Stone", 1, global_pos)
@@ -263,3 +277,11 @@ func get_layer(key: WorldEnums.LAYER) -> TileMapLayer:
 			return defense_tiles
 		_:
 			return null
+
+
+func get_tile_map_layers() -> Array[TileMapLayer]:
+	var ret: Array[TileMapLayer] = []
+	for child: TileMapLayer in tiles_root.get_children():
+		ret.append(child)
+
+	return ret

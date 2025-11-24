@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WorldEnemies" load_steps=4 format=3 uid="uid://b6msgfm6ns6rx"]
 
 [ext_resource type="Script" uid="uid://batjd7vgwc587" path="res://actors/pawns/enemies/enemy_data.gd" id="1_rqwh6"]
-[ext_resource type="Resource" uid="uid://bfp85p8ebqdan" path="res://actors/pawns/enemies/resources/basic_zombie.tres" id="2_6t5wl"]
+[ext_resource type="Resource" uid="uid://bcpu5pthfg2j1" path="res://actors/pawns/enemies/resources/tank_zombie.tres" id="2_6t5wl"]
 [ext_resource type="Script" uid="uid://dr2os1hvmpcd4" path="res://world/resources/pawns/world_enemies.gd" id="2_vwfx5"]
 
 [resource]

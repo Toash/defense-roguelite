@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 
 ## ensure that this is a direct child of the main node and not renamed. 
@@ -10,7 +10,20 @@ signal health_changed(new_value)
 
 
 @export var max_health: int = 100
+@export var bar_height_offset: float = -50
 @onready var health: int = max_health
+
+@onready var bar_offset := Vector2(-20, bar_height_offset)
+
+
+const bar_width := 40
+const bar_height := 6
+
+func _ready():
+	health_changed.connect(func(val: int):
+		queue_redraw()
+		)
+	queue_redraw()
 
 
 func to_dict() -> Dictionary:
@@ -24,8 +37,21 @@ func from_dict(dict: Dictionary) -> void:
 	self.max_health = dict.max_health
 
 
+func _draw():
+	# background
+	draw_rect(Rect2(bar_offset, Vector2(bar_width, bar_height)), Color(0, 0, 0, 0.4))
+
+	# percentage
+	var ratio := float(health) / max_health
+	var filled_w := bar_width * ratio
+
+	# filled bar
+	draw_rect(Rect2(bar_offset, Vector2(filled_w, bar_height)), Color(0, 1, 0))
+
+
 func damage(amount: int):
 	print("damage!!")
+	TextPopupManager.damage_popup(str(amount), global_position)
 	if health <= 0: return
 
 	health = clamp(health - amount, 0, max_health)

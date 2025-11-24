@@ -8,6 +8,6 @@ script = ExtResource("1_cai7a")
 projectile = ExtResource("1_w5dpl")
 factions_to_hit = Array[int]([2])
 shoot_audio_key = 3
-shoot_volume = 0.1
+shoot_volume = 0.0
 bus = "turret"
 metadata/_custom_type_script = "uid://d2jtsxokuvpi0"

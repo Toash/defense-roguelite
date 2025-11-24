@@ -40,7 +40,7 @@ func state_physics_update(delta: float):
 	var next_point: Vector2 = nav.get_next_path_position()
 	var normal_dir = (next_point - pawn.global_position).normalized()
 
-	pawn.set_raw_velocity(normal_dir * enemy.enemy_data.move_speed)
+	pawn.set_raw_velocity(normal_dir * enemy.get_data().move_speed)
 	pawn.move_and_collide(pawn.get_total_velocity() * delta)
 	if t > attack_cooldown:
 		equipment.use()

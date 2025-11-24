@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://chwn2rj05cqqf"]
+[gd_scene load_steps=29 format=3 uid="uid://chwn2rj05cqqf"]
 
 [ext_resource type="Script" uid="uid://si1ikxp52cuk" path="res://actors/pawns/enemies/enemy.gd" id="1_38i1c"]
 [ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/pawns/character_sprite.tscn" id="2_rxupi"]
@@ -22,9 +22,8 @@
 [ext_resource type="Script" uid="uid://c8dnwtjdg5wbq" path="res://audio/footsteps.gd" id="20_vnq08"]
 [ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/pawn_tracker.gd" id="21_37wjs"]
 [ext_resource type="Script" uid="uid://d3o527u2hmgp7" path="res://actors/pawns/generic/defense_tracker.gd" id="22_hscdr"]
-[ext_resource type="Script" uid="uid://6x0akmb8ed61" path="res://actors/generic/health_bar.gd" id="23_6svbi"]
 
-[sub_resource type="Shader" id="Shader_fhyjg"]
+[sub_resource type="Shader" id="Shader_7lhke"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -44,7 +43,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
 resource_local_to_scene = true
-shader = SubResource("Shader_fhyjg")
+shader = SubResource("Shader_7lhke")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
@@ -58,7 +57,7 @@ radius = 376.0053
 radius = 118.004234
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_buy8w"]
-radius = 47.010635
+radius = 48.010414
 
 [node name="BabyZombie" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "tile_pathfind", "health")]
 collision_layer = 4
@@ -135,7 +134,7 @@ script = ExtResource("12_c55w2")
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_3fose")
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node2D" parent="."]
 script = ExtResource("13_khshd")
 metadata/_custom_type_script = "uid://gyp8bshfrfoj"
 
@@ -231,10 +230,3 @@ collision_mask = 2
 
 [node name="DefenseRaycast" type="RayCast2D" parent="Raycasts"]
 collision_mask = 34
-
-[node name="HealthBar" type="Node2D" parent="." node_paths=PackedStringArray("health")]
-script = ExtResource("23_6svbi")
-health = NodePath("../Health")
-bar_size = Vector2(60, 15)
-offset = Vector2(0, -40)
-metadata/_custom_type_script = "uid://6x0akmb8ed61"

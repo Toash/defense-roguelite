@@ -32,7 +32,7 @@ func state_physics_update(delta: float):
 	var next_point: Vector2 = nav.get_next_path_position()
 	var normal_dir = (next_point - pawn.global_position).normalized()
 	
-	pawn.set_raw_velocity(normal_dir * enemy.enemy_data.move_speed)
+	pawn.set_raw_velocity(normal_dir * enemy.get_data().move_speed)
 	pawn.move_and_collide(pawn.get_total_velocity() * delta)
 
 			
@@ -45,12 +45,14 @@ func state_exit():
 
 func _on_player_found(player: Pawn):
 	# pass
-	print("found player!")
+	# print("found player!")
 	ai_target.reference = player
 	transitioned.emit(self, "chase")
 
 func _on_defense_found(defense: Defense):
-	print("found defense!")
+	# print("found defense!")
+	if defense.get_data().defense_priority != enemy.get_data().defense_targeting:
+		return
 	ai_target.reference = defense
 	transitioned.emit(self, "break")
 
