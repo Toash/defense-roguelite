@@ -19,6 +19,33 @@ func _enter_tree() -> void:
 var pawn_name: String
 # var walk_speed: float = 200
 
-
 @export_group("References")
 @export var health: Health
+
+
+var raw_velocity: Vector2 = Vector2.ZERO
+
+var knockback_velocity: Vector2
+var knockback_decay = 800
+
+
+func _physics_process(delta: float) -> void:
+	# if knockback_velocity > Vector2.ZERO:
+	# 	knockback_velocity -= Vector2.ONE * knockback_decay * delta
+	if knockback_velocity.length() > 0.0:
+		knockback_velocity -= knockback_velocity.normalized() * knockback_decay * delta
+
+
+func knockback(dir: Vector2, amount: float):
+	# knockback_velocity = -1 * velocity.normalized()
+	knockback_velocity = 1 * dir * amount
+
+
+## do not multiply by delta
+func set_raw_velocity(vel: Vector2):
+	self.raw_velocity = vel
+
+
+## multiply by delta
+func get_total_velocity() -> Vector2:
+	return raw_velocity + knockback_velocity

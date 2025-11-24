@@ -18,6 +18,7 @@ func setup(data: EnemyData):
 	self.health.set_max_health(int(data.health))
 	self.health.set_health(data.health)
 
+
 func get_data() -> EnemyData:
 	if enemy_data == null:
 		var default_enemy_data = EnemyData.new()

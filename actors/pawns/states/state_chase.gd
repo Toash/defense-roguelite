@@ -6,7 +6,7 @@ signal target_lost
 
 
 @export var enemy: Enemy
-@export var character: CharacterBody2D
+@export var pawn: Pawn
 
 @export var attack_vision: Area2D
 
@@ -36,11 +36,12 @@ func state_physics_update(delta: float):
 		target_emitted.emit(target.reference.global_position)
 
 		var next_point: Vector2 = nav.get_next_path_position()
-		var normal_dir = (next_point - character.global_position).normalized()
+		var normal_dir = (next_point - pawn.global_position).normalized()
 		
 
-		# character.velocity = normal_dir * chase_speed
-		character.move_and_collide(normal_dir * enemy.enemy_data.move_speed * delta)
+		# pawn.move_and_collide(normal_dir * enemy.enemy_data.move_speed * delta)
+		pawn.set_raw_velocity(normal_dir * enemy.enemy_data.move_speed)
+		pawn.move_and_collide(pawn.get_total_velocity() * delta)
 	else:
 		transitioned.emit(self, "nexus")
 

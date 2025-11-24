@@ -71,3 +71,8 @@ func _on_body_entered(body: Node2D) -> void:
 	health.damage(damage)
 	if pierce_counter >= pierce:
 		area.body_entered.disconnect(_on_body_entered)
+
+	if body is Pawn:
+		print("knockback")
+		print(context.direction)
+		body.knockback(context.direction, 400)

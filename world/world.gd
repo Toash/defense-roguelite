@@ -182,7 +182,7 @@ func _append_spawn_node(target_global: Vector2) -> Node2D:
 		var angle_deg: float = randf_range(0, 360)
 
 
-		var radius: float = world_config.world_height * ground_tiles.tile_set.tile_size.x * 1.8
+		var radius: float = world_config.world_height * ground_tiles.tile_set.tile_size.x * 1
 		var candidate_global := target_global + Vector2.RIGHT.rotated(deg_to_rad(angle_deg)) * radius
 		print("Candidate global: " + str(candidate_global))
 

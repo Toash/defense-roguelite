@@ -113,7 +113,7 @@ script = ExtResource("16_ysn08")
 game_state = NodePath("../..")
 nexus = NodePath("../../../Nexus")
 world = NodePath("../../..")
-intermission_time = 3.0
+intermission_time = 1.0
 
 [node name="Wave" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state", "enemy_root", "wave_spawner", "world")]
 script = ExtResource("17_m0cxt")

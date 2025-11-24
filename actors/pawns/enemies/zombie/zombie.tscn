@@ -95,18 +95,18 @@ character = NodePath("../..")
 tile_pathfind = NodePath("../../TilePathfind")
 target = NodePath("../../ZombieTarget")
 
-[node name="Chase" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "character", "attack_vision", "nav", "target")]
+[node name="Chase" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "pawn", "attack_vision", "nav", "target")]
 script = ExtResource("7_qpxon")
 enemy = NodePath("../..")
-character = NodePath("../..")
+pawn = NodePath("../..")
 attack_vision = NodePath("../../Areas/AttackArea")
 nav = NodePath("../../NavigationAgent2D")
 target = NodePath("../../ZombieTarget")
 
-[node name="Attack" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "character", "attack_vision", "equipment", "nav", "ai_target")]
+[node name="Attack" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "pawn", "attack_vision", "equipment", "nav", "ai_target")]
 script = ExtResource("9_ubgnx")
 enemy = NodePath("../..")
-character = NodePath("../..")
+pawn = NodePath("../..")
 attack_vision = NodePath("../../Areas/AttackArea")
 equipment = NodePath("../../Items/Equipment")
 nav = NodePath("../../NavigationAgent2D")
@@ -245,6 +245,6 @@ metadata/_custom_type_script = "uid://donkr7aqvtvk7"
 
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
-[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_left_hand_pos"]
 [connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_right_hand_pos"]
+[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_left_hand_pos"]
 [connection signal="died" from="Health" to="LootDropper" method="drop_loot"]

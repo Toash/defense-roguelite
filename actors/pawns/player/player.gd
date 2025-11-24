@@ -32,6 +32,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	# super._process(delta)
 	if dead: return
 	if input_vector != Vector2.ZERO:
 		state = "walk"

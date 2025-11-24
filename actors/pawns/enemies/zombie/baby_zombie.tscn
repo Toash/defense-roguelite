@@ -26,7 +26,7 @@
 [ext_resource type="Script" uid="uid://donkr7aqvtvk7" path="res://item/loot/loot_dropper.gd" id="26_tsfnh"]
 [ext_resource type="Resource" uid="uid://b3mx7fnms14x8" path="res://item/loot/loot_table_basic_enemy.tres" id="27_v6hns"]
 
-[sub_resource type="Shader" id="Shader_tblbu"]
+[sub_resource type="Shader" id="Shader_fhyjg"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -46,7 +46,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
 resource_local_to_scene = true
-shader = SubResource("Shader_tblbu")
+shader = SubResource("Shader_fhyjg")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
@@ -97,18 +97,18 @@ character = NodePath("../..")
 tile_pathfind = NodePath("../../TilePathfind")
 target = NodePath("../../ZombieTarget")
 
-[node name="Chase" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "character", "attack_vision", "nav", "target")]
+[node name="Chase" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "pawn", "attack_vision", "nav", "target")]
 script = ExtResource("8_puoqp")
 enemy = NodePath("../..")
-character = NodePath("../..")
+pawn = NodePath("../..")
 attack_vision = NodePath("../../Areas/AttackArea")
 nav = NodePath("../../NavigationAgent2D")
 target = NodePath("../../ZombieTarget")
 
-[node name="Attack" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "character", "attack_vision", "equipment", "nav", "ai_target")]
+[node name="Attack" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "pawn", "attack_vision", "equipment", "nav", "ai_target")]
 script = ExtResource("10_y0m4v")
 enemy = NodePath("../..")
-character = NodePath("../..")
+pawn = NodePath("../..")
 attack_vision = NodePath("../../Areas/AttackArea")
 equipment = NodePath("../../Items/Equipment")
 nav = NodePath("../../NavigationAgent2D")
@@ -247,6 +247,6 @@ metadata/_custom_type_script = "uid://donkr7aqvtvk7"
 
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_right_hand"]
 [connection signal="target_acquired" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_move_left_hand"]
-[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_left_hand_pos"]
 [connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_right_hand_pos"]
+[connection signal="target_lost" from="ZombieStateMachine/Chase" to="CharacterSprite" method="_reset_left_hand_pos"]
 [connection signal="died" from="Health" to="LootDropper" method="drop_loot"]

@@ -15,6 +15,7 @@ var user_node: Node2D
 
 
 var global_spawn_point: Vector2
+var direction: Vector2
 
 ## when spawning things, they will be children of this node
 ## ex. could use for melee instances

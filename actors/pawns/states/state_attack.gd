@@ -6,7 +6,8 @@ signal target_lost
 
 
 @export var enemy: Enemy
-@export var character: CharacterBody2D
+@export var pawn: Pawn
+# @export var character: CharacterBody2D
 @export var attack_move_speed = 300
 @export var attack_cooldown = 1
 @export var attack_vision: Area2D
@@ -37,9 +38,10 @@ func state_physics_update(delta: float):
 	target_emitted.emit(ai_target.reference.global_position)
 
 	var next_point: Vector2 = nav.get_next_path_position()
-	var normal_dir = (next_point - character.global_position).normalized()
-	character.move_and_collide(normal_dir * enemy.enemy_data.move_speed * delta)
+	var normal_dir = (next_point - pawn.global_position).normalized()
 
+	pawn.set_raw_velocity(normal_dir * enemy.enemy_data.move_speed)
+	pawn.move_and_collide(pawn.get_total_velocity() * delta)
 	if t > attack_cooldown:
 		equipment.use()
 		t = 0
