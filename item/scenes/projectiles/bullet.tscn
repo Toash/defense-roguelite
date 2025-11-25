@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfya2bgykrj43"]
+[gd_scene load_steps=5 format=3 uid="uid://dfya2bgykrj43"]
 
 [ext_resource type="Script" uid="uid://c0e5vy4qopanc" path="res://item/scenes/projectiles/projectile.gd" id="1_5memk"]
 [ext_resource type="Texture2D" uid="uid://ch1ctbupkfx2h" path="res://item/scenes/projectiles/bullet.png" id="2_mjk65"]
+[ext_resource type="Script" uid="uid://djae8vevx6727" path="res://item/scenes/projectiles/projectile_bullet.gd" id="3_mjk65"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2b2rl"]
 size = Vector2(15, 12)
@@ -22,3 +23,8 @@ shape = SubResource("RectangleShape2D_2b2rl")
 texture_filter = 1
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("2_mjk65")
+
+[node name="ProjectileBullet" type="Node2D" parent="." node_paths=PackedStringArray("projectile")]
+script = ExtResource("3_mjk65")
+projectile = NodePath("..")
+metadata/_custom_type_script = "uid://djae8vevx6727"

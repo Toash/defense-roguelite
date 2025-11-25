@@ -16,14 +16,16 @@ class_name ProjectileEffect
 func apply(context: ItemContext):
     var projectile_inst: Projectile = projectile.instantiate() as Projectile
 
-    projectile_inst.factions_to_hit = factions_to_hit
-    projectile_inst.damage = damage
-    projectile_inst.speed = speed
+    var data: ProjectileData = ProjectileData.new()
+    data.factions_to_hit = factions_to_hit
+    data.damage = damage
+    data.speed = speed
+    data.context = context
 
     projectile_inst.global_position = context.global_spawn_point
     projectile_inst.look_at(context.global_target_position)
 
-    projectile_inst.setup(context)
+    projectile_inst.setup(data)
 
     context.root_node.add_child.call_deferred(projectile_inst)
     print(shoot_volume)

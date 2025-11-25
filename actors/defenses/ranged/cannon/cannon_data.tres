@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DefenseData" load_steps=2 format=3 uid="uid://b7f2encmrg6by"]
+
+[ext_resource type="Script" uid="uid://do5j60ewuaqp" path="res://actors/defenses/defense_data.gd" id="1_onhhv"]
+
+[resource]
+script = ExtResource("1_onhhv")
+projectile_speed = 400.0
+metadata/_custom_type_script = "uid://do5j60ewuaqp"
