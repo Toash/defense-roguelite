@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=45 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
@@ -30,6 +30,7 @@
 [ext_resource type="Resource" uid="uid://dhkvadvqgfe7u" path="res://crafting/blueprints/blueprint_wooden_barricade.tres" id="29_pxsft"]
 [ext_resource type="Script" uid="uid://c0igk80mo7ba7" path="res://crafting/blueprint.gd" id="29_s6245"]
 [ext_resource type="Resource" uid="uid://ccuug6iyhqu4u" path="res://crafting/blueprints/blueprint_mini_turret.tres" id="29_ygih8"]
+[ext_resource type="Resource" uid="uid://bectdwfnrpirh" path="res://crafting/blueprints/blueprint_wooden_ballista.tres" id="30_qg747"]
 [ext_resource type="Resource" uid="uid://cm5rcgysn4fkm" path="res://crafting/blueprints/blueprint_wooden_spear.tres" id="30_qqc64"]
 [ext_resource type="Resource" uid="uid://bag3yiaad1f5p" path="res://item/items/tiles/defense/mini_turret_item.tres" id="31_s6245"]
 [ext_resource type="Resource" uid="uid://bxegj0aw5s18c" path="res://item/items/scrap/scrap.tres" id="32_qqc64"]
@@ -238,7 +239,7 @@ metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
 [node name="PlayerCrafting" type="Node2D" parent="." node_paths=PackedStringArray("coins", "player_containers")]
 script = ExtResource("27_h0lia")
 coins = NodePath("../PlayerCoins")
-blueprints = Array[ExtResource("29_s6245")]([ExtResource("30_qqc64"), ExtResource("29_ygih8"), ExtResource("29_pxsft")])
+blueprints = Array[ExtResource("29_s6245")]([ExtResource("30_qqc64"), ExtResource("29_ygih8"), ExtResource("29_pxsft"), ExtResource("30_qg747")])
 player_containers = NodePath("../Containers")
 metadata/_custom_type_script = "uid://cvf4ycidd0cme"
 

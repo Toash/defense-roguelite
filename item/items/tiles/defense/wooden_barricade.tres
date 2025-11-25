@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://cqpiojifh38eh"]
 
-[ext_resource type="Texture2D" uid="uid://oyegl1t0b74l" path="res://actors/defenses/fence/wood_fence.png" id="1_4awro"]
+[ext_resource type="Texture2D" uid="uid://oyegl1t0b74l" path="res://actors/defenses/barricade/wood_fence.png" id="1_4awro"]
 [ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_n21j0"]
 [ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="2_4awro"]
 [ext_resource type="Resource" uid="uid://b7i3nsaiwr3xy" path="res://item/effects/defenses/place_wooden_barricade.tres" id="3_fne52"]

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b888f1irbry2f" path="res://actors/containers/crate/crate.tscn" id="1_331fi"]
 [ext_resource type="PackedScene" uid="uid://sg8a2pgomwuw" path="res://actors/doors/door.tscn" id="2_oeqgq"]
 [ext_resource type="PackedScene" uid="uid://dmgdc6u4t2he8" path="res://actors/defenses/spikes/spike.tscn" id="3_oeqgq"]
-[ext_resource type="PackedScene" uid="uid://dtkkeyu4ik5tg" path="res://actors/defenses/fence/fence.tscn" id="4_2obb6"]
+[ext_resource type="PackedScene" uid="uid://dtkkeyu4ik5tg" path="res://actors/defenses/barricade/fence.tscn" id="4_2obb6"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_3pkja"]
 scenes/1/scene = ExtResource("1_331fi")

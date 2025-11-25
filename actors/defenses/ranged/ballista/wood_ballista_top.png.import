@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwmt0j64xwbji"
-path="res://.godot/imported/mini_turret_head.png-6fefb5939f6a0f7d9dae6640b72bed8e.ctex"
+uid="uid://ca2m666bcuqon"
+path="res://.godot/imported/wood_ballista_top.png-214c9643940e2c3a374a3bc86ba18db7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/defenses/mini_turret/mini_turret_head.png"
-dest_files=["res://.godot/imported/mini_turret_head.png-6fefb5939f6a0f7d9dae6640b72bed8e.ctex"]
+source_file="res://actors/defenses/ranged/ballista/wood_ballista_top.png"
+dest_files=["res://.godot/imported/wood_ballista_top.png-214c9643940e2c3a374a3bc86ba18db7.ctex"]
 
 [params]
 

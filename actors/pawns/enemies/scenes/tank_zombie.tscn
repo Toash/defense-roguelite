@@ -48,7 +48,7 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fose"]
-size = Vector2(36, 72)
+size = Vector2(68, 115)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_roy8y"]
 radius = 376.0053
@@ -131,7 +131,7 @@ ai_target = NodePath("../../ZombieTarget")
 script = ExtResource("12_rms5r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -9)
+position = Vector2(0, -12.5)
 shape = SubResource("RectangleShape2D_3fose")
 
 [node name="Health" type="Node2D" parent="."]

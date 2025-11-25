@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DefenseData" load_steps=2 format=3 uid="uid://djrdcxjoi10ac"]
+
+[ext_resource type="Script" uid="uid://do5j60ewuaqp" path="res://actors/defenses/defense_data.gd" id="1_hhiqh"]
+
+[resource]
+script = ExtResource("1_hhiqh")
+attack_damage = 100
+attack_speed = 3.0
+metadata/_custom_type_script = "uid://do5j60ewuaqp"

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DefenseData" load_steps=2 format=3 uid="uid://doax2byf7sed7"]
+
+[ext_resource type="Script" uid="uid://do5j60ewuaqp" path="res://actors/defenses/defense_data.gd" id="1_7eixc"]
+
+[resource]
+script = ExtResource("1_7eixc")
+defense_priority = 1
+metadata/_custom_type_script = "uid://do5j60ewuaqp"

@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://cf63ae2nymmrw"]
+
+[ext_resource type="Script" uid="uid://q6n7fr42kj25" path="res://actors/defenses/defense.gd" id="1_rqptj"]
+[ext_resource type="Resource" uid="uid://djrdcxjoi10ac" path="res://actors/defenses/ranged/ballista/wood_ballista_data.tres" id="2_tdn6j"]
+[ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/pawn_tracker.gd" id="3_jiwro"]
+[ext_resource type="Texture2D" uid="uid://ca2m666bcuqon" path="res://actors/defenses/ranged/ballista/wood_ballista_top.png" id="4_tdn6j"]
+[ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="7_gtmwm"]
+[ext_resource type="Script" uid="uid://bvpgbckygjfb1" path="res://actors/defenses/states/state_swivel_idle.gd" id="8_kmmgr"]
+[ext_resource type="Script" uid="uid://bhkahelyvljmo" path="res://actors/defenses/states/state_turret_attack.gd" id="9_77bml"]
+[ext_resource type="Resource" uid="uid://iu3556p6xgqa" path="res://item/effects/defenses/mini_turret_shoot.tres" id="10_c1nj7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7q5m8"]
+radius = 300.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_73l1h"]
+radius = 48.09366
+
+[node name="WoodBallista" type="Area2D"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_rqptj")
+defense_data = ExtResource("2_tdn6j")
+metadata/_custom_type_script = "uid://q6n7fr42kj25"
+
+[node name="PawnTracker" type="Node2D" parent="." node_paths=PackedStringArray("pawn_vision", "pawn_raycast")]
+script = ExtResource("3_jiwro")
+factions_to_track = Array[int]([2])
+pawn_vision = NodePath("../ZombieVision")
+pawn_raycast = NodePath("../ZombieRaycast")
+metadata/_custom_type_script = "uid://dg8qbly1ndg5w"
+
+[node name="SpriteRoot" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="SwivelRoot" type="Node2D" parent="SpriteRoot"]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteRoot/SwivelRoot"]
+texture = ExtResource("4_tdn6j")
+
+[node name="ZombieVision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZombieVision"]
+shape = SubResource("CircleShape2D_7q5m8")
+
+[node name="ZombieRaycast" type="RayCast2D" parent="."]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_73l1h")
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("7_gtmwm")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://bptrhmi4tcomm"
+
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("enemy_tracker", "swivel_root")]
+script = ExtResource("8_kmmgr")
+enemy_tracker = NodePath("../../PawnTracker")
+swivel_root = NodePath("../../SpriteRoot/SwivelRoot")
+metadata/_custom_type_script = "uid://bvpgbckygjfb1"
+
+[node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("user", "defense", "enemy_tracker", "swivel_root", "muzzle")]
+script = ExtResource("9_77bml")
+user = NodePath("../..")
+defense = NodePath("../..")
+enemy_tracker = NodePath("../../PawnTracker")
+swivel_root = NodePath("../../SpriteRoot/SwivelRoot")
+projectile_effect = ExtResource("10_c1nj7")
+muzzle = NodePath("../../SpriteRoot/SwivelRoot/Sprite2D")

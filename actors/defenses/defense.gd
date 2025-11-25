@@ -19,6 +19,8 @@ func _ready():
 		health.died.connect(func():
 			queue_free()
 			)
+		health.max_health = defense_data.health
+		health.health = defense_data.health
 
 
 func get_data() -> DefenseData:

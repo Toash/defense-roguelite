@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcnuud2mmhqob"
-path="res://.godot/imported/mini_turret_body.png-e377a1172748d8ae4a48e3e86dfc6cf8.ctex"
+uid="uid://cwmt0j64xwbji"
+path="res://.godot/imported/mini_turret_head.png-41786655870f52be34a6b204125f8de2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/defenses/mini_turret/mini_turret_body.png"
-dest_files=["res://.godot/imported/mini_turret_body.png-e377a1172748d8ae4a48e3e86dfc6cf8.ctex"]
+source_file="res://actors/defenses/ranged/mini_turret/mini_turret_head.png"
+dest_files=["res://.godot/imported/mini_turret_head.png-41786655870f52be34a6b204125f8de2.ctex"]
 
 [params]
 

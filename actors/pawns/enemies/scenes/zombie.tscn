@@ -48,7 +48,7 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fose"]
-size = Vector2(36, 72)
+size = Vector2(46, 72)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_roy8y"]
 radius = 376.0053
