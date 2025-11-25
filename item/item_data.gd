@@ -30,6 +30,8 @@ var id: int
 ## item should point towards the target.
 @export var follow_target = true
 
+
+## TODO: deprecate this - sounds should only be spawned in effects
 @export_group("Sound")
 @export var use_sound_key: AudioManager.KEY = AudioManager.KEY.NO_SOUND
 @export var use_sound_bus: String = "master"

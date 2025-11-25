@@ -10,7 +10,15 @@ enum PRIORITY {
 }
 
 
+@export var health: Health
 @export var defense_data: DefenseData
+
+
+func _ready():
+	if health != null:
+		health.died.connect(func():
+			queue_free()
+			)
 
 
 func get_data() -> DefenseData:

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://si1ikxp52cuk" path="res://actors/pawns/enemies/enemy.gd" id="1_jqbie"]
 [ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/pawns/character_sprite.tscn" id="2_53wjr"]
-[ext_resource type="Texture2D" uid="uid://doueacum5bmne" path="res://actors/pawns/sprites/head/head_zombie_1.png" id="3_lp0q3"]
-[ext_resource type="Texture2D" uid="uid://diqa5jjgkpomp" path="res://actors/pawns/sprites/torso/torso_zombie.png" id="4_r7ixj"]
+[ext_resource type="Texture2D" uid="uid://du6dkxcrgho1u" path="res://actors/pawns/sprites/head/head_zombie_tusk.png" id="3_jqbie"]
+[ext_resource type="Texture2D" uid="uid://bxolm0afqx5jv" path="res://actors/pawns/sprites/torso/torso_tank_zombie.png" id="4_jqbie"]
 [ext_resource type="Texture2D" uid="uid://bcrncjn0sri3i" path="res://actors/pawns/sprites/hand/hands_zombie_1.png" id="5_s74vt"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="6_v6ih7"]
 [ext_resource type="Script" uid="uid://cskdd0xcjjmfc" path="res://actors/pawns/states/state_wander.gd" id="7_03dcd"]
@@ -74,8 +74,8 @@ position = Vector2(0, -6)
 scale = Vector2(5, 5)
 target_supplier = NodePath("../NavTargetProvider")
 health = NodePath("../Health")
-head_texture = ExtResource("3_lp0q3")
-torso_texture = ExtResource("4_r7ixj")
+head_texture = ExtResource("3_jqbie")
+torso_texture = ExtResource("4_jqbie")
 left_arm_texture = ExtResource("5_s74vt")
 right_arm_texture = ExtResource("5_s74vt")
 
@@ -136,6 +136,7 @@ shape = SubResource("RectangleShape2D_3fose")
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("13_r8hx2")
+bar_height_offset = -100.0
 metadata/_custom_type_script = "uid://gyp8bshfrfoj"
 
 [node name="Items" type="Node2D" parent="."]

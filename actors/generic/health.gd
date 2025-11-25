@@ -38,6 +38,12 @@ func from_dict(dict: Dictionary) -> void:
 
 
 func _draw():
+	# Make drawing ignore world/node scaling
+	var gs := global_scale
+	if gs.x != 0.0 and gs.y != 0.0:
+		# Apply inverse of total scale so bar stays the same size visually
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2(1.0 / gs.x, 1.0 / gs.y))
+
 	# background
 	draw_rect(Rect2(bar_offset, Vector2(bar_width, bar_height)), Color(0, 0, 0, 0.4))
 
