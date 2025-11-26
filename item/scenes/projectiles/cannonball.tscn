@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7wmd704yv387"]
+
+[ext_resource type="Script" uid="uid://c0e5vy4qopanc" path="res://item/scenes/projectiles/projectile.gd" id="1_gqaia"]
+[ext_resource type="Texture2D" uid="uid://c7qx30lklwm5e" path="res://item/scenes/projectiles/cannonball.png" id="2_gqaia"]
+[ext_resource type="Script" uid="uid://cuoh80umj24rl" path="res://item/scenes/projectiles/projectile_cannonball.gd" id="3_x2s0i"]
+[ext_resource type="PackedScene" uid="uid://dho0etfev22nf" path="res://item/scenes/projectiles/explosion.tscn" id="4_qc7fu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x2s0i"]
+radius = 31.016125
+
+[node name="Cannonball" type="RigidBody2D"]
+collision_mask = 4
+input_pickable = true
+gravity_scale = 0.0
+continuous_cd = 2
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_gqaia")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x2s0i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_gqaia")
+
+[node name="ProjectileCannonball" type="Node2D" parent="." node_paths=PackedStringArray("projectile")]
+script = ExtResource("3_x2s0i")
+projectile = NodePath("..")
+explosion_scene = ExtResource("4_qc7fu")
+metadata/_custom_type_script = "uid://cuoh80umj24rl"

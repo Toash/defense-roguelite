@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Blueprint" load_steps=5 format=3 uid="uid://c5fc8j3i8g611"]
+
+[ext_resource type="Script" uid="uid://b6bhu0l2m8yl0" path="res://crafting/item_data_group.gd" id="1_fdgk1"]
+[ext_resource type="Resource" uid="uid://ihkpap04oom0" path="res://item/items/tiles/defense/cannon.tres" id="2_g2gkp"]
+[ext_resource type="Script" uid="uid://c0igk80mo7ba7" path="res://crafting/blueprint.gd" id="2_ql4gq"]
+
+[sub_resource type="Resource" id="Resource_fdgk1"]
+script = ExtResource("1_fdgk1")
+item_data = ExtResource("2_g2gkp")
+amount = 1
+metadata/_custom_type_script = "uid://b6bhu0l2m8yl0"
+
+[resource]
+script = ExtResource("2_ql4gq")
+coins_needed = 10
+outputs = Array[ExtResource("1_fdgk1")]([SubResource("Resource_fdgk1")])
+metadata/_custom_type_script = "uid://c0igk80mo7ba7"

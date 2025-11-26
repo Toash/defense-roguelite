@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dho0etfev22nf"]
+
+[ext_resource type="Texture2D" uid="uid://buw6maae0bvye" path="res://item/scenes/projectiles/explosion.png" id="1_bxfb4"]
+[ext_resource type="Script" uid="uid://cuoorngr5hn3p" path="res://item/scenes/projectiles/explosion.gd" id="1_wcv2a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tj50u"]
+radius = 212.00237
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wcv2a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bxfb4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Explosion" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_wcv2a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tj50u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_wcv2a")

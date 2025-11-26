@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://ihkpap04oom0"]
+
+[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_ehre1"]
+[ext_resource type="Texture2D" uid="uid://boy4nbmdhr656" path="res://actors/defenses/ranged/cannon/cannon.png" id="1_k3bjs"]
+[ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="2_k3bjs"]
+[ext_resource type="Resource" uid="uid://3hh0lvhk48gl" path="res://item/effects/defenses/place_cannon.tres" id="3_uqfd1"]
+
+[resource]
+script = ExtResource("2_k3bjs")
+display_name = "Cannon"
+description = "AOE Tower"
+max_stack = 1
+icon = ExtResource("1_k3bjs")
+consume_on_use = true
+ingame_sprite = ExtResource("1_k3bjs")
+item_effects = Array[ExtResource("1_ehre1")]([ExtResource("3_uqfd1")])
+metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

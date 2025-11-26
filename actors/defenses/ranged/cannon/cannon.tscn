@@ -5,9 +5,9 @@
 [ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/pawn_tracker.gd" id="3_tvgdg"]
 [ext_resource type="Texture2D" uid="uid://boy4nbmdhr656" path="res://actors/defenses/ranged/cannon/cannon.png" id="4_1lnak"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="7_qdjum"]
+[ext_resource type="Resource" uid="uid://b34besxa1pltg" path="res://item/effects/defenses/cannonball_shoot.tres" id="8_1lnak"]
 [ext_resource type="Script" uid="uid://bvpgbckygjfb1" path="res://actors/defenses/states/state_swivel_idle.gd" id="8_i3u0j"]
 [ext_resource type="Script" uid="uid://bhkahelyvljmo" path="res://actors/defenses/states/state_turret_attack.gd" id="9_rb6ga"]
-[ext_resource type="Resource" uid="uid://iu3556p6xgqa" path="res://item/effects/defenses/mini_turret_shoot.tres" id="10_glan7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7q5m8"]
 radius = 300.0
@@ -35,6 +35,7 @@ scale = Vector2(0.5, 0.5)
 [node name="SwivelRoot" type="Node2D" parent="SpriteRoot"]
 
 [node name="Sprite2D" type="Sprite2D" parent="SpriteRoot/SwivelRoot"]
+rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_1lnak")
 
@@ -68,5 +69,5 @@ user = NodePath("../..")
 defense = NodePath("../..")
 enemy_tracker = NodePath("../../PawnTracker")
 swivel_root = NodePath("../../SpriteRoot/SwivelRoot")
-projectile_effect = ExtResource("10_glan7")
+projectile_effect = ExtResource("8_1lnak")
 muzzle = NodePath("../../SpriteRoot/SwivelRoot/Sprite2D")
