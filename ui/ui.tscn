@@ -43,7 +43,6 @@ offset_right = 637.0
 offset_bottom = 937.0
 
 [node name="PickupWindow" parent="." instance=ExtResource("4_tf0e0")]
-visible = false
 offset_left = 66.0
 offset_top = 49.0
 offset_right = 150.0

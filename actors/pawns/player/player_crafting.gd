@@ -18,18 +18,20 @@ func get_blueprints() -> Array[Blueprint]:
 
 
 func craft(blueprint: Blueprint):
-	if not coins.has_enough(blueprint.coins_needed):
+
+	var blueprint_copy = blueprint.duplicate()
+	if not coins.has_enough(blueprint_copy.coins_needed):
 		TextPopupManager.popup("Not enough coins!", get_viewport_rect().size / 2)
 		return
 		
-	for ingredient: ItemDataGroup in blueprint.get_ingredients():
+	for ingredient: ItemDataGroup in blueprint_copy.get_ingredients():
 		if not player_containers.has_enough_items(ingredient.item_data, ingredient.amount):
 			TextPopupManager.popup("Not enough items!", get_viewport_rect().size / 2)
 			return
 
-	for ingredient: ItemDataGroup in blueprint.get_ingredients():
+	for ingredient: ItemDataGroup in blueprint_copy.get_ingredients():
 		player_containers.must_take_amount(ingredient.item_data, ingredient.amount)
 
-	for results: ItemDataGroup in blueprint.get_outputs():
+	for results: ItemDataGroup in blueprint_copy.get_outputs():
 		player_containers.force_add_item_group(results)
-	coins.change_coins(-blueprint.coins_needed)
+	coins.change_coins(-blueprint_copy.coins_needed)

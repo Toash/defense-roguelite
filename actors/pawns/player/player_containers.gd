@@ -62,16 +62,19 @@ func must_take_amount(item_data: ItemData, amount: int) -> ItemDataGroup:
 
 ## drops items on the floor that dont fit.
 func force_add_item_group(group: ItemDataGroup):
+
+	var group_copy = group.duplicate()
+
 	var items_left: int = 0
-	items_left = hotbar_container.try_add_item_group(group)
-	group.amount = items_left
+	items_left = hotbar_container.try_add_item_group(group_copy)
+	group_copy.amount = items_left
 
 	if items_left > 0:
-		items_left = inventory_container.try_add_item_group(group)
-		group.amount = items_left
+		items_left = inventory_container.try_add_item_group(group_copy)
+		group_copy.amount = items_left
 
 	if items_left > 0:
-		GroundItems.spawn_by_data(group.item_data, items_left, global_position)
+		GroundItems.spawn_by_data(group_copy.item_data, items_left, global_position)
 
 
 ## take as much as avaliable from the container.

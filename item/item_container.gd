@@ -59,8 +59,10 @@ func set_item_instance(index: int, inst: ItemInstance) -> void:
 
 ## tries to add the group; returns the amount **leftover** (0 = fully added).
 func try_add_item_group(group: ItemDataGroup) -> int:
+	print("try add")
 	var items_left: int = group.amount
 
+	print(items_left)
 	# 1) Fill existing stacks
 	for index in capacity:
 		if items_left == 0:

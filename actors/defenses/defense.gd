@@ -1,5 +1,6 @@
 extends Area2D
 
+## root node for all defenses 
 class_name Defense
 
 # How do other enemies see this ? 
