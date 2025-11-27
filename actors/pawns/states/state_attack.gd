@@ -10,7 +10,8 @@ signal target_lost
 # @export var character: CharacterBody2D
 @export var attack_move_speed = 300
 @export var attack_cooldown = 1
-@export var attack_vision: Area2D
+# @export var attack_vision: Area2D
+@export var attack_tracker:PawnTracker 
 @export var equipment: PawnEquipment
 
 
@@ -24,7 +25,8 @@ var t: float = 0.0
 func state_enter():
 	active = true
 	target_acquired.emit()
-	attack_vision.body_exited.connect(_on_attack_vision_exited)
+	attack_tracker.nearest_pawn_changed.connect(_on_attack_vision_exited)
+	
 
 func state_update(delta: float):
 	pass
@@ -50,9 +52,9 @@ func state_physics_update(delta: float):
 func state_exit():
 	active = false
 	target_lost.emit()
-	attack_vision.body_exited.disconnect(_on_attack_vision_exited)
+	attack_tracker.nearest_pawn_changed.disconnect(_on_attack_vision_exited)
 
-func _on_attack_vision_exited(body: Node2D):
-	if body is Player:
-		ai_target.reference = body
+func _on_attack_vision_exited(previous_pawn:Pawn, pawn: Pawn):
+	if previous_pawn is Player:
+		ai_target.reference = previous_pawn 
 		transitioned.emit(self, "chase")

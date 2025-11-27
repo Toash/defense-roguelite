@@ -9,6 +9,10 @@ class_name PlayerCrafting
 @export var player_containers: PlayerContainers
 
 
+func add_blueprint(blueprint:Blueprint):
+	blueprints.append(blueprint)
+
+
 func get_blueprints() -> Array[Blueprint]:
 	return blueprints
 

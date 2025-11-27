@@ -44,5 +44,5 @@ func _swivel_to_random_point():
 
 	# real_interval = interval + rng.randf_range(-2, 2)
 
-func _on_nearest_pawn_changed(pawn: Pawn):
+func _on_nearest_pawn_changed(a:Pawn,pawn: Pawn):
 	transitioned.emit(self, "attack")

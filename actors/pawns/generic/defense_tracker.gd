@@ -7,10 +7,12 @@ signal found_defense(defense: Defense)
 
 @export var visibility_level: Defense.PRIORITY
 
+@export var vision_distance :float = 300
+
 ## mask should include layers to track.
-@export var defense_vision: Area2D
+var defense_vision: Area2D
 ## ensure this raycast gets obstructed by walls
-@export var defense_raycast: RayCast2D
+var defense_raycast: RayCast2D
 
 var retries = 0
 const MAX_RETRIES = 50 ## only find player if we can see this many times in a row.
@@ -20,6 +22,15 @@ var t: float = INF
 var defenses_within_vision: Dictionary[int, Defense] = {}
 
 func _ready() -> void:
+	defense_vision = PhysicsUtils.get_circle_area(vision_distance)
+	defense_vision.set_collision_mask_value(6,true)
+	add_child(defense_vision)
+	
+	defense_raycast= RayCast2D.new()
+	defense_raycast.set_collision_mask_value(2,true)
+	defense_raycast.set_collision_mask_value(6,true)
+	add_child(defense_raycast)
+
 	defense_vision.area_entered.connect(_on_area_entered)
 	defense_vision.area_exited.connect(_on_area_exited)
 

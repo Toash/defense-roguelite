@@ -33,7 +33,7 @@ func state_exit():
 	pass
 
 
-func _on_nearest_pawn_changed(pawn: Pawn):
+func _on_nearest_pawn_changed(a:Pawn,pawn: Pawn):
 	if pawn == null:
 		transitioned.emit(self, "idle")
 		return

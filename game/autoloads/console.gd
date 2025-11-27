@@ -35,7 +35,7 @@ func _ready() -> void:
 		PawnSpawner.spawn_pawn_near_player(PawnRegistry.get_key(name), Vector2.UP * 100)
 		)
 
-	_register_command("zombie", func(amount):
+	_register_command("z", func(amount):
 		PawnSpawner.spawn_horde(PawnEnums.NAME.BASIC_ZOMBIE, int(amount))
 		)
 

@@ -114,7 +114,6 @@ game_state = NodePath("../..")
 spawn_manager = NodePath("../../SpawnManager")
 nexus = NodePath("../../../Nexus")
 world = NodePath("../../..")
-spawn_nodes = 10
 intermission_time = 1.0
 
 [node name="Wave" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state", "enemy_root", "spawn_manager", "world")]
