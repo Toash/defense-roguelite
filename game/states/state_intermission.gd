@@ -5,6 +5,7 @@ extends State
 class_name IntermissionState
 
 @export var game_state: GameState
+@export var spawn_manager: SpawnManager
 @export var nexus: Nexus
 @export var world: World
 
@@ -15,7 +16,7 @@ var intermission_timer: float = 0
 func state_enter():
 	intermission_timer = 0
 	# world.get_spawn_nodes(Vector2.ZERO, 3)
-	world.get_spawn_nodes(nexus.global_position, 1)
+	await spawn_manager.generate_spawn_nodes(1)
 	
 
 func state_update(delta: float):

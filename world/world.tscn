@@ -94,9 +94,10 @@ position = Vector2(2, 0)
 [node name="ZombieRoot" type="Node2D" parent="Roots"]
 position = Vector2(0, -2)
 
-[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("world", "state_machine", "intermission_state", "wave_state", "wave_spawner")]
+[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("world", "nexus", "state_machine", "intermission_state", "wave_state", "wave_spawner")]
 script = ExtResource("14_b2suy")
 world = NodePath("..")
+nexus = NodePath("../Nexus")
 state_machine = NodePath("StateMachine")
 intermission_state = NodePath("StateMachine/Intermission")
 wave_state = NodePath("StateMachine/Wave")

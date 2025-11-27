@@ -8,7 +8,7 @@ class_name WaveState
 @export var enemy_root: Node2D
 @export var enemy_data: EnemyData
 
-@export var wave_spawner: WaveSpawner
+@export var spawn_manager: SpawnManager
 @export var wave_time: float = 1
 
 @export var world: World
@@ -28,13 +28,14 @@ func state_update(delta: float):
 	wave_timer += delta
 
 	if spawn_timer > 8:
-		# TODO: fallback if we cant find spawn points
-		wave_spawner.spawn(world.get_random_spawn_point())
+		spawn_manager.spawn_at_random_spawn_node() 
 		spawn_timer = 0
-
 
 	if wave_timer > wave_time:
 		transitioned.emit(self, "intermission")
+
+
+
 
 func state_physics_update(delta: float):
 	pass

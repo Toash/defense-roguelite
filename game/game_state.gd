@@ -13,10 +13,15 @@ enum PHASE {
 
 
 @export var world: World
+@export var nexus: Nexus
 @export var state_machine: StateMachine
 @export var intermission_state: IntermissionState
 @export var wave_state: WaveState
-@export var wave_spawner: WaveSpawner
+@export var wave_spawner: SpawnManager
+
+
+var spawn_nodes : Array[Node2D]
+
 
 
 func get_phase() -> PHASE:
@@ -26,6 +31,7 @@ func get_phase() -> PHASE:
 		"wave":
 			return PHASE.WAVE
 	return PHASE.NONE
+
 
 
 func get_debug_string() -> String:

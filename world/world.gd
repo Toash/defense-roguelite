@@ -19,6 +19,7 @@ signal generated_spawn_nodes(nodes: Array[Node2D])
 @export_group("Game")
 # @export var spawn_points: Array[Marker2D]
 @export var game_state: GameState
+@export var nexus:Nexus
 @export_group("Debug")
 @export var debug_path: DebugPath
 var astar_grid: AStarGrid2D = AStarGrid2D.new()
@@ -30,7 +31,7 @@ var scaling_factor: Vector2
 ## offset to the center of the tile.
 var tile_offset: Vector2 = Vector2(8, 8)
 
-var spawn_nodes: Array[Node2D]
+# var spawn_nodes: Array[Node2D]
 
 
 # SETUP
@@ -38,8 +39,6 @@ var spawn_nodes: Array[Node2D]
 
 func _ready():
 	setup = false
-
-
 	_setup()
 	setup = true
 	world_setup.emit()
@@ -180,66 +179,60 @@ func _grid_to_world(cell: Vector2i) -> Vector2:
 
 # SPAWNING
 # ============================
-func get_spawn_nodes(target_global: Vector2, amount: int) -> Array[Node2D]:
-	clear_spawn_points()
+## generates spawn nodes, ensuring that there is a valid path to the target
+func get_spawn_nodes(amount: int) -> Array[Node2D]:
+	var target_global = nexus.global_position
+	var spawn_nodes : Array[Node2D]
 	for i in amount:
-		_append_spawn_node(target_global)
+		await _append_valid_random_spawn_node(spawn_nodes,target_global)
 	generated_spawn_nodes.emit(spawn_nodes)
 	return spawn_nodes
+
+
+func _has_valid_nonpartial_path_in_tilemap(from:Vector2i,to:Vector2i) -> bool:
+	if not setup:
+		await world_setup
+	var point_path:PackedVector2Array = astar_grid.get_point_path(from,to,false)
+	return not point_path.is_empty()
 	
 
-## TODO, dont pick spawnpoints for a x radius around other spawnpoints.
-func _append_spawn_node(target_global: Vector2) -> Node2D:
-	var target_cell: Vector2i = _world_to_grid(target_global)
 
-	for i in 100:
-		# var angle_deg: float = randf_range(0, 360)
-		var angle_deg: float = -90
+func _append_valid_random_spawn_node(spawn_nodes: Array[Node2D],target_global: Vector2) -> Node2D:
+	## TODO fix this
+	const TRIES = 100
 
+
+	for tries in TRIES:
+		var angle_deg: float = randf_range(0, 360)
+		# var angle_deg: float = -90
 
 		var radius: float = world_config.world_height * ground_tiles.tile_set.tile_size.x * 1
 		var candidate_global := target_global + Vector2.RIGHT.rotated(deg_to_rad(angle_deg)) * radius
-		print("Candidate global: " + str(candidate_global))
+
+		var candidate_local = ground_tiles.to_local(candidate_global) 
+		var candidate_tile = ground_tiles.local_to_map(candidate_local)
+
+		var target_local = ground_tiles.to_local(target_global)  
+		var target_tile = ground_tiles.local_to_map(target_local)
 
 
-		# TODO: Check if there is a path to the nexus !
-		# var candidate_cell: Vector2i = _world_to_grid(candidate_global)
+		if await _has_valid_nonpartial_path_in_tilemap(candidate_tile,target_tile):
+			print("valid path found!")
+			var node2d = Node2D.new()
+			node2d.global_position = candidate_global
 
-		# if not astar_grid.is_in_boundsv(candidate_cell):
-		# 	print("World: candidate cell is not in bounds" + str(candidate_cell))
-		# 	continue
-		# if astar_grid.is_point_solid(candidate_cell):
-		# 	print("World: candidate cell is solid")
-		# 	continue
+			spawn_nodes.append(node2d)
+			return node2d
+		else:
+			print("path not found... retrying")
+			pass
 
-		# # check path from spawn_cell to target cell.
-		# var path: PackedVector2Array = astar_grid.get_point_path(candidate_cell, target_cell)
-		# if path.is_empty():
-		# 	print("World: path to target is empty")
-		# 	continue
-
-		var node2d = Node2D.new()
-		# node2d.global_position = _grid_to_world(candidate_cell)
-		node2d.global_position = candidate_global
-
-		spawn_nodes.append(node2d)
-		return node2d
 		
-	push_error("World: could generate a spawn point")
+	push_error("World: could not generate a spawn point")
 	return null
 
 
-func get_random_spawn_point() -> Vector2:
-	## TODO: fallback if no spawn points
-	# return Vector2.UP * 500
-	return spawn_nodes[randi()%spawn_nodes.size()].global_position
 
-
-func clear_spawn_points():
-	for spawn_node: Node2D in spawn_nodes:
-		spawn_node.queue_free()
-	spawn_nodes.clear()
-	
 			
 # RANDOM GEN 
 # ============================
