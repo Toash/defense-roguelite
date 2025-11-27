@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dm15crljo54tt"]
+[gd_scene load_steps=23 format=3 uid="uid://dm15crljo54tt"]
 
 [ext_resource type="Script" uid="uid://si1ikxp52cuk" path="res://actors/pawns/enemies/enemy.gd" id="1_jqbie"]
 [ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/pawns/character_sprite.tscn" id="2_53wjr"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bxolm0afqx5jv" path="res://actors/pawns/sprites/torso/torso_tank_zombie.png" id="4_jqbie"]
 [ext_resource type="Texture2D" uid="uid://bcrncjn0sri3i" path="res://actors/pawns/sprites/hand/hands_zombie_1.png" id="5_s74vt"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="6_v6ih7"]
-[ext_resource type="Script" uid="uid://cskdd0xcjjmfc" path="res://actors/pawns/states/state_wander.gd" id="7_03dcd"]
 [ext_resource type="Script" uid="uid://b1vk2g6nxw2g" path="res://actors/pawns/states/state_chase.gd" id="8_8opkp"]
 [ext_resource type="Script" uid="uid://bdpo0eyqlq8re" path="res://actors/pawns/states/state_attack.gd" id="9_urhwv"]
 [ext_resource type="Script" uid="uid://cjnn80jlwilpx" path="res://actors/pawns/states/state_nexus.gd" id="10_hjo7y"]
@@ -18,12 +17,10 @@
 [ext_resource type="Script" uid="uid://c816dagnqn6re" path="res://actors/pawns/enemies/zombie/zombie_item.gd" id="16_yp1tt"]
 [ext_resource type="Resource" uid="uid://6rsgvhonqx4b" path="res://item/items/zombie/zombie_attack.tres" id="17_3jcr1"]
 [ext_resource type="Script" uid="uid://bnk868k5qp3nb" path="res://actors/pawns/nav_target_provider.gd" id="18_srbql"]
-[ext_resource type="Script" uid="uid://dbgqumwhqtmf6" path="res://actors/pawns/generic/tile_pathfind.gd" id="19_j4kjd"]
-[ext_resource type="Script" uid="uid://c8dnwtjdg5wbq" path="res://audio/footsteps.gd" id="20_8e33n"]
 [ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/pawn_tracker.gd" id="21_vt6i4"]
 [ext_resource type="Script" uid="uid://d3o527u2hmgp7" path="res://actors/pawns/generic/defense_tracker.gd" id="22_uwkqg"]
 
-[sub_resource type="Shader" id="Shader_jqbie"]
+[sub_resource type="Shader" id="Shader_u0608"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -43,28 +40,19 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
 resource_local_to_scene = true
-shader = SubResource("Shader_jqbie")
+shader = SubResource("Shader_u0608")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fose"]
 size = Vector2(68, 115)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_roy8y"]
-radius = 376.0053
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_jmu02"]
-radius = 118.004234
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_buy8w"]
-radius = 75.16648
-
 [node name="TankZombie" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "tile_pathfind", "health")]
 collision_layer = 4
 collision_mask = 32
 script = ExtResource("1_jqbie")
 state_machine = NodePath("ZombieStateMachine")
-tile_pathfind = NodePath("TilePathfind")
+tile_pathfind = NodePath("")
 faction = 2
 health = NodePath("Health")
 
@@ -87,29 +75,22 @@ script = ExtResource("6_v6ih7")
 initial_state = NodePath("Nexus")
 metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 
-[node name="Wander" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("player_tracker", "character", "tile_pathfind", "target")]
-script = ExtResource("7_03dcd")
-player_tracker = NodePath("../../Detectors/PlayerTracker")
-character = NodePath("../..")
-tile_pathfind = NodePath("../../TilePathfind")
-target = NodePath("../../ZombieTarget")
-
-[node name="Chase" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "pawn", "attack_vision", "nav", "target")]
+[node name="Chase" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "pawn", "attack_tracker", "nav", "target")]
 script = ExtResource("8_8opkp")
 enemy = NodePath("../..")
 pawn = NodePath("../..")
-attack_vision = NodePath("../../Areas/AttackArea")
+attack_tracker = NodePath("../../Detectors/AttackTracker")
 nav = NodePath("../../NavigationAgent2D")
-target = NodePath("../../ZombieTarget")
+target = NodePath("../ZombieTarget")
 
-[node name="Attack" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "pawn", "attack_vision", "equipment", "nav", "ai_target")]
+[node name="Attack" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "pawn", "attack_tracker", "equipment", "nav", "ai_target")]
 script = ExtResource("9_urhwv")
 enemy = NodePath("../..")
 pawn = NodePath("../..")
-attack_vision = NodePath("../../Areas/AttackArea")
+attack_tracker = NodePath("../../Detectors/AttackTracker")
 equipment = NodePath("../../Items/Equipment")
 nav = NodePath("../../NavigationAgent2D")
-ai_target = NodePath("../../ZombieTarget")
+ai_target = NodePath("../ZombieTarget")
 
 [node name="Nexus" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "pawn", "player_tracker", "defense_tracker", "ai_target", "nav")]
 script = ExtResource("10_hjo7y")
@@ -117,7 +98,7 @@ enemy = NodePath("../..")
 pawn = NodePath("../..")
 player_tracker = NodePath("../../Detectors/PlayerTracker")
 defense_tracker = NodePath("../../Detectors/DefenseTracker")
-ai_target = NodePath("../../ZombieTarget")
+ai_target = NodePath("../ZombieTarget")
 nav = NodePath("../../NavigationAgent2D")
 
 [node name="Break" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "equipment", "nav", "ai_target")]
@@ -125,9 +106,9 @@ script = ExtResource("11_njqtl")
 character = NodePath("../..")
 equipment = NodePath("../../Items/Equipment")
 nav = NodePath("../../NavigationAgent2D")
-ai_target = NodePath("../../ZombieTarget")
+ai_target = NodePath("../ZombieTarget")
 
-[node name="ZombieTarget" type="Node2D" parent="."]
+[node name="ZombieTarget" type="Node2D" parent="ZombieStateMachine"]
 script = ExtResource("12_rms5r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -145,7 +126,7 @@ metadata/_custom_type_script = "uid://gyp8bshfrfoj"
 script = ExtResource("14_lwmia")
 user = NodePath("../..")
 inst_provider = NodePath("../ZombieItem")
-target_provider = NodePath("../../ZombieTarget")
+target_provider = NodePath("../../ZombieStateMachine/ZombieTarget")
 item_display = NodePath("../ItemDisplay")
 character_sprite = NodePath("../../CharacterSprite")
 metadata/_custom_type_script = "uid://kesirm75pc1q"
@@ -167,67 +148,20 @@ script = ExtResource("18_srbql")
 agent = NodePath("../NavigationAgent2D")
 metadata/_custom_type_script = "uid://bnk868k5qp3nb"
 
-[node name="TilePathfind" type="Node2D" parent="." node_paths=PackedStringArray("body")]
-script = ExtResource("19_j4kjd")
-body = NodePath("..")
-metadata/_custom_type_script = "uid://dbgqumwhqtmf6"
-
-[node name="Footsteps" type="Node2D" parent="." node_paths=PackedStringArray("character_sprite")]
-script = ExtResource("20_8e33n")
-character_sprite = NodePath("../CharacterSprite")
-metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
-
 [node name="Detectors" type="Node2D" parent="."]
 
-[node name="PlayerTracker" type="Node2D" parent="Detectors" node_paths=PackedStringArray("pawn_vision", "pawn_raycast")]
+[node name="PlayerTracker" type="Node2D" parent="Detectors"]
 script = ExtResource("21_vt6i4")
 factions_to_track = Array[int]([1])
-pawn_vision = NodePath("../../Areas/PlayerVision")
-pawn_raycast = NodePath("../../Raycasts/PlayerRaycast")
 metadata/_custom_type_script = "uid://dg8qbly1ndg5w"
 
-[node name="DefenseTracker" type="Node2D" parent="Detectors" node_paths=PackedStringArray("defense_vision", "defense_raycast")]
+[node name="AttackTracker" type="Node2D" parent="Detectors"]
+script = ExtResource("21_vt6i4")
+factions_to_track = Array[int]([1])
+vision_distance = 170.0
+metadata/_custom_type_script = "uid://dg8qbly1ndg5w"
+
+[node name="DefenseTracker" type="Node2D" parent="Detectors"]
 script = ExtResource("22_uwkqg")
 visibility_level = 1
-defense_vision = NodePath("../../Areas/DefenseVision")
-defense_raycast = NodePath("../../Raycasts/DefenseRaycast")
 metadata/_custom_type_script = "uid://d3o527u2hmgp7"
-
-[node name="Areas" type="Node2D" parent="."]
-
-[node name="PlayerVision" type="Area2D" parent="Areas"]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/PlayerVision"]
-shape = SubResource("CircleShape2D_roy8y")
-debug_color = Color(0.6269497, 0.5273712, 0.18917459, 0.41960785)
-
-[node name="AttackArea" type="Area2D" parent="Areas"]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AttackArea"]
-shape = SubResource("CircleShape2D_jmu02")
-debug_color = Color(0.9304709, 0, 0.20319647, 0.41960785)
-
-[node name="DefenseVision" type="Area2D" parent="Areas"]
-collision_layer = 0
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/DefenseVision"]
-shape = SubResource("CircleShape2D_buy8w")
-debug_color = Color(0, 0.55722815, 0.89891285, 0.41960785)
-
-[node name="Raycasts" type="Node2D" parent="."]
-
-[node name="PlayerRaycast" type="RayCast2D" parent="Raycasts"]
-target_position = Vector2(0, 0)
-collision_mask = 6
-
-[node name="ObstructionRaycast" type="RayCast2D" parent="Raycasts"]
-target_position = Vector2(0, 0)
-collision_mask = 2
-
-[node name="DefenseRaycast" type="RayCast2D" parent="Raycasts"]
-collision_mask = 34

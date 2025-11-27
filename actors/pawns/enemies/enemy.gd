@@ -43,7 +43,8 @@ func _on_death():
 
 
 	state_machine.queue_free()
-	tile_pathfind.queue_free()
+	if tile_pathfind!=null:
+		tile_pathfind.queue_free()
 
 	set_collision_layer_value(3, false)
 	await get_tree().create_timer(5).timeout

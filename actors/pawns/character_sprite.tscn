@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfb3edd4wnnag"]
+[gd_scene load_steps=12 format=3 uid="uid://dfb3edd4wnnag"]
 
 [ext_resource type="Script" uid="uid://pmnccyfhs5pm" path="res://actors/pawns/sprites/character_sprite.gd" id="1_702fr"]
 [ext_resource type="Texture2D" uid="uid://wcmxajlvsg1i" path="res://actors/pawns/sprites/leg/legs_black_1.png" id="1_g2x4w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://oyto6h4h2ewn" path="res://actors/pawns/sprites/torso/torso_blue_jacket.png" id="2_702fr"]
 [ext_resource type="Texture2D" uid="uid://csxjjom3dyxfa" path="res://actors/pawns/sprites/head/white_head_1.png" id="3_o7wq7"]
 [ext_resource type="Texture2D" uid="uid://ddl3g6wo4371s" path="res://actors/pawns/sprites/hand/hands_white_1.png" id="4_kfdqb"]
+[ext_resource type="Script" uid="uid://c8dnwtjdg5wbq" path="res://audio/footsteps.gd" id="7_ngeuq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ngeuq"]
 resource_local_to_scene = true
@@ -86,3 +87,8 @@ texture = ExtResource("4_kfdqb")
 libraries = {
 &"": SubResource("AnimationLibrary_ngeuq")
 }
+
+[node name="Footsteps" type="Node2D" parent="." node_paths=PackedStringArray("character_sprite")]
+script = ExtResource("7_ngeuq")
+character_sprite = NodePath("..")
+metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
