@@ -31,7 +31,7 @@ func spawn_at_random_spawn_node():
 		if enemy_data.amount_spawned > 1:
 			offset = Vector2(rng.randf_range(-100, 100), rng.randf_range(-100, 100))
 		# enemy.global_position = global_pos + offset
-		enemy.global_position = get_random_spawn_node()+ offset
+		enemy.global_position = _get_random_spawn_node()+ offset
 
 		if enemy == null:
 			push_error("Wave: spawned pawn is not of type enemy!")
@@ -45,7 +45,7 @@ func generate_spawn_nodes(amount :int = 1):
 	spawn_nodes = await world.get_spawn_nodes(amount)
 
 
-func get_random_spawn_node() -> Vector2:
+func _get_random_spawn_node() -> Vector2:
 	if spawn_nodes.size() > 0:
 		return spawn_nodes[randi() % spawn_nodes.size()].global_position
 	push_error("Game state does not have any spawn_at_random_spawn_node nodes!")

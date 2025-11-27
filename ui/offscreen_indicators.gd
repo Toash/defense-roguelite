@@ -66,6 +66,9 @@ func _process(delta: float) -> void:
 		if rect.has_point(screen_pos):
 			ind.texture = indicator_texture
 		else:
+			# point arrow toward target
+			var angle := (screen_pos - center).angle()
+			ind.rotation = angle
 			ind.texture = side_indicator_texture
 
 		# clamp to edges with margin
@@ -75,6 +78,3 @@ func _process(delta: float) -> void:
 		)
 		ind.position = clamped
 
-		# point arrow toward target
-		var angle := (screen_pos - center).angle()
-		ind.rotation = angle

@@ -18,11 +18,11 @@
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="15_h8lre"]
 [ext_resource type="Script" uid="uid://omtnlx3h5d70" path="res://game/states/state_intermission.gd" id="16_ysn08"]
 [ext_resource type="Script" uid="uid://djv6321i8c28e" path="res://game/states/state_wave.gd" id="17_m0cxt"]
-[ext_resource type="Script" uid="uid://d2jl0vikp6yny" path="res://game/wave_spawner.gd" id="19_j34ew"]
-[ext_resource type="Resource" uid="uid://b6msgfm6ns6rx" path="res://world/resources/pawns/forest_enemies.tres" id="20_p2iis"]
+[ext_resource type="Script" uid="uid://dqct7nbqcgvbh" path="res://game/spawn_manager.gd" id="19_p2iis"]
+[ext_resource type="Resource" uid="uid://b6msgfm6ns6rx" path="res://world/resources/pawns/forest_enemies.tres" id="20_aysyn"]
 [ext_resource type="Script" uid="uid://ocod1qfphspl" path="res://actors/pawns/player/game_over.gd" id="21_aysyn"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("tiles_root", "ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "defense_tiles", "game_state", "debug_path") groups=["world"]]
+[node name="World" type="Node2D" node_paths=PackedStringArray("tiles_root", "ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "defense_tiles", "game_state", "nexus", "debug_path") groups=["world"]]
 script = ExtResource("1_4papg")
 world_config = ExtResource("2_dqqhb")
 tiles_root = NodePath("Tiles")
@@ -32,6 +32,7 @@ interactable_tiles = NodePath("Tiles/InteractableTiles")
 resource_tiles = NodePath("Tiles/ResourceTiles")
 defense_tiles = NodePath("Tiles/DefenseTiles")
 game_state = NodePath("GameState")
+nexus = NodePath("Nexus")
 debug_path = NodePath("DebugPath")
 
 [node name="Player" parent="." instance=ExtResource("1_fyhu2")]
@@ -94,14 +95,12 @@ position = Vector2(2, 0)
 [node name="ZombieRoot" type="Node2D" parent="Roots"]
 position = Vector2(0, -2)
 
-[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("world", "nexus", "state_machine", "intermission_state", "wave_state", "wave_spawner")]
+[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("state_machine", "intermission_state", "wave_state", "spawn_manager")]
 script = ExtResource("14_b2suy")
-world = NodePath("..")
-nexus = NodePath("../Nexus")
 state_machine = NodePath("StateMachine")
 intermission_state = NodePath("StateMachine/Intermission")
 wave_state = NodePath("StateMachine/Wave")
-wave_spawner = NodePath("WaveSpawner")
+spawn_manager = NodePath("SpawnManager")
 metadata/_custom_type_script = "uid://b2l0f2hsw0cbx"
 
 [node name="StateMachine" type="Node2D" parent="GameState" node_paths=PackedStringArray("initial_state")]
@@ -109,27 +108,30 @@ script = ExtResource("15_h8lre")
 initial_state = NodePath("Intermission")
 metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 
-[node name="Intermission" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state", "nexus", "world")]
+[node name="Intermission" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state", "spawn_manager", "nexus", "world")]
 script = ExtResource("16_ysn08")
 game_state = NodePath("../..")
+spawn_manager = NodePath("../../SpawnManager")
 nexus = NodePath("../../../Nexus")
 world = NodePath("../../..")
+spawn_nodes = 10
 intermission_time = 1.0
 
-[node name="Wave" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state", "enemy_root", "wave_spawner", "world")]
+[node name="Wave" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state", "enemy_root", "spawn_manager", "world")]
 script = ExtResource("17_m0cxt")
 game_state = NodePath("../..")
 enemy_root = NodePath("../../../Zombies")
 enemy_data = ExtResource("14_h8lre")
-wave_spawner = NodePath("../../WaveSpawner")
+spawn_manager = NodePath("../../SpawnManager")
 wave_time = 30.0
 world = NodePath("../../..")
 
-[node name="WaveSpawner" type="Node2D" parent="GameState" node_paths=PackedStringArray("enemy_root")]
-script = ExtResource("19_j34ew")
-world_enemies = ExtResource("20_p2iis")
-enemy_root = NodePath("../../Zombies")
-metadata/_custom_type_script = "uid://d2jl0vikp6yny"
+[node name="SpawnManager" type="Node2D" parent="GameState" node_paths=PackedStringArray("world", "enemy_root")]
+script = ExtResource("19_p2iis")
+world = NodePath("../..")
+world_enemies = ExtResource("20_aysyn")
+enemy_root = NodePath("../../Roots/ZombieRoot")
+metadata/_custom_type_script = "uid://dqct7nbqcgvbh"
 
 [node name="GameOver" type="Node2D" parent="." node_paths=PackedStringArray("player", "nexus")]
 script = ExtResource("21_aysyn")
