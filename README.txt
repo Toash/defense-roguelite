@@ -1,39 +1,58 @@
 Roguelite survival game
 
-Explore -> Gather -> Defend -> Survive -> Extract -> Repeat....
+Explore -> Defend -> Upgrade -> Extract -> Repeat....
 
-Core: Gather resources, make defenses, survive the night
 Meta progression: 
-    Explore more interesting
+    Exploring more interesting
     Gathering more efficient
     Defending more expressive
     - Simple skill tree
     - New biomes.
 
 1) Spawn in world
-2) Gather resources to survive
-    Resources
-        Weapons
-        ammo
-3) When nightfall arrives, hordes 
+2) Place base 
+3) Wave of enemies 
+4) Unlock towers, upgrades
+5) Choose when to extract , repeat
 
-Daytime: Discovery / smaller combat encounters
-Nighttime: Defense
+Upgrades
+    Towers
+        Simple stat upgrades
+        Change the actual mechanics of tower
+    Player
+        Simple stat upgrades
+    Items
+        Simple stat upgrades
 
+Player stats:
+    Health
+    Speed
+    Build range
+    Abilities?
+
+Tower / Item stats:
+    Attack damage
+    Attack speed
+    Pierce
+    Knockback
+    etc..
 
 Building items
-    wood?
-    Blueprints?
-    Defenses???
+    Coins
+    Enemy drops
+    Map resource 
 
-Nightime
-    Just spawn zombies..
 
 Defenses
+    Ranged
+        High fire rate, low damage
+        High damage, slow fire rate
+        AOE
+    Melee 
+    Spawner
+    Stun
+    Crowd control
+        Stun
+        Poison / fire
 
-Night
-    Zombies go to some "nexus"
 
-NPC (non-zombie):
-    Raiders
-    Companions (find in world?)

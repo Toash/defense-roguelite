@@ -23,7 +23,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fose"]
 size = Vector2(46, 72)
 
-[sub_resource type="Shader" id="Shader_tg8f3"]
+[sub_resource type="Shader" id="Shader_ni1qn"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -43,16 +43,15 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
 resource_local_to_scene = true
-shader = SubResource("Shader_tg8f3")
+shader = SubResource("Shader_ni1qn")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
-[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "tile_pathfind", "health")]
+[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "health")]
 collision_layer = 4
 collision_mask = 32
 script = ExtResource("1_gg2q8")
 state_machine = NodePath("ZombieStateMachine")
-tile_pathfind = NodePath("")
 faction = 2
 health = NodePath("Health")
 
