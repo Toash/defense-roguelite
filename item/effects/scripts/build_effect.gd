@@ -10,8 +10,6 @@ class_name BuildEffect
 @export var tile_info: TileInfo
 
 
-# atlas coords?
-
 func apply(context: ItemContext):
 	var world: World = context.root_node.get_tree().get_first_node_in_group("world") as World
 	var layer: TileMapLayer = world.get_layer(tile_info.layer)
