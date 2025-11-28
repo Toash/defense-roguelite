@@ -11,6 +11,7 @@ display_name = "Wooden Ballista"
 description = "Slow firing heavy hitting"
 max_stack = 1
 icon = ExtResource("1_qg6g2")
+consume_on_use = true
 ingame_sprite = ExtResource("1_qg6g2")
 item_effects = Array[ExtResource("1_nc133")]([ExtResource("3_kyver")])
 metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

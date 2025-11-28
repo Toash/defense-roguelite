@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c64uwphhqlc4b"]
+[gd_scene load_steps=12 format=3 uid="uid://c64uwphhqlc4b"]
 
 [ext_resource type="Script" uid="uid://q6n7fr42kj25" path="res://actors/defenses/defense.gd" id="1_73l1h"]
 [ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/pawn_tracker.gd" id="2_73l1h"]
@@ -11,9 +11,6 @@
 [ext_resource type="Script" uid="uid://bhkahelyvljmo" path="res://actors/defenses/states/state_turret_attack.gd" id="11_ra1yd"]
 [ext_resource type="Resource" uid="uid://iu3556p6xgqa" path="res://item/effects/defenses/mini_turret_shoot.tres" id="12_0m62q"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7q5m8"]
-radius = 300.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_73l1h"]
 radius = 48.09366
 
@@ -24,11 +21,9 @@ script = ExtResource("1_73l1h")
 defense_data = ExtResource("2_ma2d7")
 metadata/_custom_type_script = "uid://q6n7fr42kj25"
 
-[node name="PawnTracker" type="Node2D" parent="." node_paths=PackedStringArray("pawn_vision", "pawn_raycast")]
+[node name="PawnTracker" type="Node2D" parent="."]
 script = ExtResource("2_73l1h")
 factions_to_track = Array[int]([2])
-pawn_vision = NodePath("../ZombieVision")
-pawn_raycast = NodePath("../ZombieRaycast")
 metadata/_custom_type_script = "uid://dg8qbly1ndg5w"
 
 [node name="SpriteRoot" type="Node2D" parent="."]
@@ -66,16 +61,6 @@ texture = ExtResource("4_hbcse")
 [node name="MiniTurretHead" type="Sprite2D" parent="SpriteRoot/SwivelRoot"]
 position = Vector2(7, -1)
 texture = ExtResource("5_2t2yu")
-
-[node name="ZombieVision" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ZombieVision"]
-shape = SubResource("CircleShape2D_7q5m8")
-
-[node name="ZombieRaycast" type="RayCast2D" parent="."]
-collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_73l1h")

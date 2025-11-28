@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cf63ae2nymmrw"]
+[gd_scene load_steps=10 format=3 uid="uid://cf63ae2nymmrw"]
 
 [ext_resource type="Script" uid="uid://q6n7fr42kj25" path="res://actors/defenses/defense.gd" id="1_rqptj"]
 [ext_resource type="Resource" uid="uid://djrdcxjoi10ac" path="res://actors/defenses/ranged/ballista/wood_ballista_data.tres" id="2_tdn6j"]
@@ -8,9 +8,6 @@
 [ext_resource type="Script" uid="uid://bvpgbckygjfb1" path="res://actors/defenses/states/state_swivel_idle.gd" id="8_kmmgr"]
 [ext_resource type="Script" uid="uid://bhkahelyvljmo" path="res://actors/defenses/states/state_turret_attack.gd" id="9_77bml"]
 [ext_resource type="Resource" uid="uid://iu3556p6xgqa" path="res://item/effects/defenses/mini_turret_shoot.tres" id="10_c1nj7"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_7q5m8"]
-radius = 300.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_73l1h"]
 radius = 48.09366
@@ -22,11 +19,9 @@ script = ExtResource("1_rqptj")
 defense_data = ExtResource("2_tdn6j")
 metadata/_custom_type_script = "uid://q6n7fr42kj25"
 
-[node name="PawnTracker" type="Node2D" parent="." node_paths=PackedStringArray("pawn_vision", "pawn_raycast")]
+[node name="PawnTracker" type="Node2D" parent="."]
 script = ExtResource("3_jiwro")
 factions_to_track = Array[int]([2])
-pawn_vision = NodePath("../ZombieVision")
-pawn_raycast = NodePath("../ZombieRaycast")
 metadata/_custom_type_script = "uid://dg8qbly1ndg5w"
 
 [node name="SpriteRoot" type="Node2D" parent="."]
@@ -37,16 +32,6 @@ scale = Vector2(0.5, 0.5)
 [node name="Sprite2D" type="Sprite2D" parent="SpriteRoot/SwivelRoot"]
 rotation = 1.5707964
 texture = ExtResource("4_tdn6j")
-
-[node name="ZombieVision" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ZombieVision"]
-shape = SubResource("CircleShape2D_7q5m8")
-
-[node name="ZombieRaycast" type="RayCast2D" parent="."]
-collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_73l1h")
