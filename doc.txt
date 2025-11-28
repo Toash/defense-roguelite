@@ -1,0 +1,86 @@
+Roguelite defense game
+
+Explore -> Defend -> Upgrade -> Extract -> Repeat....
+
+Design pillars
+    Impactful upgrades - every upgrade influences gameplay significantly, not just stat boosting
+    Diverse strategy - Synergy from upgrades allow for certain strategies to emerge
+
+Core systems
+    Procedural worlds
+        Different enemies  
+        Different resources
+        New tower unlocks
+            Fire world - fire tower
+            Ice world - aoe
+            Poison world - Damage over time
+    Unlocks and upgrades
+        New towers
+        Upgrade existing towers
+        Upgrade items
+    Building defenses
+    Player combat
+
+
+Flow
+1) Spawn in world
+2) Place base 
+3) Wave of enemies 
+4) Unlock towers, upgrades
+5) Choose when to extract , repeat
+
+Upgrades
+    Towers
+        Simple stat upgrades
+        Change the actual mechanics of tower
+        Tower  stats:
+            Attack damage
+            Attack speed
+            Pierce
+            Knockback
+            etc..
+    Player
+        Simple stat upgrades
+        Player stats:
+            Health
+            Speed
+            Build range
+            Abilities?
+    Items
+        Simple stat upgrades
+        Attack damage
+        Attack speed
+        Pierce
+        Knockback
+        etc..
+
+Building items / resources
+    Coins
+    Enemy drops (unique to different worlds)
+    Map resource 
+
+Defenses
+    Ranged
+        High fire rate, low damage
+        High damage, slow fire rate
+        AOE
+    Melee 
+    Spawner
+    Stun
+    Crowd control
+        Stun
+        Poison / fire
+
+Enemies
+    Basic enemy
+    Fast moving low hp
+    Slow moving, high hp
+    Healers
+
+
+
+Strategies
+    Damage over time
+    AOE
+    Crowd control / execute
+    etc...
