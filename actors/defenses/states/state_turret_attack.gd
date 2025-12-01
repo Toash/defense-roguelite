@@ -5,8 +5,9 @@ extends State
 @export var defense: Defense
 @export var enemy_tracker: PawnTracker
 @export var swivel_root: Node2D
-@export var projectile_effect: ProjectileEffect
 @export var muzzle: Node2D
+
+# var projectile_effect: ProjectileEffect
 
 # var target: Node2D
 
@@ -33,7 +34,7 @@ func state_exit():
 	pass
 
 
-func _on_nearest_pawn_changed(a:Pawn,pawn: Pawn):
+func _on_nearest_pawn_changed(a: Pawn, pawn: Pawn):
 	if pawn == null:
 		transitioned.emit(self, "idle")
 		return
@@ -52,6 +53,7 @@ func _fire():
 	# ctx.global_target_position = enemy_tracker.get_nearest_pawn().global_position
 	ctx.global_target_position = predicted_target
 
-	projectile_effect.damage = defense.defense_data.attack_damage
-	projectile_effect.speed = defense.defense_data.projectile_speed
-	projectile_effect.apply(ctx)
+	for effect in defense.get_all_item_effects():
+		effect.damage = defense.get_damage()
+		effect.speed = defense.defense_data.projectile_speed
+		effect.apply(ctx)

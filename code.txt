@@ -1,0 +1,18 @@
+Upgrades
+    Towers
+        Certain tower types have a "pool" of possible item effects
+        Add new item effects
+        Change base stats
+    Items
+        Add item effects    
+        Change base stats
+    Player
+        Change base stats 
+        New abilities
+
+
+Need to show the upgrade on the items, as well as the towers in game.
+
+Have smoe object that handles defenses that are placed.
+    When a player gets an upgrade, get all defenses that were already placed.
+    Placing items ingame should go through that manager.

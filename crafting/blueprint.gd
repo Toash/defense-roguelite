@@ -2,6 +2,7 @@ extends Resource
 
 class_name Blueprint
 
+
 @export var coins_needed: int
 @export var ingredients: Array[ItemDataGroup]
 @export var outputs: Array[ItemDataGroup]

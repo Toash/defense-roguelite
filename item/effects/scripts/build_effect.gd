@@ -4,8 +4,6 @@ extends ItemEffect
 class_name BuildEffect
 
 #informatino for specifying what tile it is we are building with.
-# what layer are we building on ?
-
 
 @export var tile_info: TileInfo
 

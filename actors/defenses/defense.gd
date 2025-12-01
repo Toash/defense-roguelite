@@ -1,13 +1,12 @@
 extends Area2D
 
-## root node for all defenses 
+## runtime root node for all defenses 
 class_name Defense
 
 # How do other enemies see this ? 
 enum PRIORITY {
 	INVISIBLE,
 	VISIBLE
-
 }
 
 
@@ -17,17 +16,29 @@ enum PRIORITY {
 # "on-paper data"
 @export var defense_data: DefenseData
 
+func _ready():
+	add_to_group("defenses")
+
+
+	if health != null:
+		health.died.connect(func():
+			queue_free()
+			)
+		health.max_health = defense_data.health
+		health.health = defense_data.health
+
 
 # runtime stats
 var stat_multipliers := {
 	"health": 1,
 	"damage": 1.0,
 	"fire_rate": 1.0,
+	"projectile_speed": 1.0,
 	# "range": ,
 }
 var upgraded_defense_effects: Array[ItemEffect] = []
 
-func add_item_effect(effect: ItemEffect):
+func add_upgrade_item_effect(effect: ItemEffect):
 	var dup = effect.duplicate()
 	upgraded_defense_effects.append(dup)
 
@@ -41,19 +52,16 @@ func get_damage() -> int:
 func get_fire_rate() -> float:
 	return defense_data.attack_speed / stat_multipliers["fire_rate"]
 
+func get_projectile_speed() -> float:
+	return defense_data.projectile_speed * stat_multipliers["projectile_speed"]
 
-func get_item_effects() -> Array[ItemEffect]:
+func get_all_item_effects() -> Array[ItemEffect]:
 	return defense_data.base_effects + upgraded_defense_effects
-
-
-func _ready():
-	if health != null:
-		health.died.connect(func():
-			queue_free()
-			)
-		health.max_health = defense_data.health
-		health.health = defense_data.health
 
 
 func get_data() -> DefenseData:
 	return self.defense_data
+
+
+func has_allowed_upgrade(upgrade: DefenseUpgrade) -> bool:
+	return upgrade in defense_data.allowed_upgrades

@@ -18,8 +18,8 @@ signal generated_spawn_nodes(nodes: Array[Node2D])
 
 @export_group("Game")
 # @export var spawn_points: Array[Marker2D]
-@export var game_state: GameState
-@export var nexus:Nexus
+# @export var game_state: GameState
+@export var nexus: Nexus
 @export_group("Debug")
 @export var debug_path: DebugPath
 var astar_grid: AStarGrid2D = AStarGrid2D.new()
@@ -182,22 +182,21 @@ func _grid_to_world(cell: Vector2i) -> Vector2:
 ## generates spawn nodes, ensuring that there is a valid path to the target
 func get_spawn_nodes(amount: int) -> Array[Node2D]:
 	var target_global = nexus.global_position
-	var spawn_nodes : Array[Node2D]
+	var spawn_nodes: Array[Node2D]
 	for i in amount:
-		await _append_valid_random_spawn_node(spawn_nodes,target_global)
+		await _append_valid_random_spawn_node(spawn_nodes, target_global)
 	generated_spawn_nodes.emit(spawn_nodes)
 	return spawn_nodes
 
 
-func _has_valid_nonpartial_path_in_tilemap(from:Vector2i,to:Vector2i) -> bool:
+func _has_valid_nonpartial_path_in_tilemap(from: Vector2i, to: Vector2i) -> bool:
 	if not setup:
 		await world_setup
-	var point_path:PackedVector2Array = astar_grid.get_point_path(from,to,false)
+	var point_path: PackedVector2Array = astar_grid.get_point_path(from, to, false)
 	return not point_path.is_empty()
 	
 
-
-func _append_valid_random_spawn_node(spawn_nodes: Array[Node2D],target_global: Vector2) -> Node2D:
+func _append_valid_random_spawn_node(spawn_nodes: Array[Node2D], target_global: Vector2) -> Node2D:
 	## TODO fix this
 	const TRIES = 100
 
@@ -209,14 +208,14 @@ func _append_valid_random_spawn_node(spawn_nodes: Array[Node2D],target_global: V
 		var radius: float = world_config.world_height * ground_tiles.tile_set.tile_size.x * 1
 		var candidate_global := target_global + Vector2.RIGHT.rotated(deg_to_rad(angle_deg)) * radius
 
-		var candidate_local = ground_tiles.to_local(candidate_global) 
+		var candidate_local = ground_tiles.to_local(candidate_global)
 		var candidate_tile = ground_tiles.local_to_map(candidate_local)
 
-		var target_local = ground_tiles.to_local(target_global)  
+		var target_local = ground_tiles.to_local(target_global)
 		var target_tile = ground_tiles.local_to_map(target_local)
 
 
-		if await _has_valid_nonpartial_path_in_tilemap(candidate_tile,target_tile):
+		if await _has_valid_nonpartial_path_in_tilemap(candidate_tile, target_tile):
 			print("valid path found!")
 			var node2d = Node2D.new()
 			node2d.global_position = candidate_global
@@ -232,8 +231,6 @@ func _append_valid_random_spawn_node(spawn_nodes: Array[Node2D],target_global: V
 	return null
 
 
-
-			
 # RANDOM GEN 
 # ============================
 func _get_altitude(val: float) -> WorldEnums.ALTITUDE:

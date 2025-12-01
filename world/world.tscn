@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=23 format=3 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="Script" uid="uid://csd4ncy3jgem8" path="res://world/world.gd" id="1_4papg"]
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/pawns/player/player.tscn" id="1_fyhu2"]
@@ -18,11 +18,12 @@
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="15_h8lre"]
 [ext_resource type="Script" uid="uid://omtnlx3h5d70" path="res://game/states/state_intermission.gd" id="16_ysn08"]
 [ext_resource type="Script" uid="uid://djv6321i8c28e" path="res://game/states/state_wave.gd" id="17_m0cxt"]
-[ext_resource type="Script" uid="uid://dqct7nbqcgvbh" path="res://game/spawn_manager.gd" id="19_p2iis"]
+[ext_resource type="Script" path="res://game/spawn_manager.gd" id="19_p2iis"]
 [ext_resource type="Resource" uid="uid://b6msgfm6ns6rx" path="res://world/resources/pawns/forest_enemies.tres" id="20_aysyn"]
 [ext_resource type="Script" uid="uid://ocod1qfphspl" path="res://actors/pawns/player/game_over.gd" id="21_aysyn"]
+[ext_resource type="Script" uid="uid://c2arfo6ta4w4w" path="res://upgrades/run_upgrades.gd" id="21_o1net"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("tiles_root", "ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "defense_tiles", "game_state", "nexus", "debug_path") groups=["world"]]
+[node name="World" type="Node2D" node_paths=PackedStringArray("tiles_root", "ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "defense_tiles", "nexus", "debug_path") groups=["world"]]
 script = ExtResource("1_4papg")
 world_config = ExtResource("2_dqqhb")
 tiles_root = NodePath("Tiles")
@@ -31,7 +32,6 @@ wall_tiles = NodePath("Tiles/WallTiles")
 interactable_tiles = NodePath("Tiles/InteractableTiles")
 resource_tiles = NodePath("Tiles/ResourceTiles")
 defense_tiles = NodePath("Tiles/DefenseTiles")
-game_state = NodePath("GameState")
 nexus = NodePath("Nexus")
 debug_path = NodePath("DebugPath")
 
@@ -130,7 +130,10 @@ script = ExtResource("19_p2iis")
 world = NodePath("../..")
 world_enemies = ExtResource("20_aysyn")
 enemy_root = NodePath("../../Roots/ZombieRoot")
-metadata/_custom_type_script = "uid://dqct7nbqcgvbh"
+
+[node name="RunUpgrades" type="Node2D" parent="GameState"]
+script = ExtResource("21_o1net")
+metadata/_custom_type_script = "uid://c2arfo6ta4w4w"
 
 [node name="GameOver" type="Node2D" parent="." node_paths=PackedStringArray("player", "nexus")]
 script = ExtResource("21_aysyn")

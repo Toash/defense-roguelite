@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c64uwphhqlc4b"]
+[gd_scene load_steps=11 format=3 uid="uid://c64uwphhqlc4b"]
 
 [ext_resource type="Script" uid="uid://q6n7fr42kj25" path="res://actors/defenses/defense.gd" id="1_73l1h"]
 [ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/pawn_tracker.gd" id="2_73l1h"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="9_2t2yu"]
 [ext_resource type="Script" uid="uid://bvpgbckygjfb1" path="res://actors/defenses/states/state_swivel_idle.gd" id="10_trb0s"]
 [ext_resource type="Script" uid="uid://bhkahelyvljmo" path="res://actors/defenses/states/state_turret_attack.gd" id="11_ra1yd"]
-[ext_resource type="Resource" uid="uid://iu3556p6xgqa" path="res://item/effects/defenses/mini_turret_shoot.tres" id="12_0m62q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_73l1h"]
 radius = 48.09366
@@ -82,5 +81,4 @@ user = NodePath("../..")
 defense = NodePath("../..")
 enemy_tracker = NodePath("../../PawnTracker")
 swivel_root = NodePath("../../SpriteRoot/SwivelRoot")
-projectile_effect = ExtResource("12_0m62q")
 muzzle = NodePath("../../SpriteRoot/SwivelRoot/MiniTurretHead")

@@ -12,14 +12,16 @@ enum PHASE {
 }
 
 
+@export var run_upgrades: RunUpgrades
+
 @export var state_machine: StateMachine
 @export var intermission_state: IntermissionState
 @export var wave_state: WaveState
 @export var spawn_manager: SpawnManager
 
 
-var spawn_nodes : Array[Node2D]
-
+func _ready():
+	add_to_group("game_state")
 
 
 func get_phase() -> PHASE:
@@ -29,7 +31,6 @@ func get_phase() -> PHASE:
 		"wave":
 			return PHASE.WAVE
 	return PHASE.NONE
-
 
 
 func get_debug_string() -> String:
