@@ -58,6 +58,21 @@ func _ready() -> void:
 	)
 
 
+	_register_command("towers", func():
+		var defense_manager = (get_node("/root/World/GameState") as GameState).defense_manager
+		if defense_manager == null:
+			_log("Error: Could not find defense manager!")
+		else:
+			var defenses = defense_manager.get_defenses()
+			if defenses.size() == 0:
+				_log("No defenses.")
+			else:
+				for defense in defenses:
+					_log(str(defense))
+
+		)
+
+
 func _log(message: String):
 	logs.append_text(message + "\n")
 

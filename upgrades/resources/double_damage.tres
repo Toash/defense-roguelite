@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DefenseUpgrade" load_steps=4 format=3 uid="uid://c2wlsjabghbl1"]
+
+[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_13s32"]
+[ext_resource type="Texture2D" uid="uid://bdiex4ttahs2h" path="res://ui/placeholder.png" id="2_j20sb"]
+[ext_resource type="Script" uid="uid://bdh1tnqsbi2ow" path="res://upgrades/defense_upgrade.gd" id="2_wxr8y"]
+
+[resource]
+script = ExtResource("2_wxr8y")
+name = "Double Damage"
+description = "All towers do double damage."
+icon = ExtResource("2_j20sb")
+applies_to = Array[int]([0])
+damage_mult = 1.0
+metadata/_custom_type_script = "uid://bdh1tnqsbi2ow"

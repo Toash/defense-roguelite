@@ -2,32 +2,34 @@
 extends Resource
 class_name DefenseUpgrade
 
-@export var id: StringName
 @export var name: String
 @export var description: String
 @export var icon: Texture2D
 
-# stat modifiers (additive/multipliers – up to you)
+@export var applies_to: Array[DefenseData.DEFENSE_TYPE]
+
+# base states
+@export_group("Base Stats")
 @export var damage_mult: float = 0.0
-@export var fire_rate_mult: float = 0.0
-@export var range_mult: float = 0.0
+@export var attack_speed_mult: float = 0.0
 @export var health_mult: float = 0.0
 
-# behavior: effects to add
-@export var add_effects: Array[ItemEffect] = []
+@export_group("Effects")
+@export var added_effects: Array[ItemEffect] = []
 
-func apply_to_defense(defense: Defense) -> void:
-    # stats
-    if damage_mult != 0.0:
-        defense.stat_multipliers["damage"] += damage_mult
-    if fire_rate_mult != 0.0:
-        defense.stat_multipliers["fire_rate"] += fire_rate_mult
-    if range_mult != 0.0:
-        defense.stat_multipliers["range"] += range_mult
-    if health_mult != 0.0:
-        defense.stat_multipliers["health"] += health_mult
-        # if you want, also bump current health here
 
-    # effects
-    for effect in add_effects:
-        defense.add_upgrade_item_effect(effect)
+func get_base_stat_multiplier(base_stat: DefenseData.BASE_STAT) -> float:
+    match base_stat:
+        DefenseData.BASE_STAT.HEALTH:
+            return health_mult
+        DefenseData.BASE_STAT.DAMAGE:
+            return damage_mult
+        DefenseData.BASE_STAT.ATTACK_SPEED:
+            return attack_speed_mult
+        _:
+            push_error("base stat not defined in defense upgrade!")
+            return 1
+
+
+func _to_string() -> String:
+    return "Upgrade: " + name

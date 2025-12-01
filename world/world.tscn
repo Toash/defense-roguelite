@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=24 format=3 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="Script" uid="uid://csd4ncy3jgem8" path="res://world/world.gd" id="1_4papg"]
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/pawns/player/player.tscn" id="1_fyhu2"]
@@ -21,7 +21,8 @@
 [ext_resource type="Script" path="res://game/spawn_manager.gd" id="19_p2iis"]
 [ext_resource type="Resource" uid="uid://b6msgfm6ns6rx" path="res://world/resources/pawns/forest_enemies.tres" id="20_aysyn"]
 [ext_resource type="Script" uid="uid://ocod1qfphspl" path="res://actors/pawns/player/game_over.gd" id="21_aysyn"]
-[ext_resource type="Script" uid="uid://c2arfo6ta4w4w" path="res://upgrades/run_upgrades.gd" id="21_o1net"]
+[ext_resource type="Script" uid="uid://bgbi7qv8f0ml3" path="res://upgrades/upgrade_manager.gd" id="21_o1net"]
+[ext_resource type="Script" uid="uid://bjc7dxmakq7ml" path="res://game/defense_manager.gd" id="22_3ljsx"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("tiles_root", "ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "defense_tiles", "nexus", "debug_path") groups=["world"]]
 script = ExtResource("1_4papg")
@@ -95,8 +96,10 @@ position = Vector2(2, 0)
 [node name="ZombieRoot" type="Node2D" parent="Roots"]
 position = Vector2(0, -2)
 
-[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("state_machine", "intermission_state", "wave_state", "spawn_manager")]
+[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("upgrade_manager", "defense_manager", "state_machine", "intermission_state", "wave_state", "spawn_manager")]
 script = ExtResource("14_b2suy")
+upgrade_manager = NodePath("UpgradeManager")
+defense_manager = NodePath("DefenseManager")
 state_machine = NodePath("StateMachine")
 intermission_state = NodePath("StateMachine/Intermission")
 wave_state = NodePath("StateMachine/Wave")
@@ -131,9 +134,13 @@ world = NodePath("../..")
 world_enemies = ExtResource("20_aysyn")
 enemy_root = NodePath("../../Roots/ZombieRoot")
 
-[node name="RunUpgrades" type="Node2D" parent="GameState"]
+[node name="UpgradeManager" type="Node2D" parent="GameState"]
 script = ExtResource("21_o1net")
-metadata/_custom_type_script = "uid://c2arfo6ta4w4w"
+metadata/_custom_type_script = "uid://bgbi7qv8f0ml3"
+
+[node name="DefenseManager" type="Node2D" parent="GameState"]
+script = ExtResource("22_3ljsx")
+metadata/_custom_type_script = "uid://bjc7dxmakq7ml"
 
 [node name="GameOver" type="Node2D" parent="." node_paths=PackedStringArray("player", "nexus")]
 script = ExtResource("21_aysyn")

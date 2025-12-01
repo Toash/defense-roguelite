@@ -1,6 +1,7 @@
 extends Node
 
 # Ground Items - Autoload for items on the ground.
+## TODO MAKE THIS INSTANCED ON THE WORLD 
 
 # uses itemdata to spawn_by_data corresponding instances.
 

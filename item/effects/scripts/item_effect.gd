@@ -1,4 +1,5 @@
 @abstract
+## base class that defines what happens what items "do stuff"
 class_name ItemEffect
 
 extends Resource

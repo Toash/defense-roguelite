@@ -22,7 +22,7 @@ func state_update(delta: float):
 
 	if enemy_tracker.get_nearest_pawn():
 		swivel_root.look_at(enemy_tracker.get_nearest_pawn().global_position)
-		if defense.defense_data.attack_speed < t:
+		if defense.defense_data.attack_cooldown < t:
 			_fire()
 			t = 0
 
