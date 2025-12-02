@@ -4,7 +4,6 @@ extends Resource
 class_name DefenseData
 
 enum DEFENSE_TYPE {
-    ALL,
     TURRET,
     BALLISTA,
     CANNON
@@ -14,12 +13,13 @@ enum BASE_STAT {
     HEALTH,
     DAMAGE,
     ATTACK_SPEED,
+    PROJECTILE_SPEED,
 }
 
 
 @export_group("General")
 @export var defense_type: DEFENSE_TYPE
-@export var defense_priority: Defense.PRIORITY
+@export var defense_priority: RuntimeDefense.PRIORITY
 @export var health: int = 100
 @export var attack_damage: int = 10
 @export var attack_cooldown: float = 2
@@ -27,9 +27,9 @@ enum BASE_STAT {
 @export_group("Behavior")
 @export var base_effects: Array[ItemEffect] = []
 
-@export_group("Upgrades")
-## upgrades that are able to be applied on this tower.
-@export var allowed_upgrades: Array[DefenseUpgrade]
+# @export_group("Upgrades")
+# ## upgrades that are able to be applied on this tower.
+# @export var allowed_upgrades: Array[DefenseUpgrade]
 
 @export_group("Projectiles")
 @export var projectile_speed: float = 600

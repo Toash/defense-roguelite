@@ -49,7 +49,7 @@ func _on_player_found(player: Pawn):
 	ai_target.reference = player
 	transitioned.emit(self, "chase")
 
-func _on_defense_found(defense: Defense):
+func _on_defense_found(defense: RuntimeDefense):
 	# print("found defense!")
 	if defense.get_defense_data().defense_priority != enemy.get_data().defense_targeting:
 		return

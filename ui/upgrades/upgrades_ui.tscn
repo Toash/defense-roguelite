@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkepin6hv37wh"]
+
+[ext_resource type="Theme" uid="uid://dhhk734ua4d0l" path="res://ui/theme.tres" id="1_jlvyb"]
+[ext_resource type="Script" uid="uid://gscqon0tc6aa" path="res://ui/upgrades/upgrades_ui.gd" id="2_qvg7s"]
+
+[node name="UpgradesUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_jlvyb")
+script = ExtResource("2_qvg7s")
+metadata/_custom_type_script = "uid://gscqon0tc6aa"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2

@@ -2,8 +2,9 @@ extends Node
 
 signal player_loaded
 
-var debug_state_machines = true 
+var debug_state_machines = true
 
+var player_has_loaded = false
 
 func _ready():
 	# await get_tree().create_timer(4).timeout
@@ -15,3 +16,4 @@ func _ready():
 
 func player_load():
 	player_loaded.emit()
+	player_has_loaded = true

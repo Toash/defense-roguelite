@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4dk2qtjwdwf2"]
+
+[ext_resource type="Script" uid="uid://bf4xx68q0tkxv" path="res://ui/upgrades/upgrade_ui.gd" id="1_3607n"]
+[ext_resource type="Resource" uid="uid://c2wlsjabghbl1" path="res://upgrades/resources/double_damage.tres" id="2_5ysin"]
+[ext_resource type="Theme" uid="uid://dhhk734ua4d0l" path="res://ui/theme.tres" id="3_j6trx"]
+
+[node name="UpgradeUI" type="Control" node_paths=PackedStringArray("upgrade_name", "description", "icon", "applies_to", "button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3607n")
+upgrade = ExtResource("2_5ysin")
+upgrade_name = NodePath("PanelContainer/MarginContainer/VBoxContainer/Name")
+description = NodePath("PanelContainer/MarginContainer/VBoxContainer/Description")
+icon = NodePath("PanelContainer/MarginContainer/VBoxContainer/Icon")
+applies_to = NodePath("PanelContainer/MarginContainer/VBoxContainer/AppliesTo")
+button = NodePath("PanelContainer/Button")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("3_j6trx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 4
+stretch_mode = 4
+
+[node name="AppliesTo" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1

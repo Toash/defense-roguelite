@@ -2,6 +2,7 @@
 extends Resource
 class_name DefenseUpgrade
 
+@export_group("Core")
 @export var name: String
 @export var description: String
 @export var icon: Texture2D

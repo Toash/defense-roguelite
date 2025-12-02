@@ -1,7 +1,7 @@
 extends Area2D
 
 ## RUNTIME root node for all defenses 
-class_name Defense
+class_name RuntimeDefense
 
 # How do other enemies see this ? 
 enum PRIORITY {
@@ -22,7 +22,7 @@ func _ready():
 	add_to_group("defenses")
 
 	if defense_data == null:
-		push_error("Defense: defense data not specified!")
+		push_error("RuntimeDefense: defense data not specified!")
 
 	if health != null:
 		health.died.connect(func():
@@ -46,17 +46,20 @@ func get_all_item_effects() -> Array[ItemEffect]:
 	var added_effects = _get_added_effects()
 	return defense_data.base_effects + added_effects
 
-func get_health() -> int:
-	return defense_data.health * _get_base_stat_multiplier(DefenseData.BASE_STAT.HEALTH)
-	
-func get_damage() -> int:
-	return defense_data.damage * _get_base_stat_multiplier(DefenseData.BASE_STAT.DAMAGE)
 
-func get_fire_rate() -> float:
-	return defense_data.attack_cooldown / _get_base_stat_multiplier(DefenseData.BASE_STAT.ATTACK_SPEED)
-
-func get_projectile_speed() -> float:
-	return defense_data.projectile_speed
+func get_runtime_stat(stat_type: DefenseData.BASE_STAT) -> float:
+	match stat_type:
+		DefenseData.BASE_STAT.HEALTH:
+			return defense_data.health * _get_base_stat_multiplier(DefenseData.BASE_STAT.HEALTH)
+		DefenseData.BASE_STAT.DAMAGE:
+			return defense_data.damage * _get_base_stat_multiplier(DefenseData.BASE_STAT.DAMAGE)
+		DefenseData.BASE_STAT.ATTACK_SPEED:
+			return defense_data.attack_cooldown / _get_base_stat_multiplier(DefenseData.BASE_STAT.ATTACK_SPEED)
+		DefenseData.BASE_STAT.PROJECTILE_SPEED:
+			return defense_data.projectile_speed
+		_:
+			push_error("Invalid stat type")
+			return 1
 
 
 func get_defense_type() -> DefenseData.DEFENSE_TYPE:
@@ -65,9 +68,6 @@ func get_defense_type() -> DefenseData.DEFENSE_TYPE:
 func get_defense_data() -> DefenseData:
 	return self.defense_data
 
-
-func has_allowed_upgrade(upgrade: DefenseUpgrade) -> bool:
-	return upgrade in defense_data.allowed_upgrades
 
 func _get_base_stat_multiplier(base_stat: DefenseData.BASE_STAT):
 	var mult: float = 1

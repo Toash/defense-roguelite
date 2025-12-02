@@ -2,7 +2,7 @@ extends State
 
 
 @export var user: Node2D
-@export var defense: Defense
+@export var defense: RuntimeDefense
 @export var enemy_tracker: PawnTracker
 @export var swivel_root: Node2D
 @export var muzzle: Node2D
@@ -54,6 +54,8 @@ func _fire():
 	ctx.global_target_position = predicted_target
 
 	for effect in defense.get_all_item_effects():
-		effect.damage = defense.get_damage()
+		# effect.damage = defense.get_damage()
+		effect.damage = defense.get_runtime_stat(DefenseData.BASE_STAT.DAMAGE)
+		
 		effect.speed = defense.defense_data.projectile_speed
 		effect.apply(ctx)

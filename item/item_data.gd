@@ -54,3 +54,11 @@ func has_build_effect() -> bool:
 		if effect is BuildEffect:
 			return true
 	return false
+
+
+func get_defense_types() -> Array[DefenseData.DEFENSE_TYPE]:
+	var ret: Array[DefenseData.DEFENSE_TYPE] = []
+	for effect in item_effects:
+		if effect is BuildDefenseEffect:
+			ret.append(effect.defense_type)
+	return ret

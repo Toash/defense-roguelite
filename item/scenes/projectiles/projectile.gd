@@ -12,7 +12,7 @@ func _ready() -> void:
 	self.body_entered.connect(_body_entered)
 
 func _enter_tree() -> void:
-	if data.context.user_node is Defense:
+	if data.context.user_node is RuntimeDefense:
 		var player = get_tree().get_first_node_in_group("player")
 		add_collision_exception_with(player)
 

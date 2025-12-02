@@ -1,6 +1,7 @@
 extends Node2D
 
 
+## runtime node for the current game state.
 class_name GameState
 
 

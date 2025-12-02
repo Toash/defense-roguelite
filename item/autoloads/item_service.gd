@@ -86,9 +86,10 @@ func load(dict: Dictionary):
 
 
 func _process(delta):
-	for inst in get_player_container(ContainerName.HOTBAR).get_item_instances():
-		if inst != null:
-			inst.update_state(delta)
+	if Game.player_has_loaded:
+		for inst in get_player_container(ContainerName.HOTBAR).get_item_instances():
+			if inst != null:
+				inst.update_state(delta)
 
 
 # shift click
