@@ -91,7 +91,6 @@ stretch_mode = 5
 
 [node name="Coins" type="Label" parent="Stats/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
 text = "Coins"
 vertical_alignment = 1
 

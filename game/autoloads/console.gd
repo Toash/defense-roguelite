@@ -50,30 +50,55 @@ func _ready() -> void:
 		var items = ItemDatabase.get_all()
 		
 		if items.is_empty():
-			_log("No items registered.")
+			log_message("No items registered.")
 			return
 
 		for data in items:
-			_log("id: " + str(data.id) + "\t\tname: " + str(data.display_name))
+			log_message("id: " + str(data.id) + "\t\tname: " + str(data.display_name))
+	)
+
+	_register_command("get_upgrade", func(id: int):
+		print("getting upgrade")
+		var upgrade_manager: UpgradeManager = (get_node("/root/World/GameState") as GameState).upgrade_manager
+		if upgrade_manager == null:
+			log_message("Upgrade manager not found!")
+			return
+		upgrade_manager.acquire_upgrade_by_id(int(id))
+		
+		)
+
+	_register_command("upgrades", func():
+		var upgrade_manager: UpgradeManager = (get_node("/root/World/GameState") as GameState).upgrade_manager
+		if upgrade_manager == null:
+			log_message("Upgrade manager not found!")
+			return
+		var upgrades = upgrade_manager.get_all()
+		
+		if upgrades.is_empty():
+			log_message("No upgrades registered.")
+			return
+
+		for upgrade in upgrades:
+			log_message(str(upgrade))
 	)
 
 
 	_register_command("towers", func():
 		var defense_manager = (get_node("/root/World/GameState") as GameState).defense_manager
 		if defense_manager == null:
-			_log("Error: Could not find defense manager!")
+			log_message("Error: Could not find defense manager!")
 		else:
 			var defenses = defense_manager.get_defenses()
 			if defenses.size() == 0:
-				_log("No defenses.")
+				log_message("No defenses.")
 			else:
 				for defense in defenses:
-					_log(str(defense))
+					log_message(str(defense))
 
 		)
 
 
-func _log(message: String):
+func log_message(message: String):
 	logs.append_text(message + "\n")
 
 func _register_command(command_name: String, callable: Callable):
@@ -95,7 +120,7 @@ func _handle_console_input(text: String):
 	if commands.has(command):
 		commands[command].callv(arguments)
 	else:
-		_log("Command " + text + " not found.")
+		log_message("Command " + text + " not found.")
  
 	input.clear()
 	

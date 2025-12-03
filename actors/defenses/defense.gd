@@ -16,11 +16,22 @@ enum PRIORITY {
 # "on-paper data"
 @export var defense_data: DefenseData
 
-@export var applied_upgrades: Array[DefenseUpgrade]
+# @export var applied_upgrades: Array[DefenseUpgrade]
 
 func _ready():
 	add_to_group("defenses")
 
+	# sync with upgrade manager
+	var game_state = get_node("/root/World/GameState") as GameState
+	var upgrade_manager = game_state.upgrade_manager
+	if game_state == null:
+		push_error("Could not find gamestate!")
+	if upgrade_manager == null:
+		push_error("Could not find upgrade manager!")
+
+	upgrade_manager.sync_defense_upgrades(self)
+
+	
 	if defense_data == null:
 		push_error("RuntimeDefense: defense data not specified!")
 
@@ -32,18 +43,14 @@ func _ready():
 		health.health = defense_data.health
 
 
-# var upgraded_defense_effects: Array[ItemEffect] = []
-var added_upgrades: Array[DefenseUpgrade] = []
+var upgrade_manager_upgrades: Array[DefenseUpgrade] = []
 
-# func add_upgrade_item_effect(effect: ItemEffect):
-# 	var dup = effect.duplicate()
-# 	upgraded_defense_effects.append(dup)
 
-func add_upgrade(upgrade: DefenseUpgrade):
-	added_upgrades.append(upgrade)
+func set_upgrades(upgrades: Array[DefenseUpgrade]):
+	upgrade_manager_upgrades = upgrades
 
 func get_all_item_effects() -> Array[ItemEffect]:
-	var added_effects = _get_added_effects()
+	var added_effects = _get_upgrade_effects()
 	return defense_data.base_effects + added_effects
 
 
@@ -72,7 +79,7 @@ func get_defense_data() -> DefenseData:
 func _get_base_stat_multiplier(base_stat: DefenseData.BASE_STAT):
 	var mult: float = 1
 
-	for upgrade in added_upgrades:
+	for upgrade in upgrade_manager_upgrades:
 		var upgrade_mult = upgrade.get_base_stat_multiplier(base_stat)
 
 		## TODO add scaling options
@@ -80,9 +87,10 @@ func _get_base_stat_multiplier(base_stat: DefenseData.BASE_STAT):
 		
 	return mult
 
-func _get_added_effects() -> Array[ItemEffect]:
+## gets the effects that were added by defense upgrades
+func _get_upgrade_effects() -> Array[ItemEffect]:
 	var added_effects: Array[ItemEffect] = []
-	for upgrade: DefenseUpgrade in applied_upgrades:
+	for upgrade: DefenseUpgrade in upgrade_manager_upgrades:
 		for effect: ItemEffect in upgrade:
 			added_effects.append(effect)
 	return added_effects
@@ -92,7 +100,9 @@ func _to_string() -> String:
 	var m = str(defense_data)
 	m += "\n"
 
-	for upgrade in added_upgrades:
+	if upgrade_manager_upgrades.size() > 0:
+		m += "Upgrades :"
+	for upgrade in upgrade_manager_upgrades:
 		m += str(upgrade)
 		m += "\n"
 		

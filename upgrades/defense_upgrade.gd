@@ -1,11 +1,7 @@
 # DefenseUpgrade.gd
-extends Resource
+extends Upgrade
 class_name DefenseUpgrade
 
-@export_group("Core")
-@export var name: String
-@export var description: String
-@export var icon: Texture2D
 
 @export var applies_to: Array[DefenseData.DEFENSE_TYPE]
 
@@ -30,7 +26,3 @@ func get_base_stat_multiplier(base_stat: DefenseData.BASE_STAT) -> float:
         _:
             push_error("base stat not defined in defense upgrade!")
             return 1
-
-
-func _to_string() -> String:
-    return "Upgrade: " + name

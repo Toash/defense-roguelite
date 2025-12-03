@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="15_h8lre"]
 [ext_resource type="Script" uid="uid://omtnlx3h5d70" path="res://game/states/state_intermission.gd" id="16_ysn08"]
 [ext_resource type="Script" uid="uid://djv6321i8c28e" path="res://game/states/state_wave.gd" id="17_m0cxt"]
-[ext_resource type="Script" path="res://game/spawn_manager.gd" id="19_p2iis"]
+[ext_resource type="Script" uid="uid://dqct7nbqcgvbh" path="res://game/spawn_manager.gd" id="19_p2iis"]
 [ext_resource type="Resource" uid="uid://b6msgfm6ns6rx" path="res://world/resources/pawns/forest_enemies.tres" id="20_aysyn"]
 [ext_resource type="Script" uid="uid://ocod1qfphspl" path="res://actors/pawns/player/game_over.gd" id="21_aysyn"]
 [ext_resource type="Script" uid="uid://bgbi7qv8f0ml3" path="res://upgrades/upgrade_manager.gd" id="21_o1net"]

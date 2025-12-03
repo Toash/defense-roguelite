@@ -25,6 +25,7 @@ enum BASE_STAT {
 @export var attack_cooldown: float = 2
 
 @export_group("Behavior")
+## The base functionality of this tower
 @export var base_effects: Array[ItemEffect] = []
 
 # @export_group("Upgrades")
