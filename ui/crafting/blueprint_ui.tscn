@@ -7,62 +7,45 @@
 offset_right = 72.0
 offset_bottom = 32.0
 script = ExtResource("1_3plvy")
-ingredients_root = NodePath("MarginContainer/HBoxContainer/MarginContainer/Ingredients_root")
-output_root = NodePath("MarginContainer/HBoxContainer/MarginContainer3/Output_root")
+ingredients_root = NodePath("HBoxContainer/MarginContainer/Ingredients_root")
+output_root = NodePath("HBoxContainer/MarginContainer3/Output_root")
 button = NodePath("Button")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-mouse_filter = 2
-mouse_behavior_recursive = 1
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
 mouse_behavior_recursive = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-mouse_behavior_recursive = 1
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="Ingredients_root" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 mouse_behavior_recursive = 1
 
-[node name="Arrow" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+[node name="Ingredients_root" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 mouse_behavior_recursive = 1
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Arrow"]
+[node name="Arrow" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Arrow"]
 layout_mode = 2
 mouse_filter = 2
 mouse_behavior_recursive = 1
 texture = ExtResource("2_0khts")
 
-[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 mouse_behavior_recursive = 1
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
 
-[node name="Output_root" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer3"]
+[node name="Output_root" type="VBoxContainer" parent="HBoxContainer/MarginContainer3"]
 layout_mode = 2
 mouse_filter = 2
 mouse_behavior_recursive = 1

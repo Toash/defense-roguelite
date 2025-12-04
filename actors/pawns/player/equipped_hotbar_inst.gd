@@ -15,7 +15,7 @@ var equipped_index: int
 func _ready():
 	hotbar_input.equip_slot.connect(_on_equip_slot)
 
-	Game.player_loaded.connect(func():
+	Game.player_loaded.connect(func(player: Player):
 		_on_equip_slot(0)
 	)
 

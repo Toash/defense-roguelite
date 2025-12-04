@@ -1,6 +1,6 @@
 extends Node
 
-signal player_loaded
+signal player_loaded(player: Player)
 
 var debug_state_machines = true
 
@@ -14,6 +14,6 @@ func _ready():
 	pass
 
 
-func player_load():
-	player_loaded.emit()
+func player_load(player: Player):
+	player_loaded.emit(player)
 	player_has_loaded = true

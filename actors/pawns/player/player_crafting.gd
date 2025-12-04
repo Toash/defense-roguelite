@@ -16,14 +16,6 @@ func add_blueprint(blueprint: Blueprint):
 func get_blueprints() -> Array[Blueprint]:
 	return blueprints
 
-func get_defense_types() -> Array[DefenseData.DEFENSE_TYPE]:
-	var ret: Array[DefenseData.DEFENSE_TYPE] = []
-	for blueprint in blueprints:
-		var defense_types: Array[DefenseData.DEFENSE_TYPE] = blueprint.get_defense_type_outputs()
-		ret += defense_types
-		
-	return ret
-
 
 func craft(blueprint: Blueprint):
 	var blueprint_copy = blueprint.duplicate()

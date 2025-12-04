@@ -1,6 +1,8 @@
-extends Control
+extends PanelContainer
 
 class_name UpgradeUI
+
+signal pressed_upgrade(upgrade: Upgrade)
 
 @export var upgrade: DefenseUpgrade
 
@@ -34,4 +36,5 @@ func setup(upgrade: DefenseUpgrade):
 
 	button.pressed.connect(func():
 		print("Pressed upgrade " + upgrade_name.text)
+		pressed_upgrade.emit(upgrade)
 		)

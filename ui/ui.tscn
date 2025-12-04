@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b3kkj3vijsw7s"]
+[gd_scene load_steps=19 format=3 uid="uid://b3kkj3vijsw7s"]
 
 [ext_resource type="Script" uid="uid://dy00162n1j4me" path="res://ui/ui.gd" id="1_bo1jx"]
 [ext_resource type="PackedScene" uid="uid://c44tg88n7uy51" path="res://ui/inventory_ui.tscn" id="1_ks8t7"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bpyb1qw03660d" path="res://ui/crafting/arrow.png" id="11_hrmpd"]
 [ext_resource type="Texture2D" uid="uid://p6vrlwd6fa4f" path="res://ui/indicator.png" id="12_x7jpl"]
 [ext_resource type="PackedScene" uid="uid://cg4eufrf2732t" path="res://ui/death_ui.tscn" id="13_x7jpl"]
+[ext_resource type="PackedScene" uid="uid://bkepin6hv37wh" path="res://ui/upgrades/upgrades_ui.tscn" id="16_mf2ns"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7jpl"]
 bg_color = Color(1, 0, 0, 1)
@@ -160,3 +161,5 @@ indicator_texture = ExtResource("12_x7jpl")
 
 [node name="DeathUI" parent="." instance=ExtResource("13_x7jpl")]
 visible = false
+
+[node name="UpgradesUI" parent="." instance=ExtResource("16_mf2ns")]

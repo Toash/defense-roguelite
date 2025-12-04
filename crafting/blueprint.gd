@@ -14,6 +14,7 @@ func get_ingredients() -> Array[ItemDataGroup]:
 func get_outputs() -> Array[ItemDataGroup]:
 	return outputs
 
+## returns defense types if present in the output.
 func get_defense_type_outputs() -> Array[DefenseData.DEFENSE_TYPE]:
 	var ret: Array[DefenseData.DEFENSE_TYPE] = []
 	for output in outputs:

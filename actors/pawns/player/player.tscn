@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=47 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
@@ -38,6 +38,7 @@
 [ext_resource type="Script" uid="uid://d1jitd8ecvh0i" path="res://actors/pawns/player/player_build_highlight.gd" id="34_5hbjc"]
 [ext_resource type="Texture2D" uid="uid://c8oaaom1olacl" path="res://ui/white_outline.png" id="35_ed5vm"]
 [ext_resource type="Script" uid="uid://ce3pc3v2y36cc" path="res://actors/pawns/player/player_coins.gd" id="35_pxsft"]
+[ext_resource type="Script" uid="uid://b524hsh0tyeu5" path="res://actors/pawns/player/player_defenses.gd" id="39_0lo4q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(25, 54)
@@ -69,7 +70,7 @@ gradient = SubResource("Gradient_dqf5y")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "coins", "inventory", "hotbar", "hotbar_equipped_inst", "pickups", "player_crafting", "hotbar_input", "world_container_input", "context_input", "health") groups=["persist", "player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "coins", "inventory", "hotbar", "hotbar_equipped_inst", "pickups", "player_crafting", "player_defenses", "hotbar_input", "world_container_input", "context_input", "health") groups=["persist", "player"]]
 collision_layer = 4
 collision_mask = 38
 script = ExtResource("1_onrkg")
@@ -81,6 +82,7 @@ hotbar = NodePath("Containers/Hotbar")
 hotbar_equipped_inst = NodePath("HotbarEquippedInst")
 pickups = NodePath("Containers/Pickups")
 player_crafting = NodePath("PlayerCrafting")
+player_defenses = NodePath("PlayerDefenses")
 hotbar_input = NodePath("Inputs/HotbarInput")
 world_container_input = NodePath("Inputs/WorldContainerInput")
 context_input = NodePath("Inputs/ContextInput")
@@ -283,6 +285,11 @@ script = ExtResource("35_pxsft")
 starting_coins = 1000
 metadata/_custom_type_script = "uid://ce3pc3v2y36cc"
 
+[node name="PlayerDefenses" type="Node2D" parent="." node_paths=PackedStringArray("player_crafting")]
+script = ExtResource("39_0lo4q")
+player_crafting = NodePath("../PlayerCrafting")
+metadata/_custom_type_script = "uid://b524hsh0tyeu5"
+
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]
 [connection signal="origin_position_emitted" from="Items/ItemDisplay" to="CharacterSprite" method="_set_right_hand_pos"]
@@ -292,5 +299,5 @@ metadata/_custom_type_script = "uid://ce3pc3v2y36cc"
 [connection signal="use_equipment" from="Inputs/EquipmentInput" to="Items/Equipment" method="use"]
 [connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_left_hand"]
 [connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
-[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_left_hand"]
 [connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_right_hand"]
+[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_left_hand"]

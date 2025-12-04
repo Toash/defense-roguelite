@@ -4,16 +4,16 @@ extends Resource
 class_name DefenseData
 
 enum DEFENSE_TYPE {
-    TURRET,
-    BALLISTA,
-    CANNON
+	TURRET,
+	BALLISTA,
+	CANNON
 }
 
 enum BASE_STAT {
-    HEALTH,
-    DAMAGE,
-    ATTACK_SPEED,
-    PROJECTILE_SPEED,
+	HEALTH,
+	DAMAGE,
+	ATTACK_SPEED,
+	PROJECTILE_SPEED,
 }
 
 
@@ -37,16 +37,22 @@ enum BASE_STAT {
 
 
 func get_base_stat(base_stat: BASE_STAT) -> float:
-    match base_stat:
-        BASE_STAT.HEALTH:
-            return health
-        BASE_STAT.DAMAGE:
-            return attack_damage
-        BASE_STAT.ATTACK_SPEED:
-            return attack_cooldown
-        _:
-            push_error("base_stat not specified")
-            return 0
+	match base_stat:
+		BASE_STAT.HEALTH:
+			return health
+		BASE_STAT.DAMAGE:
+			return attack_damage
+		BASE_STAT.ATTACK_SPEED:
+			return attack_cooldown
+		_:
+			push_error("base_stat not specified")
+			return 0
 
 func _to_string() -> String:
-    return "Tower: " + str(DEFENSE_TYPE.keys()[defense_type])
+	return "Tower: " + str(DEFENSE_TYPE.keys()[defense_type])
+
+
+static func get_random_defense_type() -> DEFENSE_TYPE:
+	var i: int = randi() % DEFENSE_TYPE.size()
+	# integer
+	return DEFENSE_TYPE.values()[i]

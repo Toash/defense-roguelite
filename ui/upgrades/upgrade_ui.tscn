@@ -4,53 +4,49 @@
 [ext_resource type="Resource" uid="uid://c2wlsjabghbl1" path="res://upgrades/resources/double_damage.tres" id="2_5ysin"]
 [ext_resource type="Theme" uid="uid://dhhk734ua4d0l" path="res://ui/theme.tres" id="3_j6trx"]
 
-[node name="UpgradeUI" type="Control" node_paths=PackedStringArray("upgrade_name", "description", "icon", "applies_to", "button")]
-layout_mode = 3
+[node name="UpgradeUI" type="PanelContainer" node_paths=PackedStringArray("upgrade_name", "description", "icon", "applies_to", "button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_3607n")
 upgrade = ExtResource("2_5ysin")
-upgrade_name = NodePath("PanelContainer/MarginContainer/VBoxContainer/Name")
-description = NodePath("PanelContainer/MarginContainer/VBoxContainer/Description")
-icon = NodePath("PanelContainer/MarginContainer/VBoxContainer/Icon")
-applies_to = NodePath("PanelContainer/MarginContainer/VBoxContainer/AppliesTo")
-button = NodePath("PanelContainer/Button")
+upgrade_name = NodePath("MarginContainer/VBoxContainer/Name")
+description = NodePath("MarginContainer/VBoxContainer/Description")
+icon = NodePath("MarginContainer/VBoxContainer/Icon")
+applies_to = NodePath("MarginContainer/VBoxContainer/AppliesTo")
+button = NodePath("Button")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Button" type="Button" parent="PanelContainer"]
+[node name="Button" type="Button" parent="."]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("3_j6trx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Name" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="Description" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 expand_mode = 4
 stretch_mode = 4
 
-[node name="AppliesTo" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="AppliesTo" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 horizontal_alignment = 1

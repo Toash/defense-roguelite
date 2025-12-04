@@ -1,3 +1,4 @@
+## Console.gd (Autoload)
 extends CanvasLayer
 
 
@@ -57,13 +58,25 @@ func _ready() -> void:
 			log_message("id: " + str(data.id) + "\t\tname: " + str(data.display_name))
 	)
 
-	_register_command("get_upgrade", func(id: int):
+	_register_command("get_upgrade", func(id):
 		print("getting upgrade")
 		var upgrade_manager: UpgradeManager = (get_node("/root/World/GameState") as GameState).upgrade_manager
 		if upgrade_manager == null:
 			log_message("Upgrade manager not found!")
 			return
 		upgrade_manager.acquire_upgrade_by_id(int(id))
+		
+		)
+
+	_register_command("get_upgrades", func(amount):
+		var upgrade_manager: UpgradeManager = (get_node("/root/World/GameState") as GameState).upgrade_manager
+		if upgrade_manager == null:
+			log_message("Upgrade manager not found!")
+			return
+		var upgrades = upgrade_manager.get_random_upgrades(int(amount))
+
+		for upgrade in upgrades:
+			log_message(str(upgrade))
 		
 		)
 
@@ -100,7 +113,9 @@ func _ready() -> void:
 
 func log_message(message: String):
 	logs.append_text(message + "\n")
+	print(message)
 
+# do not type the arguments other than string. 
 func _register_command(command_name: String, callable: Callable):
 	commands[command_name] = callable
 
@@ -146,7 +161,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			set_open(true)
 
-
+	# generate world
 	if OS.is_debug_build() and event is InputEventKey:
 		if (event as InputEventKey).keycode == KEY_N:
 			if event.is_pressed():

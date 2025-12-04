@@ -134,8 +134,9 @@ world = NodePath("../..")
 world_enemies = ExtResource("20_aysyn")
 enemy_root = NodePath("../../Roots/ZombieRoot")
 
-[node name="UpgradeManager" type="Node2D" parent="GameState"]
+[node name="UpgradeManager" type="Node2D" parent="GameState" node_paths=PackedStringArray("player")]
 script = ExtResource("21_o1net")
+player = NodePath("../../Player")
 metadata/_custom_type_script = "uid://bgbi7qv8f0ml3"
 
 [node name="DefenseManager" type="Node2D" parent="GameState"]

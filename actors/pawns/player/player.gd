@@ -16,6 +16,9 @@ class_name Player
 @export_group("Crafting")
 @export var player_crafting: PlayerCrafting
 
+@export_group("Defenses")
+@export var player_defenses: PlayerDefenses
+
 
 var state = "idle"
 var input_vector = Vector2.ZERO
@@ -29,7 +32,7 @@ var input_vector = Vector2.ZERO
 var dead = false
 
 func _ready() -> void:
-	Game.player_load()
+	Game.player_load(self)
 
 
 func _process(delta: float) -> void:
@@ -98,4 +101,4 @@ func load(d: Dictionary):
 	health.health_changed.emit(health.health)
 
 
-	Game.player_load()
+	Game.player_load(self)
