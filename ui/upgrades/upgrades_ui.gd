@@ -38,7 +38,10 @@ func _add_upgrade_display(upgrade: Upgrade):
 
 	upgrade_ui.setup(upgrade)
 	upgrade_ui.pressed_upgrade.connect(func(upgrade: Upgrade):
-		self.upgrade_manager.acquire_upgrade(upgrade)
+		var player: Player = get_tree().get_first_node_in_group("player")
+		if player == null:
+			push_error("Could not find player!")
+		player.player_defenses.acquire_upgrade(upgrade)
 		_clear_displayed_upgrades()
 		hide()
 		)

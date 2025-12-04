@@ -69,7 +69,7 @@ func _on_nearest_interactable_changed(new_interactable: Interactable):
 	ContextManager.clear_context()
 
 
-func _on_request_context(viewport_pos: Vector2, global_pos: Vector2):
+func _on_request_context(global_pos: Vector2):
 	var param: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
 	param.collide_with_areas = true
 	param.position = global_pos

@@ -4,7 +4,6 @@ extends Node2D
 ## runtime manager for upgrades
 class_name UpgradeManager
 
-signal upgrade_acquired(upgrade: Upgrade)
 signal got_an_upgrade_hmm_should_i_take_it(upgrade: Upgrade)
 
 
@@ -13,8 +12,6 @@ signal got_an_upgrade_hmm_should_i_take_it(upgrade: Upgrade)
 
 # Dictionary[DefenseData.DEFENSE_TYPE,Array[DefenseUpgrade]] 
 
-# TODO put this on the player
-var _player_defense_type_to_upgrades: Dictionary[DefenseData.DEFENSE_TYPE, Array] = {}
 
 ## defense upgrades corresponding to defense types
 var _all_defense_type_to_upgrades: Dictionary[DefenseData.DEFENSE_TYPE, Array] = {}
@@ -26,7 +23,6 @@ var defense_manager: DefenseManager
 
 func _ready() -> void:
 	for d_type in DefenseData.DEFENSE_TYPE.values():
-		_player_defense_type_to_upgrades[d_type] = []
 		_all_defense_type_to_upgrades[d_type] = []
 	_load_upgrade_data("res://upgrades/resources")
 	defense_manager = (get_node("/root/World/GameState") as GameState).defense_manager
@@ -46,13 +42,13 @@ func get_by_id(id: int) -> Upgrade:
 	push_error("Could not find upgrade")
 	return null
 
-func get_random_upgrades(amount: int) -> Array[Upgrade]:
+func propose_random_upgrades(amount: int) -> Array[Upgrade]:
 	var upgrades: Array[Upgrade]
 	for i in range(amount):
-		upgrades.append(get_random_upgrade())
+		upgrades.append(propose_random_upgrade())
 	return upgrades
 
-func get_random_upgrade() -> Upgrade:
+func propose_random_upgrade() -> Upgrade:
 	# var random_type: DefenseData.DEFENSE_TYPE = DefenseData.get_random_defense_type()
 	# var random_type: DefenseData.DEFENSE_TYPE = player.player_defenses.get_random_player_owned_defense_type()
 	var valid_defense_upgrades: Array = _get_valid_defense_upgrades()
@@ -65,31 +61,6 @@ func get_random_upgrade() -> Upgrade:
 	got_an_upgrade_hmm_should_i_take_it.emit(upgrade)
 
 	return upgrade
-
-
-## sets the upgrades that the player has on the defense.
-func sync_defense_upgrades(defense: RuntimeDefense):
-	var d_type = defense.defense_data.defense_type
-	var upgrades: Array[DefenseUpgrade] = _player_defense_type_to_upgrades.get(d_type, [])
-	defense.set_upgrades(upgrades)
-
-
-func acquire_upgrade(upgrade: Upgrade):
-	if upgrade is DefenseUpgrade:
-		for d_type in upgrade.applies_to:
-			_player_defense_type_to_upgrades[d_type].append(upgrade)
-
-		# sync runtime defenses
-		for defense: RuntimeDefense in defense_manager.get_defenses():
-			sync_defense_upgrades(defense)
-
-	print("Acquired upgade: " + upgrade.name)
-	Console.log_message("Acquired upgade: " + upgrade.name)
-	upgrade_acquired.emit(upgrade)
-
-func acquire_upgrade_by_id(id: int):
-	var upgrade: Upgrade = get_by_id(id)
-	acquire_upgrade(upgrade)
 
 
 func _load_upgrade_data(path: String) -> void:

@@ -64,7 +64,13 @@ func _ready() -> void:
 		if upgrade_manager == null:
 			log_message("Upgrade manager not found!")
 			return
-		upgrade_manager.acquire_upgrade_by_id(int(id))
+
+		var player: Player = get_tree().get_first_node_in_group("player")
+		if upgrade_manager == null:
+			log_message("Player not found!")
+			return
+		var upgrade = upgrade_manager.get_by_id(int(id))
+		player.player_defenses.acquire_upgrade(upgrade)
 		
 		)
 
@@ -73,7 +79,7 @@ func _ready() -> void:
 		if upgrade_manager == null:
 			log_message("Upgrade manager not found!")
 			return
-		var upgrades = upgrade_manager.get_random_upgrades(int(amount))
+		var upgrades = upgrade_manager.propose_random_upgrades(int(amount))
 
 		for upgrade in upgrades:
 			log_message(str(upgrade))

@@ -16,20 +16,19 @@ enum PRIORITY {
 # "on-paper data"
 @export var defense_data: DefenseData
 
+## used for outlining
+@export var main_sprite: Sprite2D
+
+
 # @export var applied_upgrades: Array[DefenseUpgrade]
 
 func _ready():
 	add_to_group("defenses")
 
-	# sync with upgrade manager
-	var game_state = get_node("/root/World/GameState") as GameState
-	var upgrade_manager = game_state.upgrade_manager
-	if game_state == null:
-		push_error("Could not find gamestate!")
-	if upgrade_manager == null:
-		push_error("Could not find upgrade manager!")
 
-	upgrade_manager.sync_defense_upgrades(self)
+	var player: Player = get_tree().get_first_node_in_group("player")
+	
+	player.player_defenses.sync_defense_upgrades(self)
 
 	
 	if defense_data == null:
@@ -41,6 +40,12 @@ func _ready():
 			)
 		health.max_health = defense_data.health
 		health.health = defense_data.health
+
+
+	# TODO: Specify interactable radius
+	var interactable = Interactable.create_interactable(10)
+	interactable.sprite = main_sprite
+	add_child(interactable)
 
 
 var upgrade_manager_upgrades: Array[DefenseUpgrade] = []

@@ -13,11 +13,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_73l1h"]
 radius = 48.09366
 
-[node name="MiniTurret" type="Area2D"]
+[node name="MiniTurret" type="Area2D" node_paths=PackedStringArray("main_sprite")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_73l1h")
 defense_data = ExtResource("2_ma2d7")
+main_sprite = NodePath("SpriteRoot/SwivelRoot/MiniTurretHead")
 metadata/_custom_type_script = "uid://q6n7fr42kj25"
 
 [node name="PawnTracker" type="Node2D" parent="."]

@@ -47,7 +47,7 @@ size = Vector2(25, 54)
 radius = 200.01
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsln6"]
-radius = 98.02041
+radius = 156.0032
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h0lia"]
 shader = ExtResource("7_fptfb")
