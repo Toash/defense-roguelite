@@ -7,6 +7,7 @@ class_name Player
 @export var camera: Camera2D
 
 @export_group("Containers")
+@export var containers: PlayerContainers
 @export var coins: PlayerCoins
 @export var inventory: ItemContainer
 @export var hotbar: ItemContainer

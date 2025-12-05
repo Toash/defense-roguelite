@@ -70,12 +70,13 @@ gradient = SubResource("Gradient_dqf5y")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "coins", "inventory", "hotbar", "hotbar_equipped_inst", "pickups", "player_crafting", "player_defenses", "hotbar_input", "world_container_input", "context_input", "health") groups=["persist", "player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "containers", "coins", "inventory", "hotbar", "hotbar_equipped_inst", "pickups", "player_crafting", "player_defenses", "hotbar_input", "world_container_input", "context_input", "health") groups=["persist", "player"]]
 collision_layer = 4
 collision_mask = 38
 script = ExtResource("1_onrkg")
 speed = 500
 camera = NodePath("Camera2D")
+containers = NodePath("Containers")
 coins = NodePath("PlayerCoins")
 inventory = NodePath("Containers/Inventory")
 hotbar = NodePath("Containers/Hotbar")

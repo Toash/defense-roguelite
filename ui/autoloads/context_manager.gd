@@ -1,3 +1,4 @@
+## ContentManager.gd (Autoload) handles context menus.
 extends CanvasLayer
 
 @export var context_menu: Control
@@ -11,23 +12,25 @@ func _ready():
 	visible = false
 
 
-func toggle_context(actions: Array[String]):
+## the "packed scenes" are responsible for creating the functionality
+func show_context(controls: Array[Control]):
 	context_opened = !context_opened
 	visible = context_opened
-	if context_opened:
-		for button in context_menu_vbox.get_children():
-			button.queue_free()
 
-		context_menu.global_position = get_viewport().get_mouse_position() + context_offset
+	context_menu.global_position = get_viewport().get_mouse_position() + context_offset
 
-		for action in actions:
-			var button = Button.new()
-			button.text = action
-			context_menu_vbox.add_child(button)
+	_remove_children()
+	
+	for control: Control in controls:
+		context_menu_vbox.add_child(control)
 
 
-func clear_context():
+func hide_context():
 	context_opened = false
 	visible = false
-	for button in context_menu_vbox.get_children():
-		button.queue_free()
+	_remove_children()
+
+
+func _remove_children():
+	for child in context_menu_vbox.get_children():
+		context_menu_vbox.remove_child(child)

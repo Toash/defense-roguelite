@@ -1,13 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cf63ae2nymmrw"]
+[gd_scene load_steps=9 format=3 uid="uid://cf63ae2nymmrw"]
 
-[ext_resource type="Script" uid="uid://q6n7fr42kj25" path="res://actors/defenses/defense.gd" id="1_rqptj"]
+[ext_resource type="Script" uid="uid://h2bibq07av83" path="res://actors/defenses/runtime_defense.gd" id="1_rqptj"]
 [ext_resource type="Resource" uid="uid://djrdcxjoi10ac" path="res://actors/defenses/ranged/ballista/wood_ballista_data.tres" id="2_tdn6j"]
 [ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/pawn_tracker.gd" id="3_jiwro"]
 [ext_resource type="Texture2D" uid="uid://ca2m666bcuqon" path="res://actors/defenses/ranged/ballista/wood_ballista_top.png" id="4_tdn6j"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="7_gtmwm"]
 [ext_resource type="Script" uid="uid://bvpgbckygjfb1" path="res://actors/defenses/states/state_swivel_idle.gd" id="8_kmmgr"]
 [ext_resource type="Script" uid="uid://bhkahelyvljmo" path="res://actors/defenses/states/state_turret_attack.gd" id="9_77bml"]
-[ext_resource type="Resource" uid="uid://iu3556p6xgqa" path="res://item/effects/defenses/mini_turret_shoot.tres" id="10_c1nj7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_73l1h"]
 radius = 48.09366
@@ -17,7 +16,6 @@ collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_rqptj")
 defense_data = ExtResource("2_tdn6j")
-metadata/_custom_type_script = "uid://q6n7fr42kj25"
 
 [node name="PawnTracker" type="Node2D" parent="."]
 script = ExtResource("3_jiwro")
@@ -47,11 +45,8 @@ enemy_tracker = NodePath("../../PawnTracker")
 swivel_root = NodePath("../../SpriteRoot/SwivelRoot")
 metadata/_custom_type_script = "uid://bvpgbckygjfb1"
 
-[node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("user", "defense", "enemy_tracker", "swivel_root", "muzzle")]
+[node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("enemy_tracker", "swivel_root", "muzzle")]
 script = ExtResource("9_77bml")
-user = NodePath("../..")
-defense = NodePath("../..")
 enemy_tracker = NodePath("../../PawnTracker")
 swivel_root = NodePath("../../SpriteRoot/SwivelRoot")
-projectile_effect = ExtResource("10_c1nj7")
 muzzle = NodePath("../../SpriteRoot/SwivelRoot/Sprite2D")

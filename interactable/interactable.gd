@@ -8,14 +8,8 @@ signal interacted(action_id: int, player: Node2D)
 ## used for outlining the interactable.
 @export var sprite: Sprite2D
 
-# @export var outline: ShaderMaterial
-
-# @export_group("Action names")
-# @export var main_action_name = "use"
-
-
-# var actions: Dictionary[String, Callable]
-@export var actions: Array[String]
+## What nodes show in the context menu.
+@export var context_nodes: Array[Control]
 
 ## Creates an interactable object with the specified radius.
 static func create_interactable(radius: float) -> Interactable:
@@ -27,10 +21,6 @@ static func create_interactable(radius: float) -> Interactable:
 	collision_shape.shape = circle
 	interactable.add_child(collision_shape)
 	return interactable
-
-# have list of actions
-# include the action name ( string ) on the interacted event
-# thigns that listen for the interacted event will also get the actino name.
 
 
 func interact(player: Node2D):

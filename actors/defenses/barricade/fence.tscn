@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://doax2byf7sed7" path="res://actors/defenses/barricade/wooden_barricade_data.tres" id="2_5cveo"]
 [ext_resource type="Texture2D" uid="uid://oyegl1t0b74l" path="res://actors/defenses/barricade/wood_fence.png" id="2_7o13v"]
-[ext_resource type="Script" uid="uid://q6n7fr42kj25" path="res://actors/defenses/defense.gd" id="3_7o13v"]
+[ext_resource type="Script" uid="uid://h2bibq07av83" path="res://actors/defenses/runtime_defense.gd" id="3_7o13v"]
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="5_q3pk1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lcgvv"]
@@ -16,7 +16,6 @@ collision_mask = 0
 script = ExtResource("3_7o13v")
 health = NodePath("StaticBody2D/Health")
 defense_data = ExtResource("2_5cveo")
-metadata/_custom_type_script = "uid://q6n7fr42kj25"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -3)

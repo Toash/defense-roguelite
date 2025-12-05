@@ -45,6 +45,13 @@ func _ready():
 	# TODO: Specify interactable radius
 	var interactable = Interactable.create_interactable(10)
 	interactable.sprite = main_sprite
+	
+	var pickup_defense_scene: PackedScene = load("res://ui/context/pickup_defense.tscn")
+	var pickup_defense = pickup_defense_scene.instantiate() as PickupDefense
+	pickup_defense.setup(self)
+
+	interactable.context_nodes.append(pickup_defense)
+
 	add_child(interactable)
 
 

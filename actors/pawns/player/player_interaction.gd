@@ -66,10 +66,11 @@ func _on_nearest_interactable_changed(new_interactable: Interactable):
 
 	nearest_interactable = new_interactable
 	print("PlayerInteraction: Current interactable: " + str(nearest_interactable))
-	ContextManager.clear_context()
+	ContextManager.hide_context()
 
 
 func _on_request_context(global_pos: Vector2):
+	# TODO: Shouldnt this just be on the ui? instead of physics
 	var param: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
 	param.collide_with_areas = true
 	param.position = global_pos
@@ -81,4 +82,8 @@ func _on_request_context(global_pos: Vector2):
 			if data.collider is Interactable:
 				var interactable = data.collider as Interactable
 				if _interactable_in_range(interactable, player):
-					ContextManager.toggle_context(interactable.actions)
+					# ContextManager.show_context((interactable.context_nodes).duplicate(true))
+					ContextManager.show_context(interactable.context_nodes)
+					return
+
+	ContextManager.hide_context()

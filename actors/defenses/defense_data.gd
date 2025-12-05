@@ -18,6 +18,8 @@ enum BASE_STAT {
 
 
 @export_group("General")
+## the item data that corresponds to this defense. used for picking up.
+@export var item_data: ItemData
 @export var defense_type: DEFENSE_TYPE
 @export var defense_priority: RuntimeDefense.PRIORITY
 @export var health: int = 100
