@@ -1,0 +1,27 @@
+extends Node2D
+
+## node to hold all status effects at runtime.
+class_name PawnStatusEffectContainer
+
+signal added_status_effect(node: RuntimePawnStatusEffect)
+signal removed_status_effect(node: RuntimePawnStatusEffect)
+
+var pawn: Pawn
+
+
+func setup(pawn: Pawn):
+    self.pawn = pawn
+
+func add_status_effect(node: RuntimePawnStatusEffect):
+    add_child(node)
+    added_status_effect.emit()
+    node.removed_status_effect.connect(func():
+        removed_status_effect.emit()
+        )
+
+
+func clear_status_effects():
+    for status_effect: RuntimePawnStatusEffect in get_children():
+        status_effect._on_exit(pawn)
+
+        status_effect.call_deferred("queue_free")

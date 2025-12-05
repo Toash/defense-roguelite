@@ -1,6 +1,7 @@
 extends Area2D
 
 ## RUNTIME root node for all defenses 
+# TODO: Should these be effected by status effects?
 class_name RuntimeDefense
 
 # How do other enemies see this ? 
@@ -28,8 +29,8 @@ func _ready():
 	add_to_group("defenses")
 
 
+	# TODO: dont generalize onto player?
 	var player: Player = get_tree().get_first_node_in_group("player")
-	
 	player.player_defenses.sync_defense_upgrades(self)
 
 	

@@ -7,7 +7,7 @@ class_name Enemy
 var enemy_data: EnemyData
 
 @export var state_machine: StateMachine
-@export var tile_pathfind: TilePathfind
+# @export var tile_pathfind: TilePathfind
 
 func _ready():
 	add_to_group("enemy")
@@ -43,8 +43,8 @@ func _on_death():
 
 
 	state_machine.queue_free()
-	if tile_pathfind!=null:
-		tile_pathfind.queue_free()
+	# if tile_pathfind!=null:
+	# 	tile_pathfind.queue_free()
 
 	set_collision_layer_value(3, false)
 	await get_tree().create_timer(5).timeout

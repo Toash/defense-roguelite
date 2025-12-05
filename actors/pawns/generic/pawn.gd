@@ -12,22 +12,21 @@ enum FACTION {
 @onready var world: World = get_tree().get_first_node_in_group("world") as World
 @export var faction: FACTION
 
-func _enter_tree() -> void:
-	world = get_tree().get_first_node_in_group("world") as World
-
-# @export_group("Stats")
-var pawn_name: String
-# var walk_speed: float = 200
 
 @export_group("References")
 @export var health: Health
 
+var pawn_name: String
+
+var status_effect_container: PawnStatusEffectContainer
 
 var raw_velocity: Vector2 = Vector2.ZERO
-
 var knockback_velocity: Vector2
 var knockback_decay = 800
 
+
+func _enter_tree() -> void:
+	world = get_tree().get_first_node_in_group("world") as World
 
 func _physics_process(delta: float) -> void:
 	# if knockback_velocity > Vector2.ZERO:
@@ -49,3 +48,8 @@ func set_raw_velocity(vel: Vector2):
 ## multiply by delta
 func get_total_velocity() -> Vector2:
 	return raw_velocity + knockback_velocity
+
+
+func _setup_status_effect_container():
+	var container: PawnStatusEffectContainer = PawnStatusEffectContainer.new()
+	container.setup(self)

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PawnStatusEffectResource" load_steps=5 format=3 uid="uid://ctw0rafe0qrn6"]
+
+[ext_resource type="Script" path="res://status_effects/resources/scripts/pawn_status_effect_resource.gd" id="1_8mqgc"]
+[ext_resource type="Script" uid="uid://cmsficht13qab" path="res://status_effects/resources/scripts/status_effect_data.gd" id="2_flfaq"]
+[ext_resource type="PackedScene" uid="uid://cg2eiyoeu5bfn" path="res://status_effects/scenes/fire_status_effect.tscn" id="3_rgimq"]
+
+[sub_resource type="Resource" id="Resource_6nqyv"]
+script = ExtResource("2_flfaq")
+metadata/_custom_type_script = "uid://cmsficht13qab"
+
+[resource]
+script = ExtResource("1_8mqgc")
+status_effect_scene = ExtResource("3_rgimq")
+status_effect_data = SubResource("Resource_6nqyv")
+metadata/_custom_type_script = "uid://c8ee6sfmk0yru"
