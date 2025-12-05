@@ -7,6 +7,7 @@ class_name ProjectileEffect
 @export var damage = 25
 @export var speed = 200
 
+# @export var pierce: int = 1
 
 @export var shoot_audio_key: AudioManager.KEY
 @export var shoot_volume: float = 1
@@ -14,7 +15,7 @@ class_name ProjectileEffect
 
 
 func apply(context: ItemContext):
-    var projectile_inst: Projectile = projectile.instantiate() as Projectile
+    var projectile_inst: ProjectileScene = projectile.instantiate() as ProjectileScene
 
     var data: ProjectileData = ProjectileData.new()
     data.factions_to_hit = factions_to_hit

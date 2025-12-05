@@ -1,7 +1,7 @@
 extends Node2D
 class_name ProjectileSceneEffect
 
-@export var projectile: Projectile
+@export var projectile: ProjectileScene
 
 func _ready():
 	projectile.projectile_entered_body.connect(_on_projectile_entered_body)

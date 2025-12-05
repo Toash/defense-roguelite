@@ -25,9 +25,13 @@ var knockback_velocity: Vector2
 var knockback_decay = 800
 
 
+# TODO: why not ready 
 func _enter_tree() -> void:
 	world = get_tree().get_first_node_in_group("world") as World
+	_setup_status_effect_container()
+	_setup_health()
 
+	
 func _physics_process(delta: float) -> void:
 	# if knockback_velocity > Vector2.ZERO:
 	# 	knockback_velocity -= Vector2.ONE * knockback_decay * delta
@@ -49,7 +53,12 @@ func set_raw_velocity(vel: Vector2):
 func get_total_velocity() -> Vector2:
 	return raw_velocity + knockback_velocity
 
+func _setup_health():
+	self.health.died.connect(func():
+		status_effect_container.clear_status_effects()
+		)
 
 func _setup_status_effect_container():
-	var container: PawnStatusEffectContainer = PawnStatusEffectContainer.new()
-	container.setup(self)
+	status_effect_container = PawnStatusEffectContainer.new()
+	status_effect_container.setup(self)
+	self.add_child(status_effect_container)

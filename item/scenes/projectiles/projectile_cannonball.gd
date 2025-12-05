@@ -3,7 +3,7 @@ extends Node2D
 class_name ProjectileCannonball
 
 
-@export var projectile: Projectile
+@export var projectile: ProjectileScene
 @export var explosion_scene: PackedScene
 
 func _ready():

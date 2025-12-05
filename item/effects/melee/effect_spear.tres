@@ -1,9 +1,18 @@
-[gd_resource type="Resource" script_class="MeleeEffect" load_steps=3 format=3 uid="uid://dpshn6vo1w8ck"]
+[gd_resource type="Resource" script_class="MeleeEffect" load_steps=7 format=3 uid="uid://dpshn6vo1w8ck"]
 
 [ext_resource type="PackedScene" uid="uid://bkxcb3afuvs15" path="res://item/scenes/melee/spear.tscn" id="1_tpvee"]
 [ext_resource type="Script" uid="uid://dn16c2l3h1soe" path="res://item/effects/scripts/melee_effect.gd" id="2_35i4t"]
+[ext_resource type="Script" uid="uid://cbtvcrir1s6js" path="res://item/scenes/melee/melee_data.gd" id="2_44ldc"]
+[ext_resource type="Script" uid="uid://dbeenbdaedfak" path="res://status_effects/resources/scripts/status_effect.gd" id="3_v4m1t"]
+[ext_resource type="Resource" uid="uid://dmq5dp8jkovj6" path="res://status_effects/resources/fire.tres" id="4_v4m1t"]
+
+[sub_resource type="Resource" id="Resource_5pfe5"]
+script = ExtResource("2_44ldc")
+melee_scene = ExtResource("1_tpvee")
+status_effects = Array[ExtResource("3_v4m1t")]([ExtResource("4_v4m1t")])
+metadata/_custom_type_script = "uid://cbtvcrir1s6js"
 
 [resource]
 script = ExtResource("2_35i4t")
-scene = ExtResource("1_tpvee")
+melee_data = SubResource("Resource_5pfe5")
 metadata/_custom_type_script = "uid://dn16c2l3h1soe"

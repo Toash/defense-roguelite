@@ -10,4 +10,5 @@ extends Resource
 # func apply(user: Node2D, ctx: Dictionary):
 #     push_error("Implement apply for the item effect")
 
+## called when the effect is triggered.
 @abstract func apply(context: ItemContext)

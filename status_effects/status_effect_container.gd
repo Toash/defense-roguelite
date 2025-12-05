@@ -8,11 +8,17 @@ signal removed_status_effect(node: RuntimePawnStatusEffect)
 
 var pawn: Pawn
 
+func _init():
+    print("adding container")
+func _ready():
+    if pawn == null:
+        push_error("PawnStatusEffectContainer: Pawn not defined")
 
 func setup(pawn: Pawn):
     self.pawn = pawn
 
 func add_status_effect(node: RuntimePawnStatusEffect):
+    print("adding status effect")
     add_child(node)
     added_status_effect.emit()
     node.removed_status_effect.connect(func():

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfya2bgykrj43"]
 
-[ext_resource type="Script" uid="uid://c0e5vy4qopanc" path="res://item/scenes/projectiles/projectile.gd" id="1_5memk"]
+[ext_resource type="Script" uid="uid://v2ludc88wplv" path="res://item/scenes/projectiles/projectile_scene.gd" id="1_mjk65"]
 [ext_resource type="Texture2D" uid="uid://ch1ctbupkfx2h" path="res://item/scenes/projectiles/bullet.png" id="2_mjk65"]
 [ext_resource type="Script" uid="uid://djae8vevx6727" path="res://item/scenes/projectiles/projectile_bullet.gd" id="3_mjk65"]
 
@@ -14,7 +14,7 @@ gravity_scale = 0.0
 continuous_cd = 2
 contact_monitor = true
 max_contacts_reported = 1
-script = ExtResource("1_5memk")
+script = ExtResource("1_mjk65")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2b2rl")

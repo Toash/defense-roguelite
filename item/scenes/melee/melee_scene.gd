@@ -1,5 +1,6 @@
 extends Node2D
 
+## scene instantiate for melee swing item effects.
 class_name MeleeScene
 
 signal finished
@@ -7,6 +8,8 @@ signal finished
 var damage: int = 25
 var pierce: int = 1
 var user: Node2D
+var factions_to_hit: Array[Pawn.FACTION]
+var status_effects: Array[StatusEffect]
 
 @export var left_hand_marker: Marker2D
 @export var right_hand_marker: Marker2D
@@ -29,15 +32,17 @@ func _process(delta):
 	context.character_sprite.set_left_hand(left_hand_marker.global_position)
 	context.character_sprite.set_right_hand(right_hand_marker.global_position)
 
-func setup(context: ItemContext, damage: int, pierce: int):
+func setup(context: ItemContext, melee_data: MeleeData):
 	context.character_sprite.enable_left_hand()
 	context.character_sprite.enable_right_hand()
 	self.context = context
 
 	position = Vector2.ZERO
 
-	self.damage = damage
-	self.pierce = pierce
+	self.damage = melee_data.damage
+	self.pierce = melee_data.pierce
+	self.factions_to_hit = melee_data.factions_to_hit
+	self.status_effects = melee_data.status_effects
 
 	look_at(context.global_target_position)
 
@@ -73,6 +78,8 @@ func _on_body_entered(body: Node2D) -> void:
 		area.body_entered.disconnect(_on_body_entered)
 
 	if body is Pawn:
-		print("knockback")
-		print(context.direction)
 		body.knockback(context.direction, 400)
+
+		# apply status effects
+		for status_effect: StatusEffect in status_effects:
+			status_effect.apply_status_effect_to_pawn(body as Pawn)

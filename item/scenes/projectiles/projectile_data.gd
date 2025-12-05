@@ -1,3 +1,4 @@
+## data to pass to projectiles when they are spawned in the scene tree
 class_name ProjectileData
 
 var factions_to_hit: Array[Pawn.FACTION]

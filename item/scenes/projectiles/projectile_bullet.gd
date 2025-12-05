@@ -3,7 +3,7 @@ extends Node2D
 class_name ProjectileBullet
 
 
-@export var projectile: Projectile
+@export var projectile: ProjectileScene
 
 func _ready():
 	projectile.projectile_entered_body.connect(on_projectile_entered_body)

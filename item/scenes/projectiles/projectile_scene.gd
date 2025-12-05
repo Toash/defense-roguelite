@@ -1,7 +1,8 @@
 extends RigidBody2D
 
 
-class_name Projectile
+## refers to a projectile.
+class_name ProjectileScene
 
 
 signal projectile_entered_body(projectile: Node2D, body: Node2D, data: ProjectileData)
