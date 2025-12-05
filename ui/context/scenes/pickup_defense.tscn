@@ -1,11 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://g3fs35iflfj7"]
 
 [ext_resource type="Theme" uid="uid://dhhk734ua4d0l" path="res://ui/theme.tres" id="1_qhyem"]
-[ext_resource type="Script" uid="uid://ys1644h20vh5" path="res://ui/context/pickup_defense.gd" id="1_rvukx"]
+[ext_resource type="Script" uid="uid://ys1644h20vh5" path="res://ui/context/context_pickup_defense.gd" id="1_rvukx"]
 
 [node name="PickupDefense" type="Button"]
-offset_right = 8.0
-offset_bottom = 8.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_qhyem")
 text = "Pickup"
 script = ExtResource("1_rvukx")

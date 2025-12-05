@@ -19,6 +19,8 @@ enum PRIORITY {
 ## used for outlining
 @export var main_sprite: Sprite2D
 
+var pickup_defense_scene: PackedScene = preload("res://ui/context/scenes/pickup_defense.tscn")
+var defense_stat_display_scene: PackedScene = preload("res://ui/context/scenes/defense_stat_display.tscn")
 
 # @export var applied_upgrades: Array[DefenseUpgrade]
 
@@ -41,18 +43,7 @@ func _ready():
 		health.max_health = defense_data.health
 		health.health = defense_data.health
 
-
-	# TODO: Specify interactable radius
-	var interactable = Interactable.create_interactable(10)
-	interactable.sprite = main_sprite
-	
-	var pickup_defense_scene: PackedScene = load("res://ui/context/pickup_defense.tscn")
-	var pickup_defense = pickup_defense_scene.instantiate() as PickupDefense
-	pickup_defense.setup(self)
-
-	interactable.context_nodes.append(pickup_defense)
-
-	add_child(interactable)
+	_setup_interactable()
 
 
 var upgrade_manager_upgrades: Array[DefenseUpgrade] = []
@@ -69,11 +60,12 @@ func get_all_item_effects() -> Array[ItemEffect]:
 func get_runtime_stat(stat_type: DefenseData.BASE_STAT) -> float:
 	match stat_type:
 		DefenseData.BASE_STAT.HEALTH:
-			return defense_data.health * _get_base_stat_multiplier(DefenseData.BASE_STAT.HEALTH)
+			return defense_data.health + get_total_additive_base_stat_modifier(DefenseData.BASE_STAT.HEALTH)
 		DefenseData.BASE_STAT.DAMAGE:
-			return defense_data.damage * _get_base_stat_multiplier(DefenseData.BASE_STAT.DAMAGE)
+			return defense_data.damage + get_total_additive_base_stat_modifier(DefenseData.BASE_STAT.DAMAGE)
 		DefenseData.BASE_STAT.ATTACK_SPEED:
-			return defense_data.attack_cooldown / _get_base_stat_multiplier(DefenseData.BASE_STAT.ATTACK_SPEED)
+			# TODO: Clamp
+			return defense_data.attack_cooldown + get_total_additive_base_stat_modifier(DefenseData.BASE_STAT.ATTACK_SPEED)
 		DefenseData.BASE_STAT.PROJECTILE_SPEED:
 			return defense_data.projectile_speed
 		_:
@@ -88,16 +80,16 @@ func get_defense_data() -> DefenseData:
 	return self.defense_data
 
 
-func _get_base_stat_multiplier(base_stat: DefenseData.BASE_STAT):
-	var mult: float = 1
+func get_total_additive_base_stat_modifier(base_stat: DefenseData.BASE_STAT) -> float:
+	var modifier: float = 1
 
 	for upgrade in upgrade_manager_upgrades:
-		var upgrade_mult = upgrade.get_base_stat_multiplier(base_stat)
+		var upgrade_modifier = upgrade.get_additive_base_stat_modifier(base_stat)
 
 		## TODO add scaling options
-		mult += upgrade_mult
+		modifier += upgrade_modifier
 		
-	return mult
+	return modifier
 
 ## gets the effects that were added by defense upgrades
 func _get_upgrade_effects() -> Array[ItemEffect]:
@@ -119,3 +111,18 @@ func _to_string() -> String:
 		m += "\n"
 		
 	return m
+
+func _setup_interactable():
+	# TODO: Specify interactable radius
+	var interactable = Interactable.create_interactable(10)
+	interactable.sprite = main_sprite
+	
+
+	var defense_stat_display = defense_stat_display_scene.instantiate() as DefenseStatDisplay
+	defense_stat_display.setup(self)
+	interactable.context_nodes.append(defense_stat_display)
+	
+	var pickup_defense = pickup_defense_scene.instantiate() as PickupDefense
+	pickup_defense.setup(self)
+	interactable.context_nodes.append(pickup_defense)
+	add_child(interactable)

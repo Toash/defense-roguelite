@@ -16,6 +16,20 @@ enum BASE_STAT {
 	PROJECTILE_SPEED,
 }
 
+static func defense_type_to_string(stat: int) -> String:
+	var raw: String = DEFENSE_TYPE.keys()[stat]
+	var parts := raw.to_lower().split("_")
+	for i in parts.size():
+		parts[i] = parts[i].capitalize()
+	return " ".join(parts)
+
+static func base_stat_to_string(stat: int) -> String:
+	var raw: String = BASE_STAT.keys()[stat]
+	var parts := raw.to_lower().split("_")
+	for i in parts.size():
+		parts[i] = parts[i].capitalize()
+	return " ".join(parts)
+
 
 @export_group("General")
 ## the item data that corresponds to this defense. used for picking up.

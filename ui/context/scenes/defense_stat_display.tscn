@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://2dfguin7qwlt"]
+
+[ext_resource type="Theme" uid="uid://dhhk734ua4d0l" path="res://ui/theme.tres" id="1_lc3ft"]
+[ext_resource type="Script" uid="uid://dg7ew52apw2uy" path="res://ui/context/context_defense_display.gd" id="1_oj2sc"]
+
+[node name="DefenseStatDisplay" type="PanelContainer" node_paths=PackedStringArray("defense_label", "base_stats_root", "effects_root")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_lc3ft")
+script = ExtResource("1_oj2sc")
+defense_label = NodePath("Defense Stats/Defense Name")
+base_stats_root = NodePath("Defense Stats/Base Stats")
+effects_root = NodePath("Defense Stats/Effects")
+
+[node name="Defense Stats" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Defense Name" type="Label" parent="Defense Stats"]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+text = "Name"
+
+[node name="Base Stats" type="VBoxContainer" parent="Defense Stats"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Defense Stats/Base Stats"]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+text = "Base Stats"
+
+[node name="Effects" type="VBoxContainer" parent="Defense Stats"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Defense Stats/Effects"]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+text = "Effects"
