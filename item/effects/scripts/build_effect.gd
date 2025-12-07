@@ -18,5 +18,11 @@ func apply(context: ItemContext):
 	var tile_pos: Vector2i = layer.local_to_map(local_pos)
 
 
+	# check if the existing position isnt alreaduy occupied.
+	var existing_source_id := layer.get_cell_source_id(tile_pos)
+	if existing_source_id != -1:
+		print("already existing")
+		return false
+
 	# place the tile at the position.
 	layer.set_cell(tile_pos, tile_info.source_id, tile_info.atlas_coord, tile_info.alternative_id)

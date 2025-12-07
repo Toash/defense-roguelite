@@ -9,6 +9,7 @@
 [sub_resource type="Resource" id="Resource_5pfe5"]
 script = ExtResource("2_44ldc")
 melee_scene = ExtResource("1_tpvee")
+damage = 1
 status_effects = Array[ExtResource("3_v4m1t")]([ExtResource("4_v4m1t")])
 metadata/_custom_type_script = "uid://cbtvcrir1s6js"
 

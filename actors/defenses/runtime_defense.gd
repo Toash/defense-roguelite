@@ -11,10 +11,11 @@ enum PRIORITY {
 }
 
 
+# should be set if the defense should take damage.
 @export var health: Health
 
 
-# "on-paper data"
+# should be set in the scene. 
 @export var defense_data: DefenseData
 
 ## used for outlining

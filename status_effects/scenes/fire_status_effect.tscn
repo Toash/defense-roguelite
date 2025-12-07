@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cg2eiyoeu5bfn"]
+[gd_scene load_steps=3 format=3 uid="uid://cg2eiyoeu5bfn"]
 
 [ext_resource type="Script" uid="uid://cqvph31p2tmkl" path="res://status_effects/scenes/fire_status_effect.gd" id="1_o7sht"]
+[ext_resource type="PackedScene" uid="uid://35nh2dp5v7xk" path="res://particle_effects/fire_effect.tscn" id="2_4488j"]
 
 [node name="FireStatusEffect" type="Node2D"]
 script = ExtResource("1_o7sht")
 metadata/_custom_type_script = "uid://cqvph31p2tmkl"
+
+[node name="GPUParticles2D" parent="." instance=ExtResource("2_4488j")]

@@ -19,6 +19,13 @@ func setup(pawn: Pawn):
 
 func add_status_effect(node: RuntimePawnStatusEffect):
     print("adding status effect")
+
+    # check for existing status effects
+
+    # for status_effect: RuntimePawnStatusEffect in get_children():
+    #     if 
+
+
     add_child(node)
     added_status_effect.emit()
     node.removed_status_effect.connect(func():

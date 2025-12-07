@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://smq5m57lmovo"]
+
+[ext_resource type="Script" uid="uid://h2bibq07av83" path="res://actors/defenses/runtime_defense.gd" id="1_syurq"]
+[ext_resource type="Texture2D" uid="uid://xj3elfr75rb5" path="res://actors/defenses/wall/wood_wall.png" id="2_jb8h0"]
+[ext_resource type="Resource" uid="uid://c373pmscowk43" path="res://actors/defenses/wall/wood_wall_data.tres" id="2_o6jdh"]
+[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="3_7l6v4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jb8h0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6jdh"]
+size = Vector2(16, 16)
+
+[node name="WoodWall" type="Area2D" node_paths=PackedStringArray("health", "main_sprite")]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_syurq")
+health = NodePath("Health")
+defense_data = ExtResource("2_o6jdh")
+main_sprite = NodePath("Sprite2D")
+metadata/_custom_type_script = "uid://h2bibq07av83"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jb8h0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_jb8h0")
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("3_7l6v4")
+metadata/_custom_type_script = "uid://gyp8bshfrfoj"
+
+[node name="RigidBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_o6jdh")

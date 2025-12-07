@@ -11,4 +11,5 @@ extends Resource
 #     push_error("Implement apply for the item effect")
 
 ## called when the effect is triggered.
+## return false if the item should not be consumed.
 @abstract func apply(context: ItemContext)

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ParticleEffectResource" load_steps=3 format=3 uid="uid://de181nua2wawy"]
+
+[ext_resource type="PackedScene" uid="uid://35nh2dp5v7xk" path="res://particle_effects/fire_effect.tscn" id="1_611pi"]
+[ext_resource type="Script" uid="uid://ctrbwu5ch1s0b" path="res://particle_effects/particle_effect_resource.gd" id="1_mrkn3"]
+
+[resource]
+script = ExtResource("1_mrkn3")
+scene = ExtResource("1_611pi")
+metadata/_custom_type_script = "uid://ctrbwu5ch1s0b"

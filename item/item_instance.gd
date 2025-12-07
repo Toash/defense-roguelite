@@ -20,8 +20,8 @@ func use(ctx: ItemContext):
 
 	# AudioManager.play_key(data.use_sound_key, 1, ctx.user_node.global_position, data.use_sound_bus)
 
-	data.apply_effects(ctx)
-	if data.consume_on_use:
+	var success = data.apply_effects(ctx)
+	if data.consume_on_use and success == true:
 		print("trying to consume the item instance")
 
 		var player: Player = ctx.user_node as Player

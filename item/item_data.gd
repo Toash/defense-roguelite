@@ -42,11 +42,14 @@ var id: int
 @export var item_effects: Array[ItemEffect]
 
 
-# this is stateless
-# since item data will be a shared resource
-func apply_effects(context: ItemContext):
+## returns whether it was successful or not.
+func apply_effects(context: ItemContext) -> bool:
 	for effect in item_effects:
-		effect.apply(context)
+		var result = effect.apply(context)
+		if result == false:
+			return false
+
+	return true
 
 
 func has_build_effect() -> bool:

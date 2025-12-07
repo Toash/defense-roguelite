@@ -1,9 +1,10 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://tradm20dt1wg"]
+[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://tradm20dt1wg"]
 
 [ext_resource type="PackedScene" uid="uid://c64uwphhqlc4b" path="res://actors/defenses/ranged/mini_turret/mini_turret.tscn" id="1_s3soh"]
 [ext_resource type="PackedScene" uid="uid://cf63ae2nymmrw" path="res://actors/defenses/ranged/ballista/wood_ballista.tscn" id="2_yj6k1"]
 [ext_resource type="PackedScene" uid="uid://dtkkeyu4ik5tg" path="res://actors/defenses/barricade/fence.tscn" id="3_ms368"]
 [ext_resource type="PackedScene" uid="uid://c7xbekv3l65cn" path="res://actors/defenses/ranged/cannon/cannon.tscn" id="3_yj6k1"]
+[ext_resource type="PackedScene" uid="uid://smq5m57lmovo" path="res://actors/defenses/wall/wood_wall.tscn" id="5_ms368"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_qomsx"]
 resource_name = "ranged"
@@ -14,6 +15,7 @@ scenes/3/scene = ExtResource("3_yj6k1")
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_s3soh"]
 resource_name = "inert"
 scenes/1/scene = ExtResource("3_ms368")
+scenes/2/scene = ExtResource("5_ms368")
 
 [resource]
 sources/0 = SubResource("TileSetScenesCollectionSource_qomsx")

@@ -6,7 +6,8 @@ class_name DefenseData
 enum DEFENSE_TYPE {
 	TURRET,
 	BALLISTA,
-	CANNON
+	CANNON,
+    WALL
 }
 
 enum BASE_STAT {

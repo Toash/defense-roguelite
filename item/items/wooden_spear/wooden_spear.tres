@@ -14,6 +14,5 @@ icon = ExtResource("1_swtsm")
 cooldown_time = 0.5
 ingame_sprite = ExtResource("1_swtsm")
 follow_target = false
-use_sound_key = 2
 item_effects = Array[ExtResource("1_qokqg")]([ExtResource("3_vrqey")])
 metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

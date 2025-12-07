@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Blueprint" load_steps=5 format=3 uid="uid://didp84x63i7vu"]
+
+[ext_resource type="Script" uid="uid://b6bhu0l2m8yl0" path="res://crafting/item_data_group.gd" id="1_0r6xd"]
+[ext_resource type="Resource" uid="uid://cxlw2i1uptmc5" path="res://item/items/tiles/wood_wall.tres" id="2_ms34r"]
+[ext_resource type="Script" uid="uid://c0igk80mo7ba7" path="res://crafting/blueprint.gd" id="2_uod6a"]
+
+[sub_resource type="Resource" id="Resource_me20g"]
+script = ExtResource("1_0r6xd")
+item_data = ExtResource("2_ms34r")
+amount = 10
+metadata/_custom_type_script = "uid://b6bhu0l2m8yl0"
+
+[resource]
+script = ExtResource("2_uod6a")
+coins_needed = 1
+outputs = Array[ExtResource("1_0r6xd")]([SubResource("Resource_me20g")])
+metadata/_custom_type_script = "uid://c0igk80mo7ba7"

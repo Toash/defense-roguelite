@@ -1,22 +1,18 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://cxlw2i1uptmc5"]
 
 [ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_1qsa1"]
-[ext_resource type="Texture2D" uid="uid://crak87c2t24tw" path="res://item/items/tile_placeholder.png" id="1_yiwkp"]
+[ext_resource type="Texture2D" uid="uid://xj3elfr75rb5" path="res://actors/defenses/wall/wood_wall.png" id="1_xep86"]
 [ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="2_yiwkp"]
 [ext_resource type="Resource" uid="uid://dcf1dp63r4r5o" path="res://item/effects/defenses/place_wood_wall.tres" id="3_xep86"]
 
 [resource]
 script = ExtResource("2_yiwkp")
-id = 200
 display_name = "Wood Wall"
 description = "Keeps the zombies away."
 max_stack = 64
-icon = ExtResource("1_yiwkp")
+icon = ExtResource("1_xep86")
 cooldown_time = 0.0
 consume_on_use = true
-ingame_sprite = ExtResource("1_yiwkp")
-scale = 2.0
-follow_target = true
-use_sound_key = 9
+ingame_sprite = ExtResource("1_xep86")
 item_effects = Array[ExtResource("1_1qsa1")]([ExtResource("3_xep86")])
 metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

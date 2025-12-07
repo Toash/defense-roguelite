@@ -56,7 +56,6 @@ func _draw():
 
 
 func damage(amount: int):
-	print("damage!!")
 	TextPopupManager.damage_popup(str(amount), global_position)
 	if health <= 0: return
 

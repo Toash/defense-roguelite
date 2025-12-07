@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bapufyc81xndi"]
+
+[node name="HealthUI" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Fill" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
