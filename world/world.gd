@@ -1,10 +1,11 @@
 extends Node2D
 
 
-## worldgen and pathfinding 
+## Root node in a game, used for worldgen and pathfinding 
 class_name World
 
 signal generated_spawn_nodes(nodes: Array[Node2D])
+signal nexus_spawned(nexus: Nexus)
 
 @export var world_config: WorldConfig
 
@@ -163,6 +164,13 @@ func _setup_pathfinding():
 
 func get_astar() -> AStarGrid2D:
 	return self.astar_grid
+
+
+## broadcasts that the nexus has been set
+## useful for enemies to then go towards it.
+func set_nexus(nexus: Nexus):
+	self.nexus = nexus
+	nexus_spawned.emit(nexus)
 
 # COORD CONVERSION
 # ============================

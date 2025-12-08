@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnpygi6xo1s0n"]
+[gd_scene load_steps=10 format=3 uid="uid://dnpygi6xo1s0n"]
 
 [ext_resource type="Script" uid="uid://dsxsaqwksga3x" path="res://actors/nexus/nexus.gd" id="1_wx721"]
 [ext_resource type="Shader" uid="uid://bte14t1wav6lm" path="res://actors/nexus/nexus.gdshader" id="2_2c8jp"]
 [ext_resource type="Texture2D" uid="uid://yst1t6sauyst" path="res://icon.svg" id="2_w52sr"]
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="3_w52sr"]
-[ext_resource type="Theme" uid="uid://dhhk734ua4d0l" path="res://ui/theme.tres" id="5_gyffu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyffu"]
 shader = ExtResource("2_2c8jp")
@@ -12,10 +11,28 @@ shader = ExtResource("2_2c8jp")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wx721"]
 size = Vector2(63, 70)
 
-[node name="Nexus" type="Node2D" node_paths=PackedStringArray("area", "health")]
+[sub_resource type="Gradient" id="Gradient_gyffu"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.3561709, 0.1618908, 0.17763561, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4ha8x"]
+gradient = SubResource("Gradient_gyffu")
+width = 8
+height = 8
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t8i1i"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 85.892
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 98, 0)
+
+[node name="Nexus" type="Node2D" node_paths=PackedStringArray("area", "health", "sprite")]
 script = ExtResource("1_wx721")
 area = NodePath("Area2D")
 health = NodePath("Health")
+sprite = NodePath("Sprite2D")
 metadata/_custom_type_script = "uid://dsxsaqwksga3x"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -29,7 +46,6 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
 position = Vector2(-2.5, -3)
 shape = SubResource("RectangleShape2D_wx721")
 
@@ -38,11 +54,8 @@ script = ExtResource("3_w52sr")
 max_health = 10
 metadata/_custom_type_script = "uid://gyp8bshfrfoj"
 
-[node name="Label" type="Label" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 visible = false
-offset_left = -46.0
-offset_top = -57.0
-offset_right = 57.0
-offset_bottom = -34.0
-theme = ExtResource("5_gyffu")
-text = "protect me!!!!"
+position = Vector2(0, 27)
+texture = SubResource("GradientTexture2D_4ha8x")
+process_material = SubResource("ParticleProcessMaterial_t8i1i")

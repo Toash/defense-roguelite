@@ -10,13 +10,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6jdh"]
 size = Vector2(16, 16)
 
-[node name="WoodWall" type="Area2D" node_paths=PackedStringArray("health", "main_sprite")]
+[node name="WoodWall" type="Area2D" node_paths=PackedStringArray("health")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_syurq")
 health = NodePath("Health")
 defense_data = ExtResource("2_o6jdh")
-main_sprite = NodePath("Sprite2D")
 metadata/_custom_type_script = "uid://h2bibq07av83"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

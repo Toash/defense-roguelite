@@ -19,7 +19,7 @@ enum PRIORITY {
 @export var defense_data: DefenseData
 
 ## used for outlining
-@export var main_sprite: Sprite2D
+# @export var main_sprite: Sprite2D
 
 var pickup_defense_scene: PackedScene = preload("res://ui/context/scenes/pickup_defense.tscn")
 var defense_stat_display_scene: PackedScene = preload("res://ui/context/scenes/defense_stat_display.tscn")
@@ -117,7 +117,7 @@ func _to_string() -> String:
 func _setup_interactable():
 	# TODO: Specify interactable radius
 	var interactable = Interactable.create_interactable(10)
-	interactable.sprite = main_sprite
+	# interactable.sprite = main_sprite
 	
 
 	var defense_stat_display = defense_stat_display_scene.instantiate() as DefenseStatDisplay

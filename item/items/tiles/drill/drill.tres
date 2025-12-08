@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dn6cg4uxupdqf"]
+
+[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_887ea"]
+[ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="2_ca8b0"]
+
+[resource]
+script = ExtResource("2_ca8b0")
+display_name = "Drill"
+description = "Used to mine resources."
+max_stack = 1
+metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

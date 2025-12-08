@@ -34,4 +34,6 @@ func show_outline(outline: ShaderMaterial):
 	sprite.material = outline
 
 func hide_outline():
+	if sprite == null:
+		return
 	sprite.material = null

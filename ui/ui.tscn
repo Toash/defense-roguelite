@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b3kkj3vijsw7s"]
+[gd_scene load_steps=18 format=3 uid="uid://b3kkj3vijsw7s"]
 
 [ext_resource type="Script" uid="uid://dy00162n1j4me" path="res://ui/ui.gd" id="1_bo1jx"]
 [ext_resource type="PackedScene" uid="uid://c44tg88n7uy51" path="res://ui/inventory_ui.tscn" id="1_ks8t7"]
@@ -20,10 +20,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7jpl"]
 bg_color = Color(1, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obcwv"]
-bg_color = Color(1, 0, 1, 1)
-
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("inventory_window", "pickup_window", "world_container_window", "crafting_window", "hotbar_ui", "health_bar", "nexus_bar", "coins_label", "death_ui", "game_state_ui", "offscreen_indicators")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("inventory_window", "pickup_window", "world_container_window", "crafting_window", "hotbar_ui", "health_bar", "coins_label", "death_ui", "game_state_ui", "offscreen_indicators")]
 script = ExtResource("1_bo1jx")
 inventory_window = NodePath("InventoryWindow")
 pickup_window = NodePath("PickupWindow")
@@ -31,7 +28,6 @@ world_container_window = NodePath("WorldContainerWindow")
 crafting_window = NodePath("CraftingWindow")
 hotbar_ui = NodePath("HotbarUI")
 health_bar = NodePath("Stats/MarginContainer/VBoxContainer/Health")
-nexus_bar = NodePath("Stats/MarginContainer/VBoxContainer/Nexus")
 coins_label = NodePath("Stats/MarginContainer/VBoxContainer/HBoxContainer/Coins")
 death_ui = NodePath("DeathUI")
 game_state_ui = NodePath("GameStateUI")
@@ -104,16 +100,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Health"
-
-[node name="Nexus" type="ProgressBar" parent="Stats/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_obcwv")
-
-[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/Nexus"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Nexus"
 
 [node name="WorldContainerWindow" parent="." instance=ExtResource("4_tf0e0")]
 visible = false
