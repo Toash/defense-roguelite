@@ -1,5 +1,8 @@
 extends TargetProvider
 
+## represents the target for the AI.
+## used to store the reference of a target, 
+##		that can be used and referred to between states.
 class_name AITarget
 
 var reference: Node2D

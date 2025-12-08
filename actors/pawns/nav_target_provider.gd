@@ -1,7 +1,7 @@
 extends TargetProvider
 
 
-## provides target for nav agent
+## interface that provdides the target of a nav agent
 class_name NavTargetProvider
 
 @export var agent: NavigationAgent2D

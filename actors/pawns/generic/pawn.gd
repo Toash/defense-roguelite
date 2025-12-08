@@ -15,8 +15,7 @@ enum FACTION {
 
 @export_group("References")
 @export var health: Health
-
-var pawn_name: String
+var character_sprite: CharacterSprite
 
 var status_effect_container: PawnStatusEffectContainer
 
@@ -25,13 +24,15 @@ var knockback_velocity: Vector2
 var knockback_decay = 800
 
 
-# TODO: why not ready 
 func _enter_tree() -> void:
 	world = get_tree().get_first_node_in_group("world") as World
 	_setup_status_effect_container()
 	_setup_health()
-
+	character_sprite = get_node("CharacterSprite")
+	if character_sprite == null:
+		push_error("Could not find character sprite!")
 	
+
 func _physics_process(delta: float) -> void:
 	# if knockback_velocity > Vector2.ZERO:
 	# 	knockback_velocity -= Vector2.ONE * knockback_decay * delta

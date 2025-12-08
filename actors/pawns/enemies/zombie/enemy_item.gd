@@ -1,7 +1,7 @@
 extends ItemInstanceProvider
 
 
-class_name ZombieItem
+class_name EnemyItem
 
 # @export var inst: ItemInstance
 @export var data: ItemData

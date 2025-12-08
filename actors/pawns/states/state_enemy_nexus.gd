@@ -8,8 +8,8 @@ var enemy: Enemy
 # @export var tile_pathfind: TilePathfind
 # @export var player_tracker: PawnTracker
 # @export var defense_tracker: DefenseTracker
-@export var ai_target: AITarget
-@export var nav: NavigationAgent2D
+# @export var ai_target: AITarget
+# @export var nav: NavigationAgent2D
 
 var active = false
 @onready var nexus_pos: Vector2 = (get_tree().get_first_node_in_group("nexus") as Nexus).global_position
@@ -31,9 +31,9 @@ func state_update(delta: float):
 
 func state_physics_update(delta: float):
 	if active == false: return
-	nav.target_position = nexus_pos
+	enemy.nav_agent.target_position = nexus_pos
 
-	var next_point: Vector2 = nav.get_next_path_position()
+	var next_point: Vector2 = enemy.nav_agent.get_next_path_position()
 	var normal_dir = (next_point - pawn.global_position).normalized()
 	
 	pawn.set_raw_velocity(normal_dir * enemy.get_data().move_speed)
@@ -50,14 +50,14 @@ func state_exit():
 func _on_player_found(player: Pawn):
 	# pass
 	# print("found player!")
-	ai_target.reference = player
+	enemy.ai_target.reference = player
 	transitioned.emit(self, "chase")
 
 func _on_defense_found(defense: RuntimeDefense):
 	# print("found defense!")
 	if defense.get_defense_data().defense_priority != enemy.get_data().defense_targeting:
 		return
-	ai_target.reference = defense
+	enemy.ai_target.reference = defense
 	transitioned.emit(self, "break")
 
 # func _set_target():

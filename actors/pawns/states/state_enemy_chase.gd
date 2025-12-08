@@ -9,12 +9,6 @@ signal chase_target_lost
 @export var pawn: Pawn
 
 
-@export var nav: NavigationAgent2D
-
-
-@export var target: AITarget
-
-
 var active = false
 
 
@@ -31,11 +25,11 @@ func state_update(delta: float):
 func state_physics_update(delta: float):
 	if active == false: return
 
-	if target.reference:
-		nav.target_position = target.reference.global_position
-		chase_target_emitted.emit(target.reference.global_position)
+	if enemy.ai_target.reference:
+		enemy.nav_agent.target_position = enemy.ai_target.reference.global_position
+		chase_target_emitted.emit(enemy.ai_target.reference.global_position)
 
-		var next_point: Vector2 = nav.get_next_path_position()
+		var next_point: Vector2 = enemy.nav_agent.get_next_path_position()
 		var normal_dir = (next_point - pawn.global_position).normalized()
 		
 

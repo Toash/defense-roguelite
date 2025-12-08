@@ -7,15 +7,8 @@ signal target_lost
 
 var enemy: Enemy
 @export var pawn: Pawn
-# @export var character: CharacterBody2D
 @export var attack_move_speed = 300
 @export var attack_cooldown = 1
-# @export var attack_vision: Area2D
-@export var equipment: PawnEquipment
-
-
-@export var nav: NavigationAgent2D
-@export var ai_target: AITarget
 
 
 var active = false
@@ -39,16 +32,16 @@ func state_physics_update(delta: float):
 
 	t += delta
 
-	nav.target_position = ai_target.reference.global_position
-	target_emitted.emit(ai_target.reference.global_position)
+	enemy.nav_agent.target_position = enemy.ai_target.reference.global_position
+	target_emitted.emit(enemy.ai_target.reference.global_position)
 
-	var next_point: Vector2 = nav.get_next_path_position()
+	var next_point: Vector2 = enemy.nav_agent.get_next_path_position()
 	var normal_dir = (next_point - pawn.global_position).normalized()
 
 	pawn.set_raw_velocity(normal_dir * enemy.get_data().move_speed)
 	pawn.move_and_collide(pawn.get_total_velocity() * delta)
 	if t > attack_cooldown:
-		equipment.use()
+		enemy.equipment.use()
 		t = 0
 
 
@@ -59,5 +52,5 @@ func state_exit():
 
 func _on_attack_vision_exited(previous_pawn: Pawn, pawn: Pawn):
 	if previous_pawn is Player:
-		ai_target.reference = previous_pawn
+		enemy.ai_target.reference = previous_pawn
 		transitioned.emit(self, "chase")

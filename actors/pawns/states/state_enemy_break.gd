@@ -4,7 +4,6 @@ extends State
 @export var speed = 200
 @export var break_cooldown := 2.5
 
-@export var character: CharacterBody2D
 
 @export var equipment: PawnEquipment
 
@@ -14,11 +13,14 @@ extends State
 
 var active = false
 var t: float = 0.0
+var enemy: Enemy
 
 
 const BREAK_DISTANCE = 80
 
 
+func _ready():
+	enemy = get_node("../..") as Enemy
 func state_enter():
 	active = true
 	
@@ -31,15 +33,15 @@ func state_physics_update(delta: float):
 
 	t += delta
 
-	if ai_target.reference:
+	if enemy.ai_target.reference:
 		nav.target_position = ai_target.reference.global_position
 		var next_point: Vector2 = nav.get_next_path_position()
-		var normal_dir = (next_point - character.global_position).normalized()
+		var normal_dir = (next_point - enemy.global_position).normalized()
 
-		character.velocity = normal_dir * speed
-		character.move_and_collide(normal_dir * speed * delta)
+		enemy.velocity = normal_dir * speed
+		enemy.move_and_collide(normal_dir * speed * delta)
 		
-		if (ai_target.reference.global_position - character.global_position).length() < BREAK_DISTANCE:
+		if (enemy.ai_target.reference.global_position - enemy.global_position).length() < BREAK_DISTANCE:
 			if t > break_cooldown:
 				equipment.use()
 				t = 0

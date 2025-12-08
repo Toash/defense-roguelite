@@ -1,15 +1,15 @@
 extends Node2D
 
 ## displays an item instance that a user has, must be supplied a target.
-## usually used for the spawnpoint for equipment.
+## ex. used for the spawnpoint for equipment.
 class_name ItemDisplay
 
 
 signal origin_created(node: Node2D)
 signal origin_position_emitted(pos: Vector2)
 
-## how far the item instnace will be from the player
 @export var user: Node2D
+## how far the item instnace will be from the player
 @export var distance_from_user = 50
 @export var instance_supplier: ItemInstanceProvider
 @export var target_supplier: TargetProvider
@@ -46,6 +46,7 @@ func _set_instance(inst: ItemInstance):
 		inst_sprite.texture = null
 		inst_sprite.visible = false
 
+## Where the item should be displayed
 func get_origin_node() -> Node2D:
 	return origin_node
 
@@ -74,6 +75,7 @@ func _process(delta):
 	inst_sprite.look_at(target)
 
 
+## sets the target. the origin points towards this.
 func _update_target(pos: Vector2):
 	target = pos
 

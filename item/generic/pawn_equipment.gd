@@ -4,16 +4,17 @@ extends Node
 ## Handles using some current instance for a user
 class_name PawnEquipment
 
-## used when the item spawns stuff.
-@export var user: Node2D
+## pawn that uses the equipment.
+@export var user: Pawn
 
-
-## should have a method that returns an instance.
+## provides the instance to be used
 @export var inst_provider: ItemInstanceProvider
+## provides the target when using the item
 @export var target_provider: TargetProvider
 
-## Used for passing in information when the items get used.
 @export var item_display: ItemDisplay
+
+## used the handle limbs when using the item
 @export var character_sprite: CharacterSprite
 
 var target: Vector2
