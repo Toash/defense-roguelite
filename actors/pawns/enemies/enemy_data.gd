@@ -18,4 +18,15 @@ class_name EnemyData
 @export var attack_speed: float = 1
 
 
+@export_group("Vision")
 @export var defense_targeting: RuntimeDefense.PRIORITY = RuntimeDefense.PRIORITY.VISIBLE
+
+@export var factions_to_track: Array[Pawn.FACTION] = [Pawn.FACTION.HUMAN]
+@export var defense_priority_targeting: RuntimeDefense.PRIORITY = RuntimeDefense.PRIORITY.VISIBLE
+
+## range to detect player 
+@export var player_vision_distance: float = 500
+## range to detect defenses
+@export var defense_vision_distance: float = 500
+## range to start attacking
+@export var attack_vision_distance: float = 100

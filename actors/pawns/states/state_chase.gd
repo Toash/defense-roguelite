@@ -8,7 +8,6 @@ signal chase_target_lost
 @export var enemy: Enemy
 @export var pawn: Pawn
 
-@export var attack_tracker:PawnTracker
 
 @export var nav: NavigationAgent2D
 
@@ -23,7 +22,7 @@ func state_enter():
 	active = true
 	chase_target_acquired.emit()
 	# attack_tracker.nearest_pawn_changed.connect(_on_attack_vision_entered)
-	attack_tracker.pawn_line_of_sight.connect(_on_attack_vision_entered)
+	enemy.attack_tracker.pawn_line_of_sight.connect(_on_attack_vision_entered)
 	
 
 func state_update(delta: float):
@@ -50,7 +49,7 @@ func state_physics_update(delta: float):
 func state_exit():
 	active = false
 	chase_target_lost.emit()
-	attack_tracker.pawn_line_of_sight.disconnect(_on_attack_vision_entered)
+	enemy.attack_tracker.pawn_line_of_sight.disconnect(_on_attack_vision_entered)
 
 
 func _on_attack_vision_entered(pawn: Pawn):

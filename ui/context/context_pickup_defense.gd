@@ -1,13 +1,16 @@
 extends Button
 
+## should be in scenetree ( to get path to world )
 class_name PickupDefense
 
 var defense: RuntimeDefense
+var world: World
 
 func _ready():
 	pressed.connect(_on_press)
 
-func setup(defense: RuntimeDefense):
+func setup(world: World, defense: RuntimeDefense):
+	self.world = world
 	self.defense = defense
 
 
@@ -27,4 +30,7 @@ func _on_press():
 	
 	ContextManager.hide_context()
 	player.containers.force_add_item_group(item_group)
-	defense.queue_free()
+
+	# (get_node("/root/World") as World).defense_tiles.erase_cell(defense.tile_pos)
+	world.defense_tiles.erase_cell(defense.tile_pos)
+	# defense.queue_free()

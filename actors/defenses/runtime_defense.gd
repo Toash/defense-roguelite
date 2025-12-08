@@ -1,7 +1,7 @@
 extends Area2D
 
-## RUNTIME root node for all defenses 
-# TODO: Should these be effected by status effects?
+## runtime root node for all defenses 
+## the area2d for this defense, corresponds to the range that enemies should be able to detect this defense.
 class_name RuntimeDefense
 
 # How do other enemies see this ? 
@@ -21,12 +21,18 @@ enum PRIORITY {
 ## used for outlining
 # @export var main_sprite: Sprite2D
 
+## the tile position that this defense is currently on.
+var tile_pos: Vector2i
+
 var pickup_defense_scene: PackedScene = preload("res://ui/context/scenes/pickup_defense.tscn")
 var defense_stat_display_scene: PackedScene = preload("res://ui/context/scenes/defense_stat_display.tscn")
+var world: World
+
 
 # @export var applied_upgrades: Array[DefenseUpgrade]
 
 func _ready():
+	world = get_node("/root/World") as World
 	add_to_group("defenses")
 
 
@@ -46,6 +52,9 @@ func _ready():
 		health.health = defense_data.health
 
 	_setup_interactable()
+
+	
+	_setup_tile_pos()
 
 
 var upgrade_manager_upgrades: Array[DefenseUpgrade] = []
@@ -125,6 +134,15 @@ func _setup_interactable():
 	interactable.context_nodes.append(defense_stat_display)
 	
 	var pickup_defense = pickup_defense_scene.instantiate() as PickupDefense
-	pickup_defense.setup(self)
+	pickup_defense.setup(world, self)
 	interactable.context_nodes.append(pickup_defense)
 	add_child(interactable)
+
+
+func _setup_tile_pos():
+	var world = get_node("/root/World") as World
+	var defense_layer = world.defense_tiles
+
+	var local_pos = defense_layer.to_local(global_position)
+	tile_pos = defense_layer.local_to_map(local_pos)
+	print(tile_pos)

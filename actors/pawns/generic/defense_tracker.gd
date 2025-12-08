@@ -1,11 +1,13 @@
 extends Node2D
 
+## tracks defenses aronud a radius
 class_name DefenseTracker
 
 signal found_defense(defense: RuntimeDefense)
 
 
-@export var visibility_level: RuntimeDefense.PRIORITY
+## what priority to track
+@export var priority_level: RuntimeDefense.PRIORITY
 
 @export var vision_distance: float = 300
 
@@ -15,7 +17,7 @@ var defense_vision: Area2D
 var defense_raycast: RayCast2D
 
 var retries = 0
-const MAX_RETRIES = 50 ## only find player if we can see this many times in a row.
+const MAX_RETRIES = 10 ## only find player if we can see this many times in a row.
 const COOLDOWN = 2 ## cooldown after having discovered a defense.
 var t: float = INF
 

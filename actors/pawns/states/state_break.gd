@@ -18,6 +18,7 @@ var t: float = 0.0
 
 const BREAK_DISTANCE = 80
 
+
 func state_enter():
 	active = true
 	
