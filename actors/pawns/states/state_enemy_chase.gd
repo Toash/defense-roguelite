@@ -34,7 +34,7 @@ func state_physics_update(delta: float):
 		
 
 		# pawn.move_and_collide(normal_dir * enemy.enemy_data.move_speed * delta)
-		pawn.set_raw_velocity(normal_dir * enemy.get_data().move_speed)
+		pawn.set_raw_velocity(normal_dir * enemy.get_enemy_data().move_speed)
 		pawn.move_and_collide(pawn.get_total_velocity() * delta)
 	else:
 		transitioned.emit(self, "nexus")

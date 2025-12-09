@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://bag3yiaad1f5p"]
+
+[ext_resource type="Texture2D" uid="uid://dcnuud2mmhqob" path="res://actors/defenses/ranged/mini_turret/mini_turret_body.png" id="1_m33t6"]
+[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="2_7jdul"]
+[ext_resource type="Resource" uid="uid://uvmg8vu7yy7j" path="res://item/effects/defenses/place_defense_mini_turret.tres" id="3_y6pf1"]
+[ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="4_c4y36"]
+
+[resource]
+script = ExtResource("4_c4y36")
+display_name = "Mini Turret"
+description = "Ranged tower that shoots bullets."
+max_stack = 1
+icon = ExtResource("1_m33t6")
+consume_on_use = true
+ingame_sprite = ExtResource("1_m33t6")
+item_effects = Array[ExtResource("2_7jdul")]([ExtResource("3_y6pf1")])
+metadata/_custom_type_script = "uid://c0ie8dprpo3eg"

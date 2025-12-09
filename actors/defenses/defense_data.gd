@@ -17,20 +17,6 @@ enum BASE_STAT {
 	PROJECTILE_SPEED,
 }
 
-static func defense_type_to_string(stat: int) -> String:
-	var raw: String = DEFENSE_TYPE.keys()[stat]
-	var parts := raw.to_lower().split("_")
-	for i in parts.size():
-		parts[i] = parts[i].capitalize()
-	return " ".join(parts)
-
-static func base_stat_to_string(stat: int) -> String:
-	var raw: String = BASE_STAT.keys()[stat]
-	var parts := raw.to_lower().split("_")
-	for i in parts.size():
-		parts[i] = parts[i].capitalize()
-	return " ".join(parts)
-
 
 @export_group("General")
 ## the item data that corresponds to this defense. used for picking up.
@@ -38,10 +24,13 @@ static func base_stat_to_string(stat: int) -> String:
 @export var defense_type: DEFENSE_TYPE
 @export var defense_priority: RuntimeDefense.PRIORITY
 @export var health: int = 100
+
+@export var attack_range: float = 450
 @export var attack_damage: int = 10
 @export var attack_cooldown: float = 2
 
 @export_group("Behavior")
+@export var factions_to_track: Array[Pawn.FACTION] = [Pawn.FACTION.ENEMY]
 ## The base functionality of this tower
 @export var base_effects: Array[ItemEffect] = []
 
@@ -61,6 +50,8 @@ func get_base_stat(base_stat: BASE_STAT) -> float:
 			return attack_damage
 		BASE_STAT.ATTACK_SPEED:
 			return attack_cooldown
+		BASE_STAT.PROJECTILE_SPEED:
+			return projectile_speed
 		_:
 			push_error("base_stat not specified")
 			return 0
@@ -69,7 +60,19 @@ func _to_string() -> String:
 	return "Tower: " + str(DEFENSE_TYPE.keys()[defense_type])
 
 
-static func get_random_defense_type() -> DEFENSE_TYPE:
-	var i: int = randi() % DEFENSE_TYPE.size()
-	# integer
-	return DEFENSE_TYPE.values()[i]
+static func get_default() -> DefenseData:
+	return DefenseData.new()
+
+static func defense_type_to_string(stat: int) -> String:
+	var raw: String = DEFENSE_TYPE.keys()[stat]
+	var parts := raw.to_lower().split("_")
+	for i in parts.size():
+		parts[i] = parts[i].capitalize()
+	return " ".join(parts)
+
+static func base_stat_to_string(stat: int) -> String:
+	var raw: String = BASE_STAT.keys()[stat]
+	var parts := raw.to_lower().split("_")
+	for i in parts.size():
+		parts[i] = parts[i].capitalize()
+	return " ".join(parts)

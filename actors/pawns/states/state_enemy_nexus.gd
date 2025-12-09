@@ -36,7 +36,7 @@ func state_physics_update(delta: float):
 	var next_point: Vector2 = enemy.nav_agent.get_next_path_position()
 	var normal_dir = (next_point - pawn.global_position).normalized()
 	
-	pawn.set_raw_velocity(normal_dir * enemy.get_data().move_speed)
+	pawn.set_raw_velocity(normal_dir * enemy.get_enemy_data().move_speed)
 	pawn.move_and_collide(pawn.get_total_velocity() * delta)
 
 			
@@ -55,7 +55,7 @@ func _on_player_found(player: Pawn):
 
 func _on_defense_found(defense: RuntimeDefense):
 	# print("found defense!")
-	if defense.get_defense_data().defense_priority != enemy.get_data().defense_targeting:
+	if defense.defense_data.defense_priority != enemy.get_enemy_data().defense_priority_targeting:
 		return
 	enemy.ai_target.reference = defense
 	transitioned.emit(self, "break")

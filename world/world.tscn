@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=23 format=3 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="Script" uid="uid://csd4ncy3jgem8" path="res://world/world.gd" id="1_4papg"]
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/pawns/player/player.tscn" id="1_fyhu2"]
@@ -11,7 +11,6 @@
 [ext_resource type="TileSet" uid="uid://kp24hb4w12of" path="res://world/tilesets/interactables.tres" id="10_mad0u"]
 [ext_resource type="TileSet" uid="uid://dal5shiydc68s" path="res://world/tilesets/resources.tres" id="10_ocfjn"]
 [ext_resource type="PackedScene" uid="uid://dnpygi6xo1s0n" path="res://actors/nexus/nexus.tscn" id="11_ov2xu"]
-[ext_resource type="AudioStream" uid="uid://ce32rgxtm702s" path="res://audio/audioaudio/weather/smooth_wind.mp3" id="12_mad0u"]
 [ext_resource type="Script" uid="uid://bhr5uamvonway" path="res://actors/pawns/generic/debug_path.gd" id="13_ocfjn"]
 [ext_resource type="Script" uid="uid://b2l0f2hsw0cbx" path="res://game/game_state.gd" id="14_b2suy"]
 [ext_resource type="Resource" uid="uid://bfp85p8ebqdan" path="res://actors/pawns/enemies/resources/basic_zombie.tres" id="14_h8lre"]
@@ -80,15 +79,6 @@ tile_set = ExtResource("10_h8lre")
 [node name="DebugPath" type="Node2D" parent="."]
 script = ExtResource("13_ocfjn")
 metadata/_custom_type_script = "uid://bhr5uamvonway"
-
-[node name="Weather" type="Node2D" parent="."]
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="Weather"]
-stream = ExtResource("12_mad0u")
-volume_db = -10.565
-autoplay = true
-bus = &"weather"
-parameters/looping = true
 
 [node name="Roots" type="Node2D" parent="."]
 position = Vector2(2, 0)

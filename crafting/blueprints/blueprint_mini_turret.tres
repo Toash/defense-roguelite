@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b6bhu0l2m8yl0" path="res://crafting/item_data_group.gd" id="1_75nst"]
 [ext_resource type="Script" uid="uid://c0igk80mo7ba7" path="res://crafting/blueprint.gd" id="2_8nets"]
-[ext_resource type="Resource" uid="uid://bag3yiaad1f5p" path="res://item/items/tiles/defense/mini_turret_item.tres" id="3_mhjk2"]
+[ext_resource type="Resource" uid="uid://bag3yiaad1f5p" path="res://item/items/tiles/defense/item_mini_turret.tres" id="3_mhjk2"]
 
 [sub_resource type="Resource" id="Resource_41vqj"]
 script = ExtResource("1_75nst")

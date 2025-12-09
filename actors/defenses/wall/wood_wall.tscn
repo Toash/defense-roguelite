@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://h2bibq07av83" path="res://actors/defenses/runtime_defense.gd" id="1_syurq"]
 [ext_resource type="Texture2D" uid="uid://xj3elfr75rb5" path="res://actors/defenses/wall/wood_wall.png" id="2_jb8h0"]
-[ext_resource type="Resource" uid="uid://c373pmscowk43" path="res://actors/defenses/wall/wood_wall_data.tres" id="2_o6jdh"]
+[ext_resource type="Resource" uid="uid://c373pmscowk43" path="res://actors/defenses/wall/defense_data_wood_wall.tres" id="2_o6jdh"]
 [ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="3_7l6v4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jb8h0"]

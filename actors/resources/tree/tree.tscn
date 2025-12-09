@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bn3qjdpbtaqlm" path="res://actors/resources/tree/tree.png" id="2_7w16m"]
 [ext_resource type="Shader" uid="uid://smx07gg7bpv2" path="res://actors/resources/tree/tree.gdshader" id="2_u7por"]
 [ext_resource type="Script" uid="uid://ckcpqp1b5jb7q" path="res://actors/resources/resource_dropper.gd" id="3_ae50a"]
-[ext_resource type="Resource" uid="uid://cxlw2i1uptmc5" path="res://item/items/tiles/defense/wood_wall.tres" id="4_gahu0"]
+[ext_resource type="Resource" uid="uid://cxlw2i1uptmc5" path="res://item/items/tiles/defense/item_wood_wall.tres" id="4_gahu0"]
 [ext_resource type="Script" uid="uid://6x0akmb8ed61" path="res://actors/generic/health_bar.gd" id="5_7w16m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sim66"]

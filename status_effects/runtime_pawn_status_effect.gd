@@ -36,5 +36,6 @@ func _process(delta):
 
 ## called when the status effect duration ends.
 func _on_exit(pawn: Pawn):
-	removed_status_effect.emit(self)
+	# removed_status_effect.emit(self)
+	removed_status_effect.emit()
 	queue_free()

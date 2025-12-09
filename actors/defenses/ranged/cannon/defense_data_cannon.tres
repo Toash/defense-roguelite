@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_47nsg"]
 [ext_resource type="Script" uid="uid://do5j60ewuaqp" path="res://actors/defenses/defense_data.gd" id="1_onhhv"]
-[ext_resource type="Resource" uid="uid://ihkpap04oom0" path="res://item/items/tiles/defense/cannon.tres" id="2_c0mfu"]
+[ext_resource type="Resource" uid="uid://ihkpap04oom0" path="res://item/items/tiles/defense/item_cannon.tres" id="2_c0mfu"]
 
 [resource]
 script = ExtResource("1_onhhv")

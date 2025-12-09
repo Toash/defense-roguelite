@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b6bhu0l2m8yl0" path="res://crafting/item_data_group.gd" id="1_snl0b"]
 [ext_resource type="Script" uid="uid://c0igk80mo7ba7" path="res://crafting/blueprint.gd" id="2_cun12"]
-[ext_resource type="Resource" uid="uid://jr4u7ev0sy1q" path="res://item/items/tiles/defense/wooden_ballista.tres" id="2_yaccs"]
+[ext_resource type="Resource" uid="uid://jr4u7ev0sy1q" path="res://item/items/tiles/defense/item_wooden_ballista.tres" id="2_yaccs"]
 
 [sub_resource type="Resource" id="Resource_sii2v"]
 script = ExtResource("1_snl0b")

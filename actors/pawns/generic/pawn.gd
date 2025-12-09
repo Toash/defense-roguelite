@@ -6,7 +6,7 @@ class_name Pawn
 enum FACTION {
 	NO_FACTION,
 	HUMAN,
-	ZOMBIE
+	ENEMY
 }
 
 @onready var world: World = get_tree().get_first_node_in_group("world") as World

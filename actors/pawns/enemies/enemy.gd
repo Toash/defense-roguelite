@@ -3,7 +3,7 @@ extends Pawn
 
 class_name Enemy
 
-## SHOULD NOT BE ACCESSED DIRECTLY! USE get_data 
+## SHOULD NOT BE ACCESSED DIRECTLY! USE get_enemy_data 
 var enemy_data: EnemyData
 
 @export var state_machine: StateMachine
@@ -19,52 +19,33 @@ var attack_tracker: PawnTracker
 ## used for using items
 var equipment: PawnEquipment
 var item_display: ItemDisplay
+
+# item that the enemy holds.
 var enemy_item: EnemyItem
+
 var ai_target: AITarget
 var nav_target_provider: NavTargetProvider
 
 func _enter_tree() -> void:
 	super._enter_tree()
-	player_tracker = PawnTracker.new()
-	defense_tracker = DefenseTracker.new()
-	attack_tracker = PawnTracker.new()
-	add_child(player_tracker)
-	add_child(defense_tracker)
-	add_child(attack_tracker)
 
-	nav_agent = NavigationAgent2D.new()
-	add_child(nav_agent)
+	faction = Pawn.FACTION.ENEMY
 
-	nav_target_provider = NavTargetProvider.new()
-	nav_target_provider.agent = nav_agent
-	add_child(nav_target_provider)
+	_setup_trackers()
+	_set_trackers_with_data()
 
-	enemy_item = EnemyItem.new()
-	enemy_item.data = get_data().item_data
-	add_child(enemy_item)
+	_setup_nav_agent()
+	_setup_nav_target_provider()
 
-	ai_target = AITarget.new()
-	add_child(ai_target)
+	_setup_enemy_item()
+	_set_enemy_item_with_data()
 
-	item_display = ItemDisplay.new()
-	item_display.user = self
-	item_display.instance_supplier = enemy_item
-	item_display.target_supplier = ai_target
-
-	add_child(item_display)
-
-	equipment = PawnEquipment.new()
-	equipment.user = self
-	equipment.inst_provider = enemy_item
-	equipment.target_provider = ai_target
-	equipment.item_display = item_display
-	equipment.character_sprite = character_sprite
-	add_child(equipment)
+	_setup_ai_target()
+	_setup_item_display()
+	_setup_equipment()
 
 	character_sprite.target_supplier = nav_target_provider
 
-
-	_init_trackers_with_data()
 
 func _ready():
 	add_to_group("enemy")
@@ -82,10 +63,12 @@ func setup(data: EnemyData):
 	self.health.set_max_health(int(data.health))
 	self.health.set_health(data.health)
 
-	_init_trackers_with_data()
+	_set_trackers_with_data()
+	_set_enemy_item_with_data()
 
 
-func get_data() -> EnemyData:
+## returns the enemy data, returning a default config if it is not present.
+func get_enemy_data() -> EnemyData:
 	if enemy_data == null:
 		return EnemyData.get_default()
 	else:
@@ -96,7 +79,7 @@ func _on_death():
 	remove_from_group("enemy")
 
 	# add coins to player
-	(get_tree().get_first_node_in_group("player") as Player).coins.change_coins(get_data().coins_dropped)
+	(get_tree().get_first_node_in_group("player") as Player).coins.change_coins(get_enemy_data().coins_dropped)
 
 
 	state_machine.queue_free()
@@ -108,12 +91,57 @@ func _on_death():
 	queue_free.call_deferred()
 
 
-func _init_trackers_with_data():
-	player_tracker.factions_to_track = get_data().factions_to_track
-	player_tracker.vision_distance = get_data().player_vision_distance
+func _set_trackers_with_data():
+	player_tracker.factions_to_track = get_enemy_data().factions_to_track
+	player_tracker.vision_distance = get_enemy_data().player_vision_distance
 
-	defense_tracker.vision_distance = get_data().defense_vision_distance
-	defense_tracker.priority_level = get_data().defense_priority_targeting
+	defense_tracker.vision_distance = get_enemy_data().defense_vision_distance
+	defense_tracker.priority_level = get_enemy_data().defense_priority_targeting
 
-	attack_tracker.factions_to_track = get_data().factions_to_track
-	attack_tracker.vision_distance = get_data().attack_vision_distance
+	attack_tracker.factions_to_track = get_enemy_data().factions_to_track
+	attack_tracker.vision_distance = get_enemy_data().attack_vision_distance
+
+
+func _setup_trackers():
+	player_tracker = PawnTracker.new()
+	defense_tracker = DefenseTracker.new()
+	attack_tracker = PawnTracker.new()
+	add_child(player_tracker)
+	add_child(defense_tracker)
+	add_child(attack_tracker)
+
+func _setup_nav_agent():
+	nav_agent = NavigationAgent2D.new()
+	add_child(nav_agent)
+
+func _setup_nav_target_provider():
+	nav_target_provider = NavTargetProvider.new()
+	nav_target_provider.agent = nav_agent
+	add_child(nav_target_provider)
+
+func _setup_enemy_item():
+	enemy_item = EnemyItem.new()
+	add_child(enemy_item)
+
+func _setup_ai_target():
+	ai_target = AITarget.new()
+	add_child(ai_target)
+
+func _setup_item_display():
+	item_display = ItemDisplay.new()
+	item_display.user = self
+	item_display.instance_supplier = enemy_item
+	item_display.target_supplier = ai_target
+	add_child(item_display)
+
+func _setup_equipment():
+	equipment = PawnEquipment.new()
+	equipment.user = self
+	equipment.inst_provider = enemy_item
+	equipment.target_provider = ai_target
+	equipment.item_display = item_display
+	equipment.character_sprite = character_sprite
+	add_child(equipment)
+
+func _set_enemy_item_with_data():
+	enemy_item.data = get_enemy_data().item_data

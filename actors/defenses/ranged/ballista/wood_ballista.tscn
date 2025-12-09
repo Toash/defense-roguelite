@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cf63ae2nymmrw"]
 
 [ext_resource type="Script" uid="uid://h2bibq07av83" path="res://actors/defenses/runtime_defense.gd" id="1_rqptj"]
-[ext_resource type="Resource" uid="uid://djrdcxjoi10ac" path="res://actors/defenses/ranged/ballista/wood_ballista_data.tres" id="2_tdn6j"]
+[ext_resource type="Resource" uid="uid://djrdcxjoi10ac" path="res://actors/defenses/ranged/ballista/defense_data_wooden_ballista.tres" id="2_tdn6j"]
 [ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/pawn_tracker.gd" id="3_jiwro"]
 [ext_resource type="Texture2D" uid="uid://ca2m666bcuqon" path="res://actors/defenses/ranged/ballista/wood_ballista_top.png" id="4_tdn6j"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="7_gtmwm"]
@@ -39,14 +39,11 @@ script = ExtResource("7_gtmwm")
 initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 
-[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("enemy_tracker", "swivel_root")]
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("swivel_root")]
 script = ExtResource("8_kmmgr")
-enemy_tracker = NodePath("../../PawnTracker")
 swivel_root = NodePath("../../SpriteRoot/SwivelRoot")
 metadata/_custom_type_script = "uid://bvpgbckygjfb1"
 
-[node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("enemy_tracker", "swivel_root", "muzzle")]
+[node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("swivel_root")]
 script = ExtResource("9_77bml")
-enemy_tracker = NodePath("../../PawnTracker")
 swivel_root = NodePath("../../SpriteRoot/SwivelRoot")
-muzzle = NodePath("../../SpriteRoot/SwivelRoot/Sprite2D")

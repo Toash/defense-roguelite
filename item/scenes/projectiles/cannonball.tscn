@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b7wmd704yv387"]
 
-[ext_resource type="Script" uid="uid://c0e5vy4qopanc" path="res://item/scenes/projectiles/projectile.gd" id="1_gqaia"]
+[ext_resource type="Script" uid="uid://v2ludc88wplv" path="res://item/scenes/projectiles/projectile_scene.gd" id="1_gqaia"]
 [ext_resource type="Texture2D" uid="uid://c7qx30lklwm5e" path="res://item/scenes/projectiles/cannonball.png" id="2_gqaia"]
 [ext_resource type="Script" uid="uid://cuoh80umj24rl" path="res://item/scenes/projectiles/projectile_cannonball.gd" id="3_x2s0i"]
 [ext_resource type="PackedScene" uid="uid://dho0etfev22nf" path="res://item/scenes/projectiles/explosion.tscn" id="4_qc7fu"]

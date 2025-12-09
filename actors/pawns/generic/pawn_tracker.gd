@@ -63,7 +63,6 @@ func _physics_process(delta):
 		var distance = (global_position - pawn.global_position).length()
 		nearby_pawns[pawn] = distance
 
-
 	if get_nearest_pawn() != nearest_pawn:
 		nearest_pawn_changed.emit(nearest_pawn, get_nearest_pawn())
 		nearest_pawn = get_nearest_pawn()

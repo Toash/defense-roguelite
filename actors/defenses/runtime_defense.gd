@@ -1,7 +1,6 @@
 extends Area2D
 
 ## runtime root node for all defenses 
-## the area2d for this defense, corresponds to the range that enemies should be able to detect this defense.
 class_name RuntimeDefense
 
 # How do other enemies see this ? 
@@ -16,7 +15,13 @@ enum PRIORITY {
 
 
 # should be set in the scene. 
-@export var defense_data: DefenseData
+@export var defense_data: DefenseData:
+	get:
+		if defense_data == null:
+			push_error("DefenseData not found.")
+			return DefenseData.get_default()
+		return defense_data
+
 
 ## used for outlining
 # @export var main_sprite: Sprite2D
@@ -29,7 +34,13 @@ var defense_stat_display_scene: PackedScene = preload("res://ui/context/scenes/d
 var world: World
 
 
+var pawn_tracker: PawnTracker
+
+
 # @export var applied_upgrades: Array[DefenseUpgrade]
+
+func _enter_tree() -> void:
+	_setup_pawn_tracker()
 
 func _ready():
 	world = get_node("/root/World") as World
@@ -41,9 +52,6 @@ func _ready():
 	player.player_defenses.sync_defense_upgrades(self)
 
 	
-	if defense_data == null:
-		push_error("RuntimeDefense: defense data not specified!")
-
 	if health != null:
 		health.died.connect(func():
 			queue_free()
@@ -52,8 +60,6 @@ func _ready():
 		health.health = defense_data.health
 
 	_setup_interactable()
-
-	
 	_setup_tile_pos()
 
 
@@ -73,7 +79,7 @@ func get_runtime_stat(stat_type: DefenseData.BASE_STAT) -> float:
 		DefenseData.BASE_STAT.HEALTH:
 			return defense_data.health + get_total_additive_base_stat_modifier(DefenseData.BASE_STAT.HEALTH)
 		DefenseData.BASE_STAT.DAMAGE:
-			return defense_data.damage + get_total_additive_base_stat_modifier(DefenseData.BASE_STAT.DAMAGE)
+			return defense_data.attack_damage + get_total_additive_base_stat_modifier(DefenseData.BASE_STAT.DAMAGE)
 		DefenseData.BASE_STAT.ATTACK_SPEED:
 			# TODO: Clamp
 			return defense_data.attack_cooldown + get_total_additive_base_stat_modifier(DefenseData.BASE_STAT.ATTACK_SPEED)
@@ -87,9 +93,6 @@ func get_runtime_stat(stat_type: DefenseData.BASE_STAT) -> float:
 func get_defense_type() -> DefenseData.DEFENSE_TYPE:
 	return defense_data.defense_type
 
-func get_defense_data() -> DefenseData:
-	return self.defense_data
-
 
 func get_total_additive_base_stat_modifier(base_stat: DefenseData.BASE_STAT) -> float:
 	var modifier: float = 1
@@ -101,6 +104,10 @@ func get_total_additive_base_stat_modifier(base_stat: DefenseData.BASE_STAT) -> 
 		modifier += upgrade_modifier
 		
 	return modifier
+
+
+func get_defense_priority() -> PRIORITY:
+	return defense_data.defense_priority
 
 ## gets the effects that were added by defense upgrades
 func _get_upgrade_effects() -> Array[ItemEffect]:
@@ -146,3 +153,10 @@ func _setup_tile_pos():
 	var local_pos = defense_layer.to_local(global_position)
 	tile_pos = defense_layer.local_to_map(local_pos)
 	print(tile_pos)
+
+
+func _setup_pawn_tracker():
+	pawn_tracker = PawnTracker.new()
+	pawn_tracker.vision_distance = defense_data.attack_range
+	pawn_tracker.factions_to_track = defense_data.factions_to_track
+	add_child(pawn_tracker)

@@ -44,11 +44,11 @@ static func compute_predicted_target(origin: Vector2, target: Vector2, target_ve
 	# fallback: just aim directly at current position
 
 
-
-static func get_circle_area(radius:float) -> Area2D:
+## returns an area2d with a circle collisionshape2d of the specified radius.
+static func get_circle_area(radius: float) -> Area2D:
 	var area2d = Area2D.new()
-	var collision_shape = CollisionShape2D.new() 
+	var collision_shape = CollisionShape2D.new()
 	collision_shape.shape = CircleShape2D.new()
-	(collision_shape.shape as CircleShape2D).radius = radius 
+	(collision_shape.shape as CircleShape2D).radius = radius
 	area2d.add_child(collision_shape)
 	return area2d

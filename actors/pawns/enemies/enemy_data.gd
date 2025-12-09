@@ -1,5 +1,6 @@
 extends Resource
 
+## contains the data for enemies as well as the scene for the enemy.
 class_name EnemyData
 
 @export var scene: PackedScene
@@ -24,6 +25,8 @@ class_name EnemyData
 
 @export_group("Vision")
 @export var factions_to_track: Array[Pawn.FACTION] = [Pawn.FACTION.HUMAN]
+
+## what defense priority level this enemy targets.
 @export var defense_priority_targeting: RuntimeDefense.PRIORITY = RuntimeDefense.PRIORITY.VISIBLE
 @export var player_vision_distance: float = 500
 @export var defense_vision_distance: float = 500
