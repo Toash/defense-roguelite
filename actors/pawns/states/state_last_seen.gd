@@ -14,7 +14,7 @@ var active = false
 
 func state_enter():
 	active = true
-	player_tracker.pawn_line_of_sight.connect(_on_player_found)
+	player_tracker.got_pawn.connect(_on_player_found)
 	print("Going to last seen position.")
 
 func state_update(delta: float):
@@ -40,7 +40,7 @@ func state_physics_update(delta: float):
 func state_exit():
 	active = false
 	
-	player_tracker.pawn_line_of_sight.disconnect(_on_player_found)
+	player_tracker.got_pawn.disconnect(_on_player_found)
 
 func _on_player_found(player: Pawn):
 	target.reference = player

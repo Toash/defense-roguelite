@@ -3,6 +3,8 @@ extends Pawn
 class_name Player
 
 
+signal poll_position(global_pos: Vector2)
+
 @export var speed = 250
 @export var camera: Camera2D
 
@@ -30,10 +32,16 @@ var input_vector = Vector2.ZERO
 @export var world_container_input: WorldContainerInput
 @export var context_input: ContextInput
 
+
+## distance that the player should move to poll their position.
+const POLL_DISTANCE = 100
+var polled_position: Vector2
+
 var dead = false
 
 func _ready() -> void:
 	Game.player_load(self)
+	polled_position = global_position
 
 
 func _process(delta: float) -> void:
@@ -46,6 +54,12 @@ func _process(delta: float) -> void:
 	input_vector = input_vector.normalized()
 	velocity = input_vector * speed
 	move_and_slide()
+
+
+	if (polled_position - global_position).length() >= POLL_DISTANCE:
+		print("poll!")
+		poll_position.emit(global_position)
+		polled_position = global_position
 
 
 func _physics_process(delta: float) -> void:

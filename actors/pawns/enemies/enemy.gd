@@ -76,7 +76,10 @@ func get_enemy_data() -> EnemyData:
 		
 
 func _on_death():
+	var game_state = (get_node("/root/World/GameState") as GameState)
 	remove_from_group("enemy")
+	game_state.aggro_manager.release_aggro(self)
+
 
 	# add coins to player
 	(get_tree().get_first_node_in_group("player") as Player).coins.change_coins(get_enemy_data().coins_dropped)
