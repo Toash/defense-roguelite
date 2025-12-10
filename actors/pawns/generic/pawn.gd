@@ -34,8 +34,6 @@ func _enter_tree() -> void:
 	
 
 func _physics_process(delta: float) -> void:
-	# if knockback_velocity > Vector2.ZERO:
-	# 	knockback_velocity -= Vector2.ONE * knockback_decay * delta
 	if knockback_velocity.length() > 0.0:
 		knockback_velocity -= knockback_velocity.normalized() * knockback_decay * delta
 

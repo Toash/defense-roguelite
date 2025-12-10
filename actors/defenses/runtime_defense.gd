@@ -1,6 +1,7 @@
 extends Area2D
 
 ## runtime root node for all defenses 
+## contains information for all defenses, as well as their stats and effects for use in some other classes.
 class_name RuntimeDefense
 
 # How do other enemies see this ? 

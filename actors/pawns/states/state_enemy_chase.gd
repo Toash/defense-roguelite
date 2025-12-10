@@ -5,7 +5,7 @@ var enemy: Enemy
 
 
 var active = false
-var POLLING_DELAY = 0.5 + RandomNumberGenerator.new().randf_range(-.1, .1)
+var POLLING_DELAY = RandomNumberGenerator.new().randf_range(0, .2)
 var rng = RandomNumberGenerator.new()
 
 # time to pull again
@@ -40,7 +40,9 @@ func state_physics_update(delta: float):
 
 	var next_point: Vector2 = enemy.nav_agent.get_next_path_position()
 	var normal_dir = (next_point - enemy.global_position).normalized()
-	enemy.set_raw_velocity(normal_dir * enemy.get_enemy_data().move_speed)
+	# enemy.set_raw_velocity(normal_dir * enemy.get_enemy_data().move_speed)
+	# enemy.move_and_collide(enemy.get_total_velocity() * delta)
+	enemy.nav_agent.velocity = normal_dir * enemy.enemy_data.move_speed
 	enemy.move_and_collide(enemy.get_total_velocity() * delta)
 
 

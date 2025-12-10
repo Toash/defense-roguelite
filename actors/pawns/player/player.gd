@@ -34,7 +34,7 @@ var input_vector = Vector2.ZERO
 
 
 ## distance that the player should move to poll their position.
-const POLL_DISTANCE = 100
+const POLL_DISTANCE = 50
 var polled_position: Vector2
 
 var dead = false

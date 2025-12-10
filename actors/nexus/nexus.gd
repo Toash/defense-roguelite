@@ -23,9 +23,9 @@ func _ready():
 
 func _on_body_entered(body: Node2D):
 	if body is Enemy:
+		pass
 		# health.damage(1)
 		# body.queue_free()
-		pass
 
 func _setup_interactable():
 	# TODO: Specify interactable radius

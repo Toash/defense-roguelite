@@ -3,8 +3,12 @@ extends Pawn
 
 class_name Enemy
 
-## SHOULD NOT BE ACCESSED DIRECTLY! USE get_enemy_data 
-var enemy_data: EnemyData
+var enemy_data: EnemyData:
+	get:
+		if enemy_data == null:
+			return EnemyData.get_default()
+		else:
+			return enemy_data
 
 @export var state_machine: StateMachine
 # @export var tile_pathfind: TilePathfind
@@ -24,6 +28,7 @@ var item_display: ItemDisplay
 var enemy_item: EnemyItem
 
 var ai_target: AITarget
+var computed_velocity: Vector2
 var nav_target_provider: NavTargetProvider
 
 func _enter_tree() -> void:
@@ -115,7 +120,22 @@ func _setup_trackers():
 
 func _setup_nav_agent():
 	nav_agent = NavigationAgent2D.new()
+	nav_agent.avoidance_enabled = true
+	nav_agent.radius = 20
+	nav_agent.debug_enabled = true
+	nav_agent.velocity_computed.connect(func(vel):
+		print(vel)
+		computed_velocity = vel
+		)
+
 	add_child(nav_agent)
+
+func get_total_velocity() -> Vector2:
+	if nav_agent.avoidance_enabled == true:
+		## velocity + avoidance
+		return computed_velocity
+	else:
+		return raw_velocity + knockback_velocity
 
 func _setup_nav_target_provider():
 	nav_target_provider = NavTargetProvider.new()
