@@ -107,7 +107,7 @@ func _ready() -> void:
 		if defense_manager == null:
 			log_message("Error: Could not find defense manager!")
 		else:
-			var defenses = defense_manager.get_defenses()
+			var defenses = defense_manager.get_runtime_defenses()
 			if defenses.size() == 0:
 				log_message("No defenses.")
 			else:

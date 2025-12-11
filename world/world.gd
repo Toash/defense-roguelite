@@ -274,6 +274,7 @@ func get_layer(key: WorldEnums.LAYER) -> TileMapLayer:
 		WorldEnums.LAYER.DEFENSE:
 			return defense_tiles
 		_:
+			push_error("World: Invalid layer")
 			return null
 
 

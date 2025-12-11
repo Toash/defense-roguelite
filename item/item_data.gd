@@ -58,11 +58,8 @@ func has_build_effect() -> bool:
 			return true
 	return false
 
-
-## returns the corresponding defense types if the item can build defenses.
-func get_defense_types() -> Array[DefenseData.DEFENSE_TYPE]:
-	var ret: Array[DefenseData.DEFENSE_TYPE] = []
+func get_first_build_effect() -> BuildEffect:
 	for effect in item_effects:
-		if effect is BuildDefenseEffect:
-			ret.append(effect.defense_type)
-	return ret
+		if effect is BuildEffect:
+			return effect
+	return null

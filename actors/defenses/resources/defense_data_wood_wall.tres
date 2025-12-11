@@ -7,6 +7,5 @@
 [resource]
 script = ExtResource("2_wb114")
 item_data = ExtResource("2_362d2")
-defense_type = 3
 defense_priority = 1
 metadata/_custom_type_script = "uid://do5j60ewuaqp"

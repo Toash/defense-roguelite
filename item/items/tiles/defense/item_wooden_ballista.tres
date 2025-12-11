@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_nc133"]
 [ext_resource type="Texture2D" uid="uid://ca2m666bcuqon" path="res://actors/defenses/ranged/ballista/wood_ballista_top.png" id="1_qg6g2"]
 [ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="2_qg6g2"]
-[ext_resource type="Resource" uid="uid://cauywjwdv7fju" path="res://item/effects/defenses/place_defense_wooden_ballista.tres" id="3_kyver"]
+[ext_resource type="Resource" uid="uid://cauywjwdv7fju" path="res://item/effects/defenses/build_defense_wooden_ballista.tres" id="3_kyver"]
 
 [resource]
 script = ExtResource("2_qg6g2")

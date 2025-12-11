@@ -9,7 +9,6 @@ signal upgrade_acquired(upgrade: Upgrade)
 
 @export var player_crafting: PlayerCrafting
 
-# TODO put this on the player
 var _player_defense_type_to_upgrades: Dictionary[DefenseData.DEFENSE_TYPE, Array] = {}
 
 func _ready() -> void:
@@ -48,7 +47,7 @@ func acquire_upgrade(upgrade: Upgrade):
 		if defense_manager == null:
 			push_error("Player Defenses: Defense manager is null!")
 		# sync runtime defenses
-		for defense: RuntimeDefense in defense_manager.get_defenses():
+		for defense: RuntimeDefense in defense_manager.get_runtime_defenses():
 			sync_defense_upgrades(defense)
 
 

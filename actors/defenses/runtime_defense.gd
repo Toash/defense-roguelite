@@ -4,6 +4,10 @@ extends Area2D
 ## contains information for all defenses, as well as their stats and effects for use in some other classes.
 class_name RuntimeDefense
 
+## signals that all functionality should be off if set to true.
+var is_preview: bool = false
+
+
 # How do other enemies see this ? 
 enum PRIORITY {
 	INVISIBLE,
@@ -64,11 +68,11 @@ func _ready():
 	_setup_tile_pos()
 
 
-var upgrade_manager_upgrades: Array[DefenseUpgrade] = []
+var additional_upgrades: Array[DefenseUpgrade] = []
 
 
 func set_upgrades(upgrades: Array[DefenseUpgrade]):
-	upgrade_manager_upgrades = upgrades
+	additional_upgrades = upgrades
 
 func get_all_item_effects() -> Array[ItemEffect]:
 	var added_effects = _get_upgrade_effects()
@@ -98,7 +102,7 @@ func get_defense_type() -> DefenseData.DEFENSE_TYPE:
 func get_total_additive_base_stat_modifier(base_stat: DefenseData.BASE_STAT) -> float:
 	var modifier: float = 1
 
-	for upgrade in upgrade_manager_upgrades:
+	for upgrade in additional_upgrades:
 		var upgrade_modifier = upgrade.get_additive_base_stat_modifier(base_stat)
 
 		## TODO add scaling options
@@ -113,7 +117,7 @@ func get_defense_priority() -> PRIORITY:
 ## gets the effects that were added by defense upgrades
 func _get_upgrade_effects() -> Array[ItemEffect]:
 	var added_effects: Array[ItemEffect] = []
-	for upgrade: DefenseUpgrade in upgrade_manager_upgrades:
+	for upgrade: DefenseUpgrade in additional_upgrades:
 		for effect: ItemEffect in upgrade:
 			added_effects.append(effect)
 	return added_effects
@@ -123,9 +127,9 @@ func _to_string() -> String:
 	var m = str(defense_data)
 	m += "\n"
 
-	if upgrade_manager_upgrades.size() > 0:
+	if additional_upgrades.size() > 0:
 		m += "Upgrades :"
-	for upgrade in upgrade_manager_upgrades:
+	for upgrade in additional_upgrades:
 		m += str(upgrade)
 		m += "\n"
 		

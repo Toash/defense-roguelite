@@ -270,12 +270,12 @@ itemdata = ExtResource("32_qqc64")
 amount = 20
 index = 2
 
-[node name="PlayerBuildHighlight" type="Node2D" parent="." node_paths=PackedStringArray("player", "mouse_input", "instance_provider", "ghost")]
+[node name="PlayerBuildHighlight" type="Node2D" parent="." node_paths=PackedStringArray("player", "mouse_input", "instance_provider", "tile_highlight")]
 script = ExtResource("34_5hbjc")
 player = NodePath("..")
 mouse_input = NodePath("../Inputs/MouseInput")
 instance_provider = NodePath("../HotbarEquippedInst")
-ghost = NodePath("Sprite2D")
+tile_highlight = NodePath("Sprite2D")
 metadata/_custom_type_script = "uid://d1jitd8ecvh0i"
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerBuildHighlight"]
@@ -294,12 +294,12 @@ metadata/_custom_type_script = "uid://b524hsh0tyeu5"
 
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]
-[connection signal="origin_position_emitted" from="Items/ItemDisplay" to="CharacterSprite" method="_set_right_hand_pos"]
 [connection signal="origin_position_emitted" from="Items/ItemDisplay" to="CharacterSprite" method="_set_left_hand_pos"]
+[connection signal="origin_position_emitted" from="Items/ItemDisplay" to="CharacterSprite" method="_set_right_hand_pos"]
 [connection signal="mouse_position" from="Inputs/MouseInput" to="CharacterSprite" method="_set_target"]
 [connection signal="mouse_position" from="Inputs/MouseInput" to="Items/ItemDisplay" method="_update_target"]
 [connection signal="use_equipment" from="Inputs/EquipmentInput" to="Items/Equipment" method="use"]
-[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_left_hand"]
 [connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
-[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_right_hand"]
+[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_left_hand"]
 [connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_left_hand"]
+[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_right_hand"]

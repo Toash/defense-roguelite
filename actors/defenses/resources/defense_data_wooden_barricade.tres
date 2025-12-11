@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DefenseData" load_steps=4 format=3 uid="uid://doax2byf7sed7"]
+
+[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_kn6ck"]
+[ext_resource type="Resource" uid="uid://cqpiojifh38eh" path="res://item/items/tiles/defense/item_wooden_barricade.tres" id="2_0875p"]
+[ext_resource type="Script" uid="uid://do5j60ewuaqp" path="res://actors/defenses/defense_data.gd" id="3_55shu"]
+
+[resource]
+script = ExtResource("3_55shu")
+item_data = ExtResource("2_0875p")
+defense_priority = 1
+metadata/_custom_type_script = "uid://do5j60ewuaqp"

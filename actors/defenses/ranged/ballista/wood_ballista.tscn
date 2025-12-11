@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cf63ae2nymmrw"]
 
 [ext_resource type="Script" uid="uid://h2bibq07av83" path="res://actors/defenses/runtime_defense.gd" id="1_rqptj"]
-[ext_resource type="Resource" uid="uid://djrdcxjoi10ac" path="res://actors/defenses/ranged/ballista/defense_data_wooden_ballista.tres" id="2_tdn6j"]
+[ext_resource type="Resource" uid="uid://djrdcxjoi10ac" path="res://actors/defenses/resources/defense_data_wooden_ballista.tres" id="2_tdn6j"]
 [ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/pawn_tracker.gd" id="3_jiwro"]
 [ext_resource type="Texture2D" uid="uid://ca2m666bcuqon" path="res://actors/defenses/ranged/ballista/wood_ballista_top.png" id="4_tdn6j"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="7_gtmwm"]

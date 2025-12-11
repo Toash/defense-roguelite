@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DefenseData" load_steps=4 format=3 uid="uid://djrdcxjoi10ac"]
+
+[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_xggxn"]
+[ext_resource type="Resource" uid="uid://jr4u7ev0sy1q" path="res://item/items/tiles/defense/item_wooden_ballista.tres" id="2_abiut"]
+[ext_resource type="Script" uid="uid://do5j60ewuaqp" path="res://actors/defenses/defense_data.gd" id="3_wr5pk"]
+
+[resource]
+script = ExtResource("3_wr5pk")
+item_data = ExtResource("2_abiut")
+attack_damage = 100
+metadata/_custom_type_script = "uid://do5j60ewuaqp"

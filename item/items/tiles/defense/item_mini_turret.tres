@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dcnuud2mmhqob" path="res://actors/defenses/ranged/mini_turret/mini_turret_body.png" id="1_m33t6"]
 [ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="2_7jdul"]
-[ext_resource type="Resource" uid="uid://uvmg8vu7yy7j" path="res://item/effects/defenses/place_defense_mini_turret.tres" id="3_y6pf1"]
+[ext_resource type="Resource" uid="uid://uvmg8vu7yy7j" path="res://item/effects/defenses/build_defense_mini_turret.tres" id="3_y6pf1"]
 [ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="4_c4y36"]
 
 [resource]

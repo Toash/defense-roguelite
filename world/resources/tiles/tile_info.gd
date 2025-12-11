@@ -6,5 +6,6 @@ class_name TileInfo
 
 @export var layer: WorldEnums.LAYER
 @export var source_id: int
+## used for scene tiles
 @export var alternative_id: int
 @export var atlas_coord: Vector2i

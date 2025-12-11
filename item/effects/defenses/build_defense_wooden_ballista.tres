@@ -11,6 +11,5 @@ metadata/_custom_type_script = "uid://xhxw30qy6vry"
 
 [resource]
 script = ExtResource("1_r2uy1")
-defense_type = 1
 tile_info = SubResource("Resource_gwb6c")
 metadata/_custom_type_script = "uid://ct2glsyjoq6cu"

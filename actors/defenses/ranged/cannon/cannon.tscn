@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c7xbekv3l65cn"]
 
 [ext_resource type="Script" uid="uid://h2bibq07av83" path="res://actors/defenses/runtime_defense.gd" id="1_kr1n3"]
-[ext_resource type="Resource" uid="uid://d26qh6qvstt2w" path="res://actors/defenses/ranged/mini_turret/defense_data_mini_turret.tres" id="2_ge2em"]
+[ext_resource type="Resource" uid="uid://d26qh6qvstt2w" path="res://actors/defenses/resources/defense_data_mini_turret.tres" id="2_ge2em"]
 [ext_resource type="Script" uid="uid://dg8qbly1ndg5w" path="res://actors/pawns/generic/pawn_tracker.gd" id="3_tvgdg"]
 [ext_resource type="Texture2D" uid="uid://boy4nbmdhr656" path="res://actors/defenses/ranged/cannon/cannon.png" id="4_1lnak"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="7_qdjum"]

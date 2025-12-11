@@ -1,13 +1,10 @@
 extends Resource
 
-## Static initial data for defenses
+## Static initial / base data for defenses
 class_name DefenseData
 
 enum DEFENSE_TYPE {
-	TURRET,
-	BALLISTA,
-	CANNON,
-    WALL
+	RANGED
 }
 
 enum BASE_STAT {
@@ -21,6 +18,7 @@ enum BASE_STAT {
 @export_group("General")
 ## the item data that corresponds to this defense. used for picking up.
 @export var item_data: ItemData
+
 @export var defense_type: DEFENSE_TYPE
 @export var defense_priority: RuntimeDefense.PRIORITY
 @export var health: int = 100
@@ -40,6 +38,14 @@ enum BASE_STAT {
 
 @export_group("Projectiles")
 @export var projectile_speed: float = 600
+
+
+func get_defense_name() -> String:
+	print("item data" + str(item_data))
+	var item_name := self.item_data.display_name
+	if item_name.is_empty():
+		push_error("Item Display name is empty!")
+	return item_name
 
 
 func get_base_stat(base_stat: BASE_STAT) -> float:
