@@ -72,6 +72,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "containers", "coins", "inventory", "hotbar", "hotbar_equipped_inst", "pickups", "player_crafting", "player_defenses", "hotbar_input", "world_container_input", "context_input", "health") groups=["persist", "player"]]
+z_index = 11
 collision_layer = 4
 collision_mask = 38
 script = ExtResource("1_onrkg")
@@ -294,12 +295,12 @@ metadata/_custom_type_script = "uid://b524hsh0tyeu5"
 
 [connection signal="area_entered" from="PickupRadius" to="PickupRadius" method="_on_area_entered"]
 [connection signal="area_exited" from="PickupRadius" to="PickupRadius" method="_on_area_exited"]
-[connection signal="origin_position_emitted" from="Items/ItemDisplay" to="CharacterSprite" method="_set_left_hand_pos"]
 [connection signal="origin_position_emitted" from="Items/ItemDisplay" to="CharacterSprite" method="_set_right_hand_pos"]
+[connection signal="origin_position_emitted" from="Items/ItemDisplay" to="CharacterSprite" method="_set_left_hand_pos"]
 [connection signal="mouse_position" from="Inputs/MouseInput" to="CharacterSprite" method="_set_target"]
 [connection signal="mouse_position" from="Inputs/MouseInput" to="Items/ItemDisplay" method="_update_target"]
 [connection signal="use_equipment" from="Inputs/EquipmentInput" to="Items/Equipment" method="use"]
-[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
 [connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_left_hand"]
-[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_left_hand"]
+[connection signal="holding_nothing" from="HotbarEquippedInst" to="CharacterSprite" method="_disable_right_hand"]
 [connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_right_hand"]
+[connection signal="holding_something" from="HotbarEquippedInst" to="CharacterSprite" method="_enable_left_hand"]

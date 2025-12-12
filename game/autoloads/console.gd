@@ -117,6 +117,16 @@ func _ready() -> void:
 		)
 
 
+	_register_command("kill", func():
+		var enemy_manager = (get_node("/root/World/GameState") as GameState).enemy_manager
+
+		var enemies := enemy_manager.get_all_enemies()
+		for enemy: Enemy in enemies:
+			enemy.health.damage(99999)
+		
+		)
+
+
 func log_message(message: String):
 	logs.append_text(message + "\n")
 	print(message)

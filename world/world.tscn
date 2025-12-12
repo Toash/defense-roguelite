@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=25 format=3 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="Script" uid="uid://csd4ncy3jgem8" path="res://world/world.gd" id="1_4papg"]
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/pawns/player/player.tscn" id="1_fyhu2"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://bgbi7qv8f0ml3" path="res://upgrades/upgrade_manager.gd" id="21_o1net"]
 [ext_resource type="Script" uid="uid://bjc7dxmakq7ml" path="res://game/defense_manager.gd" id="22_3ljsx"]
 [ext_resource type="Script" uid="uid://cgb88tva7y8gd" path="res://game/aggro_manager.gd" id="22_gi7ib"]
+[ext_resource type="Script" uid="uid://bbjqdpfysa4o3" path="res://actors/pawns/enemies/enemy_manager.gd" id="23_gi7ib"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("tiles_root", "ground_tiles", "wall_tiles", "interactable_tiles", "resource_tiles", "defense_tiles", "nexus", "debug_path") groups=["world"]]
 script = ExtResource("1_4papg")
@@ -87,11 +88,12 @@ position = Vector2(2, 0)
 [node name="ZombieRoot" type="Node2D" parent="Roots"]
 position = Vector2(0, -2)
 
-[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("upgrade_manager", "defense_manager", "aggro_manager", "state_machine", "intermission_state", "wave_state", "spawn_manager")]
+[node name="GameState" type="Node2D" parent="." node_paths=PackedStringArray("upgrade_manager", "defense_manager", "aggro_manager", "enemy_manager", "state_machine", "intermission_state", "wave_state", "spawn_manager")]
 script = ExtResource("14_b2suy")
 upgrade_manager = NodePath("UpgradeManager")
 defense_manager = NodePath("DefenseManager")
 aggro_manager = NodePath("AggroManager")
+enemy_manager = NodePath("EnemyManager")
 state_machine = NodePath("StateMachine")
 intermission_state = NodePath("StateMachine/Intermission")
 wave_state = NodePath("StateMachine/Wave")
@@ -138,6 +140,10 @@ metadata/_custom_type_script = "uid://bjc7dxmakq7ml"
 [node name="AggroManager" type="Node2D" parent="GameState"]
 script = ExtResource("22_gi7ib")
 metadata/_custom_type_script = "uid://cgb88tva7y8gd"
+
+[node name="EnemyManager" type="Node2D" parent="GameState"]
+script = ExtResource("23_gi7ib")
+metadata/_custom_type_script = "uid://bbjqdpfysa4o3"
 
 [node name="GameOver" type="Node2D" parent="." node_paths=PackedStringArray("player", "nexus")]
 script = ExtResource("21_aysyn")
