@@ -8,6 +8,13 @@ class_name Health
 signal died
 signal health_changed(new_value)
 
+## called damage with no hit context passed in
+signal hit_no_context()
+
+## called damage with a hit context passed in
+signal hit_from_direction(dir: Vector2)
+signal hit_from_pawn(pawn: Pawn)
+
 
 @export var max_health: int = 100
 @export var bar_height_offset: float = -50
@@ -55,13 +62,18 @@ func _draw():
 	draw_rect(Rect2(bar_offset, Vector2(filled_w, bar_height)), Color(0, 1, 0))
 
 
-func damage(amount: int):
+func damage(amount: int, hit_context: HitContext = null):
 	TextPopupManager.damage_popup(str(amount), global_position)
 	if health <= 0: return
 
 	health = clamp(health - amount, 0, max_health)
 
 	health_changed.emit(health)
+	if hit_context != null:
+		hit_from_direction.emit(hit_context.direction)
+		hit_from_pawn.emit(hit_context.who_hit)
+	else:
+		hit_no_context.emit()
 
 	if health <= 0:
 		died.emit()

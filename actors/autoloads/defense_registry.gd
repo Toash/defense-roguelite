@@ -16,6 +16,7 @@ func has_defense_data(defense_name: String) -> bool:
 	return true
 
 
+## gets the defense based off of its corresponding item data display name.
 func get_defense_data(defense_name: String) -> DefenseData:
 	var data: DefenseData = _name_to_defense_data.get(defense_name)
 	if data == null:

@@ -8,7 +8,7 @@ func _ready():
 
 func _on_projectile_entered_body(projectile: Node2D, body: Node2D, data: ProjectileData):
 	# shared checks
-	if body == data.context.user_node:
+	if body == data.item_context.user_node:
 		return
 
 	var pawn: Pawn = body as Pawn

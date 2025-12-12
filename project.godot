@@ -35,6 +35,7 @@ PawnSpawner="*res://actors/autoloads/pawn_spawner.gd"
 ContextManager="*res://ui/autoloads/context_manager.tscn"
 TextPopupManager="*res://ui/autoloads/popup_text.tscn"
 DefenseRegistry="*res://actors/autoloads/defense_registry.gd"
+ParticleEffectManager="*res://particle_effects/particle_effect_manager.gd"
 
 [debug]
 

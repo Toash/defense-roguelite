@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ParticleEffectResource" load_steps=3 format=3 uid="uid://o7ebi7ffqx05"]
+
+[ext_resource type="Script" uid="uid://ctrbwu5ch1s0b" path="res://particle_effects/particle_effect_resource.gd" id="1_lnj1k"]
+[ext_resource type="PackedScene" uid="uid://d3w60bfajun3a" path="res://particle_effects/blood_effect.tscn" id="1_r5y1u"]
+
+[resource]
+script = ExtResource("1_lnj1k")
+scene = ExtResource("1_r5y1u")
+metadata/_custom_type_script = "uid://ctrbwu5ch1s0b"

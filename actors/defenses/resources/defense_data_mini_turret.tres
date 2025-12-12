@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="DefenseData" load_steps=5 format=3 uid="uid://d26qh6qvstt2w"]
 
-[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_n67fm"]
-[ext_resource type="Resource" uid="uid://iu3556p6xgqa" path="res://item/effects/defenses/mini_turret_shoot.tres" id="2_gk6ut"]
-[ext_resource type="Resource" uid="uid://bag3yiaad1f5p" path="res://item/items/tiles/defense/item_mini_turret.tres" id="3_oty2k"]
-[ext_resource type="Script" uid="uid://do5j60ewuaqp" path="res://actors/defenses/defense_data.gd" id="4_p4prm"]
+[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_6ewji"]
+[ext_resource type="Resource" uid="uid://iu3556p6xgqa" path="res://item/effects/defenses/mini_turret_shoot.tres" id="2_k02u8"]
+[ext_resource type="Resource" uid="uid://bag3yiaad1f5p" path="res://item/items/tiles/defense/item_mini_turret.tres" id="3_kgh5q"]
+[ext_resource type="Script" uid="uid://do5j60ewuaqp" path="res://actors/defenses/defense_data.gd" id="4_lab66"]
 
 [resource]
-script = ExtResource("4_p4prm")
-item_data = ExtResource("3_oty2k")
+script = ExtResource("4_lab66")
+item_data = ExtResource("3_kgh5q")
 health = 5
 attack_cooldown = 0.5
-base_effects = Array[ExtResource("1_n67fm")]([ExtResource("2_gk6ut")])
+base_effects = Array[ExtResource("1_6ewji")]([ExtResource("2_k02u8")])
 projectile_speed = 1000.0
 metadata/_custom_type_script = "uid://do5j60ewuaqp"

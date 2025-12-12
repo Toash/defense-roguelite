@@ -54,7 +54,7 @@ func _physics_process(delta):
 						t = 0
 			else:
 				retries = 0
-				print("Obstruction")
+				# print("Obstruction")
 
 func _on_area_entered(area: Area2D):
 	if area is RuntimeDefense:

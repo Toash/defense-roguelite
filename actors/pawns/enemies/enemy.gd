@@ -122,9 +122,9 @@ func _setup_nav_agent():
 	nav_agent = NavigationAgent2D.new()
 	nav_agent.avoidance_enabled = true
 	nav_agent.radius = 20
-	nav_agent.debug_enabled = true
+	# nav_agent.debug_enabled = true
 	nav_agent.velocity_computed.connect(func(vel):
-		print(vel)
+		# print(vel)
 		computed_velocity = vel
 		)
 

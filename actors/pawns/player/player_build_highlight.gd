@@ -40,7 +40,7 @@ func _process(delta):
 
 	var final_pos = world.ground_tiles.map_to_local(map_pos)
 	centered_highlight_position = final_pos
-	print(centered_highlight_position)
+# print(centered_highlight_position)
 
 	tile_highlight.global_position = final_pos * world.scaling_factor
 

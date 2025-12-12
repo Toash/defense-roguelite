@@ -53,6 +53,6 @@ func state_exit():
 
 
 func _on_attack_vision_entered(pawn: Pawn):
-	print("asyidfyisoaidfo")
+	# print("asyidfyisoaidfo")
 	if pawn is Player:
 		transitioned.emit(self, "attack")

@@ -15,6 +15,9 @@ enum FACTION {
 
 @export_group("References")
 @export var health: Health
+## effect to play when node is hit.
+@export var blood_effect: ParticleEffectResource = preload("res://particle_effects/resources/particle_effect_blood_splat.tres")
+
 var character_sprite: CharacterSprite
 
 var status_effect_container: PawnStatusEffectContainer
@@ -53,6 +56,17 @@ func get_total_velocity() -> Vector2:
 	return raw_velocity + knockback_velocity
 
 func _setup_health():
+	self.health.hit_from_direction.connect(func(dir: Vector2):
+		var particle_effect: ParticleEffect = ParticleEffect.new()
+		particle_effect.resource = blood_effect
+		particle_effect.parent_node = get_path()
+		particle_effect.direction = dir
+		
+		ParticleEffectManager.play_particle_effect(
+			particle_effect
+		
+		))
+
 	self.health.died.connect(func():
 		status_effect_container.clear_status_effects()
 		)

@@ -66,18 +66,15 @@ script = ExtResource("6_03ty6")
 initial_state = NodePath("Nexus")
 metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 
-[node name="Chase" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "pawn")]
+[node name="Chase" type="Node2D" parent="ZombieStateMachine"]
 script = ExtResource("8_7s5d7")
-enemy = NodePath("../..")
-pawn = NodePath("../..")
 
 [node name="Attack" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("pawn")]
 script = ExtResource("9_5ib1t")
 pawn = NodePath("../..")
 
-[node name="Nexus" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("pawn")]
+[node name="Nexus" type="Node2D" parent="ZombieStateMachine"]
 script = ExtResource("10_l3txb")
-pawn = NodePath("../..")
 
 [node name="Break" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("ai_target")]
 script = ExtResource("11_na37e")

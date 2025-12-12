@@ -57,7 +57,7 @@ func _process(delta: float) -> void:
 
 
 	if (polled_position - global_position).length() >= POLL_DISTANCE:
-		print("poll!")
+		# print("poll!")
 		poll_position.emit(global_position)
 		polled_position = global_position
 

@@ -21,7 +21,8 @@ func apply(context: ItemContext):
     data.factions_to_hit = factions_to_hit
     data.damage = damage
     data.speed = speed
-    data.context = context
+    data.item_context = context
+
 
     projectile_inst.global_position = context.global_spawn_point
     projectile_inst.look_at(context.global_target_position)
@@ -29,5 +30,5 @@ func apply(context: ItemContext):
     projectile_inst.setup(data)
 
     context.root_node.add_child.call_deferred(projectile_inst)
-    print(shoot_volume)
+    # print(shoot_volume)
     AudioManager.play_key(shoot_audio_key, shoot_volume, context.global_target_position, bus)

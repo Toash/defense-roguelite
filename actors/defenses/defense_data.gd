@@ -16,13 +16,18 @@ enum BASE_STAT {
 
 
 @export_group("General")
-## the item data that corresponds to this defense. used for picking up.
+## the item data that this defense is linked to. 
 @export var item_data: ItemData
 
+## used for referring to defends that perform similar functions. 
 @export var defense_type: DEFENSE_TYPE
-@export var defense_priority: RuntimeDefense.PRIORITY
-@export var health: int = 100
 
+## used for determining what type of enemies can target this defense.
+@export var defense_priority: RuntimeDefense.PRIORITY
+
+
+@export_group("Base stats")
+@export var health: int = 100
 @export var attack_range: float = 450
 @export var attack_damage: int = 10
 @export var attack_cooldown: float = 2
