@@ -11,7 +11,8 @@ var character_body: CharacterBody2D
 
 ## sprite rotates according to target
 @export var target_supplier: TargetProvider
-@export var health: Health
+# @export var health: Health
+var health: Health
 
 
 @export var head_texture: Texture2D

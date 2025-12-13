@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://blqvvu0ytchcd"]
+[gd_scene load_steps=15 format=3 uid="uid://blqvvu0ytchcd"]
 
 [ext_resource type="Script" uid="uid://si1ikxp52cuk" path="res://actors/pawns/enemies/enemy.gd" id="1_gg2q8"]
 [ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/pawns/character_sprite.tscn" id="2_uf0sd"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://cjnn80jlwilpx" path="res://actors/pawns/states/state_enemy_nexus.gd" id="10_l3txb"]
 [ext_resource type="Script" uid="uid://b4wdssttxtlra" path="res://actors/pawns/states/state_enemy_break.gd" id="11_na37e"]
 [ext_resource type="Script" uid="uid://dt4kadfyw2ywh" path="res://actors/pawns/generic/ai_target.gd" id="12_m6j08"]
-[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="13_8rokw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fose"]
 size = Vector2(46, 72)
@@ -40,22 +39,20 @@ shader = SubResource("Shader_i0804")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
-[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "health")]
+[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
 collision_layer = 4
 collision_mask = 32
 script = ExtResource("1_gg2q8")
 state_machine = NodePath("ZombieStateMachine")
 faction = 2
-health = NodePath("Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_3fose")
 
-[node name="CharacterSprite" parent="." node_paths=PackedStringArray("health") instance=ExtResource("2_uf0sd")]
+[node name="CharacterSprite" parent="." instance=ExtResource("2_uf0sd")]
 material = SubResource("ShaderMaterial_7b2us")
 position = Vector2(0, -6)
-health = NodePath("../Health")
 head_texture = ExtResource("3_5vwkd")
 torso_texture = ExtResource("4_7pw35")
 left_arm_texture = ExtResource("5_no6bl")
@@ -82,7 +79,3 @@ ai_target = NodePath("../ZombieTarget")
 
 [node name="ZombieTarget" type="Node2D" parent="ZombieStateMachine"]
 script = ExtResource("12_m6j08")
-
-[node name="Health" type="Node2D" parent="."]
-script = ExtResource("13_8rokw")
-metadata/_custom_type_script = "uid://gyp8bshfrfoj"

@@ -52,9 +52,13 @@ func _enter_tree() -> void:
 	character_sprite.target_supplier = nav_target_provider
 
 
+	self.health.set_max_health(int(enemy_data.health))
+	self.health.set_health(enemy_data.health)
+	health.died.connect(_on_death)
+
+
 func _ready():
 	add_to_group("enemy")
-	health.died.connect(_on_death)
 
 	set_collision_layer_value(3, true)
 	# set_collision_mask_value(2, true) # they just get stuck on walls :/
@@ -65,8 +69,6 @@ func _ready():
 ## sets the enemies data, and initializes respective systems.
 func setup(data: EnemyData):
 	enemy_data = data
-	self.health.set_max_health(int(data.health))
-	self.health.set_health(data.health)
 
 	_set_trackers_with_data()
 	_set_enemy_item_with_data()

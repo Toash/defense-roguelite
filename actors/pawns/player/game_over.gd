@@ -11,7 +11,7 @@ signal game_over
 
 func _ready():
 	player.health.died.connect(_game_over)
-	nexus.health.died.connect(_game_over)
+	# nexus.health.died.connect(_game_over)
 
 
 func _game_over():

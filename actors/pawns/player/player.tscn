@@ -1,9 +1,8 @@
-[gd_scene load_steps=48 format=3 uid="uid://byli3ck6gpqtc"]
+[gd_scene load_steps=47 format=3 uid="uid://byli3ck6gpqtc"]
 
 [ext_resource type="Script" uid="uid://dk25ownu14rv8" path="res://actors/pawns/player/player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://dvwl8eddefr5k" path="res://actors/pawns/player/player_camera.gd" id="2_qrxv1"]
 [ext_resource type="Script" uid="uid://cu2mhoqnrgeam" path="res://input/hotbar_input.gd" id="4_yw30f"]
-[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://cg3y6l7u7bglb" path="res://actors/pawns/player/interact_detector.gd" id="5_hiosj"]
 [ext_resource type="Script" uid="uid://c0e61g0mwp78t" path="res://actors/pawns/player/player_containers.gd" id="5_nvisx"]
 [ext_resource type="Script" uid="uid://dsrxhicfffw3e" path="res://actors/pawns/player/pickup_detector.gd" id="5_qjkh3"]
@@ -71,7 +70,7 @@ gradient = SubResource("Gradient_dqf5y")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "containers", "coins", "inventory", "hotbar", "hotbar_equipped_inst", "pickups", "player_crafting", "player_defenses", "hotbar_input", "world_container_input", "context_input", "health") groups=["persist", "player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "containers", "coins", "inventory", "hotbar", "hotbar_equipped_inst", "pickups", "player_crafting", "player_defenses", "hotbar_input", "world_container_input", "context_input") groups=["persist", "player"]]
 z_index = 11
 collision_layer = 4
 collision_mask = 38
@@ -90,7 +89,6 @@ hotbar_input = NodePath("Inputs/HotbarInput")
 world_container_input = NodePath("Inputs/WorldContainerInput")
 context_input = NodePath("Inputs/ContextInput")
 faction = 1
-health = NodePath("Health")
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -155,10 +153,9 @@ context_input = NodePath("../Inputs/ContextInput")
 player = NodePath("..")
 outline_material = SubResource("ShaderMaterial_h0lia")
 
-[node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier", "health") instance=ExtResource("13_k67x5")]
+[node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier") instance=ExtResource("13_k67x5")]
 material = SubResource("ShaderMaterial_yr7qf")
 target_supplier = NodePath("../Inputs/MouseInput")
-health = NodePath("../Health")
 head_texture = ExtResource("14_0wchr")
 torso_texture = ExtResource("15_qrxv1")
 left_leg_texture = ExtResource("17_otn2r")
@@ -226,10 +223,6 @@ metadata/_custom_type_script = "uid://dfsam3b8d27hq"
 [node name="ContextInput" type="Node2D" parent="Inputs"]
 script = ExtResource("26_h0lia")
 metadata/_custom_type_script = "uid://ctutx861f7ofh"
-
-[node name="Health" type="Node2D" parent="."]
-script = ExtResource("5_g6k8r")
-metadata/_custom_type_script = "uid://gyp8bshfrfoj"
 
 [node name="HotbarEquippedInst" type="Node2D" parent="." node_paths=PackedStringArray("hotbar_container", "hotbar_input")]
 script = ExtResource("24_nsxbo")

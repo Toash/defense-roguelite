@@ -5,13 +5,14 @@ class_name Pawn
 
 @onready var world: World = get_tree().get_first_node_in_group("world") as World
 @export var faction: Faction.Type
+@export var info_offset: int = -50
 
 
 @export_group("References")
-@export var health: Health
+var health: Health
 ## effect to play when node is hit.
-@export var directional_blood_scene: PackedScene = preload("res://particle_effects/directional_blood_effect.tscn")
-@export var blood_scene: PackedScene = preload("res://particle_effects/blood_effect.tscn")
+var directional_blood_scene: PackedScene = preload("res://particle_effects/directional_blood_effect.tscn")
+var blood_scene: PackedScene = preload("res://particle_effects/blood_effect.tscn")
 
 var character_sprite: CharacterSprite
 
@@ -24,11 +25,10 @@ var knockback_decay = 800
 
 func _enter_tree() -> void:
 	world = get_tree().get_first_node_in_group("world") as World
-	_setup_status_effect_container()
 	_setup_health()
-	character_sprite = get_node("CharacterSprite")
-	if character_sprite == null:
-		push_error("Could not find character sprite!")
+	_setup_character_sprite()
+	_setup_status_effect_container()
+	_setup_actor_info_ui()
 	
 
 func _physics_process(delta: float) -> void:
@@ -54,13 +54,32 @@ func get_total_velocity() -> Vector2:
 	return raw_velocity + knockback_velocity
 
 func _setup_health():
+	print("setup")
+	health = Health.new(100, 100)
+	health.name = "Health"
+	add_child(health)
+
 	self.health.got_hit.connect(_on_hit)
 		# apply status effect
-
-
 	self.health.died.connect(func():
 		status_effect_container.clear_status_effects()
 		)
+
+func _setup_character_sprite():
+	character_sprite = get_node("CharacterSprite")
+	if character_sprite == null:
+		push_error("Could not find character sprite!")
+	character_sprite.health = self.health
+
+
+func _setup_actor_info_ui():
+	var actor_info_scene = preload("res://ui/actors/actor_info_ui.tscn")
+	var ui: ActorInfoUI = actor_info_scene.instantiate() as ActorInfoUI
+	ui.setup(info_offset)
+
+	ui.add_health_ui(self.health)
+	add_child(ui)
+
 
 func _setup_status_effect_container():
 	status_effect_container = PawnStatusEffectContainer.new()
