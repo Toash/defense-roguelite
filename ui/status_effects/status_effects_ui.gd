@@ -1,0 +1,3 @@
+extends VBoxContainer
+
+class_name StatusEffectsUI

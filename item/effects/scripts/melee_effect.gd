@@ -2,11 +2,6 @@ extends ItemEffect
 
 class_name MeleeEffect
 
-# @export var melee_scene: PackedScene
-# @export var factions_to_hit: Array[Pawn.FACTION]
-# @export var damage: int = 25
-# # how many enemies can be hit in one swing
-# @export var pierce: int = 1
 @export var melee_data: MeleeData
 
 @export var shoot_audio_key: AudioManager.KEY

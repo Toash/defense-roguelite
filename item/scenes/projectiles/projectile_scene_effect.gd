@@ -12,7 +12,7 @@ func _on_projectile_entered_body(projectile: Node2D, body: Node2D, data: Project
 		return
 
 	var pawn: Pawn = body as Pawn
-	if pawn and pawn.faction not in data.factions_to_hit:
+	if pawn and Faction.Type not in data.factions_to_hit:
 		return
 
 	# per-projectile behavior

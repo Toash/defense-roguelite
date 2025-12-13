@@ -6,7 +6,7 @@ signal got_pawn(pawn: Pawn) # this is redundant, its just the nearest pawn
 signal nearest_pawn_changed(previous_pawn: Pawn, new_pawn: Pawn)
 
 
-@export var factions_to_track: Array[Pawn.FACTION]
+@export var factions_to_track: Array[Faction.Type]
 @export var vision_distance: float = 300
 
 ## mask should include layers to track.

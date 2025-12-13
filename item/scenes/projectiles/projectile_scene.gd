@@ -5,8 +5,9 @@ extends RigidBody2D
 class_name ProjectileScene
 
 
-signal projectile_entered_body(projectile: Node2D, body: Node2D, data: ProjectileData, hit_context: HitContext)
+signal projectile_entered_body(projectile: Node2D, body: Node2D, hit_context: HitContext)
 
+var item_context: ItemContext
 var data: ProjectileData
 var initial_rotation: float
 
@@ -22,12 +23,17 @@ func _enter_tree() -> void:
 	initial_rotation = global_rotation
 
 
-func setup(data: ProjectileData):
+func setup(item_context: ItemContext, data: ProjectileData):
+	self.item_context = item_context
 	self.data = data
 
 func _body_entered(body: Node2D):
-	var hit_context: HitContext = HitContext.new()
-	hit_context.who_hit = data.item_context.user_node
-	hit_context.direction = Utils.rad_to_unit_vector(initial_rotation)
+	var hit_context: HitContext = HitContext.new({
+		HitContext.Key.HITTER: data.item_context.user_node,
+		HitContext.Key.DIRECTION: Utils.rad_to_unit_vector(initial_rotation),
+		HitContext.Key.STATUS_EFFECTS: [],
+		HitContext.Key.KNOCKBACK: 400,
+		HitContext.Key.BASE_DAMAGE: data.damage
+	})
 
-	projectile_entered_body.emit(self, body, data, hit_context)
+	projectile_entered_body.emit(self, body, hit_context)

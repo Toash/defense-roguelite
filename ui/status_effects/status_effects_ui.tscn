@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjhn2uebxxhr0"]
+
+[ext_resource type="Script" uid="uid://bb7vt7krbtq1e" path="res://ui/status_effects/status_effects_ui.gd" id="1_gc55a"]
+
+[node name="StatusEffectsUI" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_gc55a")

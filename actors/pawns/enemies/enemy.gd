@@ -34,7 +34,7 @@ var nav_target_provider: NavTargetProvider
 func _enter_tree() -> void:
 	super._enter_tree()
 
-	faction = Pawn.FACTION.ENEMY
+	faction = Faction.Type.ENEMY
 
 	_setup_trackers()
 	_set_trackers_with_data()

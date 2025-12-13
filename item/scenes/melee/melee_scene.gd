@@ -7,8 +7,6 @@ signal finished
 
 var damage: int = 25
 var pierce: int = 1
-var user: Node2D
-var factions_to_hit: Array[Pawn.FACTION]
 var status_effects: Array[StatusEffect]
 
 @export var left_hand_marker: Marker2D
@@ -41,13 +39,11 @@ func setup(context: ItemContext, melee_data: MeleeData):
 
 	self.damage = melee_data.damage
 	self.pierce = melee_data.pierce
-	self.factions_to_hit = melee_data.factions_to_hit
 	self.status_effects = melee_data.status_effects
 
 	look_at(context.global_target_position)
 
 func play():
-	user = context.user_node
 	if context.flip_when_looking_left:
 		root.scale = Vector2(1, -1)
 	else:
@@ -68,18 +64,21 @@ func _play():
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body == user:
+	if body == context.user_node:
 		return
 
 	pierce_counter += 1
+
+	var hit_context = HitContext.new({
+		HitContext.Key.BASE_DAMAGE: damage,
+		HitContext.Key.HITTER: context.user_node,
+		HitContext.Key.STATUS_EFFECTS: status_effects,
+		HitContext.Key.KNOCKBACK: 400,
+		HitContext.Key.DIRECTION: - (context.user_node.global_position - body.global_position).normalized(),
+	})
+
 	var health: Health = body.get_node("Health") as Health
-	health.damage(damage)
+	health.apply_hit(hit_context)
+
 	if pierce_counter >= pierce:
 		area.body_entered.disconnect(_on_body_entered)
-
-	if body is Pawn:
-		body.knockback(context.direction, 400)
-
-		# apply status effects
-		for status_effect: StatusEffect in status_effects:
-			status_effect.apply_status_effect_to_pawn(body as Pawn)

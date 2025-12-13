@@ -67,7 +67,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 	var pawn: Pawn = body as Pawn
 	if pawn != null:
-		if pawn.faction == context.user_node.faction:
+		if Faction.Type == context.user_node.faction:
 			return
 		
 

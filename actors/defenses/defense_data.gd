@@ -33,7 +33,7 @@ enum BASE_STAT {
 @export var attack_cooldown: float = 2
 
 @export_group("Behavior")
-@export var factions_to_track: Array[Pawn.FACTION] = [Pawn.FACTION.ENEMY]
+@export var factions_to_track: Array[Faction.Type] = [Faction.Type.ENEMY]
 ## The base functionality of this tower
 @export var base_effects: Array[ItemEffect] = []
 

@@ -6,14 +6,14 @@ extends RuntimePawnStatusEffect
 
 var status_effect_timer: float = 0
 
-const TICK_DELAY = 1
+var tick_delay = 1
 
 
 func _process(delta):
 	super._process(delta)
 	status_effect_timer += delta
 
-	if status_effect_timer >= TICK_DELAY:
+	if status_effect_timer >= tick_delay:
 		_on_tick(pawn)
 		status_effect_timer = 0
 

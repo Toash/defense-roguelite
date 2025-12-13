@@ -24,7 +24,7 @@ class_name EnemyData
 @export var coins_dropped: int = 100
 
 @export_group("Vision")
-@export var factions_to_track: Array[Pawn.FACTION] = [Pawn.FACTION.HUMAN]
+@export var factions_to_track: Array[Faction.Type] = [Faction.Type.HUMAN]
 
 ## what defense priority level this enemy targets.
 @export var defense_priority_targeting: RuntimeDefense.PRIORITY = RuntimeDefense.PRIORITY.VISIBLE

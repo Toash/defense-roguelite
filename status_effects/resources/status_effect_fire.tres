@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=5 format=3 uid="uid://dmq5dp8jkovj6"]
+
+[ext_resource type="Script" uid="uid://dbeenbdaedfak" path="res://status_effects/resources/scripts/status_effect.gd" id="1_7y8mn"]
+[ext_resource type="Script" uid="uid://cmsficht13qab" path="res://status_effects/resources/scripts/status_effect_data.gd" id="2_qp042"]
+[ext_resource type="PackedScene" uid="uid://cg2eiyoeu5bfn" path="res://status_effects/scenes/fire_status_effect.tscn" id="3_cysnu"]
+
+[sub_resource type="Resource" id="Resource_7y8mn"]
+script = ExtResource("2_qp042")
+duration = 3.0
+metadata/_custom_type_script = "uid://cmsficht13qab"
+
+[resource]
+script = ExtResource("1_7y8mn")
+packed_scene = ExtResource("3_cysnu")
+data = SubResource("Resource_7y8mn")
+metadata/_custom_type_script = "uid://dbeenbdaedfak"

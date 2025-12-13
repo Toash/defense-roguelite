@@ -5,16 +5,16 @@ extends Resource
 class_name StatusEffect
 
 
-@export var status_effect_scene: PackedScene
-@export var status_effect_data: StatusEffectData
+## the status effect scene to spawn onto whatever is being effected.
+@export var packed_scene: PackedScene
+@export var data: StatusEffectData
 
 
 func apply_status_effect_to_pawn(pawn: Pawn):
-	# TODO: Check for other status effects for synergies.
-	var status_effect: RuntimePawnStatusEffect = status_effect_scene.instantiate() as RuntimePawnStatusEffect
+	var status_effect: RuntimePawnStatusEffect = packed_scene.instantiate() as RuntimePawnStatusEffect
 	if status_effect == null:
-		push_error("Pawn status effect scene is not the correct type!")
+		push_error("Pawn status effect packed_scene is not the correct type!")
 		return
 
 
-	status_effect.inflict_status_effect(pawn, status_effect_data)
+	status_effect.inflict_status_effect_on_pawn(pawn, data)

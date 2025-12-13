@@ -71,6 +71,11 @@ func _ready():
 var additional_upgrades: Array[DefenseUpgrade] = []
 
 
+func get_faction() -> Faction.Type:
+	## TODO: extend to other types?
+	return Faction.Type.HUMAN
+
+
 func set_upgrades(upgrades: Array[DefenseUpgrade]):
 	additional_upgrades = upgrades
 
