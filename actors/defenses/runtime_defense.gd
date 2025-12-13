@@ -84,12 +84,12 @@ func get_all_item_effects() -> Array[ItemEffect]:
 	return defense_data.base_effects + added_effects
 
 
-func get_runtime_stat(stat_type: DefenseData.BASE_STAT) -> float:
+func get_runtime_stat(stat_type: DefenseData.BASE_STAT):
 	match stat_type:
 		DefenseData.BASE_STAT.HEALTH:
 			return defense_data.health + get_total_additive_base_stat_modifier(DefenseData.BASE_STAT.HEALTH)
 		DefenseData.BASE_STAT.DAMAGE:
-			return defense_data.attack_damage + get_total_additive_base_stat_modifier(DefenseData.BASE_STAT.DAMAGE)
+			return int(defense_data.attack_damage + get_total_additive_base_stat_modifier(DefenseData.BASE_STAT.DAMAGE))
 		DefenseData.BASE_STAT.ATTACK_SPEED:
 			# TODO: Clamp
 			return defense_data.attack_cooldown + get_total_additive_base_stat_modifier(DefenseData.BASE_STAT.ATTACK_SPEED)

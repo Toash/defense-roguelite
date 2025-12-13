@@ -62,9 +62,5 @@ func _fire():
 	# ctx.global_target_position = defense.pawn_tracker.get_nearest_pawn().global_position
 	ctx.global_target_position = predicted_target
 
-	for effect in defense.get_all_item_effects():
-		# effect.damage = defense.get_damage()
-		effect.damage = defense.get_runtime_stat(DefenseData.BASE_STAT.DAMAGE)
-		
-		effect.speed = defense.defense_data.projectile_speed
+	for effect: ItemEffect in defense.get_all_item_effects():
 		effect.apply(ctx)

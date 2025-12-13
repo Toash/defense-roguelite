@@ -10,7 +10,8 @@ class_name Pawn
 @export_group("References")
 @export var health: Health
 ## effect to play when node is hit.
-@export var blood_effect: ParticleEffectResource = preload("res://particle_effects/resources/particle_effect_blood_splat.tres")
+@export var directional_blood_scene: PackedScene = preload("res://particle_effects/directional_blood_effect.tscn")
+@export var blood_scene: PackedScene = preload("res://particle_effects/blood_effect.tscn")
 
 var character_sprite: CharacterSprite
 
@@ -81,12 +82,21 @@ func _on_hit(hit_context: HitContext):
 			push_error("hitter should implement has_faction method.")
 
 
-	# play particle effect
-	var particle_effect: ParticleEffect = ParticleEffect.new()
-	particle_effect.resource = blood_effect
-	particle_effect.parent_node = get_path()
-	particle_effect.direction = hit_context.direction_hit_from
-	ParticleEffectManager.play_particle_effect(particle_effect)
+	if hit_context.direction_hit_from == Vector2.ZERO:
+		# non directional
+		var particle_effect := ParticleEffect.new({
+			ParticleEffect.Key.PACKED_SCENE: blood_scene,
+			ParticleEffect.Key.PARENT_NODE: get_path(),
+		})
+		ParticleEffectManager.play_particle_effect(particle_effect)
+	else:
+		# directional
+		var particle_effect := ParticleEffect.new({
+			ParticleEffect.Key.PACKED_SCENE: directional_blood_scene,
+			ParticleEffect.Key.PARENT_NODE: get_path(),
+			ParticleEffect.Key.DIRECTION_VECTOR: hit_context.direction_hit_from,
+		})
+		ParticleEffectManager.play_particle_effect(particle_effect)
 
 
 	knockback(hit_context.direction_hit_from, hit_context.knockback_amount)

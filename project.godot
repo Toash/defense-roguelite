@@ -61,6 +61,7 @@ folder_colors={
 "res://game/": "pink",
 "res://interactable/": "yellow",
 "res://item/": "blue",
+"res://particle_effects/": "green",
 "res://shaders/": "purple",
 "res://world/": "green"
 }

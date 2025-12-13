@@ -6,12 +6,12 @@ extends Node2D
 
 
 func play_particle_effect(particle_effect: ParticleEffect):
-	var effect_node: GPUParticles2D = particle_effect.resource.scene.instantiate()
+	var effect_node: GPUParticles2D = particle_effect.packed_scene.instantiate()
 	if effect_node == null:
 		push_error("ParticleEffectManager: spawned particle should be of type GPUParticles2D!")
 
 	var parent: Node = get_node(particle_effect.parent_node)
-	var local_position: Vector2 = particle_effect.local_position
+	var local_position: Vector2 = particle_effect.position
 	var direction: Vector2 = particle_effect.direction
 	
 

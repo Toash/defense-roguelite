@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d7qtapxfdukx"]
+[gd_scene load_steps=4 format=3 uid="uid://d3w60bfajun3a"]
 
 [sub_resource type="Gradient" id="Gradient_v1oue"]
 offsets = PackedFloat32Array(0)
@@ -13,9 +13,9 @@ height = 8
 particle_flag_disable_z = true
 angle_min = -720.0
 angle_max = 720.0
-spread = 180.0
-initial_velocity_min = 64.27
-initial_velocity_max = 134.81999
+spread = 20.866
+initial_velocity_min = 77.5
+initial_velocity_max = 219.87999
 gravity = Vector3(0, 0, 0)
 damping_min = 100.00001
 damping_max = 100.00001
@@ -24,7 +24,7 @@ scale_max = 1.1999999
 
 [node name="Blood" type="GPUParticles2D"]
 emitting = false
-amount = 3
+amount = 16
 texture = SubResource("GradientTexture2D_vb76r")
 lifetime = 5.0
 one_shot = true
