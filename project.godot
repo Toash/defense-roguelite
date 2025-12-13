@@ -36,6 +36,7 @@ ContextManager="*res://ui/autoloads/context_manager.tscn"
 TextPopupManager="*res://ui/autoloads/popup_text.tscn"
 DefenseRegistry="*res://actors/autoloads/defense_registry.gd"
 ParticleEffectManager="*res://particle_effects/particle_effect_manager.gd"
+StatusEffectRegistry="*res://status_effects/autoloads/status_effect_registry.gd"
 
 [debug]
 

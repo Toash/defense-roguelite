@@ -11,6 +11,7 @@ metadata/_custom_type_script = "uid://cmsficht13qab"
 
 [resource]
 script = ExtResource("1_7y8mn")
+name = "Fire"
 packed_scene = ExtResource("3_cysnu")
 data = SubResource("Resource_7y8mn")
 metadata/_custom_type_script = "uid://dbeenbdaedfak"

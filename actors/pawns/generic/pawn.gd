@@ -103,4 +103,5 @@ func _on_hit(hit_context: HitContext):
 
 	# apply status effects
 	for status_effect: StatusEffect in hit_context.status_effects:
-		status_effect.apply_status_effect_to_pawn(self)
+		# status_effect.apply_status_effect_to_pawn(self)
+		status_effect_container.add_status_effect(status_effect)

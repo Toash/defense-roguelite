@@ -1,8 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck07h3o13f1rh"]
+[gd_scene load_steps=3 format=3 uid="uid://ck07h3o13f1rh"]
 
 [ext_resource type="Script" uid="uid://dqnd7hj08vd76" path="res://ui/status_effects/status_effect_ui.gd" id="1_k6atw"]
+[ext_resource type="Texture2D" uid="uid://cygrckkhddxfr" path="res://particle_effects/fire.png" id="2_g3f05"]
 
 [node name="StatusEffectUI" type="HBoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 43.0
+offset_bottom = 23.0
 script = ExtResource("1_k6atw")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("2_g3f05")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "x 1"
