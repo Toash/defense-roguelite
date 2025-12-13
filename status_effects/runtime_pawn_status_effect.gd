@@ -3,7 +3,7 @@ class_name RuntimePawnStatusEffect
 extends Node2D
 
 signal runtime_status_effect_started(node: RuntimePawnStatusEffect)
-signal runtime_status_effect_ended(node: RuntimePawnStatusEffect)
+signal runtime_status_effect_ended_before_queue_free(node: RuntimePawnStatusEffect)
 
 
 var pawn: Pawn
@@ -26,5 +26,5 @@ func _process(delta):
 
 ## called when the status type duration ends.
 func _on_exit(pawn: Pawn):
-	runtime_status_effect_ended.emit(self)
+	runtime_status_effect_ended_before_queue_free.emit(self)
 	queue_free()

@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://dqnd7hj08vd76" path="res://ui/status_effects/status_effect_ui.gd" id="1_k6atw"]
 [ext_resource type="Texture2D" uid="uid://cygrckkhddxfr" path="res://particle_effects/fire.png" id="2_g3f05"]
 
-[node name="StatusEffectUI" type="HBoxContainer"]
+[node name="StatusEffectUI" type="HBoxContainer" node_paths=PackedStringArray("texture_rect", "label")]
 offset_right = 43.0
 offset_bottom = 23.0
 script = ExtResource("1_k6atw")
+texture_rect = NodePath("TextureRect")
+label = NodePath("Label")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2

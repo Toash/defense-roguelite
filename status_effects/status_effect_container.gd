@@ -3,8 +3,9 @@ extends Node2D
 ## contains status effects that are currently on a pawn
 class_name PawnStatusEffectContainer
 
-signal added_status_effect(status_effect: StatusEffect)
-signal removed_status_effect(status_effect: StatusEffect)
+# signal status_effects_added(status_effect: StatusEffectGroup)
+# signal status_effects_removed(status_effect: StatusEffectGroup)
+signal status_effect_changed(status_effect: StatusEffectGroup)
 
 var pawn: Pawn
 var _status_effect_counts: Dictionary[StatusEffect, int] = {}
@@ -37,12 +38,11 @@ func add_status_effect(status_effect: StatusEffect):
 	runtime_effect.data = status_effect.data
 	add_child(runtime_effect)
 
-	added_status_effect.emit(status_effect)
-
+	status_effect_changed.emit(StatusEffectGroup.new(status_effect, 1))
 	_status_effect_counts[status_effect] += 1
 
-	runtime_effect.runtime_status_effect_ended.connect(func(runtime_node: RuntimePawnStatusEffect):
-		removed_status_effect.emit(status_effect)
+	runtime_effect.runtime_status_effect_ended_before_queue_free.connect(func(_runtime_node: RuntimePawnStatusEffect):
+		status_effect_changed.emit(StatusEffectGroup.new(status_effect, -1))
 		_status_effect_counts[status_effect] -= 1
 		)
 
@@ -55,11 +55,12 @@ func clear_status_effects():
 	# for type in StatusEffect.TYPE.values():
 	#     _status_effect_counts[type] = 0
 
+
 ## returns dict count of status effects
 # func get_status_effects() -> Dictionary[StatusEffect.TYPE, int]:
-func get_status_effects() -> Array[StatusStack]:
-	var ret: Array[StatusStack] = []
+func get_status_effects() -> Array[StatusEffectGroup]:
+	var ret: Array[StatusEffectGroup] = []
 	for status_effect in _status_effect_counts:
-		var stack = StatusStack.new(status_effect, _status_effect_counts[status_effect])
+		var stack = StatusEffectGroup.new(status_effect, _status_effect_counts[status_effect])
 		ret.append(stack)
 	return ret

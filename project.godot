@@ -64,6 +64,7 @@ folder_colors={
 "res://item/": "blue",
 "res://particle_effects/": "green",
 "res://shaders/": "purple",
+"res://ui/": "blue",
 "res://world/": "green"
 }
 

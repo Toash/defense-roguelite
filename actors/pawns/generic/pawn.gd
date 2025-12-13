@@ -66,10 +66,14 @@ func _setup_status_effect_container():
 	status_effect_container = PawnStatusEffectContainer.new()
 	status_effect_container.setup(self)
 	self.add_child(status_effect_container)
+	_setup_status_effect_ui()
 
 
 func _setup_status_effect_ui():
-	pass
+	var ui_scene: PackedScene = preload("res://ui/status_effects/status_effects_ui.tscn")
+	var ui: StatusEffectsUI = ui_scene.instantiate() as StatusEffectsUI
+	ui.setup(status_effect_container)
+	add_child(ui)
 
 
 func _on_hit(hit_context: HitContext):

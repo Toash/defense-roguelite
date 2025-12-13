@@ -4,13 +4,19 @@ extends HBoxContainer
 class_name StatusEffectUI
 
 
-var texture_rect := $TextureRect
-var label := $Label
+@export var texture_rect: TextureRect
+@export var label: Label
+var status_group: StatusEffectGroup
 
 
-var status_stack: StatusStack
+# func _init(status_group: StatusEffectGroup):
+# 	set_status_effect_group(status_group)
+func setup(status_group: StatusEffectGroup):
+	set_status_effect_group(status_group)
 
-
-func _init(status_stack: StatusStack):
-	texture_rect.texture = status_stack.status_effect.icon
-	label.text = "x " + str(status_stack.amount)
+func set_status_effect_group(status_group: StatusEffectGroup):
+	self.status_group = status_group
+	if status_group.amount <= 0:
+		queue_free()
+	texture_rect.texture = status_group.status_effect.icon
+	label.text = "x " + str(status_group.amount)
