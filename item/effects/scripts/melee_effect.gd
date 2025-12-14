@@ -17,7 +17,6 @@ func apply(context: ItemContext):
 	var data
 
 
-	# melee_inst.setup(context, damage, pierce)
 	melee_inst.setup(context, melee_data)
 
 	context.spawn_node.add_child.call_deferred(melee_inst)

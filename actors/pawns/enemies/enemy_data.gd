@@ -21,7 +21,7 @@ class_name EnemyData
 @export_group("Functionality")
 ## item that the enemy uses
 # @export var item_data: ItemData = preload("res://item/items/enemy/basic_enemy_attack.tres")
-@export var item_data: ItemData
+@export var item_data: ItemData = preload("uid://6rsgvhonqx4b")
 
 @export_group("Spawning")
 @export var cost: int = 1

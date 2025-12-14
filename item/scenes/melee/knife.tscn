@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dqj4spopcu6pq"]
 
 [ext_resource type="Script" uid="uid://d0xfbhpgo3nyb" path="res://item/scenes/melee/melee_scene.gd" id="1_trapd"]
-[ext_resource type="Texture2D" uid="uid://dydnxbuxco00i" path="res://item/items/knife/knife.png" id="2_a8abp"]
+[ext_resource type="Texture2D" uid="uid://dydnxbuxco00i" path="res://item/items/melee/knife/knife.png" id="2_a8abp"]
 
 [sub_resource type="Animation" id="Animation_reklo"]
 length = 0.001

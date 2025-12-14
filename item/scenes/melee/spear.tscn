@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bkxcb3afuvs15"]
 
 [ext_resource type="Script" uid="uid://d0xfbhpgo3nyb" path="res://item/scenes/melee/melee_scene.gd" id="1_ulr3d"]
-[ext_resource type="Texture2D" uid="uid://corwpdej058q" path="res://item/items/wooden_spear/spear_wood.png" id="2_ulr3d"]
+[ext_resource type="Texture2D" uid="uid://corwpdej058q" path="res://item/items/melee/wooden_spear/spear_wood.png" id="2_ulr3d"]
 
 [sub_resource type="Animation" id="Animation_reklo"]
 length = 0.001

@@ -1,7 +1,7 @@
 extends Node2D
 
-## generic scene instantiate for melee swing item effects.
-## specific functionality will be implemented in the scene.
+## generic scene for melee swing item effects.
+## add this to a scene and set the necessary exports. 
 class_name MeleeScene
 
 signal finished_melee_animation
@@ -12,6 +12,7 @@ signal finished_melee_animation
 ## right hand marker for the character sprite. Should be animated
 @export var right_hand_marker: Marker2D
 
+## should define an animation named "use"
 @export var animation_player: AnimationPlayer
 
 ## area used to apply damage if it hits another pawn.

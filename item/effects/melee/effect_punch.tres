@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MeleeEffect" load_steps=6 format=3 uid="uid://ddkhos3js58n7"]
+
+[ext_resource type="PackedScene" uid="uid://dcgihnrjqae7q" path="res://item/scenes/melee/punch.tscn" id="1_1w4cs"]
+[ext_resource type="Script" uid="uid://dn16c2l3h1soe" path="res://item/effects/scripts/melee_effect.gd" id="1_3oq1w"]
+[ext_resource type="Script" uid="uid://cbtvcrir1s6js" path="res://item/scenes/melee/melee_data.gd" id="2_4xtal"]
+[ext_resource type="Script" uid="uid://dbeenbdaedfak" path="res://status_effects/resources/scripts/status_effect.gd" id="3_atovx"]
+
+[sub_resource type="Resource" id="Resource_4olur"]
+script = ExtResource("2_4xtal")
+melee_scene = ExtResource("1_1w4cs")
+metadata/_custom_type_script = "uid://cbtvcrir1s6js"
+
+[resource]
+script = ExtResource("1_3oq1w")
+melee_data = SubResource("Resource_4olur")
+effect_name = "Punch"
+description = "=)"
+metadata/_custom_type_script = "uid://dn16c2l3h1soe"

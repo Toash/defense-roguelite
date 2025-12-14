@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://6rsgvhonqx4b"]
+
+[ext_resource type="Script" uid="uid://bxwx7jek8k88s" path="res://item/effects/scripts/item_effect.gd" id="1_pmc1a"]
+[ext_resource type="Resource" uid="uid://ddkhos3js58n7" path="res://item/effects/melee/effect_punch.tres" id="2_2mlee"]
+[ext_resource type="Script" uid="uid://c0ie8dprpo3eg" path="res://item/item_data.gd" id="3_qlhdq"]
+
+[resource]
+script = ExtResource("3_qlhdq")
+display_name = "Punch"
+max_stack = 1
+cooldown_time = 0.0
+item_effects = Array[ExtResource("1_pmc1a")]([ExtResource("2_2mlee")])
+metadata/_custom_type_script = "uid://c0ie8dprpo3eg"
