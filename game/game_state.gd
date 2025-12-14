@@ -45,8 +45,9 @@ func get_debug_string() -> String:
 
 	match state_machine.current_state.name.to_lower():
 		"intermission":
-			s += "Intermission time : " + str(intermission_state.intermission_time) + "\n"
-			s += "Intermission timer : " + str(int(intermission_state.intermission_timer)) + "\n"
+			# s += "Intermission time : " + str(intermission_state.intermission_time) + "\n"
+			# s += "Intermission timer : " + str(int(intermission_state.intermission_timer)) + "\n"
+			s += "Waiting for input to start next wave..."
 		"wave":
 			s += "Wave time : " + str(wave_state.wave_time) + "\n"
 			s += "Wave timer : " + str(int(wave_state.wave_timer)) + "\n"

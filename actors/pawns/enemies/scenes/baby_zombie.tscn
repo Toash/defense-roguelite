@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://chwn2rj05cqqf"]
+[gd_scene load_steps=16 format=3 uid="uid://chwn2rj05cqqf"]
 
 [ext_resource type="Script" uid="uid://si1ikxp52cuk" path="res://actors/pawns/enemies/enemy.gd" id="1_38i1c"]
 [ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/pawns/character_sprite.tscn" id="2_rxupi"]
@@ -12,9 +12,8 @@
 [ext_resource type="Script" uid="uid://cjnn80jlwilpx" path="res://actors/pawns/states/state_enemy_nexus.gd" id="10_6r5ds"]
 [ext_resource type="Script" uid="uid://b4wdssttxtlra" path="res://actors/pawns/states/state_enemy_break.gd" id="11_olnx5"]
 [ext_resource type="Script" uid="uid://dt4kadfyw2ywh" path="res://actors/pawns/generic/ai_target.gd" id="12_c55w2"]
-[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="13_khshd"]
 
-[sub_resource type="Shader" id="Shader_gf5xh"]
+[sub_resource type="Shader" id="Shader_4o1a7"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -34,26 +33,23 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
 resource_local_to_scene = true
-shader = SubResource("Shader_gf5xh")
+shader = SubResource("Shader_4o1a7")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fose"]
 size = Vector2(36, 72)
 
-[node name="BabyZombie" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "health")]
+[node name="BabyZombie" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
 collision_layer = 4
 collision_mask = 32
 script = ExtResource("1_38i1c")
 state_machine = NodePath("ZombieStateMachine")
 faction = 2
-health = NodePath("Health")
 
-[node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier", "health") instance=ExtResource("2_rxupi")]
+[node name="CharacterSprite" parent="." instance=ExtResource("2_rxupi")]
 material = SubResource("ShaderMaterial_7b2us")
 scale = Vector2(2, 2)
-target_supplier = NodePath("")
-health = NodePath("../Health")
 head_texture = ExtResource("3_wy45q")
 torso_texture = ExtResource("4_hcw6y")
 left_arm_texture = ExtResource("5_ja44t")
@@ -65,29 +61,23 @@ script = ExtResource("6_m4kmd")
 initial_state = NodePath("Nexus")
 metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 
-[node name="Wander" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("player_tracker", "character", "target")]
+[node name="Wander" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("character", "target")]
 script = ExtResource("7_06eo4")
-player_tracker = NodePath("")
 character = NodePath("../..")
 target = NodePath("../ZombieTarget")
 
-[node name="Chase" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "pawn")]
+[node name="Chase" type="Node2D" parent="ZombieStateMachine"]
 script = ExtResource("8_wlu2l")
-enemy = NodePath("../..")
-pawn = NodePath("../..")
 
 [node name="Attack" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("pawn")]
 script = ExtResource("9_82lh0")
 pawn = NodePath("../..")
 
-[node name="Nexus" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("pawn")]
+[node name="Nexus" type="Node2D" parent="ZombieStateMachine"]
 script = ExtResource("10_6r5ds")
-pawn = NodePath("../..")
 
-[node name="Break" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("equipment", "nav", "ai_target")]
+[node name="Break" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("ai_target")]
 script = ExtResource("11_olnx5")
-equipment = NodePath("")
-nav = NodePath("")
 ai_target = NodePath("../ZombieTarget")
 
 [node name="ZombieTarget" type="Node2D" parent="ZombieStateMachine"]
@@ -96,7 +86,3 @@ script = ExtResource("12_c55w2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_3fose")
-
-[node name="Health" type="Node2D" parent="."]
-script = ExtResource("13_khshd")
-metadata/_custom_type_script = "uid://gyp8bshfrfoj"

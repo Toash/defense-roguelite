@@ -5,7 +5,6 @@ class_name Pawn
 
 @onready var world: World = get_tree().get_first_node_in_group("world") as World
 @export var faction: Faction.Type
-@export var info_offset: int = -50
 
 
 @export_group("References")
@@ -78,7 +77,7 @@ func _setup_actor_info_ui():
 	actor_info = actor_info_scene.instantiate() as ActorInfoUI
 	if actor_info == null:
 		push_error("scene is not of type ActorInfoUI")
-	actor_info.setup(info_offset)
+	actor_info.setup(character_sprite.top_of_head_anchor.position.y * character_sprite.scale.x)
 
 	actor_info.add_status_effects_ui(self.status_effect_container)
 	actor_info.add_health_ui(self.health)

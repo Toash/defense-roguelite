@@ -25,3 +25,7 @@ class_name WorldConfig
 ## Should go from lowest to highest max value.
 @export var altitude_bands: Array[AltitudeBand] = []
 @export var resource_bands: Array[ResourceBand] = []
+
+
+@export_group("Enemies")
+@export var enemies: WorldEnemies

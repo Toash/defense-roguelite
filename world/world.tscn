@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c4fe8rix7vpn5"]
+[gd_scene load_steps=23 format=3 uid="uid://c4fe8rix7vpn5"]
 
 [ext_resource type="Script" uid="uid://csd4ncy3jgem8" path="res://world/world.gd" id="1_4papg"]
 [ext_resource type="PackedScene" uid="uid://byli3ck6gpqtc" path="res://actors/pawns/player/player.tscn" id="1_fyhu2"]
@@ -13,12 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://dnpygi6xo1s0n" path="res://actors/nexus/nexus.tscn" id="11_ov2xu"]
 [ext_resource type="Script" uid="uid://bhr5uamvonway" path="res://actors/pawns/generic/debug_path.gd" id="13_ocfjn"]
 [ext_resource type="Script" uid="uid://b2l0f2hsw0cbx" path="res://game/game_state.gd" id="14_b2suy"]
-[ext_resource type="Resource" uid="uid://bfp85p8ebqdan" path="res://actors/pawns/enemies/resources/basic_zombie.tres" id="14_h8lre"]
 [ext_resource type="Script" uid="uid://bptrhmi4tcomm" path="res://ai/state_machine.gd" id="15_h8lre"]
 [ext_resource type="Script" uid="uid://omtnlx3h5d70" path="res://game/states/state_intermission.gd" id="16_ysn08"]
 [ext_resource type="Script" uid="uid://djv6321i8c28e" path="res://game/states/state_wave.gd" id="17_m0cxt"]
 [ext_resource type="Script" uid="uid://dqct7nbqcgvbh" path="res://game/spawn_manager.gd" id="19_p2iis"]
-[ext_resource type="Resource" uid="uid://b6msgfm6ns6rx" path="res://world/resources/pawns/forest_enemies.tres" id="20_aysyn"]
 [ext_resource type="Script" uid="uid://ocod1qfphspl" path="res://actors/pawns/player/game_over.gd" id="21_aysyn"]
 [ext_resource type="Script" uid="uid://bgbi7qv8f0ml3" path="res://upgrades/upgrade_manager.gd" id="21_o1net"]
 [ext_resource type="Script" uid="uid://bjc7dxmakq7ml" path="res://game/defense_manager.gd" id="22_3ljsx"]
@@ -105,19 +103,13 @@ script = ExtResource("15_h8lre")
 initial_state = NodePath("Intermission")
 metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 
-[node name="Intermission" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state", "spawn_manager", "nexus", "world")]
+[node name="Intermission" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("spawn_manager")]
 script = ExtResource("16_ysn08")
-game_state = NodePath("../..")
 spawn_manager = NodePath("../../SpawnManager")
-nexus = NodePath("../../../Nexus")
-world = NodePath("../../..")
 intermission_time = 1.0
 
-[node name="Wave" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("game_state", "enemy_root", "spawn_manager", "world")]
+[node name="Wave" type="Node2D" parent="GameState/StateMachine" node_paths=PackedStringArray("spawn_manager", "world")]
 script = ExtResource("17_m0cxt")
-game_state = NodePath("../..")
-enemy_root = NodePath("../../../Zombies")
-enemy_data = ExtResource("14_h8lre")
 spawn_manager = NodePath("../../SpawnManager")
 wave_time = 30.0
 world = NodePath("../../..")
@@ -125,7 +117,6 @@ world = NodePath("../../..")
 [node name="SpawnManager" type="Node2D" parent="GameState" node_paths=PackedStringArray("world", "enemy_root")]
 script = ExtResource("19_p2iis")
 world = NodePath("../..")
-world_enemies = ExtResource("20_aysyn")
 enemy_root = NodePath("../../Roots/ZombieRoot")
 
 [node name="UpgradeManager" type="Node2D" parent="GameState" node_paths=PackedStringArray("player")]

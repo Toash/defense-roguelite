@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldConfig" load_steps=13 format=3 uid="uid://d4jf4712x0u2o"]
+[gd_resource type="Resource" script_class="WorldConfig" load_steps=14 format=3 uid="uid://d4jf4712x0u2o"]
 
 [ext_resource type="Script" uid="uid://bqfyi0m1kshlg" path="res://world/resources/altitude_band.gd" id="1_4evj6"]
 [ext_resource type="Resource" uid="uid://uhvi6w102lyv" path="res://world/resources/altitude_bands/dirt_altitude.tres" id="2_l3yoy"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://cifpdb8wnumtv" path="res://world/resources/tiles/ground/dirt_tile.tres" id="7_dm1fa"]
 [ext_resource type="Resource" uid="uid://bynbxch8yafm2" path="res://world/resources/tiles/ground/grass_tile.tres" id="8_eo06n"]
 [ext_resource type="Resource" uid="uid://68nc2bll6k3i" path="res://world/resources/tiles/wall/rock_tile.tres" id="9_dm1fa"]
+[ext_resource type="Resource" uid="uid://b6msgfm6ns6rx" path="res://world/resources/pawns/forest_enemies.tres" id="11_f4hsn"]
 
 [resource]
 script = ExtResource("6_dm1fa")
@@ -24,4 +25,5 @@ altitude_enum_to_tile = Dictionary[int, ExtResource("5_mohia")]({
 3: ExtResource("9_dm1fa")
 })
 altitude_bands = Array[ExtResource("1_4evj6")]([ExtResource("2_x1elx"), ExtResource("2_l3yoy"), ExtResource("3_x1elx"), ExtResource("5_eo06n")])
+enemies = ExtResource("11_f4hsn")
 metadata/_custom_type_script = "uid://dvy3lib5ke8ip"

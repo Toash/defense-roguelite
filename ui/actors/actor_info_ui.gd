@@ -6,15 +6,12 @@ extends VBoxContainer
 
 @export var root: Node
 
-var vert_offset: float
 
 var health_scene: PackedScene = preload("res://ui/health/health_ui.tscn")
 var status_effects_ui_scene: PackedScene = preload("res://ui/status_effects/status_effects_ui.tscn")
 
 
 func setup(vert_offset: float):
-	## TODO implement vert offset
-	self.vert_offset = vert_offset
 	self.position.y = vert_offset
 
 

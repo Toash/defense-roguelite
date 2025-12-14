@@ -39,11 +39,12 @@ _data = {
 &"flash": SubResource("Animation_va1py")
 }
 
-[node name="CharacterSprite" type="Node2D"]
+[node name="CharacterSprite" type="Node2D" node_paths=PackedStringArray("top_of_head_anchor")]
 z_index = 10
 material = SubResource("ShaderMaterial_ngeuq")
 scale = Vector2(3, 3)
 script = ExtResource("1_702fr")
+top_of_head_anchor = NodePath("Node2D")
 
 [node name="LeftLeg" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -92,3 +93,6 @@ libraries = {
 script = ExtResource("7_ngeuq")
 character_sprite = NodePath("..")
 metadata/_custom_type_script = "uid://c8dnwtjdg5wbq"
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, -18)

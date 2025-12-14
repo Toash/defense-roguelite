@@ -9,6 +9,9 @@ signal foot_touchdown
 
 var character_body: CharacterBody2D
 
+@export var top_of_head_anchor: Node2D
+
+
 ## sprite rotates according to target
 @export var target_supplier: TargetProvider
 # @export var health: Health

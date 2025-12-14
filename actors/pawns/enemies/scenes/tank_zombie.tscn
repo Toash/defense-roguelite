@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dm15crljo54tt"]
+[gd_scene load_steps=15 format=3 uid="uid://dm15crljo54tt"]
 
 [ext_resource type="Script" uid="uid://si1ikxp52cuk" path="res://actors/pawns/enemies/enemy.gd" id="1_jqbie"]
 [ext_resource type="PackedScene" uid="uid://dfb3edd4wnnag" path="res://actors/pawns/character_sprite.tscn" id="2_53wjr"]
@@ -11,9 +11,8 @@
 [ext_resource type="Script" uid="uid://cjnn80jlwilpx" path="res://actors/pawns/states/state_enemy_nexus.gd" id="10_hjo7y"]
 [ext_resource type="Script" uid="uid://b4wdssttxtlra" path="res://actors/pawns/states/state_enemy_break.gd" id="11_njqtl"]
 [ext_resource type="Script" uid="uid://dt4kadfyw2ywh" path="res://actors/pawns/generic/ai_target.gd" id="12_rms5r"]
-[ext_resource type="Script" uid="uid://gyp8bshfrfoj" path="res://actors/generic/health.gd" id="13_r8hx2"]
 
-[sub_resource type="Shader" id="Shader_adyr5"]
+[sub_resource type="Shader" id="Shader_6xgm7"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -33,27 +32,24 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
 resource_local_to_scene = true
-shader = SubResource("Shader_adyr5")
+shader = SubResource("Shader_6xgm7")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fose"]
 size = Vector2(68, 115)
 
-[node name="TankZombie" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "health")]
+[node name="TankZombie" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
 collision_layer = 4
 collision_mask = 32
 script = ExtResource("1_jqbie")
 state_machine = NodePath("ZombieStateMachine")
 faction = 2
-health = NodePath("Health")
 
-[node name="CharacterSprite" parent="." node_paths=PackedStringArray("target_supplier", "health") instance=ExtResource("2_53wjr")]
+[node name="CharacterSprite" parent="." instance=ExtResource("2_53wjr")]
 material = SubResource("ShaderMaterial_7b2us")
 position = Vector2(0, -6)
 scale = Vector2(5, 5)
-target_supplier = NodePath("")
-health = NodePath("../Health")
 head_texture = ExtResource("3_jqbie")
 torso_texture = ExtResource("4_jqbie")
 left_arm_texture = ExtResource("5_s74vt")
@@ -64,23 +60,18 @@ script = ExtResource("6_v6ih7")
 initial_state = NodePath("Nexus")
 metadata/_custom_type_script = "uid://bptrhmi4tcomm"
 
-[node name="Chase" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("enemy", "pawn")]
+[node name="Chase" type="Node2D" parent="ZombieStateMachine"]
 script = ExtResource("8_8opkp")
-enemy = NodePath("../..")
-pawn = NodePath("../..")
 
 [node name="Attack" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("pawn")]
 script = ExtResource("9_urhwv")
 pawn = NodePath("../..")
 
-[node name="Nexus" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("pawn")]
+[node name="Nexus" type="Node2D" parent="ZombieStateMachine"]
 script = ExtResource("10_hjo7y")
-pawn = NodePath("../..")
 
-[node name="Break" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("equipment", "nav", "ai_target")]
+[node name="Break" type="Node2D" parent="ZombieStateMachine" node_paths=PackedStringArray("ai_target")]
 script = ExtResource("11_njqtl")
-equipment = NodePath("")
-nav = NodePath("")
 ai_target = NodePath("../ZombieTarget")
 
 [node name="ZombieTarget" type="Node2D" parent="ZombieStateMachine"]
@@ -89,8 +80,3 @@ script = ExtResource("12_rms5r")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12.5)
 shape = SubResource("RectangleShape2D_3fose")
-
-[node name="Health" type="Node2D" parent="."]
-script = ExtResource("13_r8hx2")
-bar_height_offset = -100.0
-metadata/_custom_type_script = "uid://gyp8bshfrfoj"

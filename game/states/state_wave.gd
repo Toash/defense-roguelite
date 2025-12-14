@@ -4,10 +4,6 @@ extends State
 class_name WaveState
 
 
-@export var game_state: GameState
-@export var enemy_root: Node2D
-@export var enemy_data: EnemyData
-
 @export var spawn_manager: SpawnManager
 @export var wave_time: float = 1
 
@@ -28,13 +24,11 @@ func state_update(delta: float):
 	wave_timer += delta
 
 	if spawn_timer > 8:
-		spawn_manager.spawn_at_random_spawn_node() 
+		spawn_manager.spawn_at_random_spawn_node()
 		spawn_timer = 0
 
 	if wave_timer > wave_time:
 		transitioned.emit(self, "intermission")
-
-
 
 
 func state_physics_update(delta: float):

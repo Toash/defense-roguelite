@@ -205,15 +205,15 @@ func _has_valid_nonpartial_path_in_tilemap(from: Vector2i, to: Vector2i) -> bool
 	
 
 func _append_valid_random_spawn_node(spawn_nodes: Array[Node2D], target_global: Vector2) -> Node2D:
-	## TODO fix this
+	## amount of tries to generate a node that has a valid path to the base.
 	const TRIES = 100
-
 
 	for tries in TRIES:
 		var angle_deg: float = randf_range(0, 360)
 		# var angle_deg: float = -90
 
-		var radius: float = world_config.world_height * ground_tiles.tile_set.tile_size.x * 1
+		# var radius: float = world_config.world_height * ground_tiles.tile_set.tile_size.x * 1
+		var radius: float = 2500
 		var candidate_global := target_global + Vector2.RIGHT.rotated(deg_to_rad(angle_deg)) * radius
 
 		var candidate_local = ground_tiles.to_local(candidate_global)

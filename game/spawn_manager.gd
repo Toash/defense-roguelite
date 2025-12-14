@@ -6,16 +6,18 @@ class_name SpawnManager
 
 
 @export var world: World
-@export var world_enemies: WorldEnemies
+
+
+## root node to spawn enemies on.
 @export var enemy_root: Node2D
 
 var spawn_budget: float = 0
 var spawn_budget_increase_multiplier: float = 1
-@onready var rng = RandomNumberGenerator.new()
+var rng = RandomNumberGenerator.new()
 
 var spawn_nodes: Array[Node2D]
 
-var spawning = false
+var spawning = true
 
 
 func _process(delta):
@@ -24,7 +26,7 @@ func _process(delta):
 
 func spawn_at_random_spawn_node():
 	if not spawning: return
-	var enemy_data: EnemyData = world_enemies.get_random_world_enemy_data_by_random_cost(0, spawn_budget)
+	var enemy_data: EnemyData = world.world_config.enemies.get_random_world_enemy_data_by_random_cost(0, spawn_budget)
 	if enemy_data == null: return
 	
 	for i in enemy_data.amount_spawned:
