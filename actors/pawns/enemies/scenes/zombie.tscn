@@ -15,7 +15,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fose"]
 size = Vector2(46, 72)
 
-[sub_resource type="Shader" id="Shader_i0804"]
+[sub_resource type="Shader" id="Shader_2asul"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -35,7 +35,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b2us"]
 resource_local_to_scene = true
-shader = SubResource("Shader_i0804")
+shader = SubResource("Shader_2asul")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_percentage = 0.0
 

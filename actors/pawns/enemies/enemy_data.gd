@@ -20,7 +20,8 @@ class_name EnemyData
 @export var attack_speed: float = 1
 @export_group("Functionality")
 ## item that the enemy uses
-@export var item_data: ItemData = preload("res://item/items/enemy/basic_enemy_attack.tres")
+# @export var item_data: ItemData = preload("res://item/items/enemy/basic_enemy_attack.tres")
+@export var item_data: ItemData
 
 @export_group("Spawning")
 @export var cost: int = 1

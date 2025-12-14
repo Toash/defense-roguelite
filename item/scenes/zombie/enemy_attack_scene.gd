@@ -17,9 +17,15 @@ class_name ZombieAttackScene
 
 
 var context: ItemContext
+var melee_data: MeleeData
 
 func _ready():
 	hitbox.body_entered.connect(_on_area_2d_body_entered)
+
+# func setup(item_context: ItemContext, melee_data: MeleeData):
+# 	self.context = item_context
+# 	self.melee_data = melee_data
+
 
 func _process(delta):
 	# get node2d that is animated, set to left and right hand
@@ -69,7 +75,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 	var hit_context = HitContext.new(
 		{
-			HitContext.Key.HITTER: context.user_node
+			HitContext.Key.HITTER: context.user_node,
+			HitContext.Key.BASE_DAMAGE: context.user_node,
 		}
 	)
 

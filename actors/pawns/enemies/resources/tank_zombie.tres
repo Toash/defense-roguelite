@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://bcpu5pthfg2j1"]
 
-[ext_resource type="Resource" uid="uid://6rsgvhonqx4b" path="res://item/items/enemy/basic_enemy_attack.tres" id="1_44un6"]
+[ext_resource type="Resource" uid="uid://6rsgvhonqx4b" path="res://item/items/enemy/item_basic_enemy_attack.tres" id="1_44un6"]
 [ext_resource type="PackedScene" uid="uid://dm15crljo54tt" path="res://actors/pawns/enemies/scenes/tank_zombie.tscn" id="1_opkow"]
 [ext_resource type="Script" uid="uid://batjd7vgwc587" path="res://actors/pawns/enemies/enemy_data.gd" id="2_44un6"]
 

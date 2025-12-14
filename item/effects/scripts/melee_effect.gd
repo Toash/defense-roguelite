@@ -11,7 +11,7 @@ class_name MeleeEffect
 func apply(context: ItemContext):
 	var melee_inst: MeleeScene = melee_data.melee_scene.instantiate() as MeleeScene
 
-	melee_inst.finished.connect(func():
+	melee_inst.finished_melee_animation.connect(func():
 		context.equip_display.show_sprite()
 		)
 	var data

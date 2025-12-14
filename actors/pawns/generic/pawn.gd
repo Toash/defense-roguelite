@@ -93,15 +93,7 @@ func _setup_status_effect_container():
 	
 
 func _on_hit(hit_context: HitContext):
-	if hit_context.direction_hit_from == Vector2.ZERO:
-		# non directional
-		var particle_effect := ParticleEffect.new({
-			ParticleEffect.Key.PACKED_SCENE: blood_scene,
-			ParticleEffect.Key.PARENT_NODE: get_path(),
-		})
-		ParticleEffectManager.play_particle_effect(particle_effect)
-	else:
-		# directional
+	if hit_context.is_directional():
 		var particle_effect := ParticleEffect.new({
 			ParticleEffect.Key.PACKED_SCENE: directional_blood_scene,
 			ParticleEffect.Key.PARENT_NODE: get_path(),
@@ -109,6 +101,12 @@ func _on_hit(hit_context: HitContext):
 		})
 		ParticleEffectManager.play_particle_effect(particle_effect)
 		knockback(hit_context.direction_hit_from, hit_context.knockback_amount)
+	else:
+		var particle_effect := ParticleEffect.new({
+			ParticleEffect.Key.PACKED_SCENE: blood_scene,
+			ParticleEffect.Key.PARENT_NODE: get_path(),
+		})
+		ParticleEffectManager.play_particle_effect(particle_effect)
 
 	# apply status effects
 	for status_effect: StatusEffect in hit_context.status_effects:

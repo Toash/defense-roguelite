@@ -27,3 +27,7 @@ func _init(config: Dictionary) -> void:
 ## returns a damage only context.
 static func damage_only(amount: int) -> HitContext:
 	return HitContext.new({Key.BASE_DAMAGE: amount})
+
+
+func is_directional() -> bool:
+	return direction_hit_from != Vector2.ZERO

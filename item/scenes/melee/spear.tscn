@@ -114,14 +114,13 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_reklo"]
 size = Vector2(20, 141)
 
-[node name="Spear" type="Node2D" node_paths=PackedStringArray("left_hand_marker", "right_hand_marker", "animation_player", "area", "root", "sprite")]
+[node name="Spear" type="Node2D" node_paths=PackedStringArray("left_hand_marker", "right_hand_marker", "animation_player", "area", "root")]
 script = ExtResource("1_ulr3d")
 left_hand_marker = NodePath("Root/LeftHand")
 right_hand_marker = NodePath("Root/RightHand")
 animation_player = NodePath("AnimationPlayer")
 area = NodePath("Root/RotatePoint/Area2D")
 root = NodePath("Root")
-sprite = NodePath("Root/RotatePoint/Sprite2D")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
