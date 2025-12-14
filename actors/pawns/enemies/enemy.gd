@@ -1,7 +1,7 @@
 extends Pawn
 
 
-class_name Enemy
+class_name RuntimeEnemy
 
 var enemy_data: EnemyData:
 	get:
@@ -36,25 +36,26 @@ func _enter_tree() -> void:
 
 	faction = Faction.Type.ENEMY
 
-	_setup_trackers()
-	_set_trackers_with_data()
-
 	_setup_nav_agent()
 	_setup_nav_target_provider()
+	_setup_ai_target()
 
+
+	_setup_trackers()
+	_set_trackers_with_data()
+	
 	_setup_enemy_item()
 	_set_enemy_item_with_data()
-
-	_setup_ai_target()
+	
 	_setup_item_display()
 	_setup_equipment()
-
-	character_sprite.target_supplier = nav_target_provider
-
-
+	
 	self.health.set_max_health(int(enemy_data.health))
 	self.health.set_health(enemy_data.health)
 	health.died.connect(_on_death)
+
+
+	character_sprite.target_supplier = nav_target_provider
 
 
 func _ready():
@@ -69,9 +70,6 @@ func _ready():
 ## sets the enemies data, and initializes respective systems.
 func setup(data: EnemyData):
 	enemy_data = data
-
-	_set_trackers_with_data()
-	_set_enemy_item_with_data()
 
 
 ## returns the enemy data, returning a default config if it is not present.

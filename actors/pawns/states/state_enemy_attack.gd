@@ -3,7 +3,7 @@ extends State
 ## uses equipment based on attack cooldown 
 
 
-var enemy: Enemy
+var enemy: RuntimeEnemy
 @export var pawn: Pawn
 @export var attack_cooldown = 1
 
@@ -12,7 +12,7 @@ var active = false
 var t: float = 0.0
 
 func _ready():
-	enemy = get_node('../..') as Enemy
+	enemy = get_node('../..') as RuntimeEnemy
 
 
 func state_enter():

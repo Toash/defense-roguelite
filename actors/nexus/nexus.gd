@@ -22,7 +22,7 @@ func _ready():
 
 
 func _on_body_entered(body: Node2D):
-	if body is Enemy:
+	if body is RuntimeEnemy:
 		pass
 		# health.damage(1)
 		# body.queue_free()

@@ -3,6 +3,12 @@ extends Resource
 ## contains the data for enemies as well as the scene for the enemy.
 class_name EnemyData
 
+
+@export var id: String
+@export var name: String
+@export var description: String
+
+
 @export var scene: PackedScene
 
 

@@ -1,7 +1,7 @@
 extends Node2D
 
 
-class_name EnemyManager
+class_name RuntimeEnemyManager
 
 
 func get_all_enemies() -> Array[Node]:

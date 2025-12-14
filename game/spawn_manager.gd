@@ -24,11 +24,11 @@ func _process(delta):
 
 func spawn_at_random_spawn_node():
 	if not spawning: return
-	var enemy_data: EnemyData = world_enemies.get_random_enemy_data(0, spawn_budget)
+	var enemy_data: EnemyData = world_enemies.get_random_world_enemy_data_by_random_cost(0, spawn_budget)
 	if enemy_data == null: return
 	
 	for i in enemy_data.amount_spawned:
-		var enemy: Enemy = enemy_data.scene.instantiate() as Enemy
+		var enemy: RuntimeEnemy = enemy_data.scene.instantiate() as RuntimeEnemy
 
 		var offset: Vector2 = Vector2.ZERO
 		if enemy_data.amount_spawned > 1:

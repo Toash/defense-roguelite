@@ -2,14 +2,14 @@
 extends State
 
 
-var enemy: Enemy
+var enemy: RuntimeEnemy
 
 var active = false
 @onready var nexus_pos: Vector2 = (get_tree().get_first_node_in_group("nexus") as Nexus).global_position
 
 
 func _ready():
-	enemy = get_node("../..") as Enemy
+	enemy = get_node("../..") as RuntimeEnemy
 
 
 func state_enter():

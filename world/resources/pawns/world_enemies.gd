@@ -9,7 +9,7 @@ class_name WorldEnemies
 
 
 # gets random enemy data between min and max cost.
-func get_random_enemy_data(min_cost: float, max_cost: float) -> EnemyData:
+func get_random_world_enemy_data_by_random_cost(min_cost: float, max_cost: float) -> EnemyData:
     var candidates: Array[EnemyData]
 
     for enemy_data: EnemyData in enemies:

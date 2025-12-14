@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://dup631aikd1md"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://dup631aikd1md"]
 
+[ext_resource type="Resource" uid="uid://6rsgvhonqx4b" path="res://item/items/enemy/basic_enemy_attack.tres" id="1_c278d"]
 [ext_resource type="PackedScene" uid="uid://chwn2rj05cqqf" path="res://actors/pawns/enemies/scenes/baby_zombie.tscn" id="1_pu6dw"]
 [ext_resource type="Script" uid="uid://batjd7vgwc587" path="res://actors/pawns/enemies/enemy_data.gd" id="2_c278d"]
 
 [resource]
 script = ExtResource("2_c278d")
+id = "baby"
+name = "Baby zombie"
 scene = ExtResource("1_pu6dw")
-amount_spawned = 3
 health = 10
 move_speed = 350.0
+amount_spawned = 3
 metadata/_custom_type_script = "uid://batjd7vgwc587"

@@ -6,6 +6,9 @@
 
 [resource]
 script = ExtResource("2_i8u1u")
+id = "basic"
+name = "Zombie"
+description = "Basic zombie."
 scene = ExtResource("1_75nsu")
 move_speed = 200.0
 metadata/_custom_type_script = "uid://batjd7vgwc587"

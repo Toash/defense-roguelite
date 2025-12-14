@@ -13,14 +13,14 @@ extends State
 
 var active = false
 var t: float = 0.0
-var enemy: Enemy
+var enemy: RuntimeEnemy
 
 
 const BREAK_DISTANCE = 80
 
 
 func _ready():
-	enemy = get_node("../..") as Enemy
+	enemy = get_node("../..") as RuntimeEnemy
 func state_enter():
 	active = true
 	

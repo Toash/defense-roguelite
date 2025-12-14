@@ -1,7 +1,7 @@
 extends State
 
 
-var enemy: Enemy
+var enemy: RuntimeEnemy
 
 
 var active = false
@@ -15,7 +15,7 @@ var poll_timer: float = 0
 
 
 func _ready():
-	enemy = get_node("../..") as Enemy
+	enemy = get_node("../..") as RuntimeEnemy
 
 func state_enter():
 	active = true

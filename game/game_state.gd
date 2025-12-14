@@ -16,7 +16,7 @@ enum PHASE {
 @export var upgrade_manager: UpgradeManager
 @export var defense_manager: DefenseManager
 @export var aggro_manager: AggroManager
-@export var enemy_manager: EnemyManager
+@export var enemy_manager: RuntimeEnemyManager
 
 @export var state_machine: StateMachine
 @export var intermission_state: IntermissionState

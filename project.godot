@@ -28,15 +28,15 @@ AudioManager="*res://audio/audio_manager.tscn"
 TooltipManager="*res://ui/autoloads/tooltip_manager.tscn"
 GroundItems="*res://item/autoloads/ground_items.tscn"
 ItemDatabase="*res://item/autoloads/item_database.gd"
-Console="*res://game/autoloads/console.tscn"
 ItemService="*res://item/autoloads/item_service.tscn"
-PawnRegistry="*res://actors/autoloads/pawn_registry.tscn"
-PawnSpawner="*res://actors/autoloads/pawn_spawner.gd"
+EnemyRegistry="*res://actors/autoloads/pawn_registry.tscn"
+EnemySpawner="*res://actors/autoloads/pawn_spawner.gd"
 ContextManager="*res://ui/autoloads/context_manager.tscn"
 TextPopupManager="*res://ui/autoloads/popup_text.tscn"
 DefenseRegistry="*res://actors/autoloads/defense_registry.gd"
 ParticleEffectManager="*res://particle_effects/particle_effect_manager.gd"
 StatusEffectRegistry="*res://status_effects/autoloads/status_effect_registry.gd"
+Console="*res://game/autoloads/console/console.tscn"
 
 [debug]
 
