@@ -1,22 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://ck07h3o13f1rh"]
+[gd_scene load_steps=4 format=3 uid="uid://ck07h3o13f1rh"]
 
 [ext_resource type="Script" uid="uid://dqnd7hj08vd76" path="res://ui/status_effects/status_effect_ui.gd" id="1_k6atw"]
 [ext_resource type="Texture2D" uid="uid://cygrckkhddxfr" path="res://particle_effects/fire.png" id="2_g3f05"]
 
-[node name="StatusEffectUI" type="HBoxContainer" node_paths=PackedStringArray("texture_rect", "label")]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g3f05"]
+texture = ExtResource("2_g3f05")
+
+[node name="StatusEffectUI" type="HBoxContainer" node_paths=PackedStringArray("panel", "label")]
 offset_right = 43.0
 offset_bottom = 23.0
 script = ExtResource("1_k6atw")
-texture_rect = NodePath("TextureRect")
-label = NodePath("Label")
+panel = NodePath("PanelContainer")
+label = NodePath("PanelContainer/Label")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-texture = ExtResource("2_g3f05")
+theme_override_styles/panel = SubResource("StyleBoxTexture_g3f05")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
-text = "x 1"
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "1"
