@@ -27,6 +27,9 @@ var astar_grid: AStarGrid2D = AStarGrid2D.new()
 
 signal world_setup
 var setup = false
+
+## how much the world is scaled by. 
+## Important to multiply by this for things that need to be positioned in relation to the world.
 var scaling_factor: Vector2
 
 ## offset to the center of the tile.
@@ -188,11 +191,11 @@ func _grid_to_world(cell: Vector2i) -> Vector2:
 # SPAWNING
 # ============================
 ## generates spawn nodes, ensuring that there is a valid path to the target
-func get_spawn_nodes(amount: int) -> Array[Node2D]:
+func get_spawn_nodes(amount: int, radius: float) -> Array[Node2D]:
 	var target_global = nexus.global_position
 	var spawn_nodes: Array[Node2D]
 	for i in amount:
-		await _append_valid_random_spawn_node(spawn_nodes, target_global)
+		await _append_valid_random_spawn_node(spawn_nodes, target_global, radius)
 	generated_spawn_nodes.emit(spawn_nodes)
 	return spawn_nodes
 
@@ -204,7 +207,7 @@ func _has_valid_nonpartial_path_in_tilemap(from: Vector2i, to: Vector2i) -> bool
 	return not point_path.is_empty()
 	
 
-func _append_valid_random_spawn_node(spawn_nodes: Array[Node2D], target_global: Vector2) -> Node2D:
+func _append_valid_random_spawn_node(spawn_nodes: Array[Node2D], target_global: Vector2, radius: float) -> Node2D:
 	## amount of tries to generate a node that has a valid path to the base.
 	const TRIES = 100
 
@@ -213,7 +216,6 @@ func _append_valid_random_spawn_node(spawn_nodes: Array[Node2D], target_global: 
 		# var angle_deg: float = -90
 
 		# var radius: float = world_config.world_height * ground_tiles.tile_set.tile_size.x * 1
-		var radius: float = 2500
 		var candidate_global := target_global + Vector2.RIGHT.rotated(deg_to_rad(angle_deg)) * radius
 
 		var candidate_local = ground_tiles.to_local(candidate_global)

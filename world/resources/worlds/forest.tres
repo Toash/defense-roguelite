@@ -25,5 +25,5 @@ altitude_enum_to_tile = Dictionary[int, ExtResource("5_mohia")]({
 3: ExtResource("9_dm1fa")
 })
 altitude_bands = Array[ExtResource("1_4evj6")]([ExtResource("2_x1elx"), ExtResource("2_l3yoy"), ExtResource("3_x1elx"), ExtResource("5_eo06n")])
-enemies = ExtResource("11_f4hsn")
+world_enemies = ExtResource("11_f4hsn")
 metadata/_custom_type_script = "uid://dvy3lib5ke8ip"

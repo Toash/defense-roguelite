@@ -28,4 +28,4 @@ class_name WorldConfig
 
 
 @export_group("Enemies")
-@export var enemies: WorldEnemies
+@export var world_enemies: WorldEnemies

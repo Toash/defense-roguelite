@@ -75,7 +75,7 @@ func _draw():
 	if show:
 		var inv = get_global_transform().affine_inverse()
 		draw_set_transform_matrix(inv)
-		draw_circle(centered_highlight_position * world.scaling_factor, highlight_radius, Color.GREEN, false)
+		draw_circle(centered_highlight_position * world.scaling_factor, highlight_radius * world.scaling_factor.x, Color.GREEN, false)
 
 func _on_instance_changed(inst: ItemInstance):
 	if inst == null:
