@@ -13,6 +13,7 @@ var health: Health
 ## effect to play when node is hit.
 var directional_blood_scene: PackedScene = preload("res://particle_effects/directional_blood_effect.tscn")
 var blood_scene: PackedScene = preload("res://particle_effects/blood_effect.tscn")
+var actor_info_scene: PackedScene = load("res://ui/actors/actor_info_ui.tscn")
 
 var character_sprite: CharacterSprite
 
@@ -22,6 +23,7 @@ var raw_velocity: Vector2 = Vector2.ZERO
 var knockback_velocity: Vector2
 var knockback_decay = 800
 
+var actor_info: ActorInfoUI
 
 func _enter_tree() -> void:
 	world = get_tree().get_first_node_in_group("world") as World
@@ -73,27 +75,22 @@ func _setup_character_sprite():
 
 
 func _setup_actor_info_ui():
-	var actor_info_scene = preload("res://ui/actors/actor_info_ui.tscn")
-	var ui: ActorInfoUI = actor_info_scene.instantiate() as ActorInfoUI
-	ui.setup(info_offset)
+	actor_info = actor_info_scene.instantiate() as ActorInfoUI
+	if actor_info == null:
+		push_error("scene is not of type ActorInfoUI")
+	actor_info.setup(info_offset)
 
-	ui.add_health_ui(self.health)
-	add_child(ui)
+	actor_info.add_status_effects_ui(self.status_effect_container)
+	actor_info.add_health_ui(self.health)
+	
+	add_child(actor_info)
 
 
 func _setup_status_effect_container():
 	status_effect_container = PawnStatusEffectContainer.new()
 	status_effect_container.setup(self)
 	self.add_child(status_effect_container)
-	_setup_status_effect_ui()
-
-
-func _setup_status_effect_ui():
-	var ui_scene: PackedScene = preload("res://ui/status_effects/status_effects_ui.tscn")
-	var ui: StatusEffectsUI = ui_scene.instantiate() as StatusEffectsUI
-	ui.setup(status_effect_container)
-	add_child(ui)
-
+	
 
 func _on_hit(hit_context: HitContext):
 	if hit_context.hitter:
