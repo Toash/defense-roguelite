@@ -82,7 +82,7 @@ func _setup_actor_info_ui():
 
 	actor_info.add_status_effects_ui(self.status_effect_container)
 	actor_info.add_health_ui(self.health)
-	
+
 	add_child(actor_info)
 
 
@@ -93,15 +93,6 @@ func _setup_status_effect_container():
 	
 
 func _on_hit(hit_context: HitContext):
-	if hit_context.hitter:
-		if hit_context.hitter.has_method("get_faction"):
-			var hitter_faction: Faction.Type = hit_context.hitter.get_faction()
-			if not Faction.can_hit(hitter_faction, faction):
-				return
-		else:
-			push_error("hitter should implement has_faction method.")
-
-
 	if hit_context.direction_hit_from == Vector2.ZERO:
 		# non directional
 		var particle_effect := ParticleEffect.new({
@@ -117,9 +108,7 @@ func _on_hit(hit_context: HitContext):
 			ParticleEffect.Key.DIRECTION_VECTOR: hit_context.direction_hit_from,
 		})
 		ParticleEffectManager.play_particle_effect(particle_effect)
-
-
-	knockback(hit_context.direction_hit_from, hit_context.knockback_amount)
+		knockback(hit_context.direction_hit_from, hit_context.knockback_amount)
 
 	# apply status effects
 	for status_effect: StatusEffect in hit_context.status_effects:

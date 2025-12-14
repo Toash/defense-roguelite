@@ -133,7 +133,7 @@ func _ready() -> void:
 		"<id>",
 		func(id: String):
 		var player: Player = get_tree().get_first_node_in_group("player")
-		EnemySpawner.spawn_enemy(id, player.global_position)
+		EnemySpawner.spawn_enemy(id, player.global_position + Vector2.UP * 100)
 		)
 
 
@@ -172,6 +172,7 @@ func _handle_console_input(text: String):
 	if command_name == "help":
 		for command: ConsoleCommand in commands:
 			Console.log_message(str(command))
+		input.clear()
 		return
 
 

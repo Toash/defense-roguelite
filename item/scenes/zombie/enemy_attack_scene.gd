@@ -16,7 +16,6 @@ class_name ZombieAttackScene
 @export var root: Node2D
 
 
-var user: Node2D
 var context: ItemContext
 
 func _ready():
@@ -33,8 +32,6 @@ func _process(delta):
 
 
 func play(flipped: bool):
-	user = context.user_node
-
 	context.character_sprite.enable_left_hand()
 	context.character_sprite.enable_right_hand()
 
@@ -62,7 +59,7 @@ func _play():
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body == user:
+	if body == context.user_node:
 		return
 
 	var pawn: Pawn = body as Pawn
@@ -70,6 +67,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if Faction.Type == context.user_node.faction:
 			return
 		
+	var hit_context = HitContext.new(
+		{
+			HitContext.Key.HITTER: context.user_node
+		}
+	)
+
 
 	var health: Health = body.get_node("Health") as Health
 	if health != null:

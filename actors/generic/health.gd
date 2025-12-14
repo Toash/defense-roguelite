@@ -18,6 +18,7 @@ signal got_hit()
 @export var max_health: int = 100
 @onready var health: int = max_health
 
+var owner_node
 
 const bar_width := 40
 const bar_height := 6
@@ -26,11 +27,7 @@ func _init(health: int = 100, max_health: int = 100):
 	self.health = health
 	self.max_health = max_health
 func _ready():
-	# health_changed.connect(func(val: int):
-	# 	queue_redraw()
-	# 	)
-	# queue_redraw()
-	pass
+	owner_node = get_parent()
 
 
 func to_dict() -> Dictionary:
@@ -49,6 +46,24 @@ func damage(amount: int):
 	apply_hit(hit_context)
 
 func apply_hit(hit_context: HitContext):
+	if hit_context.hitter:
+		var hitter_faction: Faction.Type
+		var owner_faction: Faction.Type
+
+		if hit_context.hitter.has_method("get_faction"):
+			hitter_faction = hit_context.hitter.get_faction()
+		else:
+			hitter_faction = Faction.Type.NEUTRAL
+			
+
+		if owner_node.has_method("get_faction"):
+			owner_faction = owner_node.get_faction()
+		else:
+			owner_faction = Faction.Type.NEUTRAL
+
+		if not Faction.can_hit(hitter_faction, owner_faction):
+			return
+			
 	TextPopupManager.damage_popup(str(hit_context.base_damage), global_position)
 	if health <= 0: return
 
