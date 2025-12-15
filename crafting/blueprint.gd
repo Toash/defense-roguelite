@@ -1,5 +1,6 @@
 extends Resource
 
+## represents something that can be made into item datas
 class_name Blueprint
 
 

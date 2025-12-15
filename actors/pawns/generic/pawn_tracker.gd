@@ -11,8 +11,6 @@ signal nearest_pawn_changed(previous_pawn: Pawn, new_pawn: Pawn)
 
 ## mask should include layers to track.
 var pawn_vision: Area2D
-## used to measure distance between all nearby pawns.
-var pawn_raycast: RayCast2D
 
 
 # var pawns_within_vision: Dictionary[int, Node2D] = {}
@@ -36,11 +34,6 @@ func _ready() -> void:
 	pawn_vision = PhysicsUtils.get_circle_area(vision_distance)
 	pawn_vision.set_collision_mask_value(3, true)
 	add_child(pawn_vision)
-	
-	pawn_raycast = RayCast2D.new()
-	# pawn_raycast.set_collision_mask_value(2, true)
-	pawn_raycast.set_collision_mask_value(3, true)
-	add_child(pawn_raycast)
 
 	pawn_vision.body_entered.connect(_on_body_entered)
 	pawn_vision.body_exited.connect(_on_body_exited)

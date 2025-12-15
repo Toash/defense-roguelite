@@ -12,7 +12,7 @@ signal blueprint_craft(blueprint: Blueprint)
 var blueprints: Array[Blueprint]
 
 
-func setup(blueprints: Array[Blueprint]):
+func update(blueprints: Array[Blueprint]):
 	self.blueprints = blueprints
 
 	for blueprint in blueprints:

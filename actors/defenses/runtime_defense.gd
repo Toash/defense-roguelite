@@ -123,7 +123,7 @@ func get_defense_priority() -> PRIORITY:
 func _get_upgrade_effects() -> Array[ItemEffect]:
 	var added_effects: Array[ItemEffect] = []
 	for upgrade: DefenseUpgrade in additional_upgrades:
-		for effect: ItemEffect in upgrade:
+		for effect: ItemEffect in upgrade.added_effects:
 			added_effects.append(effect)
 	return added_effects
 

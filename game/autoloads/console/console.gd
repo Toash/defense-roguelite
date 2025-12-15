@@ -137,6 +137,17 @@ func _ready() -> void:
 		)
 
 
+	_register_command(
+		"random_upgrades",
+		"gets a pool of random upgrade.",
+		"",
+		func():
+		var upgrade_manager: UpgradeManager = (get_node("/root/World/GameState") as GameState).upgrade_manager
+		upgrade_manager.propose_random_upgrades(3)
+
+		)
+	
+
 func log_message(message: String):
 	logs.append_text(message + "\n")
 	print(message)

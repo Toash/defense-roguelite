@@ -17,7 +17,6 @@ var nav_agent: NavigationAgent2D
 
 ## trackers
 var player_tracker: PawnTracker
-var defense_tracker: DefenseTracker
 var attack_tracker: PawnTracker
 
 ## used for using items
@@ -103,8 +102,6 @@ func _set_trackers_with_data():
 	player_tracker.factions_to_track = get_enemy_data().factions_to_track
 	player_tracker.vision_distance = get_enemy_data().player_vision_distance
 
-	defense_tracker.vision_distance = get_enemy_data().defense_vision_distance
-	defense_tracker.priority_level = get_enemy_data().defense_priority_targeting
 
 	attack_tracker.factions_to_track = get_enemy_data().factions_to_track
 	attack_tracker.vision_distance = get_enemy_data().attack_vision_distance
@@ -112,10 +109,8 @@ func _set_trackers_with_data():
 
 func _setup_trackers():
 	player_tracker = PawnTracker.new()
-	defense_tracker = DefenseTracker.new()
 	attack_tracker = PawnTracker.new()
 	add_child(player_tracker)
-	add_child(defense_tracker)
 	add_child(attack_tracker)
 
 func _setup_nav_agent():

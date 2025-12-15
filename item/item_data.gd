@@ -63,3 +63,10 @@ func get_first_build_effect() -> BuildEffect:
 		if effect is BuildEffect:
 			return effect
 	return null
+
+func get_defense_types() -> Array[DefenseData.DEFENSE_TYPE]:
+	var ret: Array[DefenseData.DEFENSE_TYPE] = []
+	for effect in item_effects:
+		if effect is BuildDefenseEffect:
+			ret.append(effect.defense_type)
+	return ret

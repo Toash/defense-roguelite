@@ -16,7 +16,6 @@ func state_enter():
 	active = true
 
 	enemy.player_tracker.got_pawn.connect(_on_player_found)
-	enemy.defense_tracker.found_defense.connect(_on_defense_found)
 
 
 	enemy.nav_agent.target_position = nexus_pos
@@ -41,7 +40,6 @@ func state_physics_update(delta: float):
 func state_exit():
 	active = false
 	enemy.player_tracker.got_pawn.disconnect(_on_player_found)
-	enemy.defense_tracker.found_defense.disconnect(_on_defense_found)
 	# tile_pathfind.disable()
 
 
@@ -51,12 +49,6 @@ func _on_player_found(player: Pawn):
 	if (get_node("/root/World/GameState") as GameState).aggro_manager.can_aggro(enemy):
 		transitioned.emit(self, "chase")
 
-func _on_defense_found(defense: RuntimeDefense):
-	# print("found defense!")
-	if defense.defense_data.defense_priority != enemy.get_enemy_data().defense_priority_targeting:
-		return
-	enemy.ai_target.reference = defense
-	transitioned.emit(self, "break")
 
 # func _set_target():
 # 	tile_pathfind.set_speed(speed)

@@ -9,7 +9,7 @@
 script = ExtResource("4_lab66")
 item_data = ExtResource("3_kgh5q")
 health = 5
-attack_cooldown = 0.2
+attack_cooldown = 1.0
 base_effects = Array[ExtResource("1_6ewji")]([ExtResource("2_k02u8")])
 projectile_speed = 1000.0
 metadata/_custom_type_script = "uid://do5j60ewuaqp"

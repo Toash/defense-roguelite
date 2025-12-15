@@ -5,13 +5,12 @@ class_name DefenseUpgrade
 
 @export var applies_to: Array[DefenseData.DEFENSE_TYPE]
 
-# base states
-@export_group("Base Stats")
+@export_group("Base Stat Upgrades")
 @export var damage_modifier: int = 0
 @export var attack_speed_modifier: float = 0.0
 @export var health_modifier: int = 0
 
-@export_group("Effects")
+@export_group("Effect Upgrades")
 @export var added_effects: Array[ItemEffect] = []
 
 

@@ -29,8 +29,7 @@ func sync_defense_upgrades(defense: RuntimeDefense):
 	var d_type = defense.defense_data.defense_type
 	var upgrades := _player_defense_type_to_upgrades.get(d_type, [])
 	var defense_upgrades: Array[DefenseUpgrade] = []
-	for index in upgrades:
-		var upgrade: DefenseUpgrade = upgrades[index] as DefenseUpgrade
+	for upgrade in upgrades:
 		defense_upgrades.append(upgrade)
 
 		

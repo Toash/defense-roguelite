@@ -33,6 +33,7 @@ enum BASE_STAT {
 @export var attack_cooldown: float = 2
 
 @export_group("Behavior")
+## TODO: Just make this runtime - this should depend on who placed the defense.
 @export var factions_to_track: Array[Faction.Type] = [Faction.Type.ENEMY]
 ## The base functionality of this tower
 @export var base_effects: Array[ItemEffect] = []

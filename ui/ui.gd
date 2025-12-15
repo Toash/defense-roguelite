@@ -68,7 +68,7 @@ func _ready() -> void:
 
 
 	var crafting_ui: CraftingUI = crafting_window.get_content() as CraftingUI
-	crafting_ui.setup(player.get_player_crafting().get_blueprints())
+	crafting_ui.update(player.get_player_crafting().get_blueprints())
 	crafting_ui.blueprint_craft.connect(_on_blueprint_craft)
 
 	game_state_ui.game_state = game_state

@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("2_wxr8y")
+applies_to = Array[int]([0])
+damage_modifier = 2
 name = "Double Damage"
 description = "All towers do double damage."
 icon = ExtResource("2_j20sb")
-applies_to = Array[int]([0])
-damage_mult = 1.0
 metadata/_custom_type_script = "uid://bdh1tnqsbi2ow"
